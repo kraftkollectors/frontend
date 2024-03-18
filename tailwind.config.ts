@@ -5,6 +5,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    'node_modules/flowbite-react/lib/esm/**/*.js',
   ],
   theme: {
     extend: {
@@ -30,11 +31,13 @@ const config: Config = {
         dark:{
           DEFAULT: '#010101',
           text: '#131313',
-          gray: '#343434',
+          gray: '#555555',
         }
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin'),
+  ],
 };
 export default config;
