@@ -38,7 +38,10 @@ export default function Page() {
           ]}
           socials={
             {
-              instagram: "https:instagram.com/abundiko"
+              instagram: "https:instagram.com/abundiko",
+              x: "https:x.com/@abundiko",
+              facebook: "https:facebook.com/abundiko",
+              linkedin: "https:linkedin.com/in/abundiko",
             }
           }
          />

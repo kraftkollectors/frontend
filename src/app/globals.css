@@ -49,9 +49,10 @@
   }
 
   .skill-btn{
-    @apply border rounded-2xl px-1 text-[0.6rem] bg-gray-100
+    @apply border rounded-2xl px-1 text-[0.9rem] bg-gray-100
   }
   .services-grid{
     @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2
+  
   }
 }

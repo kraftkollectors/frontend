@@ -46,7 +46,7 @@ type SocialIconsProps = {
   linkedin?:string;
 }
 function SocialIcons({x,facebook,linkedin,instagram}:SocialIconsProps){
-  const className = "p-1 hover:opacity-100 rounded-2xl border hover:bg-gray-100";
+  const className = "p-2 hover:opacity-100 rounded-2xl border hover:bg-gray-100";
   return <>
   {
     x && <Link href={x} className={className}><FaXTwitter /></Link>

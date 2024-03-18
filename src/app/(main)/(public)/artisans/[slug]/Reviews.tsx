@@ -1,6 +1,7 @@
 "use client";
 
 import { ArtisanReviewCard, RatingStars } from '@/components';
+import { dummyReviews } from '@/utils/dummy';
 import type { CustomFlowbiteTheme } from 'flowbite-react';
 
 import { ThemeModeScript, Progress } from "flowbite-react";
@@ -15,26 +16,38 @@ export default function Reviews() {
         <h1 className="r-font-semibold text-sm text-dark-gray">Overall Rating</h1>
         <div className="flex items-center gap-2">
           <h1 className="r-font-bold r-text-lg">4.8</h1>
-          <RatingStars value={4.8} size='md' />
+          <RatingStars value={4.8} size='lg' />
         </div>
         <div className="flex flex-col gap-2 max-w-[400px]">
-          {dummyReviews.map(reviewLine =>
+          {dummyReviewsLine.map(reviewLine =>
             <ReviewLine key={reviewLine.label} {...reviewLine} />
           )}
         </div>
       </div>
       <div className="pt-10 gap-4 grid md:grid-cols-2 xl:grid-cols-3">
-        <ArtisanReviewCard />
-        <ArtisanReviewCard />
-        <ArtisanReviewCard />
+        {
+          dummyReviews.map(review=>
+            <ArtisanReviewCard key={review.id} {...review} />
+            )
+        }
       </div>
     </section>
   );
 }
 
-const dummyReviews: ReviewLineProps[] = [
+const dummyReviewsLine: ReviewLineProps[] = [
   {
-    label: 1,
+    label: 5,
+    value: 100,
+    percentage: 50
+  },
+  {
+    label: 4,
+    value: 10,
+    percentage: 5
+  },
+  {
+    label: 3,
     value: 30,
     percentage: 20
   },
@@ -44,20 +57,10 @@ const dummyReviews: ReviewLineProps[] = [
     percentage: 20
   },
   {
-    label: 3,
+    label: 1,
     value: 30,
     percentage: 20
   },
-  {
-    label: 4,
-    value: 10,
-    percentage: 5
-  },
-  {
-    label: 5,
-    value: 100,
-    percentage: 50
-  }
 ];
 
 const customTheme:CustomFlowbiteTheme['progress'] = {

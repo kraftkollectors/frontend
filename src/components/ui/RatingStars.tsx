@@ -1,4 +1,4 @@
-import { Rating } from "flowbite-react";
+import { FaStar } from "react-icons/fa6";
 
 export function RatingStars({
   value,
@@ -7,17 +7,20 @@ export function RatingStars({
   value: number;
   size?: "md" | "lg" | "sm";
 }) {
+  const classNames = "text-sm text-md text-lg";
   return (
-    <Rating size={size}>
+    <div className="flex gap-1">
       {[1, 2, 3, 4, 5].map(i => {
         return (
-          <Rating.Star
-            color="var(--secondary-color)"
+          <FaStar
             key={i}
-            filled={i <= value}
+            className={`text-${size} ${i <= Math.floor(value)
+              ? "text-secondary"
+              : "text-gray-400"}`}
           />
         );
+        // <Rating.Star color="var(--secondary-color)" key={i} filled={false} />
       })}
-    </Rating>
+    </div>
   );
 }

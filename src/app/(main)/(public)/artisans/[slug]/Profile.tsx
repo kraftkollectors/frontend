@@ -23,7 +23,7 @@ export default function Profile({
           width={200}
           src={img}
           alt={name}
-          className="avatar size-20 md:size-30"
+          className="avatar size-28"
         />
         <div className="flex flex-col gap-1 max-md:items-center max-md:text-center">
           <h1 className="r-font-bold r-text-lg">
