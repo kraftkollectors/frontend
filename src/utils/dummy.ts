@@ -1,5 +1,6 @@
 import { ArtisanReviewCardProps } from "@/components/ArtisanReviewCard";
 import { ServiceCardProps } from "@/components/ServiceCard";
+import { ReviewLineProps } from "@/components/ui/ReviewLines";
 
 export const dummyServices: ServiceCardProps[] = [
   {
@@ -128,4 +129,12 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
       img: "/images/auth-bg.png"
     }
   }
+];
+
+export const dummyReviewsLine: ReviewLineProps[] = [
+  { label: 5, value: 100, percentage: 50 },
+  { label: 4, value: 10, percentage: 5 },
+  { label: 3, value: 30, percentage: 20 },
+  { label: 2, value: 30, percentage: 20 },
+  { label: 1, value: 30, percentage: 20 }
 ];

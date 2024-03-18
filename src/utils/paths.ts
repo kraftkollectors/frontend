@@ -8,6 +8,9 @@ const paths = {
   // dynamic paths
   artisan(slug: string) {
     return `/artisans/${slug}`;
+  },
+  service(slug: string) {
+    return `/services/${slug}`;
   }
 };
 

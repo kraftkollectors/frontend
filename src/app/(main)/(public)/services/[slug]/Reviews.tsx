@@ -3,7 +3,7 @@
 import { ArtisanReviewCard, RatingStars, ReviewLines } from "@/components";
 import { dummyReviews, dummyReviewsLine } from "@/utils/dummy";
 
-import { ThemeModeScript } from "flowbite-react";
+import { ThemeModeScript, Progress } from "flowbite-react";
 
 export default function Reviews() {
   return (
@@ -24,9 +24,9 @@ export default function Reviews() {
           )}
         </div>
       </div>
-      <div className="pt-10 gap-4 grid md:grid-cols-2 xl:grid-cols-3">
+      <div className="pt-10 gap-4 grid grid-cols-1">
         {dummyReviews.map(review =>
-          <ArtisanReviewCard key={review.id} {...review} />
+          <ArtisanReviewCard key={review.id} {...review} service={undefined} />
         )}
       </div>
     </section>
