@@ -5,7 +5,7 @@ import { SocialIcons } from "@/components";
 
 export default function Profile() {
   return (
-    <div className="lg:col-span-4 h-fit rounded-md bg-light p-5 shadow-lg flex flex-col items-center justify-center text-center">
+    <div className="md:col-span-4 h-fit rounded-md bg-light p-5 md:shadow-lg flex flex-col items-center justify-center text-center">
       <Image
         height={200}
         width={200}

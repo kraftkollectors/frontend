@@ -12,3 +12,10 @@ export type BasicService = {
   duration: string;
   id: string;
 };
+
+export type VideoOrImage = "video" | "image";
+
+export type ServiceMedia = {
+  src: string;
+  type: VideoOrImage;
+};

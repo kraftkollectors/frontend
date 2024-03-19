@@ -56,12 +56,14 @@
   .link-btn{
     @apply r-font-semibold text-base text-dark-gray hover:text-primary
   }
+  .media-slider-arrow{
+    @apply absolute left-4 top-1/2 -translate-y-1/2 size-8 aspect-square rounded-full bg-light shadow-md flex items-center justify-center text-xl
+  }
 
   .skill-btn{
     @apply border rounded-2xl px-1 text-[0.9rem] bg-gray-100
   }
   .services-grid{
     @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2
-  
   }
 }

@@ -7,7 +7,7 @@ import { ThemeModeScript, Progress } from "flowbite-react";
 
 export default function Reviews() {
   return (
-    <section className="app-container py-10">
+    <section className="py-4">
       <ThemeModeScript />
       <h1 className="r-font-bold r-text-lg">400 Reviews</h1>
       <div className="flex flex-col gap-2">
