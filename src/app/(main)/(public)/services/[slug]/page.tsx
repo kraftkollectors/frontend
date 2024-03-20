@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <>
     <section className="app-container pt-5 pb-10 md:bg-gray-100">
-      <div className="pb-6 flex gap-2 max-md:hidden text-sm text-dark-gray">
+      <div className="pb-6 flex gap-2 max-md:hidden text-label text-dark-gray">
         <span>home</span> &gt;
         <span>Event Planning</span> &gt;
         <span>Music</span> &gt;

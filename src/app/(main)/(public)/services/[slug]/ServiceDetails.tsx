@@ -4,13 +4,13 @@ import { FaHeart } from "react-icons/fa6";
 export default function ServiceDetails() {
   return (
     <div className="flex flex-col gap-3 py-5 pb-4 border-b">
-      <h1 className="font-bold text-lg md:text-xl">
+      <h1 className="font-bold text-title md:text-xl">
         I will make your event a blossom and it will be good
       </h1>
       <div className="flex justify-between gap-4 border-b pb-4">
-        <p className="text-primary r-font-semibold text-md">$ 100</p>
+        <p className="text-primary r-font-semibold text-title">$ 100</p>
         <div className="flex w-fit gap-2 items-center">
-          <p className="text-dark-gray r-font-semibold text-md">4.8</p>
+          <p className="text-dark-gray r-font-semibold text-label">4.8</p>
           <RatingStars value={4.8} size="md" />
           <button className="size-8 rounded-md shadow inline-flex items-center justify-center bg-light">
             <FaHeart />
@@ -18,8 +18,8 @@ export default function ServiceDetails() {
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        <h1 className="text-sm font-bold">Service Description</h1>
-        <ReadMoreReadLess className="text-sm text-dark-gray">
+        <h1 className="font-bold">Service Description</h1>
+        <ReadMoreReadLess className="text-black-400">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus
           voluptatum, sit distinctio, dolor architecto, necessitatibus nam
           tenetur quidem blanditiis fugit nulla quod veniam repellat laudantium

@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { FaXTwitter, FaLinkedin, FaInstagram, FaFacebook } from "react-icons/fa6";
+import { FaXTwitter, FaInstagram } from "react-icons/fa6";
+import {SlSocialLinkedin} from 'react-icons/sl';
+import {LuFacebook} from 'react-icons/lu';
 
 export type SocialIconsProps = {
   x?:string;
@@ -14,13 +16,13 @@ export function SocialIcons({x,facebook,linkedin,instagram}:SocialIconsProps){
     x && <Link href={x} className={className}><FaXTwitter /></Link>
   }
   {
-    linkedin && <Link href={linkedin} className={className}><FaLinkedin /></Link>
+    linkedin && <Link href={linkedin} className={className}><SlSocialLinkedin /></Link>
   }
   {
     instagram && <Link href={instagram} className={className}><FaInstagram /></Link>
   }
   {
-    facebook && <Link href={facebook} className={className}><FaFacebook /></Link>
+    facebook && <Link href={facebook} className={className}><LuFacebook /></Link>
   }
   </>
 }

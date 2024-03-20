@@ -16,11 +16,10 @@ export default function MediaSliderIndicators({
           <button
             key={i}
             onClick={() => onChange(i + 1)}
-            className={`size-2 aspect-square rounded-full border border-light ${i +
-              1 ===
+            className={`size-2 aspect-square border rounded-full ${i + 1 ===
             currentIndex
-              ? "bg-gray-700"
-              : "bg-gray-300"}`}
+              ? "bg-light"
+              : "bg-[#00000055]"}`}
           />
         );
       })}

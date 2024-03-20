@@ -9,13 +9,11 @@ export default function Reviews() {
   return (
     <section className="py-4">
       <ThemeModeScript />
-      <h1 className="r-font-bold r-text-lg">400 Reviews</h1>
+      <h1 className="r-font-bold text-title">400 Reviews</h1>
       <div className="flex flex-col gap-2">
-        <h1 className="r-font-semibold text-sm text-dark-gray">
-          Overall Rating
-        </h1>
+        <h1 className=" text-black-400">Overall Rating</h1>
         <div className="flex items-center gap-2">
-          <h1 className="r-font-bold r-text-lg">4.8</h1>
+          <h1 className="r-font-semibold text-title">4.8</h1>
           <RatingStars value={4.8} size="lg" />
         </div>
         <div className="flex flex-col gap-2 max-w-[400px]">

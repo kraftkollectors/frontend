@@ -9,7 +9,7 @@ import {
 export default function Page() {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="r-text-xl r-font-bold">Create an Account</h1>
+      <h1 className="text-headline r-font-bold">Create an Account</h1>
       <p className="r-text-sm opacity-70">
         Sign up now to begin your journey with us!
       </p>

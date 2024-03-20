@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${openSans.className} bg-light text-dark-text`}>{children}</body>
+      <body className={` bg-light text-black-800 text-body`}>{children}</body>
     </html>
   );
 }

@@ -25,16 +25,16 @@ export function ArtisanReviewCard({
       <div className="flex gap-3 items-center">
         <img src={user.img} alt={user.name} className="avatar size-8" />
         <div className="flex flex-col">
-          <h1 className="text-sm r-font-semibold truncate">
+          <h1 className="text-black-900 r-font-semibold truncate">
             {user.name}
           </h1>
-          <p className="text-xs opacity-60">
+          <p className=" text-black-300">
             {date}
           </p>
         </div>
       </div>
       <RatingStars value={rating} />
-      <p className="text-sm text-dark-gray">
+      <p className="text-black-500">
         {review}
       </p>
       {service &&
@@ -45,11 +45,11 @@ export function ArtisanReviewCard({
             className="w-4/12 object-cover aspect-[5/3] rounded"
           />
           <div className="flex flex-col gap-1">
-            <h1 className="text-xs opacity-60">Reviewed</h1>
-            <h2 className="text-xs">
+            <h1 className="text-black-300">Reviewed</h1>
+            <h2>
               {service.title}
             </h2>
-            <p className="text-xs r-font-semibold">
+            <p className="font-bold">
               N{service.price} / {service.duration}
             </p>
           </div>

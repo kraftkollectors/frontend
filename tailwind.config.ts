@@ -9,7 +9,43 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'display': ['57px', {
+          // letterSpacing: '-0.01em',
+          lineHeight: '64px',
+        }],
+        'headline': ['32px', {
+          // letterSpacing: '-0.02em',
+          lineHeight: '40px',
+        }],
+        'title': ['24px', {
+          // letterSpacing: '-0.02em',
+          lineHeight: '28px',
+        }],
+        'body': ['16px', {
+          // letterSpacing: '-0.02em',
+          lineHeight: '24px',
+        }],
+        'label': ['14px', {
+          // letterSpacing: '-0.02em',
+          lineHeight: '20px',
+        }],
+      },
       colors: {
+        black:{
+          DEFAULT: '#000000',
+          50: "#e7e7e7",
+          100: '#b6b6b6',
+          200: '#929292',
+          300: '#606060',
+          400: '#414141',
+          500: '#121212',
+          600: '#101010',
+          700: '#0d0d0d',
+          800: '#0a0a0a',
+          900: '#080808',
+          950: '#050505',
+        },
         primary:{
           DEFAULT: '#2680BF',
           light: '#93BFDF',
