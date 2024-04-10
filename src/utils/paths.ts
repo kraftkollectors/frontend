@@ -1,5 +1,7 @@
 const paths = {
   home: "/",
+
+  // auth paths
   login: "/login",
   signup: "/signup",
   forgotPassword: "/forgot-password",
