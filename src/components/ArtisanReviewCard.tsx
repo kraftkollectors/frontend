@@ -1,33 +1,59 @@
+import { BasicService, BasicUser } from "@/utils/types/basicTypes";
 import { RatingStars } from "./ui/RatingStars";
 
 /* eslint-disable @next/next/no-img-element */
-export function ArtisanReviewCard() {
+
+export type ArtisanReviewCardProps = {
+  user: BasicUser;
+  date: string;
+  rating: number;
+  review: string;
+  service?: BasicService;
+  id: string;
+};
+
+export function ArtisanReviewCard({
+  user,
+  date,
+  rating,
+  review,
+  service,
+  id
+}: ArtisanReviewCardProps) {
   return (
     <div className="flex flex-col gap-2 border-b pb-2">
       <div className="flex gap-3 items-center">
-        <img src="/images/auth-bg.png" alt="name" className="avatar size-8" />
+        <img src={user.img} alt={user.name} className="avatar size-8" />
         <div className="flex flex-col">
-          <h1 className="text-sm r-font-semibold truncate">Joshua Nwanebi</h1>
-          <p className="text-xs opacity-60">12/12/2023</p>
+          <h1 className="text-black-900 r-font-semibold truncate">
+            {user.name}
+          </h1>
+          <p className=" text-black-300">
+            {date}
+          </p>
         </div>
       </div>
-      <RatingStars value={4} />
-      <p className="text-sm text-dark-gray">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eius rerum ab
-        officiis voluptatum repudiandae?
+      <RatingStars value={rating} />
+      <p className="text-black-500">
+        {review}
       </p>
-      <div className="flex gap-2 items-center">
-        <img
-          src="/images/auth-bg.png"
-          alt=""
-          className="w-4/12 object-cover aspect-[5/3] rounded"
-        />
-        <div className="flex flex-col gap-1">
-          <h1 className="text-xs opacity-60">Reviewed</h1>
-          <h2 className="text-xs">DJ Sets</h2>
-          <p className="text-xs r-font-semibold">N20,000 / session</p>
-        </div>
-      </div>
+      {service &&
+        <div className="flex gap-2 items-center">
+          <img
+            src={service.img}
+            alt={service.title}
+            className="w-4/12 object-cover aspect-[5/3] rounded"
+          />
+          <div className="flex flex-col gap-1">
+            <h1 className="text-black-300">Reviewed</h1>
+            <h2>
+              {service.title}
+            </h2>
+            <p className="font-bold">
+              N{service.price} / {service.duration}
+            </p>
+          </div>
+        </div>}
     </div>
   );
 }

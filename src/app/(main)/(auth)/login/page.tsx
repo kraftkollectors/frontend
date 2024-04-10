@@ -9,7 +9,7 @@ import {
 export default function Page() {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="r-text-xl r-font-bold">Welcome Back</h1>
+      <h1 className="text-headline r-font-bold">Welcome Back</h1>
       <p className="r-text-sm opacity-70">Login to access you account</p>
       <LoginForm />
       <div className="flex justify-center items-center text-sm gap-1">

@@ -1,5 +1,6 @@
 import React from "react";
-import { FaEnvelope, FaHeart, FaMicrophone } from "react-icons/fa6";
+import { FaRegEnvelope, FaRegHeart } from "react-icons/fa6";
+import { BiSupport } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,17 +22,17 @@ export default function NavLinks() {
 const links: NavLinkProps[] = [
   {
     label: "Saved",
-    icon: <FaHeart />,
+    icon: <FaRegHeart />,
     href: ""
   },
   {
     label: "Messages",
-    icon: <FaEnvelope />,
+    icon: <FaRegEnvelope />,
     href: ""
   },
   {
     label: "Support",
-    icon: <FaMicrophone />,
+    icon: <BiSupport />,
     href: ""
   }
 ];
@@ -46,10 +47,10 @@ function NavLink({ icon, label, href }: NavLinkProps) {
   return (
     <Link href={href}>
       <div className="flex flex-col items-center justify-center hover:text-primary">
-        <span className="text-sm">
+        <span className="text-body">
           {icon}
         </span>
-        <span className="text-xs font-[500]">
+        <span className="text-label font-[500]">
           {label}
         </span>
       </div>
