@@ -53,14 +53,39 @@ body{
   .link-btn{
     @apply r-font-semibold text-base hover:text-primary
   }
+  .icon-btn{
+    @apply rounded-md hover:bg-primary-lightActive cursor-pointer
+  }
   .media-slider-arrow{
     @apply absolute left-4 top-1/2 -translate-y-1/2 size-8 aspect-square rounded-full bg-light shadow-md flex items-center justify-center text-xl
   }
 
+  .app-input{
+    @apply   bg-light w-full border border-black-100 outline-primary text-dark-text py-3  pe-4 rounded-md
+  }
   .skill-btn{
     @apply border rounded-2xl px-2 text-label bg-gray-100
   }
   .services-grid{
     @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3
   }
+}
+
+
+::-webkit-scrollbar-track{
+  width: 8px;
+  background-color: transparent;
+}
+::-webkit-scrollbar{
+  width: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+  width: 8px;
+  background-color: #01010144;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: #010101;
 }

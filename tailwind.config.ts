@@ -30,6 +30,10 @@ const config: Config = {
           // letterSpacing: '-0.02em',
           lineHeight: '20px',
         }],
+        'small': ['10px', {
+          // letterSpacing: '-0.02em',
+          lineHeight: '16px',
+        }],
       },
       colors: {
         black:{
@@ -50,6 +54,7 @@ const config: Config = {
           DEFAULT: '#2680BF',
           light: '#93BFDF',
           lightActive: '#BCD8EB',
+          lightActive2: '#E9F2F9',
           dark: '#1D608F',
           darkActive: '#113A56',
         },

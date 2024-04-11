@@ -6,7 +6,7 @@ export default function page() {
           Terms, Conditions, and Privacy policy
         </h1>
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             Welcome to Kraftkollectors App!
           </h1>
           <p className="text-black-500">
@@ -36,7 +36,7 @@ export default function page() {
         </div>
 
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">Cookies</h1>
+          <h1 className="text-title text-black-700 font-semiboldc">Cookies</h1>
           <p className="text-black-500">
             We employ the use of cookies. By accessing Kraftkollectors App, you
             agreed to use cookies in agreement with the Privacy Policy. Most
@@ -49,7 +49,7 @@ export default function page() {
         </div>
 
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">License</h1>
+          <h1 className="text-title text-black-700 font-semiboldc">License</h1>
           <p className="text-black-500">
             Unless otherwise stated, Kraftkollectors and/or its licensors own
             the intellectual property rights for all material on Kraftkollectors
@@ -59,7 +59,7 @@ export default function page() {
           </p>
         </div>
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             You must not:
           </h1>
           <p className="text-black-500">
@@ -89,7 +89,7 @@ export default function page() {
         </div>
 
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             You warrant and represent that:
           </h1>
           <p className="text-black-500">
@@ -110,7 +110,7 @@ export default function page() {
         </div>
 
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             Hyperlinking to our Content
           </h1>
           <p className="text-black-500">
@@ -174,7 +174,7 @@ export default function page() {
           </p>
         </div>
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">iFrames</h1>
+          <h1 className="text-title text-black-700 font-semiboldc">iFrames</h1>
           <p className="text-black-500">
             Without prior approval and written permission, you may not create
             frames around our Webpages/App that alter in any way the visual
@@ -182,7 +182,7 @@ export default function page() {
           </p>
         </div>
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             Content Liability
           </h1>
           <p className="text-black-500">
@@ -196,7 +196,7 @@ export default function page() {
         </div>
 
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             Reservation of Rights
           </h1>
           <p className="text-black-500">
@@ -220,7 +220,7 @@ export default function page() {
         </div>
 
         <div className="">
-          <h1 className="text-title text-black-700 font-semibold">
+          <h1 className="text-title text-black-700 font-semiboldc">
             Disclaimer
           </h1>
           <p className="text-black-500">
