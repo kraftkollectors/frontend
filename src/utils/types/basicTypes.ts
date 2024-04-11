@@ -1,4 +1,5 @@
 export type AppLayoutProps = Readonly<{ children: React.ReactNode }>;
+export type AppPageProps = { children: React.ReactNode };
 
 export type BasicUser = {
   name: string;

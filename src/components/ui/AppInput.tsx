@@ -1,3 +1,5 @@
+"use client";
+
 import { memo, useEffect, useRef, useState } from "react";
 import { z } from "zod";
 
@@ -77,9 +79,9 @@ export default memo(function AppInput({
                 setVal(e.target.value);
                 if (onChange) onChange(e.target.value);
               }}
-              className={` bg-light w-full border outline-primary text-dark-text py-3 ${!icon
-                ? "ps-4"
-                : "ps-9"} pe-4 rounded-md ${error ? "bg-red-100" : ""}`}
+              className={`app-input ${!icon ? "ps-4" : "ps-9"} ${error
+                ? "bg-red-100"
+                : ""}`}
             />
           : <input
               id={`${title}-input`}
@@ -91,11 +93,9 @@ export default memo(function AppInput({
                 setVal(e.target.value);
                 if (onChange) onChange(e.target.value);
               }}
-              className={` bg-light w-full border outline-primary text-dark-text py-3 ${ps
+              className={`app-input ${ps
                 ? ps
-                : !icon ? "ps-4" : "ps-9"} pe-4 rounded-md ${error
-                ? "bg-red-100"
-                : ""}`}
+                : !icon ? "ps-4" : "ps-9"}  ${error ? "bg-red-100" : ""}`}
             />}
       </div>
       {error &&

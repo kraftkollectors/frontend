@@ -8,12 +8,22 @@ const paths = {
   resetPassword: "/reset-password",
 
   // dynamic paths
-  artisan(slug: string) {
-    return `/artisans/${slug}`;
-  },
-  service(slug: string) {
-    return `/services/${slug}`;
-  }
+  artisan: (slug: string) => `/artisans/${slug}`,
+  service: (slug: string) => `/services/${slug}`,
+
+  // dashboard
+  dashboard: "/dashboard",
+
+  // dashboard settings
+  dashboardSettings: `/dashboard/settings`,
+  dashboardSettingsPersonalDetails: `/dashboard/settings/personal-details`,
+  dashboardSettingsAccount: `/dashboard/settings/account`,
+  dashboardSettingsContactInfo: `/dashboard/settings/contact-information`,
+  dashboardSettingsNotification: `/dashboard/settings/notification`,
+
+  // dashboard chats
+  dashboardChats: `/dashboard/chats`,
+  dashboardSingleChat: (slug: string) => `/dashboard/chats/${slug}`
 };
 
 export default paths;
