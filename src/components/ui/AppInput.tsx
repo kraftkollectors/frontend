@@ -13,6 +13,7 @@ export type AppInputProps = {
   textarea?: boolean;
   ps?: string;
   title?: string;
+  rows?: number;
   onChange?: (value: string) => void;
   onErrorChange?: (hasError: boolean) => void;
 };
@@ -28,7 +29,8 @@ export default memo(function AppInput({
   onErrorChange,
   schema,
   ps,
-  title
+  title,
+  rows,
 }: AppInputProps) {
   const [val, setVal] = useState(value);
   const [error, setError] = useState<string | null>(null);
@@ -56,52 +58,52 @@ export default memo(function AppInput({
 
   return (
     <div className="">
-      {title &&
+      {title && (
         <label htmlFor={`${title}-input`} className="inline-block pb-1">
           {title}
-        </label>}
+        </label>
+      )}
       <div className="relative">
         <span
-          className={`absolute inline-block left-3 opacity-60 ${textarea
-            ? "top-4"
-            : "top-1/2 -translate-y-1/2"}`}
+          className={`absolute inline-block left-3 opacity-60 ${
+            textarea ? "top-4" : "top-1/2 -translate-y-1/2"
+          }`}
         >
           {icon}
         </span>
-        {textarea
-          ? <textarea
-              id={`${title}-input`}
-              name={name}
-              placeholder={placeholder}
-              rows={4}
-              value={val}
-              onChange={e => {
-                setVal(e.target.value);
-                if (onChange) onChange(e.target.value);
-              }}
-              className={`app-input ${!icon ? "ps-4" : "ps-9"} ${error
-                ? "bg-red-100"
-                : ""}`}
-            />
-          : <input
-              id={`${title}-input`}
-              name={name}
-              placeholder={placeholder}
-              type={type}
-              value={val}
-              onChange={e => {
-                setVal(e.target.value);
-                if (onChange) onChange(e.target.value);
-              }}
-              className={`app-input ${ps
-                ? ps
-                : !icon ? "ps-4" : "ps-9"}  ${error ? "bg-red-100" : ""}`}
-            />}
+        {textarea ? (
+          <textarea
+            id={`${title}-input`}
+            name={name}
+            placeholder={placeholder}
+            rows={rows ?? 4}
+            value={val}
+            onChange={(e) => {
+              setVal(e.target.value);
+              if (onChange) onChange(e.target.value);
+            }}
+            className={`app-input ${!icon ? "ps-4" : "ps-9"} ${
+              error ? "bg-red-100" : ""
+            }`}
+          />
+        ) : (
+          <input
+            id={`${title}-input`}
+            name={name}
+            placeholder={placeholder}
+            type={type}
+            value={val}
+            onChange={(e) => {
+              setVal(e.target.value);
+              if (onChange) onChange(e.target.value);
+            }}
+            className={`app-input ${ps ? ps : !icon ? "ps-4" : "ps-9"}  ${
+              error ? "bg-red-100" : ""
+            }`}
+          />
+        )}
       </div>
-      {error &&
-        <p className="text-red-900 text-xs">
-          {error}
-        </p>}
+      {error && <p className="text-red-900 text-xs">{error}</p>}
     </div>
   );
 });

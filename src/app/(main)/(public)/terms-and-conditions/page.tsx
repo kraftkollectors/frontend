@@ -129,7 +129,8 @@ export default function page() {
             other Website/App information so long as the link: (a) is not in any
             way deceptive; (b) does not falsely imply sponsorship, endorsement
             or approval of the linking party and its products and/or services;
-            and (c) fits within the context of the linking party's site. <br />
+            and (c) fits within the context of the linking party&apos;s site.{" "}
+            <br />
             <br />
             We may consider and approve other link requests from the following
             types of organizations: <br />
@@ -153,7 +154,7 @@ export default function page() {
             (a) is not in any way deceptive; (b) does not falsely imply
             sponsorship, endorsement or approval of the linking party and its
             products or services; and (c) fits within the context of the linking
-            party's site.
+            party&apos;s site.
             <br /> <br /> If you are one of the organizations listed in
             paragraph 2 above and are interested in linking to our website/App,
             you must inform us by sending an e-mail to Kraftkollectors. Please
@@ -168,7 +169,7 @@ export default function page() {
             <br /> By use of the uniform resource locator being linked to; or
             <br /> By use of any other description of our Website being linked
             to that makes sense within the context and format of content on the
-            linking party's site.
+            linking party&apos;s site.
             <br /> No use of Kraftkollectors logo or other artwork will be
             allowed for linking absent a trademark license agreement.
           </p>
