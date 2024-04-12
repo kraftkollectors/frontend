@@ -7,7 +7,7 @@ export default function Conversations({
   conversations: ConversationTileProps[];
 }) {
   return (
-    <div className="flex flex-col overflow-y-auto  md:h-[calc(100vh-170px)] md:max-h-[calc(100vh-170px)]">
+    <div className="flex flex-col overflow-y-auto ">
       {conversations.map(conversation =>
         <ConversationTile key={conversation.id} {...conversation} />
       )}
