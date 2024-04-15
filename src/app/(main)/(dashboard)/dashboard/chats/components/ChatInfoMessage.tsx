@@ -3,11 +3,12 @@ import { IoWarningOutline } from "react-icons/io5";
 export type ChatInfoMessageProps = {
   type?: "warning" | "danger" | "success" | "default";
   message: string;
+  className?: string;
 };
 
 export function ChatInfoMessage({
   type = "default",
-  message
+  message,
 }: ChatInfoMessageProps) {
   let className: string;
   switch (type) {
@@ -26,7 +27,7 @@ export function ChatInfoMessage({
   }
 
   return (
-    <div className="flex justify-center items-center px-4 py-1">
+    <div className="flex justify-center items-center px-4 py-1 sticky left-0 top-0 bg-light-text">
       <div
         className={`text-label py-1 rounded-md px-2 ${className} flex flex-wrap items-center gap-1`}
       >

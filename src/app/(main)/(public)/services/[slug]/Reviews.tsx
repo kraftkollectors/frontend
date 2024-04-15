@@ -4,6 +4,7 @@ import { ArtisanReviewCard, RatingStars, ReviewLines } from "@/components";
 import { dummyReviews, dummyReviewsLine } from "@/utils/dummy";
 
 import { ThemeModeScript, Progress } from "flowbite-react";
+import WriteReview from "./WriteReview";
 
 export default function Reviews() {
   return (
@@ -17,15 +18,18 @@ export default function Reviews() {
           <RatingStars value={4.8} size="lg" />
         </div>
         <div className="flex flex-col gap-2 max-w-[400px]">
-          {dummyReviewsLine.map(reviewLine =>
+          {dummyReviewsLine.map((reviewLine) => (
             <ReviewLines key={reviewLine.label} {...reviewLine} />
-          )}
+          ))}
         </div>
       </div>
+      <div className="py-2">
+        <WriteReview />
+      </div>
       <div className="pt-10 gap-4 grid grid-cols-1">
-        {dummyReviews.map(review =>
+        {dummyReviews.map((review) => (
           <ArtisanReviewCard key={review.id} {...review} service={undefined} />
-        )}
+        ))}
       </div>
     </section>
   );

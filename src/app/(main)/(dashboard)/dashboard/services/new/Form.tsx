@@ -1,7 +1,13 @@
+"use client";
+
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import { MdMyLocation } from "react-icons/md";
+import {
+  FileSizeValidator,
+  FileTypeValidator,
+} from "use-file-picker/validators";
 export default function ServicesForm() {
   return (
     <form action="">
@@ -112,7 +118,17 @@ export default function ServicesForm() {
             Cover photo
           </label>
           <div className="col-span-4">
-            <AppFilePicker title="cover Photo" />
+            <AppFilePicker
+              title="cover Photo"
+              onSelect={(_) => {}}
+              accept="image/*"
+              validators={[
+                new FileTypeValidator(["jpg", "png"]),
+                new FileSizeValidator({
+                  maxFileSize: 5 * 1024 * 1024 /* 5 MB */,
+                }),
+              ]}
+            />
           </div>
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">
@@ -120,7 +136,25 @@ export default function ServicesForm() {
             Portfolio
           </label>
           <div className="col-span-4">
-            <AppFilePicker title="cover Photo" subtitle="profile" />
+            <AppFilePicker
+              accept=""
+              title="cover Photo"
+              subtitle="JPG, GIF, WebM, MP4, PNG, up to 5MB"
+              onSelect={(_) => {}}
+              validators={[
+                new FileTypeValidator([
+                  "jpg",
+                  "png",
+                  "webm",
+                  "png",
+                  "gif",
+                  "mp4",
+                ]),
+                new FileSizeValidator({
+                  maxFileSize: 5 * 1024 * 1024 /* 5 MB */,
+                }),
+              ]}
+            />
           </div>
         </div>
       </div>

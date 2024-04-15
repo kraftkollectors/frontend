@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@radix-ui/themes/styles.css";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
 

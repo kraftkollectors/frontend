@@ -1,13 +1,12 @@
 import { Navbar } from "@/components";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
+import { Theme } from "@radix-ui/themes";
 
-export default function RootLayout({
-  children,
-}: AppLayoutProps) {
+export default function RootLayout({ children }: AppLayoutProps) {
   return (
-    <>
-    <Navbar />
-    {children}
-    </>
+    <Theme>
+      <Navbar />
+      {children}
+    </Theme>
   );
 }

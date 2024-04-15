@@ -43,6 +43,9 @@ body {
   .btn-primary-tiny {
     @apply bg-primary border border-primary btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-primary-darkActive text-sm font-normal inline-flex gap-1;
   }
+  .btn-dark-tiny {
+    @apply bg-black-600 border border-black-600 btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-normal inline-flex gap-1;
+  }
   .btn-primary-tiny-border {
     @apply bg-transparent border border-primary btn text-primary rounded-md hover:shadow-sm transition duration-150 ease-in-out hover:border-primary-darkActive hover:text-primary-darkActive text-sm font-normal inline-flex gap-1;
   }
@@ -76,15 +79,18 @@ body {
 
 ::-webkit-scrollbar-track {
   width: 8px;
+  height: 8px;
   background-color: transparent;
 }
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
   background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   width: 8px;
+  height: 8px;
   background-color: #01010144;
   border-radius: 5px;
 }
