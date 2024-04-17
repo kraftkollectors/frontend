@@ -23,7 +23,11 @@ const paths = {
 
   // dashboard chats
   dashboardChats: `/dashboard/chats`,
-  dashboardSingleChat: (slug: string) => `/dashboard/chats/${slug}`
+  dashboardSingleChat: (slug: string) => `/dashboard/chats/${slug}`,
+
+  //dashboard services
+  dashboardServices: `/dashboard/services`,
+  dashboardNewService: `/dashboard/services/new`,
 };
 
 export default paths;

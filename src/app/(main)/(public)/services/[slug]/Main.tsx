@@ -12,7 +12,7 @@ export default function Main() {
             "/images/auth-bg.mp4",
             "/images/dna logo.png",
             "/images/galaxy s24.jpg",
-            "/images/auth-bg.png"
+            "/images/auth-bg.png",
           ]}
         />
       </div>

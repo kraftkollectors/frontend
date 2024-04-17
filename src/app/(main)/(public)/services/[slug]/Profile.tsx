@@ -2,6 +2,8 @@ import { FaLocationDot, FaMessage, FaPhone, FaRegClock } from "react-icons/fa6";
 import Image from "next/image";
 import Link from "next/link";
 import { SocialIcons } from "@/components";
+import Report from "@/components/Report";
+import ReportDialog from "@/components/Report";
 
 export default function Profile() {
   return (
@@ -27,10 +29,12 @@ export default function Profile() {
       </div>
       <div className="grid grid-cols-2 gap-2 py-6 w-full">
         <Link href={""} className="btn-primary-border">
-          <FaPhone />Phone Call
+          <FaPhone />
+          Phone Call
         </Link>
         <Link href={""} className="btn-primary">
-          <FaMessage />Message
+          <FaMessage />
+          Message
         </Link>
       </div>
       <div className="pb-3">
@@ -46,7 +50,9 @@ export default function Profile() {
           Member since April 25, 2020
         </h1>
         <div className="flex justify-center items-center w-full divide-x">
-          <button className="link-btn px-3 py-1">Report</button>
+          <ReportDialog>
+            <button className="link-btn px-3 py-1">Report</button>
+          </ReportDialog>
           <button className="link-btn px-3 py-1">Block</button>
         </div>
       </div>

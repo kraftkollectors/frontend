@@ -63,7 +63,7 @@ body {
   }
 
   .app-input {
-    @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-3  pe-4 rounded-md;
+    @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-2  pe-3 rounded-md;
   }
   .skill-btn {
     @apply border rounded-2xl px-2 text-label bg-gray-100;

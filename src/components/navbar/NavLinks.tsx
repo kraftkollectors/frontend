@@ -3,11 +3,14 @@ import { FaRegEnvelope, FaRegHeart } from "react-icons/fa6";
 import { BiSupport } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
+import paths from "@/utils/paths";
 
 export default function NavLinks() {
   return (
-    <nav className="flex w-fit gap-4 items-center">
-      {links.map(link => <NavLink key={link.label} {...link} />)}
+    <nav className="flex w-fit gap-4 items-center max-md:hidden">
+      {links.map((link) => (
+        <NavLink key={link.label} {...link} />
+      ))}
       <Image
         height={100}
         width={100}
@@ -23,18 +26,18 @@ const links: NavLinkProps[] = [
   {
     label: "Saved",
     icon: <FaRegHeart />,
-    href: ""
+    href: "",
   },
   {
     label: "Messages",
     icon: <FaRegEnvelope />,
-    href: ""
+    href: paths.dashboardChats,
   },
   {
     label: "Support",
     icon: <BiSupport />,
-    href: ""
-  }
+    href: "",
+  },
 ];
 
 type NavLinkProps = {
@@ -47,12 +50,8 @@ function NavLink({ icon, label, href }: NavLinkProps) {
   return (
     <Link href={href}>
       <div className="flex flex-col items-center justify-center hover:text-primary">
-        <span className="text-body">
-          {icon}
-        </span>
-        <span className="text-label font-[500]">
-          {label}
-        </span>
+        <span className="text-body">{icon}</span>
+        <span className="text-label font-[500]">{label}</span>
       </div>
     </Link>
   );

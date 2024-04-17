@@ -11,7 +11,7 @@ export default function WriteReview() {
         <button className="btn-dark-border p-2"> Write a review</button>
       </AlertDialog.Trigger>
       <AlertDialog.Content>
-        <div className=" flex flex-col gap-3 text-center items-center">
+        <form className=" flex flex-col gap-3 text-center items-center">
           <div className="flex justify-between w-full">
             <h1></h1>
             <h1 className="text-center text-title font-semibold">
@@ -40,7 +40,7 @@ export default function WriteReview() {
           <button className="btn-dark-tiny py-2 max-md:w-full px-6">
             Submit
           </button>
-        </div>
+        </form>
       </AlertDialog.Content>
     </AlertDialog.Root>
   );

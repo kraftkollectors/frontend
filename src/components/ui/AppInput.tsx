@@ -82,7 +82,7 @@ export default memo(function AppInput({
               setVal(e.target.value);
               if (onChange) onChange(e.target.value);
             }}
-            className={`app-input ${!icon ? "ps-4" : "ps-9"} ${
+            className={`app-input ${!icon ? "ps-3" : "ps-9"} ${
               error ? "bg-red-100" : ""
             }`}
           />
