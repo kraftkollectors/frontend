@@ -37,8 +37,17 @@ body {
   .btn-primary {
     @apply btn-primary-tiny r-font-semibold text-lg py-2;
   }
+  .btn-transparent {
+    @apply bg-transparent border text-label py-2 rounded-3xl inline-flex justify-center items-center text-primary gap-1;
+  }
   .btn-primary-border {
     @apply btn-primary-tiny-border r-font-semibold text-lg py-2;
+  }
+  .delete-btn {
+    @apply flex items-center gap-2 text-danger rounded hover:bg-red-100 p-1;
+  }
+  .edit-btn {
+    @apply flex items-center gap-2 text-primary rounded hover:bg-blue-100 p-1;
   }
   .btn-primary-tiny {
     @apply bg-primary border border-primary btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-primary-darkActive text-sm font-normal inline-flex gap-1;

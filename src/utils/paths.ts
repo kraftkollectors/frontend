@@ -7,6 +7,11 @@ const paths = {
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
 
+  // become a seller
+  becomeASeller: "/become-a-seller",
+  becomeASellerPersonalDetails: "/become-a-seller/personal-details",
+  becomeASellerEducation: "/become-a-seller/education",
+
   // dynamic paths
   artisan: (slug: string) => `/artisans/${slug}`,
   service: (slug: string) => `/services/${slug}`,

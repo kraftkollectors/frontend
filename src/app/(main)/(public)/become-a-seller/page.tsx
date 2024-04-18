@@ -23,7 +23,7 @@ export default function SellerPage() {
             <div className="flex  items-center gap-4">
               <div className="bg-primary-lightActive2 rounded-full p-4 text-title text-primary relative">
                 <FaUser />
-                <div className="absolute h-40 border-dashed z-[-1] border-r-2 border-primary w-1 top-4 left-1/2 -translate-x-1/2"></div>
+                <div className="absolute h-20 border-dashed z-[-1] border-r-2 border-primary w-1 top-4 left-1/2 -translate-x-1/2"></div>
               </div>
               <div className="flex flex-col">
                 <p className="font-semibold">Setup Your Profile</p>
@@ -37,7 +37,6 @@ export default function SellerPage() {
             <div className="flex  items-center gap-4">
               <div className="bg-primary-lightActive2 rounded-full p-4 text-title text-primary relative">
                 <FaRegIdBadge />
-                <div className="absolute h-40 border-dashed z-[-1] border-r-2 border-primary w-1 top-4 left-1/2 -translate-x-1/2"></div>
               </div>
               <div className="flex flex-col">
                 <p className="font-semibold">Setup Your Profile</p>
