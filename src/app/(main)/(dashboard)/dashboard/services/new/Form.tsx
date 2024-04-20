@@ -1,5 +1,6 @@
 "use client";
 
+import { UseCurrentLocation } from "@/components";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
@@ -107,10 +108,7 @@ export default function ServicesForm() {
             {" "}
             <AppSelect name="category" options={["select State"]} />
             <AppInput name="location" type="text" placeholder="Egbu" />
-            <button className="text-primary hover:text-primary-dark flex items-center">
-              <MdMyLocation />
-              <span>Use Current location</span>
-            </button>
+            <UseCurrentLocation />
           </div>
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">

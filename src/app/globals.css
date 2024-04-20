@@ -34,6 +34,9 @@ body {
   .btn {
     @apply inline-flex items-center justify-center;
   }
+  .search-filter-btn {
+    @apply flex gap-2 border py-1 px-2 items-center rounded;
+  }
   .btn-primary {
     @apply btn-primary-tiny r-font-semibold text-lg py-2;
   }

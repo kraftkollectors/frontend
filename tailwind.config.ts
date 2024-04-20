@@ -81,6 +81,7 @@ const config: Config = {
           DEFAULT: "#E0A44F",
           light: "#FCF6ED",
           lightActive: "#F5E3C8",
+          lightHover: "#FAF1E5",
           dark: "#A87B3B",
           darkActive: "#654A24",
         },

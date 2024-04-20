@@ -12,8 +12,8 @@ export const dummyServices: ServiceCardProps[] = [
     id: "7912gfbh",
     artisan: {
       name: "John Doe",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     img: "/images/auth-bg.png",
@@ -24,8 +24,8 @@ export const dummyServices: ServiceCardProps[] = [
     id: "h9fufos",
     artisan: {
       name: "John Doe",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     img: "/images/auth-bg.png",
@@ -36,8 +36,8 @@ export const dummyServices: ServiceCardProps[] = [
     id: "wf9huf",
     artisan: {
       name: "John Doe",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     img: "/images/auth-bg.png",
@@ -48,8 +48,8 @@ export const dummyServices: ServiceCardProps[] = [
     id: "ouhfefg",
     artisan: {
       name: "John Doe",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     img: "/images/auth-bg.png",
@@ -60,8 +60,8 @@ export const dummyServices: ServiceCardProps[] = [
     id: "9un3v",
     artisan: {
       name: "John Doe",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     img: "/images/auth-bg.png",
@@ -72,9 +72,9 @@ export const dummyServices: ServiceCardProps[] = [
     id: "9fuhufwje",
     artisan: {
       name: "John Doe",
-      img: "/images/auth-bg.png"
-    }
-  }
+      img: "/images/auth-bg.png",
+    },
+  },
 ];
 
 export const dummyReviews: ArtisanReviewCardProps[] = [
@@ -82,7 +82,7 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     id: "w78efg",
     user: {
       name: "Josh Binus",
-      img: "/images/auth-bg.png"
+      img: "/images/auth-bg.png",
     },
     rating: 4,
     review: "Excellent service, I wish I could give more than 5 stars",
@@ -92,14 +92,14 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
       title: "Dj Sets",
       duration: "session",
       price: "20,000",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     id: "8uwfhe",
     user: {
       name: "Josh Binus",
-      img: "/images/auth-bg.png"
+      img: "/images/auth-bg.png",
     },
     rating: 4,
     review: "Excellent service, I wish I could give more than 5 stars",
@@ -109,14 +109,14 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
       title: "Dj Sets",
       duration: "session",
       price: "20,000",
-      img: "/images/auth-bg.png"
-    }
+      img: "/images/auth-bg.png",
+    },
   },
   {
     id: "ouwvbiewbf",
     user: {
       name: "Josh Binus",
-      img: "/images/auth-bg.png"
+      img: "/images/auth-bg.png",
     },
     rating: 4,
     review: "Excellent service, I wish I could give more than 5 stars",
@@ -126,9 +126,28 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
       title: "Dj Sets",
       duration: "session",
       price: "20,000",
-      img: "/images/auth-bg.png"
-    }
-  }
+      img: "/images/auth-bg.png",
+    },
+  },
+];
+
+export const dummyRelatedSearch = [
+  {
+    title: "House music",
+    id: "11",
+  },
+  {
+    title: "Party DJ",
+    id: "12",
+  },
+  {
+    title: "DJ Controller",
+    id: "13",
+  },
+  {
+    title: "Club DJ",
+    id: "14",
+  },
 ];
 
 export const dummyReviewsLine: ReviewLineProps[] = [
@@ -136,5 +155,5 @@ export const dummyReviewsLine: ReviewLineProps[] = [
   { label: 4, value: 10, percentage: 5 },
   { label: 3, value: 30, percentage: 20 },
   { label: 2, value: 30, percentage: 20 },
-  { label: 1, value: 30, percentage: 20 }
+  { label: 1, value: 30, percentage: 20 },
 ];
