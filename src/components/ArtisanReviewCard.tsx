@@ -18,7 +18,7 @@ export function ArtisanReviewCard({
   rating,
   review,
   service,
-  id
+  id,
 }: ArtisanReviewCardProps) {
   return (
     <div className="flex flex-col gap-2 border-b pb-2">
@@ -28,16 +28,12 @@ export function ArtisanReviewCard({
           <h1 className="text-black-900 r-font-semibold truncate">
             {user.name}
           </h1>
-          <p className=" text-black-300">
-            {date}
-          </p>
+          <p className=" text-black-300">{date}</p>
         </div>
       </div>
       <RatingStars value={rating} />
-      <p className="text-black-500">
-        {review}
-      </p>
-      {service &&
+      <p className="text-black-500">{review}</p>
+      {service && (
         <div className="flex gap-2 items-center">
           <img
             src={service.img}
@@ -46,14 +42,13 @@ export function ArtisanReviewCard({
           />
           <div className="flex flex-col gap-1">
             <h1 className="text-black-300">Reviewed</h1>
-            <h2>
-              {service.title}
-            </h2>
+            <h2>{service.title}</h2>
             <p className="font-bold">
               N{service.price} / {service.duration}
             </p>
           </div>
-        </div>}
+        </div>
+      )}
     </div>
   );
 }

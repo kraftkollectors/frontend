@@ -83,6 +83,9 @@ body {
   .services-grid {
     @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3;
   }
+  .search-mobile-group {
+    @apply py-4 [&>p]:text-label [&>p]:font-[500];
+  }
 }
 
 .radio-group:checked + label {
@@ -108,4 +111,8 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: #010101;
+}
+
+.multi-range-slider .thumb .caption * {
+  display: none !important;
 }

@@ -6,6 +6,7 @@ export { ReviewLines } from "./ui/ReviewLines";
 export { ReadMoreReadLess } from "./ui/ReadMoreReadLess";
 export { ImagePicker } from "./ui/ImagePicker";
 export { UseCurrentLocation } from "./ui/UseCurrentLocation";
+export { Pagination } from "./ui/Pagination";
 
 export { ContinueWithGoogleButton } from "./ContinueWithGoogleButton";
 export { ContinueWithFacebookButton } from "./ContinueWithFacebookButton";

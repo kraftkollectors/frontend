@@ -18,6 +18,8 @@ const paths = {
 
   // dashboard
   dashboard: "/dashboard",
+  dashboardReviews: `/dashboard/reviews`,
+  dashboardSaved: "/dashboard/saved",
 
   // dashboard settings
   dashboardSettings: `/dashboard/settings`,

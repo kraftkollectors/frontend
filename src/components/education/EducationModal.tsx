@@ -1,3 +1,4 @@
+"use client";
 import { AlertDialog } from "@radix-ui/themes";
 import { FaPlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
