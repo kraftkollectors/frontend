@@ -9,7 +9,7 @@ export default function DashBoardNav() {
   const vw = useWindowWidth();
 
   return (
-    <div className="flex gap-4 pt-2 px-2">
+    <div className="flex gap-4 pt-2 px-2 max-md:justify-between">
       {services.map((service) => {
         const isActive = path == service.href;
         const isMobile = vw <= 768;

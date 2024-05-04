@@ -17,7 +17,7 @@ export default function ProfileCategories({
   education,
 }: ProfileCategoriesProps) {
   return (
-    <div className=" flex flex-col p-4 rounded-md bg-light">
+    <div className=" flex flex-col p-4 rounded-md bg-light gap-2">
       <ProfileCategory
         title="Description"
         action={
@@ -40,14 +40,13 @@ export default function ProfileCategories({
       </ProfileCategory>
 
       <ProfileCategory
-        title=""
+        title="Education"
         action={
-          <div className="edit-btn">
+          <button className="edit-btn">
             <FaPlus /> Add New
-          </div>
+          </button>
         }
       >
-        <p className="text-black-400">{education}</p>
         <EducationCard
           universityName="University of Technology Owerri"
           degree="Bachelor of Engineering(BEng)"
@@ -60,14 +59,13 @@ export default function ProfileCategories({
       </ProfileCategory>
 
       <ProfileCategory
-        title=""
+        title="Certificates"
         action={
           <div className="edit-btn">
             <FaPlus /> Add New
           </div>
         }
       >
-        <p className="text-black-400">{education}</p>
         <CertificateCard
           id=""
           year="2022"

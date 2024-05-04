@@ -19,13 +19,19 @@ export function DashboardReviewCard({
           </h1>
           <p className=" text-black-300">{date}</p>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col max-md:hidden">
           <p className=" text-black-300">reviewed</p>
           <h1 className="text-black-900 r-font-semibold truncate">
             {service?.title}
           </h1>
         </div>
       </div>
+        <div className="flex flex-col md:hidden">
+          <p className=" text-black-300">reviewed</p>
+          <h1 className="text-black-900 r-font-semibold truncate">
+            {service?.title}
+          </h1>
+        </div>
       <RatingStars value={rating} />
       <p className="text-black-500">{review}</p>
     </div>

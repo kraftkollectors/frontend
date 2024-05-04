@@ -1,3 +1,5 @@
+'use client'
+
 import { LuPhone, LuUser2 } from "react-icons/lu";
 import ProfileInfoLine from "./ProfileInfoLine";
 import { IoLocationOutline, IoTimeOutline } from "react-icons/io5";
@@ -9,13 +11,13 @@ import {
   FaLinkedin,
   FaXTwitter,
 } from "react-icons/fa6";
-export type ProfileCardprops = {
-  image: string;
-  fullName: string;
-  displayName: string;
+import { getUsernameFromLink } from "@/functions/helpers";
+import { DashboardProfile, DashboardProfileProps } from "@/components/dashboard";
+import useWindowWidth from "@/hooks/useWindowWidth";
+export type ProfileCardprops = DashboardProfileProps & {
   memberSince: string;
   location: string;
-  email: string;
+  displayName: string;
   availability?: string;
   phoneNumber?: string;
   website?: string;
@@ -26,17 +28,12 @@ export type ProfileCardprops = {
 };
 /* eslint-disable @next/next/no-img-element */
 export default function ProfileCard(props: ProfileCardprops) {
+  const vw = useWindowWidth();
   return (
     <div className="w-full border  gap-2 bg-light  p-4 rounded-md">
-      <div className="flex flex-col gap-2 items-center py-4">
-        <img
-          src={props.image}
-          alt=""
-          className="rounded-full size-16 object-ccover"
-        />
-        <p className="font-semibold text-title">{props.fullName}</p>
-        <p className="">{props.email}</p>
-      </div>
+      {
+        vw > 768 && <DashboardProfile {...props} />
+      }
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">General Info</p>
@@ -102,7 +99,7 @@ export default function ProfileCard(props: ProfileCardprops) {
                   href={props.instagram}
                   target="_blank"
                 >
-                  {props.instagram}
+                  {getUsernameFromLink(props.instagram)}
                 </a>
               }
               icon={<FaInstagram />}
@@ -117,7 +114,7 @@ export default function ProfileCard(props: ProfileCardprops) {
                   href={props.x}
                   target="_blank"
                 >
-                  {props.x}
+                  {getUsernameFromLink(props.x)}
                 </a>
               }
               icon={<FaXTwitter />}
@@ -132,7 +129,7 @@ export default function ProfileCard(props: ProfileCardprops) {
                   href={props.facebook}
                   target="_blank"
                 >
-                  {props.facebook}
+                  {getUsernameFromLink(props.facebook)}
                 </a>
               }
               icon={<FaFacebook />}
@@ -148,7 +145,7 @@ export default function ProfileCard(props: ProfileCardprops) {
                   href={props.linkedin}
                   target="_blank"
                 >
-                  {props.linkedin}
+                  {getUsernameFromLink(props.linkedin)}
                 </a>
               }
               icon={<FaLinkedin />}
