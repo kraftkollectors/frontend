@@ -17,7 +17,7 @@ export default function ProfileCategories({
   education,
 }: ProfileCategoriesProps) {
   return (
-    <div className=" flex flex-col p-4 rounded-md bg-light gap-2">
+    <div className=" flex flex-col p-4 rounded-md bg-light gap-2 border">
       <ProfileCategory
         title="Description"
         action={
