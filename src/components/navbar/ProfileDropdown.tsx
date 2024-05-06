@@ -21,7 +21,7 @@ export default function ProfileDropdown({ children }: ProfileDropdownProps) {
           {profilelinks.map((profilelink) => (
             <Link
               key={profilelink.href}
-              href={profilelink.title}
+              href={profilelink.href}
               className={`flex gap-2 py-2 hover:text-primary items-center ${
                 paths.dashboardLogout == profilelink.href
                   ? "text-red-700"
