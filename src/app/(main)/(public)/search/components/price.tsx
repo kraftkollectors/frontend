@@ -22,7 +22,6 @@ export default function Price() {
           <span>&#8358;{price[1]}</span>
         </div>
       </div>
-      <button className="btn-dark-tiny py-2 w-full">Apply</button>
     </div>
   );
 }

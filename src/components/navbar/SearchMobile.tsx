@@ -1,23 +1,24 @@
 import Sort from "@/app/(main)/(public)/search/components/Sort";
 import Price from "@/app/(main)/(public)/search/components/price";
 import Location from "@/app/(main)/(public)/search/components/Location";
-import { Popover } from "@radix-ui/themes";
+import { DropdownMenu } from "@radix-ui/themes";
 import AppIcons from "../AppIcons";
+import Category from "@/app/(main)/(public)/search/components/Category";
 
 export default function SearchMobile() {
   return (
-    <Popover.Root>
-      <Popover.Trigger>
+    <DropdownMenu.Root>
+      <DropdownMenu.Trigger>
         <button className="p-1 md:hidden">
           <AppIcons.Filter />
         </button>
-      </Popover.Trigger>
-      <Popover.Content
+      </DropdownMenu.Trigger>
+      <DropdownMenu.Content
         style={{
           maxWidth: "min(95vw, 320px)",
         }}
       >
-        <div className=" divide-y-2">
+        <form className=" divide-y-2 flex flex-col gap-2 p-2">
           <div className="search-mobile-group">
             <p>Sort By</p>
             <Sort />
@@ -31,8 +32,12 @@ export default function SearchMobile() {
             <p>Location</p>
             <Location />
           </div>
-        </div>
-      </Popover.Content>
-    </Popover.Root>
+          <div className="search-mobile-group">
+            <Category />
+          </div>
+          <button className="btn-dark-tiny py-2 w-full">Apply</button>
+        </form>
+      </DropdownMenu.Content>
+    </DropdownMenu.Root>
   );
 }

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import "@radix-ui/themes/styles.css";
 import { Open_Sans } from "next/font/google";
-import "./globals.css";
+import "@/assets/fonts.css";
+import "@/assets/globals.css";
+import { Theme } from "@radix-ui/themes";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
@@ -17,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` bg-light text-black-800 text-body`}>{children}</body>
+      <body className={` bg-light text-black-800 text-body font-normal`}>
+        <Theme>{children}</Theme>
+      </body>
     </html>
   );
 }

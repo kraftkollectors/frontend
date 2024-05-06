@@ -1,26 +1,24 @@
-"use client";
-
-import AppRangeSlider from "@/components/ui/AppRangeSlider";
 import { Popover } from "@radix-ui/themes";
-import { useState } from "react";
+import Category from "./Category";
 import { FaChevronDown } from "react-icons/fa6";
-import Price from "./price";
 
-export default function PricePopOver() {
+export default function CategoryPopOver() {
   return (
     <Popover.Root>
       <Popover.Trigger>
         <button className="search-filter-btn">
-          Price <FaChevronDown />
+          Category <FaChevronDown />
         </button>
       </Popover.Trigger>
       <Popover.Content
         style={{
-          maxWidth: 400,
+          minWidth: 280,
         }}
       >
-        <Price />
-        <button className="btn-dark-tiny py-2 w-full">Apply</button>
+        <form className="flex flex-col gap-2">
+          <Category />
+          <button className="btn-dark-tiny py-2 w-full">Apply</button>
+        </form>
       </Popover.Content>
     </Popover.Root>
   );

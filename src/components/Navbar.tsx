@@ -5,6 +5,8 @@ import NavSearch from "./navbar/NavSearch";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useState } from "react";
 import paths from "@/utils/paths";
+import { FaBars } from "react-icons/fa6";
+import MobileNav from "./navbar/MobileNav";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -38,6 +40,9 @@ export function Navbar() {
           <NavSearch />
         </div>
         <NavLinks />
+        <MobileNav>
+          <FaBars />
+        </MobileNav>
       </div>
       <div className={`md:hidden ${showSearch ? "" : "hidden"}`}>
         <NavSearch />

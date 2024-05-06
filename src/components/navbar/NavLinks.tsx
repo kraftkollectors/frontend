@@ -4,6 +4,7 @@ import { BiSupport } from "react-icons/bi";
 import Image from "next/image";
 import Link from "next/link";
 import paths from "@/utils/paths";
+import ProfileDropdown from "./ProfileDropdown";
 
 export default function NavLinks() {
   return (
@@ -11,13 +12,15 @@ export default function NavLinks() {
       {links.map((link) => (
         <NavLink key={link.label} {...link} />
       ))}
-      <Image
-        height={100}
-        width={100}
-        src="/images/auth-bg.png"
-        alt=""
-        className=" size-8 avatar"
-      />
+      <ProfileDropdown>
+        <Image
+          height={100}
+          width={100}
+          src="/images/auth-bg.png"
+          alt=""
+          className=" size-8 avatar"
+        />
+      </ProfileDropdown>
     </nav>
   );
 }

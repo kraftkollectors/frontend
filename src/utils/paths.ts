@@ -7,6 +7,9 @@ const paths = {
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
 
+  // legal
+  support: "/support",
+
   // become a seller
   becomeASeller: "/become-a-seller",
   becomeASellerPersonalDetails: "/become-a-seller/personal-details",
@@ -27,6 +30,7 @@ const paths = {
   dashboardSettingsAccount: `/dashboard/settings/account`,
   dashboardSettingsContactInfo: `/dashboard/settings/contact-information`,
   dashboardSettingsNotification: `/dashboard/settings/notification`,
+  dashboardLogout: `/dashboard/logout`,
 
   // dashboard chats
   dashboardChats: `/dashboard/chats`,
