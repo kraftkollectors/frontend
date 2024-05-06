@@ -32,7 +32,7 @@ export function Navbar() {
         show ? "" : "max-md:hidden"
       }`}
     >
-      <div className="flex gap-5 justify-between items-center h-12 md:h-16">
+      <div className="flex gap-5 justify-between items-center h-12 md:h-12">
         <AppLogo />
         <div className="max-md:hidden  md:w-5/12">
           <NavSearch />

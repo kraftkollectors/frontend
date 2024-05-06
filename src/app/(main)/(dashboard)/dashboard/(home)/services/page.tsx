@@ -1,4 +1,6 @@
 import { DashboardServiceCard } from "@/components/dashboard";
+import Link from 'next/link';
+import paths from '@/utils/paths'
 export default function Page() {
   return (
     <div className="flex flex-col gap-3">
@@ -8,7 +10,7 @@ export default function Page() {
 
       <div className="flex flex-col  items-center bg-light p-3 gap-3">
         <h1 className="text-black-300 text-title">Post a new service</h1>
-        <button className="btn-primary w-fit p-2">Post Service</button>
+        <Link href={paths.dashboardNewService} className="btn-primary w-fit py-2 px-5">Post Service</Link>
       </div>
     </div>
   );

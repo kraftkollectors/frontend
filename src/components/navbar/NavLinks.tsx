@@ -26,7 +26,7 @@ const links: NavLinkProps[] = [
   {
     label: "Saved",
     icon: <FaRegHeart />,
-    href: "",
+    href: paths.dashboardSaved,
   },
   {
     label: "Messages",

@@ -1,4 +1,4 @@
-import { DashboardSavedCard } from "@/components/dashboard/DashboardSavedCard";
+import { DashboardSavedCard } from "@/components/dashboard";
 
 export default function Page() {
   return (
