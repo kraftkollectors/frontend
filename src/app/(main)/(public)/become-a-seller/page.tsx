@@ -71,7 +71,7 @@ export default function SellerPage() {
         </Link>
       </div>
       <img
-        src="/images/image.png"
+        src="/images/become-a-seller.png"
         alt="become a seller"
         className="w-full md:w-1/2"
       />
