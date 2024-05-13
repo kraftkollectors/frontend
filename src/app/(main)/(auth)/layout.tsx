@@ -1,3 +1,4 @@
+import { AppLogo } from "@/components";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,8 +6,9 @@ import Link from "next/link";
 export default function RootLayout({ children }: AppLayoutProps) {
   return (
     <main>
-      <header className="app-container flex items-center py-6 border-b-4">
-        <nav />
+      <header className="app-container flex items-center py-3 border-b-4">
+        <AppLogo />
+        {/* <nav /> */}
       </header>
       <section className="py-10">
         <div className="app-container">
@@ -17,9 +19,10 @@ export default function RootLayout({ children }: AppLayoutProps) {
                 alt="KraftKllectors"
                 fill
                 className="h-full w-full object-cover"
+                priority
               />
             </div>
-            <div className="w-full h-fit md:p-8">
+            <div className="w-full h-fit md:p-8 font-semibold">
               {children}
             </div>
           </div>

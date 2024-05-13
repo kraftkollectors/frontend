@@ -4,6 +4,7 @@ const paths = {
   // auth paths
   login: "/login",
   signup: "/signup",
+  signupDetails: "/signup/details",
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
 

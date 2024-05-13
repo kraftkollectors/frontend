@@ -51,14 +51,18 @@
   font-display: swap;
 }
 
+html, body, *{
+  font-family: "Eina01-Regular" !important;
+}
+
 .font-normal {
   font-family: "Eina01-Regular" !important;
 }
 
-.font-semibold {
+.font-semibold, .r-font-semibold {
   font-family: "Eina01-SemiBold" !important;
 }
 
-.font-bold {
+.font-bold, .r-font-bold, .r-font-black {
   font-family: "Eina01-Bold" !important;
 }

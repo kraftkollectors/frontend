@@ -1,5 +1,6 @@
 export { AppLogo } from "./ui/AppLogo";
 export { FormButton } from "./ui/FormButton";
+export { FormMessage } from "./ui/FormMessage";
 export { RatingStars } from "./ui/RatingStars";
 export { SocialIcons } from "./ui/SocialIcons";
 export { ReviewLines } from "./ui/ReviewLines";

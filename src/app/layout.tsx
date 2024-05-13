@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "@radix-ui/themes/styles.css";
 import { Open_Sans } from "next/font/google";
-import "@/assets/fonts.css";
 import "@/assets/globals.css";
+import "@/assets/fonts.css";
 import { Theme } from "@radix-ui/themes";
 
 const openSans = Open_Sans({ subsets: ["latin"] });

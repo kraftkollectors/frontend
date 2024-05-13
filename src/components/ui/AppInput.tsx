@@ -14,6 +14,7 @@ export type AppInputProps = {
   ps?: string;
   title?: string;
   rows?: number;
+  error?:string[];
   onChange?: (value: string) => void;
   onErrorChange?: (hasError: boolean) => void;
 };
@@ -31,6 +32,7 @@ export default memo(function AppInput({
   ps,
   title,
   rows,
+  error: fieldError,
 }: AppInputProps) {
   const [val, setVal] = useState(value);
   const [error, setError] = useState<string | null>(null);
@@ -104,6 +106,7 @@ export default memo(function AppInput({
         )}
       </div>
       {error && <p className="text-red-900 text-xs">{error}</p>}
+      {fieldError && fieldError.length > 0 && <p className="text-red-900 text-xs">{fieldError[0]}</p>}
     </div>
   );
 });
