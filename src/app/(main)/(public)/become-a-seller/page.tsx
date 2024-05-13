@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+import paths from "@/utils/paths";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -37,6 +39,7 @@ export default function SellerPage() {
             <div className="flex  items-center gap-4">
               <div className="bg-primary-lightActive2 rounded-full p-4 text-title text-primary relative">
                 <FaRegIdBadge />
+                <div className="absolute h-20 border-dashed z-[-1] border-r-2 border-primary w-1 top-4 left-1/2 -translate-x-1/2"></div>
               </div>
               <div className="flex flex-col">
                 <p className="font-semibold">Setup Your Profile</p>
@@ -60,15 +63,16 @@ export default function SellerPage() {
             </div>
           </div>
         </div>
-        <Link href="" className="btn-primary py-2 px-6 w-fit">
+        <Link
+          href={paths.becomeASellerPersonalDetails}
+          className="btn-primary py-2 px-6 w-fit"
+        >
           Get Started
         </Link>
       </div>
-      <Image
-        height={1000}
-        width={1000}
-        src="/images/image.png"
-        alt=""
+      <img
+        src="/images/become-a-seller.png"
+        alt="become a seller"
         className="w-full md:w-1/2"
       />
     </div>
