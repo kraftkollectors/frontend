@@ -16,8 +16,11 @@ export async function forgotPasswordSendEmail(res: ActionResponse, formData: For
         const req = await ApiRequest.postJson(apis.forgotPasswordSendEmail, data);
         const res = await req.json();
         debugLog(res)
-        if (res.error) return {
-            error: res.details
+        if (res.token) return {
+            success: "wow"
+        };
+         return {
+            error: res.detail
         }
     } catch (error) {
         debugLog(error)
@@ -25,5 +28,5 @@ export async function forgotPasswordSendEmail(res: ActionResponse, formData: For
             error: "Something went wrong"
         };
     }
-    return {}
+    // return {}
 }

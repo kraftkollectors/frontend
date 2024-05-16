@@ -1,12 +1,12 @@
 'use server';
 
-import { tags } from "@/utils";
+import { appCookies, tags } from "@/utils";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function logout() {
     try {
-        cookies().delete('__access_token');
+        cookies().delete(appCookies.accessToken);
         revalidateTag(tags.user);
         revalidatePath('/');
 

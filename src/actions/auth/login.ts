@@ -1,14 +1,15 @@
 "use server"
 
 import { formDataToObject, debugLog } from "@/functions/helpers";
-import { tags } from "@/utils";
+import { appCookies, tags } from "@/utils";
 import { ApiRequest } from "@/utils/apiRequest";
 import apis from "@/utils/apis";
+import { COOKIE_MAX_AGE } from "@/utils/constants";
 import paths from "@/utils/paths";
 import { ActionResponse } from "@/utils/types/basicTypes";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 
 
 type LoginFormProps = {
@@ -27,8 +28,8 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
         debugLog(res)
         if(res.key) {
             success = true;
-            cookies().set('__access_token', res.key, {
-                maxAge: 60 * 60 * 24 * 30,
+            cookies().set(appCookies.accessToken, res.key, {
+                maxAge: COOKIE_MAX_AGE
             })
             revalidatePath('/');
             revalidateTag(tags.user);
@@ -44,6 +45,6 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
         };
     }
     if (success)
-        redirect(paths.dashboard);
+        redirect(paths.dashboard, RedirectType.replace);
     return {}
 }

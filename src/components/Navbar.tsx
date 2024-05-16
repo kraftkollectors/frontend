@@ -7,8 +7,11 @@ import { useLayoutEffect, useState } from "react";
 import paths from "@/utils/paths";
 import { FaBars } from "react-icons/fa6";
 import MobileNav from "./navbar/MobileNav";
+import { useUserStore } from "@/state";
+import Link from "next/link";
 
 export function Navbar() {
+  const user = useUserStore(s=>s.user);
   const pathname = usePathname();
   const [show, setShow] = useState(true);
   const [showSearch, setShowSearch] = useState(true);
@@ -39,10 +42,19 @@ export function Navbar() {
         <div className="max-md:hidden  md:w-5/12">
           <NavSearch />
         </div>
-        <NavLinks />
+       {
+        !!user ?
+        <>
+         <NavLinks />
         <MobileNav>
           <FaBars />
         </MobileNav>
+        </> : 
+        <nav className="flex gap-2">
+          <Link href={paths.login} className="btn-primary px-4">Login</Link>
+          <Link href={paths.signup} className="btn-primary-border px-4 max-md:hidden">Sign Up</Link>
+        </nav>
+       }
       </div>
       <div className={`md:hidden ${showSearch ? "" : "hidden"}`}>
         <NavSearch />
