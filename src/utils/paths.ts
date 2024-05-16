@@ -5,6 +5,7 @@ const paths = {
   login: "/login",
   signup: "/signup",
   signupDetails: "/signup/details",
+  signupToken: "/signup/token",
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
 

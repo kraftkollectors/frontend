@@ -8,7 +8,7 @@ export type FormMessageProps = {
 }
 
 export function FormMessage({
-    res: {error, success}
+    res
 }: FormMessageProps) {
     const {pending} = useFormStatus();
     
@@ -16,10 +16,10 @@ export function FormMessage({
     return (
         <>
         {
-            error && <p className="text-red-900 bg-red-50 border-red-800 p-2 rounded-md">{error}</p>
+            res && res.error && <p className="text-red-900 bg-red-50  border border-red-800 p-2 rounded-md">{res.error}</p>
         }
         {
-            success && <p className="text-green-900 bg-green-50 border-green-800 p-2 rounded-md">{success}</p>
+            res && res.success && <p className="text-green-900 bg-green-50  border border-green-800 p-2 rounded-md">{res.success}</p>
         }
         </>
     );
