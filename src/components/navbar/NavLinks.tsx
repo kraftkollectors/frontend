@@ -39,7 +39,7 @@ const links: NavLinkProps[] = [
   {
     label: "Support",
     icon: <BiSupport />,
-    href: "",
+    href: paths.support,
   },
 ];
 

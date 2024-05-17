@@ -1,8 +1,10 @@
 import { fetchUser } from "@/actions";
 import { Navbar } from "@/components";
+import AuthProvider from "@/components/server/AuthProvider";
 import { debugLog } from "@/functions/helpers";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0;
@@ -18,6 +20,9 @@ export default async function RootLayout({
   return (
     <>
     <Navbar />
+    <Suspense>
+      <AuthProvider />
+    </Suspense>
     {children}
     </>
   );

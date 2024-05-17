@@ -10,7 +10,8 @@ const paths = {
   resetPassword: "/reset-password",
 
   // legal
-  support: "/support",
+  support: "/contact",
+  contact: "/contact",
 
   // become a seller
   becomeASeller: "/become-a-seller",

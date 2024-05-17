@@ -34,10 +34,9 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
             revalidatePath('/');
             revalidateTag(tags.user);
         }
-        else if (res.error || Object.keys(res).join(' ').includes('error')) return {
+        else return {
             error: res.details ?? res.error ?? "Invalid login details"
         }
-        else throw new Error();
     } catch (error) {
         debugLog(error)
         return {

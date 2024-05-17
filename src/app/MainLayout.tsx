@@ -8,7 +8,6 @@ export default function UserStateProvider({user}:{
 }){
     const setUser = useUserStore(s=>s.setUser);
     useRunOnce(() => {
-        console.log(user);
         setUser(user);
     })
     return <></>
