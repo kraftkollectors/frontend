@@ -21,10 +21,15 @@ export default function RootLayout({ children }: AppLayoutProps) {
                 className="h-full w-full object-cover"
                 priority
               />
+              <Image
+                src="/images/kraft-logo.png"
+                alt="logo"
+                width={300}
+                height={200}
+                className="absolute right-4 bottom-4 h-8 w-28"
+              />
             </div>
-            <div className="w-full h-fit md:p-8 font-semibold">
-              {children}
-            </div>
+            <div className="w-full h-fit md:p-8 font-semibold">{children}</div>
           </div>
         </div>
       </section>

@@ -82,6 +82,9 @@
   .search-mobile-group {
     @apply py-4 [&>p]:text-label [&>p]:font-[500];
   }
+  .hover-link {
+    @apply opacity-75 hover:opacity-100;
+  }
 }
 
 .radio-group:checked + label {

@@ -14,7 +14,7 @@ export type AppInputProps = {
   ps?: string;
   title?: string;
   rows?: number;
-  error?:string[];
+  error?: string[];
   onChange?: (value: string) => void;
   onErrorChange?: (hasError: boolean) => void;
 };
@@ -61,7 +61,10 @@ export default memo(function AppInput({
   return (
     <div className="">
       {title && (
-        <label htmlFor={`${title}-input`} className="inline-block pb-1">
+        <label
+          htmlFor={`${title}-input`}
+          className="inline-block pb-1 text-black-700"
+        >
           {title}
         </label>
       )}
@@ -106,7 +109,9 @@ export default memo(function AppInput({
         )}
       </div>
       {error && <p className="text-red-900 text-xs">{error}</p>}
-      {fieldError && fieldError.length > 0 && <p className="text-red-900 text-xs">{fieldError[0]}</p>}
+      {fieldError && fieldError.length > 0 && (
+        <p className="text-red-900 text-xs">{fieldError[0]}</p>
+      )}
     </div>
   );
 });

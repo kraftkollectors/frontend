@@ -1,4 +1,4 @@
-import { Navbar } from "@/components";
+import { Footer, Navbar } from "@/components";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import { Theme } from "@radix-ui/themes";
 
@@ -7,6 +7,7 @@ export default function RootLayout({ children }: AppLayoutProps) {
     <>
       <Navbar />
       {children}
+      <Footer />
     </>
   );
 }

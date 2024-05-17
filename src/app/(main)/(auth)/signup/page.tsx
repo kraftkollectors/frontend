@@ -3,14 +3,14 @@ import LoginForm from "./Form";
 import Link from "next/link";
 import {
   ContinueWithGoogleButton,
-  ContinueWithFacebookButton
+  ContinueWithFacebookButton,
 } from "@/components";
 
 export default function Page() {
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-headline r-font-bold">Create an Account</h1>
-      <p className="r-text-sm opacity-70">
+      <p className="r-text-sm opacity-70 text-black-200">
         Sign up now to begin your journey with us!
       </p>
       <LoginForm />

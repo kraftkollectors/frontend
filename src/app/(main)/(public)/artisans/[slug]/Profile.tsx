@@ -1,54 +1,84 @@
-import Image from "next/image";
-import { FaLocationDot } from "react-icons/fa6";
+import ProfileInfoLine from "@/app/(main)/(dashboard)/dashboard/(home)/ProfileInfoLine";
+import { SocialIcons } from "@/components";
+import { SocialIconsProps } from "@/components/ui/SocialIcons";
+import Link from "next/link";
+import { CiMail } from "react-icons/ci";
+import { FaRegEnvelope } from "react-icons/fa6";
+import { IoCallOutline } from "react-icons/io5";
+import { LuPhone } from "react-icons/lu";
+import { MdOutlineLocationOn } from "react-icons/md";
+import { TbWorld } from "react-icons/tb";
 
 export type ProfileProps = {
-  skills: string[];
   img: string;
+  socials: SocialIconsProps;
   name: string;
+  profession: string;
   location: string;
-  title: string;
+  memberSince: string;
+  phone?: string;
+  email?: string;
+  website?: string;
 };
+
+/* eslint-disable @next/next/no-img-element */
 export default function Profile({
-  skills,
-  name,
+  email,
   img,
   location,
-  title
+  memberSince,
+  name,
+  phone,
+  profession,
+  socials,
+  website,
 }: ProfileProps) {
   return (
-    <div className="md:col-span-4 flex flex-col gap-3">
-      <div className="flex gap-4 max-md:flex-col max-md:items-center md:items-start md:justify-start  max-md:border-b max-md:pb-4">
-        <Image
-          height={200}
-          width={200}
-          src={img}
-          alt={name}
-          className="avatar size-32 md:size:28 lg:size-32"
-        />
-        <div className="flex flex-col gap-1 max-md:items-center max-md:text-center">
-          <h1 className="font-bold text-title">
-            {name}
-          </h1>
-          <h2 className="text-black-300">
-            {title}
-          </h2>
-          <h3 className="flex items-center gap-1 text-black-300">
-            <FaLocationDot />
-            <span>
-              {location}
-            </span>
-          </h3>
-          <p className="text-black-200">Member since April 25, 2020</p>
-        </div>
+    <div className="flex flex-col gap-2 w-full md:col-span-4 items-center justify-center md:p-6 md:bg-light md:border rounded-md">
+      <img src={img} alt="auth image" className="size-20 rounded-full" />
+      <p className="font-semibold text-title text-black-900">{name}</p>
+      <p className="text-black-400">{profession}</p>
+      <p className="flex items-center text-label">
+        <MdOutlineLocationOn />
+        {location}
+      </p>
+      <p className="text-label">member since {memberSince}</p>
+      <div className="flex gap-2 w-full justify-center">
+        <Link href="/" className="btn-primary p-2 w-5/12">
+          <FaRegEnvelope />
+          message
+        </Link>
+        <Link href="/" className="btn-primary-border p-2 w-5/12">
+          <IoCallOutline />
+          phone
+        </Link>
       </div>
-      <div className="flex flex-col gap-1 max-md:py-3 max-md:border-b">
-        <h1 className="r-font-semibold text-sm">Skills</h1>
-        <div className="flex gap-1 flex-wrap">
-          {skills.map(skill =>
-            <div key={skill} className="skill-btn">
-              {skill}
-            </div>
-          )}
+      <div className="w-full my-3 md:border-b"></div>
+      <div className="flex flex-col gap-2 w-full max-md:bg-light max-md:border max-md:rounded-md max-md:p-4">
+        <div className="flex flex-col gap-2 w-full">
+          <p className="text-body font-semibold">Contact Info</p>
+          <ProfileInfoLine
+            title="Phone Number"
+            value={"phoneNumber"}
+            icon={<LuPhone />}
+          />
+          <ProfileInfoLine
+            title="Email"
+            value={"kesh@gmail.com"}
+            icon={<CiMail />}
+          />
+          <ProfileInfoLine
+            title="website"
+            value={"kesh.com"}
+            icon={<TbWorld />}
+          />
+        </div>
+        <div className="w-full my-3 border-b"></div>
+        <div className="flex gap-1  justify-between items-center w-full ">
+          <h1 className="font-bold ">Social Links</h1>
+          <div className=" text-black-600 flex gap-3">
+            <SocialIcons {...socials} />
+          </div>
         </div>
       </div>
     </div>

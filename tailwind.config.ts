@@ -88,11 +88,13 @@ const config: Config = {
         light: {
           DEFAULT: "#FFFFFF",
           text: "#F5F5F5",
+          link: "#E8E8E8",
         },
         dark: {
           DEFAULT: "#010101",
           text: "#131313",
           gray: "#555555",
+          footer: "#1e1e1e",
         },
         danger: {
           DEFAULT: "#BE2828",
