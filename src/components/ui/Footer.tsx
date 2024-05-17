@@ -15,9 +15,13 @@ export default function Footer() {
         <div className="grid gap-5 grid-cols-2 md:grid-cols-3 md:col-span-5">
           <div className="flex flex-col gap-2">
             <h2 className="font-bold">Categories</h2>
-            {categories.map((categories) => (
-              <Link className="hover-link" key={categories} href={categories}>
-                {categories}
+            {categories.map((category) => (
+              <Link
+                className="hover-link"
+                key={category.href}
+                href={category.href}
+              >
+                {category.title}
               </Link>
             ))}
           </div>
@@ -64,7 +68,12 @@ export default function Footer() {
   );
 }
 
-const categories = ["Category 1", "Category 2", "Category 3", "Category 4"];
+const categories = [
+  { title: "Category 1", href: "/" },
+  { title: "Category 2", href: "/" },
+  { title: "Category 3", href: "/" },
+  { title: "Category 4", href: "/" },
+];
 const quicklinks = [
   { title: "Contact us", href: "/" },
   { title: "Terms & conditions", href: "/" },

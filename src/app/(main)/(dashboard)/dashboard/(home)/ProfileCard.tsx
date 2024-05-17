@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { LuPhone, LuUser2 } from "react-icons/lu";
 import ProfileInfoLine from "./ProfileInfoLine";
@@ -12,7 +12,10 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import { getUsernameFromLink } from "@/functions/helpers";
-import { DashboardProfile, DashboardProfileProps } from "@/components/dashboard";
+import {
+  DashboardProfile,
+  DashboardProfileProps,
+} from "@/components/dashboard";
 import useWindowWidth from "@/hooks/useWindowWidth";
 export type ProfileCardprops = DashboardProfileProps & {
   memberSince: string;
@@ -31,9 +34,7 @@ export default function ProfileCard(props: ProfileCardprops) {
   const vw = useWindowWidth();
   return (
     <div className="w-full border  gap-2 bg-light  p-4 rounded-md">
-      {
-        vw > 768 && <DashboardProfile {...props} />
-      }
+      {vw > 768 && <DashboardProfile {...props} />}
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">General Info</p>
@@ -48,7 +49,7 @@ export default function ProfileCard(props: ProfileCardprops) {
             icon={<IoLocationOutline />}
           />
           <ProfileInfoLine
-            title="Location"
+            title="Email"
             value={props.email}
             icon={<CiMail />}
           />
