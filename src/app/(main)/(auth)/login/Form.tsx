@@ -1,13 +1,17 @@
 "use client";
 
 import AppInput, { AppInputProps } from "@/components/ui/AppInput";
-import { FormButton } from "@/components";
+import { FormButton, FormMessage } from "@/components";
 import Link from "next/link";
-import { z } from "zod";
+import { login } from "@/actions";
+import { useFormState } from "react-dom";
 
 export default function LoginForm() {
+    const [res, action] = useFormState(login, {});
+
   return (
-    <form className="flex flex-col gap-3 py-3">
+    <form action={action} className="flex flex-col gap-3 py-3">
+      <FormMessage res={res} />
       {loginFields.map(item => {
         return <AppInput key={item.name} {...item} />;
       })}
@@ -30,13 +34,11 @@ const loginFields: AppInputProps[] = [
     title: "Email",
     type: "email",
     placeholder: "Email Address",
-    schema: z.string()
   },
   {
     name: "password",
     title: "Password",
     type: "password",
     placeholder: "Enter your Password",
-    schema: z.string()
   }
 ];

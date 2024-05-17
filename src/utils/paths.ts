@@ -5,11 +5,13 @@ const paths = {
   login: "/login",
   signup: "/signup",
   signupDetails: "/signup/details",
+  signupToken: "/signup/token",
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
 
   // legal
-  support: "/support",
+  support: "/contact",
+  contact: "/contact",
 
   // become a seller
   becomeASeller: "/become-a-seller",

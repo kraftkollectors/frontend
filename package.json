@@ -18,7 +18,8 @@
     "react-dom": "^18",
     "react-icons": "^5.0.1",
     "use-file-picker": "^2.1.1",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",

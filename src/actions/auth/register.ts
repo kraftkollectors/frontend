@@ -1,13 +1,15 @@
 "use server"
 
 import { debugLog, formDataToObject } from "@/functions/helpers";
+import { tags, apis, appCookies } from "@/utils";
 import { ApiRequest } from "@/utils/apiRequest";
-import apis from "@/utils/apis";
+import { COOKIE_MAX_AGE } from "@/utils/constants";
 import paths from "@/utils/paths";
 import { ActionResponse } from "@/utils/types/basicTypes";
 import validators from "@/utils/validators";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { RedirectType, redirect } from "next/navigation";
 import { z } from "zod";
 
 const registerSchema = z.object({
@@ -31,8 +33,8 @@ export async function register(res: ActionResponse, formData: FormData): Promise
     }
 
     const { set } = cookies();
-    set('__reg_data', JSON.stringify(data), {
-        maxAge: 60 * 5
+    set(appCookies.registerData, JSON.stringify(data), {
+        maxAge: 60 * 20
     });
     redirect(paths.signupDetails);
     return {};
@@ -54,8 +56,8 @@ type RegisterDetailsFormProps = {
 
 export async function registerDetails(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
     const { has, get } = cookies();
-    if (!has('__reg_data')) redirect(paths.signup);
-    
+    if (!has(appCookies.registerData)) redirect(paths.signup);
+
     const data = formDataToObject<RegisterDetailsFormProps>(formData);
 
     const tryParse = registerDetailsSchema.safeParse(data)
@@ -63,8 +65,9 @@ export async function registerDetails(res: ActionResponse, formData: FormData): 
         fieldErrors: tryParse.error.flatten().fieldErrors,
     }
 
+    let success = false;
     try {
-        const prevData = JSON.parse(get('__reg_data')?.value ?? "{}");
+        const prevData = JSON.parse(get(appCookies.registerData)?.value ?? "{}");
         const postData = {
             ...prevData,
             ...data,
@@ -74,18 +77,65 @@ export async function registerDetails(res: ActionResponse, formData: FormData): 
         const req = await ApiRequest.postJson(apis.register, postData);
         const res = await req.json();
         debugLog(res)
-        return (res.error) ? {
+        if (res.error) return {
             error: res.details
-        } : {
-            success: "Account created successfully",
-            data: res
-        };
+        }
+        success = true;
     } catch (error) {
         debugLog(error)
         return {
             error: "Something went wrong"
         };
     }
+    if (success)
+        redirect(paths.signupToken);
+    return {}
+}
 
-    redirect(paths.signupDetails);
+
+
+type RegisterTokenFormProps = {
+    token: string;
+}
+
+export async function registerToken(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
+    const { has, get, set, delete: deleteCookie } = cookies();
+    if (!has(appCookies.registerData)) redirect(paths.signup);
+
+    const data = formDataToObject<RegisterTokenFormProps>(formData);
+
+    let success = false;
+    try {
+        const prevData = JSON.parse(get(appCookies.registerData)?.value ?? "{}");
+        const postData = {
+            ...prevData,
+            ...data,
+        };
+        const req = await ApiRequest.postJson(apis.registerToken, postData);
+        const res = await req.json();
+        debugLog(res)
+        if(res.token) {
+            deleteCookie(appCookies.registerData);
+            set(appCookies.accessToken, res.token, {
+                maxAge: COOKIE_MAX_AGE
+            });
+            revalidateTag(tags.user);
+            revalidatePath('/');
+            success = true;
+        }
+        else return {
+            error: res.details ?? res.error ?? "Verification failed"
+        }
+        success = true;
+    } catch (error) {
+        debugLog(error)
+        return {
+            error: "Something went wrong"
+        };
+    }
+    if (success){
+        redirect(paths.dashboard, RedirectType.replace);
+    }
+        
+    return {}
 }

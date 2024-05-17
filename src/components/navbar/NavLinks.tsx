@@ -18,7 +18,7 @@ export default function NavLinks() {
           width={100}
           src="/images/auth-bg.png"
           alt=""
-          className=" size-8 avatar"
+          className=" size-8 avatar cursor-pointer"
         />
       </ProfileDropdown>
     </nav>
@@ -39,7 +39,7 @@ const links: NavLinkProps[] = [
   {
     label: "Support",
     icon: <BiSupport />,
-    href: "",
+    href: paths.support,
   },
 ];
 

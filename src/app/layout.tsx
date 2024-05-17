@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import "@radix-ui/themes/styles.css";
-import { Open_Sans } from "next/font/google";
 import "@/assets/globals.css";
 import "@/assets/fonts.css";
 import { Theme } from "@radix-ui/themes";
+import AuthProvider from "@/components/server/AuthProvider";
+import { Suspense } from "react";
 
-const openSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "KraftKollectors",
@@ -17,10 +17,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en">
+      <Suspense>
+        <AuthProvider />
+      </Suspense>
       <body className={` bg-light text-black-800 text-body font-normal`}>
-        <Theme>{children}</Theme>
+        <Theme>
+          {children}
+          </Theme>
       </body>
     </html>
   );

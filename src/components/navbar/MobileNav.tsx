@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import { ReactNode, useState } from "react";
-import { DashboardProfile } from "../dashboard";
+import { ReactNode, useLayoutEffect, useState } from "react";
 import {
   FaIdBadge,
   FaRegEnvelope,
@@ -14,13 +13,20 @@ import paths from "@/utils/paths";
 import { IoClose, IoSettingsOutline } from "react-icons/io5";
 import { PiHeadsetBold } from "react-icons/pi";
 import { BiLogOut } from "react-icons/bi";
+import { usePathname } from "next/navigation";
+import { useUserStore } from "@/state";
 
 export type MobileNavProps = {
   children: ReactNode;
 };
 
 export default function MobileNav({ children }: MobileNavProps) {
+  const user = useUserStore(s=>s.user);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname()
+  useLayoutEffect(()=>{
+    setOpen(false);
+  }, [pathname])
 
   return (
     <>
@@ -43,14 +49,15 @@ export default function MobileNav({ children }: MobileNavProps) {
           } flex flex-col gap-6 shadow transition-all duration-500 delay-100`}
         >
           <div className="flex justify-end">
-            <button className="p-2 " onClick={() => setOpen(false)}>
+            <button className="p-2 text-xl" onClick={() => setOpen(false)}>
               <IoClose />
             </button>
           </div>
           <div className="flex flex-col items-center justify-cener w-full pb-4 p-2">
             <img
               src="/images/auth-bg.png"
-              alt=""
+              alt={user?.username}
+              title={user?.username}
               className="rounded-full size-16"
             />
             <p>John Doe</p>

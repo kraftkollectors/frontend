@@ -29,3 +29,6 @@ export type ActionResponse = {
   success?: string;
   data?: any;
 }
+
+export type ActionApiResponse<T, K = null> = null | "error" | T | K
+// export type ActionApiResponseWith<T> = null | 404 | "error" | T
