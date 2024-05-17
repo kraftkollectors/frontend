@@ -1,3 +1,4 @@
+import { paths } from "@/utils";
 import Link from "next/link";
 import {
   FaFacebookF,
@@ -41,6 +42,7 @@ export default function Footer() {
             <h2 className="font-bold">Download</h2>
             {downloads.map((download) => (
               <Link
+                target="_blank"
                 className="hover-link"
                 key={download.href}
                 href={download.href}
@@ -55,6 +57,7 @@ export default function Footer() {
           <p className="font-bold max-md:hidden">Get in touch</p>
           {socials.map((social) => (
             <Link
+              target="_blank"
               className="text-2xl hover-link"
               href={social.href}
               key={social.href}
@@ -75,27 +78,27 @@ const categories = [
   { title: "Category 4", href: "/" },
 ];
 const quicklinks = [
-  { title: "Contact us", href: "/" },
-  { title: "Terms & conditions", href: "/" },
-  { title: "Privacy policy", href: "/" },
-  { title: "Become an artisan", href: "/" },
+  { title: "Contact us", href: paths.support },
+  { title: "Terms & conditions", href: paths.termsAndConditions },
+  { title: "Privacy policy", href: paths.termsAndConditions },
+  { title: "Become an artisan", href: paths.becomeASeller },
 ];
 
 const downloads = [
   {
     title: "Android app",
-    href: "/",
+    href: paths.android,
   },
   {
     title: "IOS app",
-    href: "/",
+    href: paths.ios,
   },
 ];
 
 const socials = [
-  { icon: <FaXTwitter />, href: "" },
-  { icon: <FaInstagram />, href: "" },
-  { icon: <FaFacebookF />, href: "" },
-  { icon: <FaLinkedinIn />, href: "" },
-  { icon: <FaTiktok />, href: "" },
+  { icon: <FaXTwitter />, href: paths.twitter },
+  { icon: <FaInstagram />, href: paths.instagram },
+  { icon: <FaFacebookF />, href: paths.facebook },
+  { icon: <FaLinkedinIn />, href: paths.linkedin },
+  { icon: <FaTiktok />, href: paths.tiktok },
 ];

@@ -12,7 +12,7 @@ export { Pagination } from "./ui/Pagination";
 export { ContinueWithGoogleButton } from "./ContinueWithGoogleButton";
 export { ContinueWithFacebookButton } from "./ContinueWithFacebookButton";
 export { Navbar } from "./Navbar";
-export { default as Footer } from "./ui/Footer";
+export { default as Footer } from "./Footer";
 export { ServiceCard } from "./ServiceCard";
 export { ArtisanReviewCard } from "./ArtisanReviewCard";
 

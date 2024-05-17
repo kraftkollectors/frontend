@@ -1,3 +1,5 @@
+import { FaCediSign } from "react-icons/fa6";
+
 const paths = {
   home: "/",
 
@@ -12,6 +14,7 @@ const paths = {
   // legal
   support: "/contact",
   contact: "/contact",
+  termsAndConditions: "/terms-and-conditions",
 
   // become a seller
   becomeASeller: "/become-a-seller",
@@ -42,6 +45,17 @@ const paths = {
   //dashboard services
   dashboardServices: `/dashboard/services`,
   dashboardNewService: `/dashboard/services/new`,
+
+  // app
+  android: "/",
+  ios: "/",
+
+  // socials
+  facebook: "/",
+  instagram: "/",
+  twitter: "/",
+  tiktok: "/",
+  linkedin: "/",
 };
 
 export default paths;
