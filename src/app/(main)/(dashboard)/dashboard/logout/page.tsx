@@ -4,7 +4,7 @@ import { useRunOnce } from "@/hooks";
 import { logout } from "@/actions";
 import { useRouter } from "next/navigation";
 
-export default async function Page(){
+export default function Page(){
     const {back} = useRouter();
     
     useRunOnce(async ()=>{
