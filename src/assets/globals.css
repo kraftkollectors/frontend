@@ -34,7 +34,7 @@
     @apply flex gap-2 border py-1 px-2 items-center rounded;
   }
   .btn-primary {
-    @apply btn-primary-tiny r-font-semibold text-lg py-2;
+    @apply btn-primary-tiny r-font-semibold text-lg py-3;
   }
   .btn-transparent {
     @apply bg-transparent border text-label py-2 rounded-3xl inline-flex justify-center items-center text-primary gap-1;
@@ -71,7 +71,7 @@
   }
 
   .app-input {
-    @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-2  pe-3 rounded-md;
+    @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-3  pe-3 rounded-md;
   }
   .skill-btn {
     @apply border rounded-2xl px-2 text-label bg-gray-100;

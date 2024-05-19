@@ -10,7 +10,7 @@ import {
 
 export default function ContactForm() {
   return (
-    <form className="flex flex-col gap-3 py-3 ">
+    <form className="flex flex-col gap-4 py-3 ">
       <div className="grid md:grid-cols-2 gap-4">
         {contactFields.map((item) => {
           return item.textarea ? (
@@ -22,13 +22,13 @@ export default function ContactForm() {
           );
         })}
       </div>
-      <div className="flex justify-between max-md:flex-col-reverse gap-4">
+      <div className="flex justify-between max-md:flex-col-reverse gap-8">
         <FormButton className="btn-primary w-full md:w-40">
           Send Message
         </FormButton>{" "}
         <div className="gap-2 flex items-center">
-          <p className="whitespace-nowrap">our socials</p>
-          <div className="w-full flex-shrink md:hidde"></div>
+          <p className="whitespace-nowrap font-semibold">our socials</p>
+          <div className="w-full flex-shrink md:hidden"></div>
           <SocialIcons facebook="h" x="m" linkedin="a" instagram="a" />
         </div>
       </div>
