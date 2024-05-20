@@ -76,6 +76,7 @@ const config: Config = {
           lightActive2: "#E9F2F9",
           dark: "#1D608F",
           darkActive: "#113A56",
+          hover: "#1e6699",
         },
         secondary: {
           DEFAULT: "#E0A44F",

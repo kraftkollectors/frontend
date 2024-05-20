@@ -34,7 +34,7 @@
     @apply flex gap-2 border py-1 px-2 items-center rounded;
   }
   .btn-primary {
-    @apply btn-primary-tiny r-font-semibold text-lg py-3;
+    @apply btn-primary-tiny r-font-semibold text-lg py-3 hover:bg-primary-hover;
   }
   .btn-transparent {
     @apply bg-transparent border text-label py-2 rounded-3xl inline-flex justify-center items-center text-primary gap-1;
