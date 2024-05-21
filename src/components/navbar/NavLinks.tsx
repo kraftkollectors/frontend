@@ -52,7 +52,7 @@ type NavLinkProps = {
 function NavLink({ icon, label, href }: NavLinkProps) {
   return (
     <Link href={href}>
-      <div className="flex flex-col items-center justify-center hover:text-primary">
+      <div className="flex flex-col items-center justify-center hover:text-black text-black-400">
         <span className="text-body">{icon}</span>
         <span className="text-label font-[500]">{label}</span>
       </div>

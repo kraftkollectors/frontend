@@ -20,3 +20,15 @@ export function debugLog(message: any) {
     }
 }
 
+export function getStarSize(total: number, current: number): "full" | 'half' | 'empty' {
+    const b = total.toString().split('.');
+    if(b.length > 1) {
+        const whole = Number(b[0]);
+        const fraction = Number(b[1]);
+        if(whole > current) return 'full'
+        if(fraction > 0 && whole === current) return 'half'
+    }
+    if (current <= total) return 'full'
+    return 'empty';
+}
+

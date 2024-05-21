@@ -5,7 +5,7 @@ import { FaStar } from "react-icons/fa6";
 
 const customTheme: CustomFlowbiteTheme["progress"] = {
   color: {
-    yellow: "bg-secondary"
+    yellow: "bg-secondary-accent"
   }
 };
 export type ReviewLineProps = {

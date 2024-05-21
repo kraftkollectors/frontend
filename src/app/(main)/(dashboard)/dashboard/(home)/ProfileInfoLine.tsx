@@ -14,7 +14,7 @@ export default function ProfileInfoLine({
   return (
     <div className=" flex justify-between items-center gap-4">
       <div className="flex gap-1 items-center">
-        <span className="black-300"> {icon} </span>
+        <span className="text-black-300"> {icon} </span>
         <p className="text-black-300">{title}</p>
       </div>
       <p className="text-black-900">{value}</p>

@@ -85,6 +85,7 @@ const config: Config = {
           lightHover: "#FAF1E5",
           dark: "#A87B3B",
           darkActive: "#654A24",
+          accent: "#F0981C",
         },
         light: {
           DEFAULT: "#FFFFFF",

@@ -8,7 +8,7 @@ export default function WriteReview() {
     // <Theme>
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <button className="btn-dark-border p-2"> Write a review</button>
+        <button className="btn-dark-border !text-label max-md:!font-normal p-2"> Write a review</button>
       </AlertDialog.Trigger>
       <AlertDialog.Content>
         <form className=" flex flex-col gap-3 text-center items-center">
@@ -26,7 +26,7 @@ export default function WriteReview() {
             Kindly provide genuine feedback to benefit both future customers and
             the artisan in attracting more clients.
           </p>
-          <div className="text-headline text-secondary flex gap-1 justify-center py-4">
+          <div className="text-headline text-secondary-accent flex gap-1 justify-center py-4">
             <Rating />
           </div>
           <div className="w-full">

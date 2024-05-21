@@ -13,14 +13,20 @@ export default function Main() {
             "/images/dna logo.png",
             "/images/galaxy s24.jpg",
             "/images/auth-bg.png",
+            "/images/auth-bg.png",
+            "/images/auth-bg.png",
+            "/images/auth-bg.png",
+            "/images/auth-bg.png",
           ]}
         />
       </div>
+      <div className="max-md:app-container">
       <ServiceDetails />
       <div className="md:hidden pb-4 border-b">
         <Profile />
       </div>
       <Reviews />
+      </div>
     </section>
   );
 }

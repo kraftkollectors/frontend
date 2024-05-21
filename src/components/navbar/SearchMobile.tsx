@@ -18,7 +18,7 @@ export default function SearchMobile() {
   return (
     <>
       <>
-        <button className="p-1 md:hidden" onClick={() => setOpen(true)}>
+        <button className="p-1 md:hidden text-primary hover:text-primary-hover" onClick={() => setOpen(true)}>
           <AppIcons.Filter />
         </button>
       </>

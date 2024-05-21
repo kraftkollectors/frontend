@@ -1,13 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { debugLog } from "./functions/helpers";
-import { appCookies } from "./utils";
+import { appCookies, paths } from "./utils";
 
 export async function middleware(req: NextRequest) {
+  debugLog(`middleware-------------${Date.now()}`)
   const pathname = req.nextUrl.pathname;
   if (pathname.startsWith("/dashboard")) {
-    debugLog('------------------middleware-------------')
     const hasAccessToken = req.cookies.has(appCookies.accessToken);
-    if (!(hasAccessToken)) return NextResponse.redirect(new URL("/login", req.url));
+    if (!(hasAccessToken)) return NextResponse.redirect(new URL(paths.login, req.url));
+  }
+  if (authPaths.map((item)=>pathname.startsWith(item)).includes(true)) {
+    const hasAccessToken = req.cookies.has(appCookies.accessToken);
+    if (hasAccessToken) return NextResponse.redirect(new URL(paths.dashboard, req.url));
   }
   // if (pathname.startsWith("/admin") && !pathname.startsWith("/admin-")) {
   //   const hasId = req.cookies.has("id");
@@ -18,3 +22,10 @@ export async function middleware(req: NextRequest) {
   //   }
   // }
 }
+
+const authPaths = [
+  paths.login,
+  paths.signup,
+  paths.forgotPassword,
+  paths.resetPassword,
+]

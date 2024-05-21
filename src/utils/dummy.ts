@@ -101,7 +101,7 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
       name: "Josh Binus",
       img: "/images/auth-bg.png",
     },
-    rating: 4,
+    rating: 2,
     review: "Excellent service, I wish I could give more than 5 stars",
     date: "12/12/2023",
     service: {
@@ -118,7 +118,7 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
       name: "Josh Binus",
       img: "/images/auth-bg.png",
     },
-    rating: 4,
+    rating: 3.5,
     review: "Excellent service, I wish I could give more than 5 stars",
     date: "12/12/2023",
     service: {

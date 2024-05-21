@@ -1,9 +1,9 @@
-import { RatingStars, ReadMoreReadLess } from "@/components";
+import { FavouriteButton, RatingStars, ReadMoreReadLess } from "@/components";
 import { FaHeart } from "react-icons/fa6";
 
 export default function ServiceDetails() {
   return (
-    <div className="flex flex-col gap-3 py-5 pb-4 border-b">
+    <div className="flex flex-col gap-3 my-5 mb-4 border rounded-md p-4 bg-light">
       <h1 className="font-bold text-title md:text-xl">
         I will make your event a blossom and it will be good
       </h1>
@@ -12,9 +12,7 @@ export default function ServiceDetails() {
         <div className="flex w-fit gap-2 items-center">
           <p className="text-dark-gray r-font-semibold text-label">4.8</p>
           <RatingStars value={4.8} size="md" />
-          <button className="size-8 rounded-md shadow inline-flex items-center justify-center bg-light">
-            <FaHeart />
-          </button>
+          <FavouriteButton />
         </div>
       </div>
       <div className="flex flex-col gap-1">

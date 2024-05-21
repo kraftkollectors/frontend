@@ -6,8 +6,8 @@ import SimilarPosts from "./SimilarPosts";
 export default function Page() {
   return (
     <>
-    <section className="app-container pt-5 pb-10 md:bg-gray-100">
-      <div className="pb-6 flex gap-2 max-md:hidden text-label text-dark-gray">
+    <section className="md:app-container md:pt-5 pb-10 bg-gray-100">
+      <div className="pb-6 flex gap-2 max-md:hidden text-label text-black-400 font-semibold">
         <span>home</span> &gt;
         <span>Event Planning</span> &gt;
         <span>Music</span> &gt;

@@ -28,7 +28,7 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center;
+    @apply inline-flex items-center justify-center gap-2;
   }
   .search-filter-btn {
     @apply flex gap-2 border py-1 px-2 items-center rounded;
@@ -43,10 +43,10 @@
     @apply btn-primary-tiny-border r-font-semibold text-lg py-2;
   }
   .delete-btn {
-    @apply flex items-center gap-2 text-danger rounded hover:bg-red-100 p-1;
+    @apply flex items-center gap-2 text-danger rounded-md hover:bg-red-100 px-1.5;
   }
   .edit-btn {
-    @apply flex items-center gap-2 text-primary rounded hover:bg-blue-100 p-1;
+    @apply flex items-center gap-2 text-primary rounded-md hover:bg-blue-100 px-1.5;
   }
   .btn-primary-tiny {
     @apply bg-primary border border-primary btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-primary-darkActive text-sm font-normal inline-flex gap-1;

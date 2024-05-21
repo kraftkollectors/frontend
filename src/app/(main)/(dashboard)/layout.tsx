@@ -1,7 +1,6 @@
-import { fetchUser } from "@/actions";
+import { fetchUser, logout } from "@/actions";
 import { Navbar } from "@/components";
 import AuthProvider from "@/components/server/AuthProvider";
-import { debugLog } from "@/functions/helpers";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -14,8 +13,10 @@ export default async function RootLayout({
 }: AppLayoutProps) {
   const user = await fetchUser();
   if(user === 'error') throw new Error("Unable to get profile info")
-  if(!user) redirect('/login');
-  debugLog('rendered template')
+  if(!user) {
+    await logout();
+    redirect('/login');
+  };
     
   return (
     <>

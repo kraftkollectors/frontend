@@ -1,14 +1,12 @@
 import { AppLogo } from "@/components";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function RootLayout({ children }: AppLayoutProps) {
   return (
     <main>
-      <header className="app-container flex items-center py-3 border-b-4">
+      <header className="app-container flex items-center py-3 border-b">
         <AppLogo />
-        {/* <nav /> */}
       </header>
       <section className="py-10">
         <div className="app-container">

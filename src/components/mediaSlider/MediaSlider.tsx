@@ -18,7 +18,7 @@ export function MediaSlider({ media }: MediaSliderProps) {
 
   return (
     <div className="flex flex-col gap-3 w-full">
-      <div className="w-full aspect-[4/3] relative overflow-hidden">
+      <div className="w-full aspect-[4/3] relative overflow-hidden bg-black-900 md:rounded-md">
         <AnimatePresence>
           {files.map((file, i) => {
             const _index = i + 1;
@@ -28,7 +28,7 @@ export function MediaSlider({ media }: MediaSliderProps) {
                 ? <motion.img
                     key={i}
                     src={file.src}
-                    className="absolute w-full h-full object-contain bg-gray-300 rounded"
+                    className="absolute w-full h-full object-contain bg-black-900 md:rounded-md"
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 1.1, opacity: 0 }}
@@ -36,7 +36,7 @@ export function MediaSlider({ media }: MediaSliderProps) {
                 : <motion.video
                     key={i}
                     src={file.src}
-                    className="absolute w-full h-full object-contain bg-gray-300 rounded"
+                    className="absolute w-full h-full object-contain bg-black-900 md:rounded-md"
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 1.1, opacity: 0 }}
@@ -68,7 +68,7 @@ export function MediaSlider({ media }: MediaSliderProps) {
         {files.map((file, i) =>
           <MediaSliderCard
             key={i}
-            src={file.src}
+            {...file}
             active={i + 1 === index}
             onClick={() => {
               setIndex(i + 1);
