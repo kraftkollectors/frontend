@@ -13,11 +13,11 @@ import {
 } from "react-icons/fa6";
 import { getUsernameFromLink } from "@/functions/helpers";
 import {
-  DashboardProfile,
-  DashboardProfileProps,
+  DashboardProfile
 } from "@/components/dashboard";
 import useWindowWidth from "@/hooks/useWindowWidth";
-export type ProfileCardprops = DashboardProfileProps & {
+import { useUserStore } from "@/state";
+export type ProfileCardprops =  {
   memberSince: string;
   location: string;
   displayName: string;
@@ -32,9 +32,11 @@ export type ProfileCardprops = DashboardProfileProps & {
 /* eslint-disable @next/next/no-img-element */
 export default function ProfileCard(props: ProfileCardprops) {
   const vw = useWindowWidth();
+  const user = useUserStore(s=>s.user);
+
   return (
     <div className="w-full border  gap-2 bg-light  p-4 rounded-md">
-      {vw > 768 && <DashboardProfile {...props} />}
+      {vw > 768 && <DashboardProfile  />}
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">General Info</p>
@@ -50,7 +52,7 @@ export default function ProfileCard(props: ProfileCardprops) {
           />
           <ProfileInfoLine
             title="Email"
-            value={props.email}
+            value={user?.email}
             icon={<CiMail />}
           />
         </div>

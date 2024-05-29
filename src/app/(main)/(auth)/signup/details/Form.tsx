@@ -23,21 +23,15 @@ export default function Form() {
 
 const loginFields: AppInputProps[] = [
   {
-    name: "first_name",
+    name: "firstName",
     title: "First Name",
     type: "text",
     placeholder: "First Name",
   },
   {
-    name: "last_name",
+    name: "lastName",
     title: "Last Name",
     type: "text",
     placeholder: "Last Name",
-  },
-  {
-    name: "other_names",
-    title: "Other Names",
-    type: "text",
-    placeholder: "Other Names",
   },
 ];

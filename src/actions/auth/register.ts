@@ -5,7 +5,8 @@ import { tags, apis, appCookies } from "@/utils";
 import { ApiRequest } from "@/utils/apiRequest";
 import { COOKIE_MAX_AGE } from "@/utils/constants";
 import paths from "@/utils/paths";
-import { ActionResponse } from "@/utils/types/basicTypes";
+import { ApiSignupResponse } from "@/utils/types/auth";
+import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import validators from "@/utils/validators";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
@@ -15,13 +16,13 @@ import { z } from "zod";
 const registerSchema = z.object({
     email: validators.email,
     password: validators.password,
-    username: validators.name,
+    userName: validators.name,
 })
 
 type RegisterFormProps = {
     email: string;
     password: string;
-    username: string;
+    userName: string;
 }
 
 export async function register(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
@@ -43,19 +44,19 @@ export async function register(res: ActionResponse, formData: FormData): Promise
 
 
 const registerDetailsSchema = z.object({
-    first_name: validators.name,
-    last_name: validators.name,
-    other_names: z.string().trim(),
+    firstName: validators.name,
+    lastName: validators.name,
+    gender: z.string().trim(),
 })
 
 type RegisterDetailsFormProps = {
-    first_name: string;
-    last_name: string;
-    other_names: string;
+    firstName: string;
+    lastName: string;
+    gender: string;
 }
 
 export async function registerDetails(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
-    const { has, get } = cookies();
+    const { has, get, set } = cookies();
     if (!has(appCookies.registerData)) redirect(paths.signup);
 
     const data = formDataToObject<RegisterDetailsFormProps>(formData);
@@ -71,15 +72,18 @@ export async function registerDetails(res: ActionResponse, formData: FormData): 
         const postData = {
             ...prevData,
             ...data,
-            password1: prevData.password,
-            password2: prevData.password,
         };
         const req = await ApiRequest.postJson(apis.register, postData);
-        const res = await req.json();
+        const res = (await req.json()) as ApiResponse<ApiSignupResponse | string>;
         debugLog(res)
-        if (res.error) return {
-            error: res.details
+
+        if (res.statusCode !== 201 || typeof res.data == 'string') return {
+            error:  res.data as string ?? "Unable to signup"
         }
+        set(appCookies.registerData, JSON.stringify(postData), {maxAge: 60 * 60 * 24});
+        set(appCookies.clientToken, res.data.otp, {maxAge: 60 * 60 * 24});
+        set(appCookies.accessTokenTmp, res.data.token, {maxAge: COOKIE_MAX_AGE});
+        set(appCookies.accessId, res.data.user._id, {maxAge: COOKIE_MAX_AGE});
         success = true;
     } catch (error) {
         debugLog(error)
@@ -99,8 +103,8 @@ type RegisterTokenFormProps = {
 }
 
 export async function registerToken(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
-    const { has, get, set, delete: deleteCookie } = cookies();
-    if (!has(appCookies.registerData)) redirect(paths.signup);
+    const { get, set, delete: deleteCookie } = cookies();
+    // if (!has(appCookies.registerData)) redirect(paths.signup);
 
     const data = formDataToObject<RegisterTokenFormProps>(formData);
 
@@ -111,20 +115,26 @@ export async function registerToken(res: ActionResponse, formData: FormData): Pr
             ...prevData,
             ...data,
         };
-        const req = await ApiRequest.postJson(apis.registerToken, postData);
-        const res = await req.json();
+
+        const cookieToken = get(appCookies.clientToken)?.value
+        if(data.token !== cookieToken) return {
+            error: "invalid token"
+        }
+        
+        const req = await ApiRequest.postJson(apis.registerVerifyEmail, postData);
+        const res = (await req.json()) as ApiResponse;
         debugLog(res)
-        if(res.token) {
+        if(res.msg === 'Success') {
             deleteCookie(appCookies.registerData);
-            set(appCookies.accessToken, res.token, {
-                maxAge: COOKIE_MAX_AGE
-            });
+            deleteCookie(appCookies.clientToken);
+            set(appCookies.accessToken, get(appCookies.accessTokenTmp)?.value!);
+            deleteCookie(appCookies.accessTokenTmp);
             revalidateTag(tags.user);
             revalidatePath('/');
             success = true;
         }
         else return {
-            error: res.details ?? res.error ?? "Verification failed"
+            error: res.data ?? "Verification failed"
         }
         success = true;
     } catch (error) {

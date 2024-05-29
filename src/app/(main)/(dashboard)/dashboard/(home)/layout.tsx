@@ -4,9 +4,6 @@ import ProfileCard, { ProfileCardprops } from "./ProfileCard";
 import ProfileCategories, { ProfileCategoriesProps } from "./ProfileCategories";
 
 export const dummyProfileData: ProfileCardprops = {
-  image: "/images/auth-bg.png",
-  fullName: "John Doe",
-  email: "john.doe@gmail.com",
   displayName: "John Doe",
   availability: "Available",
   location: "New York, USA",
@@ -28,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="grid md:grid-cols-10 md:app-container py-10 bg-light md:bg-light-text gap-6">
       <div className="col-span-1 bg-light app-container md:hidden">
-        <DashboardProfile {...dummyProfileData} />
+        <DashboardProfile />
       </div>
       <div className="col-span-3 flex flex-col gap-4 max-md:hidden">
         <ProfileCard {...dummyProfileData} />

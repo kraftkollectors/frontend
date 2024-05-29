@@ -27,7 +27,7 @@ export default function Form() {
 
 const loginFields: AppInputProps[] = [
   {
-    name: "username",
+    name: "userName",
     title: "User Name",
     type: "text",
     placeholder: "User Name",

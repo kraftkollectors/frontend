@@ -1,11 +1,14 @@
-const API = "https://backend-1-xex5.onrender.com";
+const API = "https://backends-865y.onrender.com";
 const apis = {
-    login: API + "/auth/app/login/",
-    register: API + "/auth/app/register/",
-    registerToken: API + "/auth/app/verify/email/",
-    forgotPasswordSendEmail: API + "/auth/app/user/reset/password/",
+    login: API + "/users/login",
+    register: API + "/users/register",
+    registerVerifyEmail: API + "/users/verifyemail",
+    forgotPasswordSendEmail: API + "/users/forgot",
 
-    user: API + '/auth/app/user/',
+    getUser(id:string){
+        return `${API}/users/dashboard/${id}`
+    },
+    
 }
 
 export default apis;

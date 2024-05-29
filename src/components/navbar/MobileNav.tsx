@@ -15,6 +15,7 @@ import { PiHeadsetBold } from "react-icons/pi";
 import { BiLogOut } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import { useUserStore } from "@/state";
+import { debugLog } from "@/functions/helpers";
 
 export type MobileNavProps = {
   children: ReactNode;
@@ -56,12 +57,12 @@ export default function MobileNav({ children }: MobileNavProps) {
           <div className="flex flex-col items-center justify-cener w-full pb-4 p-2">
             <img
               src="/images/auth-bg.png"
-              alt={user?.username}
-              title={user?.username}
+              alt={user?.userName}
+              title={user?.userName}
               className="rounded-full size-16"
             />
-            <p>John Doe</p>
-            <p>example@gmail.com</p>
+            <p>{user?.userName}</p>
+            <p>{user?.email}</p>
           </div>
 
           <div className="flex flex-col divide-y-2 px-4">

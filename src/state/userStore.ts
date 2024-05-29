@@ -1,8 +1,8 @@
-import { ApiUser } from '@/actions/fetch/fetchUser';
+import { UserDetailsPlus } from '@/utils/types/user';
 import {create} from 'zustand';
 
 export type UserState = {
-    user: ApiUser | null;
+    user: UserDetailsPlus | null;
     setUser: (user: any) => void;
 }
 

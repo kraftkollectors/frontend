@@ -21,9 +21,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <Suspense>
+      {/* <Suspense>
         <AuthProvider />
-      </Suspense>
+      </Suspense> */}
       <body className={` bg-light text-black-800 text-body font-normal`}>
         <Theme>
           {children}

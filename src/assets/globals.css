@@ -85,6 +85,9 @@
   .hover-link {
     @apply opacity-75 hover:opacity-100;
   }
+  img{
+    @apply bg-slate-200 overflow-hidden
+  }
 }
 
 .radio-group:checked + label {
@@ -115,3 +118,4 @@
 .multi-range-slider .thumb .caption * {
   display: none !important;
 }
+

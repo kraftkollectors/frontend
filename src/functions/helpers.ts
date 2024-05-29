@@ -32,3 +32,9 @@ export function getStarSize(total: number, current: number): "full" | 'half' | '
     return 'empty';
 }
 
+export function fallbackImage(src?:string){
+    if(!(src ?? '').toLowerCase().startsWith('http')){
+        return '/images/auth-bg.png'
+    }
+}
+
