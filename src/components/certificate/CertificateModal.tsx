@@ -17,6 +17,7 @@ export type CertificateModalProps = {
   isNew?: boolean;
 };
 
+
 export default function CertificateModal({
   children,
   data,
