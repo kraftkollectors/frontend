@@ -1,9 +1,9 @@
-"use client";
 import { FaRegEdit } from "react-icons/fa";
 import ProfileCategory from "./ProfileCategory";
 import { FaPlus } from "react-icons/fa6";
 import { EducationCard } from "@/components/education/EducationCard";
 import { CertificateCard } from "@/components/certificate/CertificateCard";
+import Certificates from "./Certificates";
 
 export type ProfileCategoriesProps = {
   description: string;
@@ -16,6 +16,7 @@ export default function ProfileCategories({
   awayMessage,
   education,
 }: ProfileCategoriesProps) {
+
   return (
     <div className=" flex flex-col p-4 rounded-md bg-light gap-2 border">
       <ProfileCategory
@@ -58,23 +59,7 @@ export default function ProfileCategories({
         />
       </ProfileCategory>
 
-      <ProfileCategory
-        title="Certificates"
-        action={
-          <div className="edit-btn">
-            <FaPlus /> Add New
-          </div>
-        }
-      >
-        <CertificateCard
-          id=""
-          year="2022"
-          certificate="Web Development with Python"
-          certifiedBy="Aptech Institute"
-          onDelete={() => {}}
-          onEdit={() => {}}
-        />
-      </ProfileCategory>
+      <Certificates />
     </div>
   );
 }

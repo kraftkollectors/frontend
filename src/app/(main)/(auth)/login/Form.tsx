@@ -15,7 +15,7 @@ export default function LoginForm() {
       {loginFields.map(item => {
         return <AppInput key={item.name} {...item} />;
       })}
-      <div className="flex justify-end">
+      <div className="flex justify-end"> 
         <Link
           href="/forgot-password"
           className="text-primary r-font-semibold text-sm"

@@ -1,18 +1,32 @@
 
-import { debugLog } from '@/functions/helpers';
 import { cookies } from 'next/headers'
-import paths from './paths';
-import { RedirectType, redirect } from 'next/navigation';
+import { appCookies } from '.';
 
 export const ServerApiRequest = {
     get(url: string, init: RequestInit = {}) {
         const {get, has} = cookies();
-        if(!has('__access_token')) redirect(paths.login, RedirectType.replace);
-        const accessToken = get('__access_token')!.value;
+        if(!has(appCookies.accessToken)) return null;
+        const accessToken = get(appCookies.accessToken)!.value;
         const {headers, ...others} = init;
         
         return fetch(url, {
             ...others,
+            headers: {
+                ...headers,
+                'x-access-token': accessToken
+            },
+        });
+    },
+    post(url: string,body:any, init: RequestInit = {}) {
+        const {get, has} = cookies();
+        if(!has(appCookies.accessToken)) return null;
+        const accessToken = get(appCookies.accessToken)!.value;
+        const {headers, ...others} = init;
+        
+        return fetch(url, {
+            ...others,
+            method: 'POST',
+            body: JSON.stringify(body),
             headers: {
                 ...headers,
                 'x-access-token': accessToken

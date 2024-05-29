@@ -5,6 +5,8 @@ import "@/assets/fonts.css";
 import { Theme } from "@radix-ui/themes";
 import AuthProvider from "@/components/server/AuthProvider";
 import { Suspense } from "react";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GOOGLE_OAUTH_CLIENT_ID } from "@/utils/constants";
 
 
 export const metadata: Metadata = {
@@ -21,12 +23,14 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      {/* <Suspense>
+      <Suspense>
         <AuthProvider />
-      </Suspense> */}
+      </Suspense>
       <body className={` bg-light text-black-800 text-body font-normal`}>
         <Theme>
+          <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIENT_ID}>
           {children}
+          </GoogleOAuthProvider>
           </Theme>
       </body>
     </html>

@@ -14,11 +14,11 @@ export type UserApiResponse = {
     userDetails: UserDetailsPlus
 }
 
-export async function fetchUser({ redirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
+export async function fetchUserCertificates({ redirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getUser(accessId ?? ''), {
-            next: { tags: [tags.user] },
+        const req = await ServerApiRequest.get(apis.getUserCertificates(accessId ?? ''), {
+            next: { tags: [tags.userCertificates] },
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserApiResponse>;

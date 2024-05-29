@@ -1,3 +1,5 @@
+'use client'
+
 import { AlertDialog } from "@radix-ui/themes";
 import { FaPlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
@@ -5,32 +7,23 @@ import AppInput from "../ui/AppInput";
 import AppSelect from "../ui/AppSelect";
 import { Certificate } from "./CertificateCard";
 import { useState } from "react";
+import { useFormState } from "react-dom";
+import { newCertificate } from "@/actions/new/newCertificate";
+import { FormMessage } from "../ui/FormMessage";
 
 export type CertificateModalProps = {
   children: React.ReactNode;
   data?: Certificate;
-  onSubmit: (data: Certificate) => void;
   isNew?: boolean;
 };
 
 export default function CertificateModal({
   children,
   data,
-  onSubmit,
   isNew = true,
 }: CertificateModalProps) {
   const [open, setOpen] = useState(false);
-  function handleSubmit(e: any) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    const _data = data as Certificate;
-    setOpen(false);
-    onSubmit({
-      ..._data,
-      id: !isNew ? _data.id : Date.now().toString(),
-    });
-  }
+  const [res, action] = useFormState(newCertificate, {});
 
   return (
     <div>
@@ -38,9 +31,10 @@ export default function CertificateModal({
         <AlertDialog.Trigger>{children}</AlertDialog.Trigger>
         <AlertDialog.Content>
           <form
-            onSubmit={handleSubmit}
+            action={action}
             className=" flex flex-col gap-3 text-center items-center"
           >
+            <FormMessage res={res} />
             <input type="hidden" name="id" value={data?.id} />
             <div className="flex justify-between w-full">
               <h1></h1>

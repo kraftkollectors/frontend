@@ -8,7 +8,7 @@ Onboarding routes
 get "", testServer
 post "/login", loginUser. data to send
 	email: string,
-    	password: string
+    	password: string 
 
 post "/google/login" thirdPartyLogin. data to send
 	email: string
@@ -39,6 +39,7 @@ post "/forgot" userForgotPassword. data to send
 post "/reset" userResetPassword. data to send
 	email: string
 	password: string
+
 
 // Upload Files to Cloud And Get UploadURL
 post "/geturl" data to send.

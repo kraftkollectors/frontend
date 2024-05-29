@@ -11,6 +11,8 @@ export type AppInputProps = {
   type?: string;
   schema?: z.ZodString;
   textarea?: boolean;
+  readonly?: boolean;
+  hidden?: boolean;
   ps?: string;
   title?: string;
   rows?: number;
@@ -31,6 +33,8 @@ export default memo(function AppInput({
   schema,
   ps,
   title,
+  readonly,
+  hidden,
   rows,
   error: fieldError,
 }: AppInputProps) {
@@ -59,7 +63,7 @@ export default memo(function AppInput({
   });
 
   return (
-    <div className="">
+    <div className={hidden ? 'hidden' : ''}>
       {title && (
         <label
           htmlFor={`${title}-input`}
@@ -78,6 +82,8 @@ export default memo(function AppInput({
         </span>
         {textarea ? (
           <textarea
+          readOnly={readonly}
+          hidden={hidden}
             id={`${title}-input`}
             name={name}
             placeholder={placeholder}
@@ -93,6 +99,8 @@ export default memo(function AppInput({
           />
         ) : (
           <input
+          readOnly={readonly}
+          hidden={hidden}
             id={`${title}-input`}
             name={name}
             placeholder={placeholder}

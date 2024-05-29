@@ -1,3 +1,5 @@
+'use client'
+
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import CertificateModal from "./CertificateModal";
@@ -27,9 +29,7 @@ export function CertificateCard({
         <p>{certificate} </p>
         <CertificateModal
           data={{ certificate, certifiedBy, year, id }}
-          onSubmit={(data) => {
-            onEdit(data);
-          }}
+        
           isNew={false}
         >
           <button className="edit-btn">
