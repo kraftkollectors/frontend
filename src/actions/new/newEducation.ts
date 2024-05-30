@@ -10,16 +10,17 @@ import { z } from "zod";
 import validators from "@/utils/validators";
 import { redirect } from "next/navigation";
 import { revalidateTag } from "next/cache";
+import { Education } from "@/utils/types/education";
 
-type CertificateFormData = Certificate & UserAuthProps;
+type EducationFormData = Education & UserAuthProps;
 
 const certificateSchema = z.object({
-    certificate: validators.name,
-    certifiedBy: validators.name,
+    university: validators.name,
+    degree: validators.name,
 })
 
-export async function newCertificate(_res:ActionResponse, formData:FormData):Promise<ActionResponse> {
-    const data = formDataToObject<CertificateFormData>(formData);
+export async function newEducation(_res:ActionResponse, formData:FormData):Promise<ActionResponse> {
+    const data = formDataToObject<EducationFormData>(formData);
     if(!data.userId || !data.userEmail) redirect(paths.login)
 
     const tryParse = certificateSchema.safeParse(data);
@@ -27,15 +28,15 @@ export async function newCertificate(_res:ActionResponse, formData:FormData):Pro
     
     try {
         const req = (data._id) 
-        ? await ServerApiRequest.patch(apis.editCertificate(data._id), data) 
-        : await ServerApiRequest.post(apis.uploadCertificate, data);
+        ? await ServerApiRequest.patch(apis.editEducation(data._id), data) 
+        : await ServerApiRequest.post(apis.uploadEducation, data);
         const res = (await req?.json()) as ApiResponse
         debugLog(res);
         if(res.statusCode == 201){
             revalidateTag(tags.userCertificates);
-            return {success: `Certificate ${data._id ? 'Edited' : 'Added'} Successfully`, data: res.data};
+            return {success: `Education ${data._id ? 'Edited' : 'Added'} Successfully`, data: res.data};
         }
-        return {error: res.data ?? "Failed to add certificate", data: res};
+        return {error: res.data ?? "Failed to add education", data: res};
     } catch (error) {
         debugLog(error);
         return {error: 'Something went wrong'}

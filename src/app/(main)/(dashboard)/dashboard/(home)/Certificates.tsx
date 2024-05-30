@@ -1,26 +1,26 @@
-'use client'
-
 import { CertificateCard } from "@/components/certificate/CertificateCard";
-import { FaPlus } from "react-icons/fa6";
 import ProfileCategory from "./ProfileCategory";
 import { CertificatesAction } from "@/components/dashboard";
+import { fetchUserCertificates } from "@/actions";
 
-export default function Certificates() {
-    return (
-        <ProfileCategory
-        title="Certificates"
-        action={
-          <CertificatesAction />
-        }
-      >
-        <CertificateCard
-          _id=""
-          year="2022"
-          certificate="Web Development with Python"
-          certifiedBy="Aptech Institute"
-          onDelete={() => {}}
-          onEdit={() => {}}
-        />
-      </ProfileCategory>
-    );
+export default async function Certificates() {
+  const certs = await fetchUserCertificates({ throwsError: false });
+  if (!certs || certs == 'error') return <div className="info-box">failed to get certificates</div>
+
+  return (
+    <ProfileCategory
+      title="Certificates"
+      action={
+        <CertificatesAction />
+      }
+    >
+      {
+        certs.length == 0 ? <div className="info-box">Nothing yet</div> :
+          certs.map(cert => <CertificateCard
+            key={cert._id}
+            {...cert}
+          />)
+      }
+    </ProfileCategory>
+  );
 }

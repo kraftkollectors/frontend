@@ -1,30 +1,37 @@
-'use client'
 
 import { EducationCard } from "@/components/education/EducationCard";
 import { FaPlus } from "react-icons/fa6";
 import ProfileCategory from "./ProfileCategory";
+import { fetchUserEducations } from "@/actions";
+import EducationModal from "@/components/education/EducationModal";
 
-export default function Educations() {
+export default async function Educations() {
+    const education = await fetchUserEducations({ throwsError: false });
+    if (!education || education == 'error') return <div className="info-box">failed to get Education</div>
+
+
     return (
         <div>
             <ProfileCategory
-        title="Education"
-        action={
-          <button className="edit-btn">
-            <FaPlus /> Add New
-          </button>
-        }
-      >
-        <EducationCard
-          universityName="University of Technology Owerri"
-          degree="Bachelor of Engineering(BEng)"
-          areaOfStudy=""
-          graduation="2023"
-          id=""
-          onDelete={() => {}}
-          onEdit={() => {}}
-        />
-      </ProfileCategory>
+                title="Education"
+                action={
+                    <EducationModal>
+                        <button className="edit-btn">
+                            <FaPlus /> Add New
+                        </button>
+                    </EducationModal>
+                }
+            >
+                {
+                    education.length == 0 ? <div className="info-box">Nothing yet</div> :
+                    education.map(edu =>
+                        <EducationCard
+                            key={edu._id}
+                            {...edu}
+                        />
+                    )
+                }
+            </ProfileCategory>
         </div>
     );
 }

@@ -1,18 +1,18 @@
 'use client'
 
 import { AlertDialog } from "@radix-ui/themes";
-import { FaPlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import AppInput from "../ui/AppInput";
 import AppSelect from "../ui/AppSelect";
 import { Certificate } from "./CertificateCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
-import { newCertificate } from "@/actions/new/newCertificate";
+import { newCertificate } from "@/actions";
 import { FormMessage } from "../ui/FormMessage";
 import { FormButton } from "../ui/FormButton";
 import UserAuth from "../server/UserAuth";
 import { getYearsBeforeToday } from "@/functions/date";
+import { useRouter } from "next/navigation";
 
 export type CertificateModalProps = {
   children: React.ReactNode;
@@ -28,6 +28,13 @@ export default function CertificateModal({
 }: CertificateModalProps) {
   const [open, setOpen] = useState(false);
   const [res, action] = useFormState(newCertificate, {});
+  const {refresh} = useRouter()
+  useEffect(()=>{
+    if(res.success){
+      refresh();
+      setOpen(false);
+    }
+  }, [res])
 
   return (
     <div>
@@ -36,11 +43,11 @@ export default function CertificateModal({
         <AlertDialog.Content>
           <form
             action={action}
-            className=" flex flex-col gap-3 text-center items-center"
+            className=" flex flex-col gap-3"
           >
-            {/* <input type="hidden" name="id" value={data?.id} /> */}
+            {!isNew && <input type="hidden" name="_id" value={data?._id} />}
             <div className="flex justify-between w-full">
-              <h2>{isNew ? "Add certificate" : "Edit certificate"}</h2>
+              <h2 className="font-semibold">{isNew ? "Add certificate" : "Edit certificate"}</h2>
               <AlertDialog.Cancel>
                 <button className="icon-btn text-lg p-2">
                 <IoClose />
@@ -55,12 +62,14 @@ export default function CertificateModal({
                 placeholder="Certificate"
                 type="text"
                 name="certificate"
+                error={res.fieldErrors && res.fieldErrors['certificate']}
               />
               <AppInput
                 value={data?.certifiedBy}
                 placeholder="certified by"
                 type="text"
                 name="certifiedBy"
+                error={res.fieldErrors && res.fieldErrors['certifiedBy']}
               />
             </div>
             <div className="flex w-full gap-2">

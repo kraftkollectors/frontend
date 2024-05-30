@@ -88,6 +88,12 @@
   .hover-link {
     @apply opacity-75 hover:opacity-100;
   }
+  .info-box{
+    @apply bg-[#00000022] rounded p-2
+  }
+  .skeleton{
+    @apply bg-[#00000022] rounded-md animate-pulse
+  }
 
 }
 

@@ -4,6 +4,7 @@ import { FaRegEdit } from "react-icons/fa";
 import ProfileCategory from "./ProfileCategory";
 import Certificates from "./Certificates";
 import Educations from "./Educations";
+import { Suspense } from "react";
 
 export type ProfileCategoriesProps = {
   description: string;
@@ -40,8 +41,8 @@ export default function ProfileCategories({
         <p className="text-black-400">{awayMessage}</p>
       </ProfileCategory>
 
-      <Educations />
-      <Certificates />
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Educations /></Suspense>
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Certificates /></Suspense>
     </div>
   );
 }

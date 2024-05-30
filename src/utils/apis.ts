@@ -9,12 +9,21 @@ const apis = {
 
     uploadSingleFile: API + "/geturl",
     uploadCertificate: API + "/users/certificate",
-
+    uploadEducation: API + "/users/education",
+    editCertificate(id:string){
+        return `${API}/users/certificate/${id}`
+    },
+    editEducation(id:string){
+        return `${API}/users/education/${id}`
+    },
     getUser(id:string){
         return `${API}/users/dashboard/${id}`
     },
     getUserCertificates(id:string){
         return `${API}/users/certificate/${id}`
+    },
+    getUserEducations(id:string){
+        return `${API}/users/education/${id}`
     },
     
 }

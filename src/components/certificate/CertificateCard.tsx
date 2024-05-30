@@ -6,17 +6,12 @@ import CertificateModal from "./CertificateModal";
 import { Certificate as MainCertificate } from "@/utils/types/certificate";
 
 export type Certificate = MainCertificate;
-export type CertificateCardProps = Certificate & {
-  onDelete: (id: string) => void;
-  onEdit: (data: Certificate) => void;
-};
+export type CertificateCardProps = Certificate 
 
 export function CertificateCard({
   certificate,
   certifiedBy,
   year,
-  onDelete,
-  onEdit,
    _id,
 }: CertificateCardProps) {
   return (
@@ -35,7 +30,7 @@ export function CertificateCard({
       </div>
       <div className="flex justify-between">
         <p>{certifiedBy} </p>
-        <button onClick={() => onDelete(_id)} className="delete-btn">
+        <button className="delete-btn">
           <span>Delete</span> <RiDeleteBin6Line />
         </button>
       </div>

@@ -23,7 +23,7 @@ export default function About({
       </div>
       <div className="flex flex-col gap-1 pb-2 border-b">
         <h1 className="font-bold ">Education</h1>
-        {education.map(({ degree, universityName, graduation }, i) => (
+        {education.map(({ degree, university: universityName, year: graduation }, i) => (
           <div key={i} className="pb-1 flex flex-col gap-1">
             <p className="text-black-900">{universityName}</p>
             <p className="text-black-300 font-semibold text-sm">{degree}</p>

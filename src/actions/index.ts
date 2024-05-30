@@ -8,3 +8,9 @@ export {forgotPasswordSendEmail} from './auth/forgotPassword'
 
 export {fetchUser} from './fetch/fetchUser'
 export {fetchUserCertificates} from './fetch/fetchUserCertificates'
+export {fetchUserEducations} from './fetch/fetchUserEducations'
+
+export {newEducation} from './new/newEducation'
+export {newCertificate} from './new/newCertificate'
+
+export {deleteEducation} from './delete/deleteEducation'

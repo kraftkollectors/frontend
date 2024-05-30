@@ -37,11 +37,11 @@ export default function Page() {
           exercitationem, sint sed sit eius fugit officia adipisci repellendus"
             education={[
               {
-                universityName: "Federal University of Technology Owerri",
+                university: "Federal University of Technology Owerri",
                 degree: "OND",
                 areaOfStudy: "Health science",
-                graduation: "2023",
-                id: "1",
+                year: "2023",
+                _id: "1",
               },
             ]}
             certifications={[
