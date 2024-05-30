@@ -30,10 +30,10 @@ export function EducationSelector() {
         />
       ))}
       <EducationModal
-        onSubmit={(data) => {
-          console.log(data);
-          setCertificates([...certificates, data]);
-        }}
+        // onSubmit={(data) => {
+        //   console.log(data);
+        //   setCertificates([...certificates, data]);
+        // }}
       >
         <button className="btn-transparent w-fit px-4">
           add new <FaPlus className="text-small" />

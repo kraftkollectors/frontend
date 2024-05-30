@@ -10,14 +10,14 @@ import { Education } from "./EducationCard";
 export type EducationModalProps = {
   children: React.ReactNode;
   data?: Education;
-  onSubmit: (data: Education) => void;
+  // onSubmit: (data: Education) => void;
   isNew?: boolean;
 };
 
 export default function EducationModal({
   children,
   data,
-  onSubmit,
+  // onSubmit,
   isNew = true,
 }: EducationModalProps) {
   const [open, setOpen] = useState(false);
@@ -27,10 +27,10 @@ export default function EducationModal({
     const data = Object.fromEntries(formData);
     const _data = data as Education;
     setOpen(false);
-    onSubmit({
-      ..._data,
-      id: !isNew ? _data.id : Date.now().toString(),
-    });
+    // onSubmit({
+    //   ..._data,
+    //   id: !isNew ? _data.id : Date.now().toString(),
+    // });
   }
 
   return (

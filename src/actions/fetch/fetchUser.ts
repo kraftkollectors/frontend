@@ -3,18 +3,20 @@
 import { debugLog } from "@/functions/helpers"
 import apis from "@/utils/apis";
 import { ServerApiRequest } from "@/utils/serverApiRequest";
-import { appCookies, tags } from "@/utils";
+import { appCookies, paths, tags } from "@/utils";
 import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
 import { UserDetails, UserDetailsPlus } from "@/utils/types/user";
 import { ServerActionParams } from "@/utils/types/actions";
+import { redirect } from "next/navigation";
 
 
 export type UserApiResponse = {
     userDetails: UserDetailsPlus
 }
 
-export async function fetchUser({ redirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
+export async function fetchUser({ redirect: shouldRedirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
+    let proceed = false;
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
         const req = await ServerApiRequest.get(apis.getUser(accessId ?? ''), {
@@ -24,12 +26,19 @@ export async function fetchUser({ redirect = true, throwsError = true }: ServerA
         const res = (await req.json()) as ApiResponse<UserApiResponse>;
         debugLog(res);
 
-        if (res.statusCode === 201) return res.data.userDetails;
-        if (throwsError) throw new Error("Unable to connect")
-        return 'error';
+        if((res as any).message == 'Invalid Token') proceed = true;
+        else if (res.statusCode === 201) return res.data.userDetails;
+        else if (throwsError) throw new Error("Unable to connect")
+        if(!proceed) return 'error';
     } catch (error) {
         debugLog(error)
         if (throwsError) throw new Error("Something went wrong")
         return "error";
     }
+    if(proceed && shouldRedirect){
+        cookies().delete(appCookies.accessToken);
+        cookies().delete(appCookies.accessId);
+        redirect(paths.login)
+    };
+    return 'error' 
 }

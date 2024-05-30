@@ -7,7 +7,9 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const hasAccessToken = req.cookies.has(appCookies.accessToken);
   const hasAccessId = req.cookies.has(appCookies.accessId);
-  if (pathname.startsWith("/dashboard")) {
+  if (pathname.includes("api")) {
+    return NextResponse.next();
+  }else if (pathname.startsWith("/dashboard")) {
     if (!(hasAccessToken || hasAccessId)) return NextResponse.redirect(new URL(paths.login, req.url));
   }else if (authPaths.map((item)=>pathname.startsWith(item)).includes(true)) {
     if (hasAccessToken && hasAccessId) return NextResponse.redirect(new URL(paths.dashboard, req.url));

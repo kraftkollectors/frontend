@@ -1,3 +1,5 @@
+'use client'
+
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import EducationModal from "./EducationModal";
@@ -29,9 +31,9 @@ export function EducationCard({
         <p>{universityName} </p>
         <EducationModal
           data={{ universityName, degree, areaOfStudy, graduation, id }}
-          onSubmit={(data) => {
-            onEdit(data);
-          }}
+          // onSubmit={(data) => {
+          //   onEdit(data);
+          // }}
           isNew={false}
         >
           <button className="edit-btn">

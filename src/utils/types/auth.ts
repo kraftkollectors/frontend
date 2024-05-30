@@ -5,3 +5,8 @@ export type ApiSignupResponse = {
     token: string;
     otp: string;
 }
+
+export type UserAuthProps = {
+    userId: string;
+    userEmail: string;
+}

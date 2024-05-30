@@ -13,7 +13,6 @@ export const revalidate = 0;
 export default async function RootLayout({
   children,
 }: AppLayoutProps) {
-  const _ = cookies().get('__access_token');
   const user = await fetchUser();
   if(!user) {
     await logout();

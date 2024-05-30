@@ -10,6 +10,9 @@ import { useState } from "react";
 import { useFormState } from "react-dom";
 import { newCertificate } from "@/actions/new/newCertificate";
 import { FormMessage } from "../ui/FormMessage";
+import { FormButton } from "../ui/FormButton";
+import UserAuth from "../server/UserAuth";
+import { getYearsBeforeToday } from "@/functions/date";
 
 export type CertificateModalProps = {
   children: React.ReactNode;
@@ -35,15 +38,18 @@ export default function CertificateModal({
             action={action}
             className=" flex flex-col gap-3 text-center items-center"
           >
-            <FormMessage res={res} />
-            <input type="hidden" name="id" value={data?.id} />
+            {/* <input type="hidden" name="id" value={data?.id} /> */}
             <div className="flex justify-between w-full">
-              <h1></h1>
+              <h2>{isNew ? "Add certificate" : "Edit certificate"}</h2>
               <AlertDialog.Cancel>
+                <button className="icon-btn text-lg p-2">
                 <IoClose />
+                </button>
               </AlertDialog.Cancel>
             </div>
             <div className="w-full flex flex-col gap-3">
+            <FormMessage res={res} />
+            <UserAuth />
               <AppInput
                 value={data?.certificate}
                 placeholder="Certificate"
@@ -59,14 +65,13 @@ export default function CertificateModal({
             </div>
             <div className="flex w-full gap-2">
               <div className="w-full">
-                <AppSelect value={data?.year} name="year" options={["Year"]} />
+                <AppSelect value={data?.year} name="year" options={getYearsBeforeToday()} />
               </div>
-              <button
-                type="submit"
+              <FormButton
                 className="btn-dark-tiny py-2 max-md:w-full px-6"
               >
                 <span>Done</span>
-              </button>
+              </FormButton>
             </div>
           </form>
         </AlertDialog.Content>

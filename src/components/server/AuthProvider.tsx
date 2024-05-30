@@ -3,7 +3,7 @@ import UserStateProvider from "@/app/MainLayout";
 
 
 export default async function AuthProvider() {
-    const user = await fetchUser();
+    const user = await fetchUser({throwsError: false});
 
     if(user !== 'error')
     return (

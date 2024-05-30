@@ -3,13 +3,9 @@
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import CertificateModal from "./CertificateModal";
+import { Certificate as MainCertificate } from "@/utils/types/certificate";
 
-export type Certificate = {
-  id: string;
-  certificate: string;
-  certifiedBy: string;
-  year: string;
-};
+export type Certificate = MainCertificate;
 export type CertificateCardProps = Certificate & {
   onDelete: (id: string) => void;
   onEdit: (data: Certificate) => void;
@@ -21,14 +17,14 @@ export function CertificateCard({
   year,
   onDelete,
   onEdit,
-  id,
+   _id,
 }: CertificateCardProps) {
   return (
     <div className="bg-white p-3 flex flex-col gap-2 border rounded border-black-50">
       <div className="flex justify-between">
         <p>{certificate} </p>
         <CertificateModal
-          data={{ certificate, certifiedBy, year, id }}
+          data={{ certificate, certifiedBy, year,  _id }}
         
           isNew={false}
         >
@@ -39,7 +35,7 @@ export function CertificateCard({
       </div>
       <div className="flex justify-between">
         <p>{certifiedBy} </p>
-        <button onClick={() => onDelete(id)} className="delete-btn">
+        <button onClick={() => onDelete(_id)} className="delete-btn">
           <span>Delete</span> <RiDeleteBin6Line />
         </button>
       </div>

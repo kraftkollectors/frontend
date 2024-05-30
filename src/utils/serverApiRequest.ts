@@ -26,11 +26,11 @@ export const ServerApiRequest = {
         return fetch(url, {
             ...others,
             method: 'POST',
-            body: JSON.stringify(body),
             headers: {
                 ...headers,
                 'x-access-token': accessToken
             },
+            body: JSON.stringify(body),
         });
     }
 }
