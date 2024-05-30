@@ -3,7 +3,7 @@ import { debugLog } from "./functions/helpers";
 import { appCookies, paths } from "./utils";
 
 export async function middleware(req: NextRequest) {
-  debugLog(`middleware-------------${Date.now()}`)
+  // debugLog(`middleware-------------${Date.now()}`)
   const pathname = req.nextUrl.pathname;
   const hasAccessToken = req.cookies.has(appCookies.accessToken);
   const hasAccessId = req.cookies.has(appCookies.accessId);

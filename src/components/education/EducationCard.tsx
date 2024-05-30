@@ -9,6 +9,9 @@ import { useFormState } from "react-dom";
 import { deleteEducation } from "@/actions";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import UserAuth from "../server/UserAuth";
+import { toast } from "react-toastify";
+import { debugLog } from "@/functions/helpers";
 
 export type EducationCardProps = Education;
 export function EducationCard({
@@ -21,8 +24,10 @@ export function EducationCard({
   const {refresh} = useRouter();
   const [deleteRes, deleteAction] = useFormState(deleteEducation, {});
   useEffect(()=>{
+    debugLog(deleteRes);
     if(deleteRes.success){
       refresh();
+      toast("deleted")
     }
   }, [deleteRes])
   
@@ -43,6 +48,7 @@ export function EducationCard({
         <p className="text-label font-[500] text-black-300">{degree} </p>
         <form action={deleteAction}>
           <input type="hidden" hidden name="_id" value={id} />
+          <UserAuth />
           <FormButton className="delete-btn">
             <span>Delete</span> <RiDeleteBin6Line />
           </FormButton>

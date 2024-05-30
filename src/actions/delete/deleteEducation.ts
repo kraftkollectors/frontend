@@ -13,7 +13,7 @@ type EducationFormData = Education & UserAuthProps;
 
 export async function deleteEducation(_res:ActionResponse, formData:FormData):Promise<ActionResponse> {
     const data = formDataToObject<EducationFormData>(formData);
-    if(!data.userId || !data.userEmail) redirect(paths.login)
+    if(!data.userId || !data.userEmail) throw new Error();
     
     try {
         const req =  await ServerApiRequest.delete(apis.editEducation(data._id), data);
@@ -21,7 +21,7 @@ export async function deleteEducation(_res:ActionResponse, formData:FormData):Pr
         debugLog(res);
         if(res.statusCode == 201){
             revalidateTag(tags.userEducation);
-            return {success: `Education deleted Successfully`, data: res.data};
+            return {success: `Education deleted Successfully`, data: res.data.data};
         }
         return {error: res.data ?? "Failed to delete education", data: res};
     } catch (error) {

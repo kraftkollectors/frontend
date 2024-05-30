@@ -6,7 +6,7 @@ import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { appCookies, paths, tags } from "@/utils";
 import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
-import { UserDetails, UserDetailsPlus } from "@/utils/types/user";
+import {  UserDetailsPlus } from "@/utils/types/user";
 import { ServerActionParams } from "@/utils/types/actions";
 import { redirect } from "next/navigation";
 
@@ -24,7 +24,7 @@ export async function fetchUser({ redirect: shouldRedirect = true, throwsError =
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserApiResponse>;
-        debugLog(res);
+        // debugLog(res);
 
         if((res as any).message == 'Invalid Token') proceed = true;
         else if (res.statusCode === 201) return res.data.userDetails;

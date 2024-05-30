@@ -22,7 +22,7 @@ export async function fetchUserEducations({ redirect = true, throwsError = true 
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserEducationApiResponse>;
-        debugLog(res);
+        // debugLog(res);
 
         if (res.statusCode === 201) return res.data.existingRecord;
         if (throwsError) throw new Error("Unable to connect")

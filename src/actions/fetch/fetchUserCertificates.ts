@@ -6,7 +6,6 @@ import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { appCookies, tags } from "@/utils";
 import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
-import { UserDetails, UserDetailsPlus } from "@/utils/types/user";
 import { ServerActionParams } from "@/utils/types/actions";
 import { Certificate } from "@/utils/types/certificate";
 
@@ -23,7 +22,7 @@ export async function fetchUserCertificates({ redirect = true, throwsError = tru
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserCertificatesApiResponse>;
-        debugLog(res);
+        // debugLog(res);
 
         if (res.statusCode === 201) return res.data.existingRecord;
         if (throwsError) throw new Error("Unable to connect")
