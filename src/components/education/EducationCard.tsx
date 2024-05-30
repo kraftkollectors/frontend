@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import UserAuth from "../server/UserAuth";
 import { toast } from "react-toastify";
 import { debugLog } from "@/functions/helpers";
+import AppToast from "../Toast";
 
 export type Education = MainEducation;
 export function EducationCard({
@@ -24,12 +25,11 @@ export function EducationCard({
   const {refresh} = useRouter();
   const [deleteRes, deleteAction] = useFormState(deleteEducation, {});
   useEffect(()=>{
-    toast(<div className="bg-red-200">hello world</div>)
     debugLog(deleteRes);
     if(deleteRes.success){
       refresh();
-      // toast("deleted")
-    }
+      toast(<AppToast.error message={deleteRes.success} />)
+    }else toast(<AppToast.error message={deleteRes.error ?? "Unable to delete"} />)
   }, [deleteRes])
   
   return (
