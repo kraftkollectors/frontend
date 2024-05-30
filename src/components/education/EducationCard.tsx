@@ -29,7 +29,7 @@ export function EducationCard({
     if(deleteRes.success){
       refresh();
       toast(<AppToast.error message={deleteRes.success} />)
-    }else toast(<AppToast.error message={deleteRes.error ?? "Unable to delete"} />)
+    }else if(deleteRes.error) toast(<AppToast.error message={deleteRes.error} />)
   }, [deleteRes])
   
   return (
