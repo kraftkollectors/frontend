@@ -49,7 +49,7 @@ export default function Page() {
                 certifiedBy: "Federal University of Technology Owerri",
                 certificate: "OND",
                 year: "2023",
-                id: "1",
+                _id: "1",
               },
             ]}
           />

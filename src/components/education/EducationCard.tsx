@@ -3,7 +3,7 @@
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import EducationModal from "./EducationModal";
-import { Education } from "@/utils/types/education";
+import { Education as MainEducation } from "@/utils/types/education";
 import { FormButton } from "../ui/FormButton";
 import { useFormState } from "react-dom";
 import { deleteEducation } from "@/actions";
@@ -13,14 +13,14 @@ import UserAuth from "../server/UserAuth";
 import { toast } from "react-toastify";
 import { debugLog } from "@/functions/helpers";
 
-export type EducationCardProps = Education;
+export type Education = MainEducation;
 export function EducationCard({
   university: universityName,
   degree,
   areaOfStudy,
   year: graduation,
   _id: id,
-}: EducationCardProps) {
+}: Education) {
   const {refresh} = useRouter();
   const [deleteRes, deleteAction] = useFormState(deleteEducation, {});
   useEffect(()=>{
