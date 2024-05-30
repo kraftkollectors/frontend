@@ -24,10 +24,11 @@ export function EducationCard({
   const {refresh} = useRouter();
   const [deleteRes, deleteAction] = useFormState(deleteEducation, {});
   useEffect(()=>{
+    toast(<div className="bg-red-200">hello world</div>)
     debugLog(deleteRes);
     if(deleteRes.success){
       refresh();
-      toast("deleted")
+      // toast("deleted")
     }
   }, [deleteRes])
   

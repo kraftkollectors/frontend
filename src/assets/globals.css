@@ -94,6 +94,9 @@
   .skeleton{
     @apply bg-[#00000022] rounded-md animate-pulse
   }
+  .toast{
+    @apply rounded-md shadow-lg bg-light border
+  }
 
 }
 

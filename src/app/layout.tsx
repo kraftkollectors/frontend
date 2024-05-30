@@ -8,6 +8,7 @@ import { Suspense } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_OAUTH_CLIENT_ID } from "@/utils/constants";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function RootLayout({
             {children}
           </GoogleOAuthProvider>
         </Theme>
-        <ToastContainer stacked hideProgressBar className={'rounded-md shadow-lg bg-light border'} />
+        <ToastContainer stacked hideProgressBar toastClassName={"toast"} />
       </body>
     </html>
   );

@@ -63,7 +63,7 @@ export const ServerApiRequest = {
         
         return fetch(url, {
             ...others,
-            method: 'PATCH',
+            method: 'DELETE',
             headers: {
                 ...headers,
                 'x-access-token': accessToken,
