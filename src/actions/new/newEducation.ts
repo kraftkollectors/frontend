@@ -34,7 +34,7 @@ export async function newEducation(_res:ActionResponse, formData:FormData):Promi
         debugLog(res);
         if(res.statusCode == 201){
             revalidateTag(tags.userCertificates);
-            return {success: `Education ${data._id ? 'Edited' : 'Added'} Successfully`, data: res.data};
+            return { data: "success"};
         }
         return {error: res.data ?? "Failed to add education", data: res};
     } catch (error) {

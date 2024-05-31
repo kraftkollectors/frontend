@@ -45,8 +45,8 @@ export default function MobileNav({ children }: MobileNavProps) {
           onClick={() => setOpen(false)}
         ></div>
         <div
-          className={`absolute h-full w-[90%] max-w-[300px] bg-light top-0 left-0 ${
-            open ? "translate-x-0" : "-translate-x-full"
+          className={`absolute h-full w-[90%] max-w-[300px] bg-light top-0 -left-full -translate-x-full ${
+            open ? "!translate-x-0 !left-0" : "-translate-x-full"
           } flex flex-col gap-6 shadow transition-all duration-500 delay-100`}
         >
           <div className="flex justify-end">
@@ -60,6 +60,8 @@ export default function MobileNav({ children }: MobileNavProps) {
               alt={user?.userName}
               title={user?.userName}
               className="rounded-full size-16"
+              height={64}
+              width={64}
             />
             <p>{user?.userName}</p>
             <p>{user?.email}</p>

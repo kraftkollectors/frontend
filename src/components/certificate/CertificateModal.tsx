@@ -12,7 +12,6 @@ import { FormMessage } from "../ui/FormMessage";
 import { FormButton } from "../ui/FormButton";
 import UserAuth from "../server/UserAuth";
 import { getYearsBeforeToday } from "@/functions/date";
-import { useRouter } from "next/navigation";
 
 export type CertificateModalProps = {
   children: React.ReactNode;
@@ -28,10 +27,8 @@ export default function CertificateModal({
 }: CertificateModalProps) {
   const [open, setOpen] = useState(false);
   const [res, action] = useFormState(newCertificate, {});
-  const {refresh} = useRouter()
   useEffect(()=>{
-    if(res.success){
-      refresh();
+    if(res.data === 'success'){
       setOpen(false);
     }
   }, [res])

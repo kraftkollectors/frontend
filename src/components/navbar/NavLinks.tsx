@@ -18,7 +18,7 @@ export default function NavLinks() {
           width={100}
           src="/images/auth-bg.png"
           alt=""
-          className=" size-8 avatar cursor-pointer"
+          className=" size-8 avatar cursor-pointer overflow-hidden"
         />
       </ProfileDropdown>
     </nav>

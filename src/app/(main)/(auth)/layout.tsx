@@ -15,7 +15,8 @@ export default function RootLayout({ children }: AppLayoutProps) {
               <Image
                 src="/images/auth-bg.png"
                 alt="KraftKllectors"
-                fill
+                height={700}
+                width={500}
                 className="h-full w-full object-cover"
                 priority
               />

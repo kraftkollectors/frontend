@@ -33,7 +33,7 @@ export async function newCertificate(_res:ActionResponse, formData:FormData):Pro
         debugLog(res);
         if(res.statusCode == 201){
             revalidateTag(tags.userCertificates);
-            return {success: `Certificate ${data._id ? 'Edited' : 'Added'} Successfully`, data: res.data};
+            return {data: 'success'};
         }
         return {error: res.data ?? "Failed to add certificate", data: res};
     } catch (error) {

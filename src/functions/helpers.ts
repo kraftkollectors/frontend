@@ -38,3 +38,9 @@ export function fallbackImage(src?:string){
     }
 }
 
+export function joinFormData(formData1:FormData, formData2:FormData) {
+    for (let pair of formData2.entries()) {
+      formData1.append(pair[0], pair[1]);
+    }
+    return formData1;
+  }

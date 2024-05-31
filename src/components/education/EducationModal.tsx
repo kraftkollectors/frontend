@@ -5,7 +5,6 @@ import AppInput from "../ui/AppInput";
 import AppSelect from "../ui/AppSelect";
 import { useEffect, useState } from "react";
 import { Education } from "@/utils/types/education";
-import { newCertificate } from "@/actions/new/newCertificate";
 import { useRouter } from "next/navigation";
 import { useFormState } from "react-dom";
 import UserAuth from "../server/UserAuth";
@@ -29,13 +28,13 @@ export default function EducationModal({
   isNew = true,
 }: EducationModalProps) {
   const [open, setOpen] = useState(false);
-  const [res, action] = useFormState(newEducation, {});
+  let [res, action] = useFormState(newEducation, {});
   const { refresh } = useRouter()
   useEffect(() => {
-    if (res.success) {
-      refresh();
+    if (res.data === 'success') {
       setOpen(false);
     }
+    return () => {res = {}};
   }, [res])
 
   return (

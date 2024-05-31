@@ -8,10 +8,8 @@ import { FormButton } from "../ui/FormButton";
 import { useFormState } from "react-dom";
 import { deleteEducation } from "@/actions";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import UserAuth from "../server/UserAuth";
 import { toast } from "react-toastify";
-import { debugLog } from "@/functions/helpers";
 import AppToast from "../Toast";
 
 export type Education = MainEducation;
@@ -22,16 +20,13 @@ export function EducationCard({
   year: graduation,
   _id: id,
 }: Education) {
-  const {refresh} = useRouter();
   const [deleteRes, deleteAction] = useFormState(deleteEducation, {});
   useEffect(()=>{
-    debugLog(deleteRes);
     if(deleteRes.success){
-      refresh();
-      toast(<AppToast.error message={deleteRes.success} />)
+      toast(<AppToast.success message={deleteRes.success} />)
     }else if(deleteRes.error) toast(<AppToast.error message={deleteRes.error} />)
   }, [deleteRes])
-  
+
   return (
     <div className="bg-white p-3 flex flex-col gap-1.5 border rounded border-black-50">
       <div className="flex justify-between">
