@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useRef, useState } from "react";
+import { HTMLAttributes, memo, useEffect, useRef, useState } from "react";
 import { z } from "zod";
 
 export type AppInputProps = {
@@ -19,6 +19,7 @@ export type AppInputProps = {
   error?: string[];
   onChange?: (value: string) => void;
   onErrorChange?: (hasError: boolean) => void;
+  inputProps?: HTMLAttributes<HTMLInputElement> & any
 };
 
 export default memo(function AppInput({
@@ -37,6 +38,7 @@ export default memo(function AppInput({
   hidden,
   rows,
   error: fieldError,
+  inputProps,
 }: AppInputProps) {
   const [val, setVal] = useState(value);
   const [error, setError] = useState<string | null>(null);
@@ -99,6 +101,7 @@ export default memo(function AppInput({
           />
         ) : (
           <input
+          {...inputProps}
           readOnly={readonly}
           hidden={hidden}
             id={`${title}-input`}

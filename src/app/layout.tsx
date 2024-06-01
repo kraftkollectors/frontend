@@ -9,6 +9,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_OAUTH_CLIENT_ID } from "@/utils/constants";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import ReactQueryClient from "./ReactQueryClient";
 
 
 export const metadata: Metadata = {
@@ -31,12 +32,14 @@ export default function RootLayout({
         <AuthProvider />
       </Suspense>
       <body className={` bg-light text-black-800 text-body font-normal`}>
-        <Theme>
-          <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIENT_ID}>
-            {children}
-          </GoogleOAuthProvider>
-        </Theme>
-        <ToastContainer stacked hideProgressBar toastClassName={"toast"} />
+        <ReactQueryClient>
+          <Theme>
+            <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIENT_ID}>
+              {children}
+            </GoogleOAuthProvider>
+          </Theme>
+          <ToastContainer stacked hideProgressBar toastClassName={"toast"} />
+        </ReactQueryClient>
       </body>
     </html>
   );

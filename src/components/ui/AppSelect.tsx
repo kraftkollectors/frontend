@@ -1,3 +1,5 @@
+'use client'
+
 import { AppInputProps } from "./AppInput";
 
 export type AppSelectProps = Omit<AppInputProps, "placeholder"> & {
@@ -9,14 +11,16 @@ export type AppSelectProps = Omit<AppInputProps, "placeholder"> & {
       }[];
 };
 
-export default function AppSelect({ name, title, options, value }: AppSelectProps) {
+export default function AppSelect({ name, title, options, value, readonly, onChange, error:fieldError }: AppSelectProps) {
   return (
     <div>
       {title &&
         <label htmlFor={`${title}-select`} className="inline-block pb-1">
           {title}
         </label>}
-      <select defaultValue={value} name={name} id={`${title}-select`} className="app-select">
+      <select 
+       onChange={(e)=>onChange?.(e.target.value)}
+       disabled={readonly} defaultValue={value} name={name} id={`${title}-select`} className="app-select">
         {options.map((item, index) => {
           if (typeof item === "string")
             return (
@@ -31,7 +35,9 @@ export default function AppSelect({ name, title, options, value }: AppSelectProp
               </option>
             );
         })}
-      </select>
+      </select>{fieldError && fieldError.length > 0 && (
+        <p className="text-red-900 text-xs">{fieldError[0]}</p>
+      )}
     </div>
   );
 }

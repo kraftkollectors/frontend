@@ -1,77 +1,136 @@
-import { FormButton, ImagePicker } from "@/components";
+'use client'
+import { becomeAnArtisanPersonalDetails } from "@/actions";
+import { FormButton, FormMessage, ImagePicker } from "@/components";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import { useNigerianStates } from "@/hooks/useNigerianStates";
+import { useBecomeArtisanStore } from "@/state";
+import { paths } from "@/utils";
+import { LGA, State } from "@/utils/types/location";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useFormState } from "react-dom";
 
 export default function PersonalDetailsForm() {
+  const {push} = useRouter();
+  const [lgas, setLgas] = useState<LGA[]>([])
+  const {data:states, isLoading:statesLoading, error:statesError} = useNigerianStates();
+  const allStates = useMemo(() => {
+    return statesLoading ? null : statesError ? null :
+    (states && states !== 'error' && states.length) ? states : null
+  }, [states, statesLoading, statesError]);
+
+  useEffect(()=>{
+    if(allStates) setLgas(allStates[0].lgas)
+  }, [allStates]);
+  
+  function changeLga(e:string){
+    if(!allStates) return
+    setLgas(allStates.filter(i=>i.name == e)[0].lgas)
+  }
+
+  const {artisan, updateArtisan} = useBecomeArtisanStore();
+  const [res, action] = useFormState(becomeAnArtisanPersonalDetails, {});
+  useEffect(()=>{
+    if(res.success){
+      updateArtisan(res.data);
+      push(paths.becomeASellerPersonalInfo);
+    }
+  }, [res])
+
   return (
-    <form action="">
+    <form action={action}>
       <div className=" flex flex-col md:grid grid-cols-11 gap-5 md:gap-6 py-6">
-        <p className="text-black-800 col-span-3">Profile</p>
-
-        <div className="col-span-8 max-md:justify-center flex">
-          <ImagePicker />
-        </div>
-
-        <p className="text-black-800 col-span-3">FullName</p>
-
-        <div className="col-span-8 grid md:grid-cols-2 gap-4">
-          <AppInput name="firstname" placeholder="first Name" />
-          <AppInput name="lastname" placeholder="Last Name" />
-        </div>
 
         <p className="text-black-800 col-span-3">
-          Display Name / Business Name *
+          Display Name / Business Name <i className="text-red-800">*</i>
         </p>
 
         <div className="col-span-8 grid md:grid-cols-2 gap-4">
-          <AppInput name="firstname" placeholder="eg Andy" />
+          <AppInput name="businessName"
+          error={res.fieldErrors && res.fieldErrors['businessName']}
+           placeholder="eg Andy" />
         </div>
-        <p className="text-black-800 col-span-3">Phone Number *</p>
+        <p className="text-black-800 col-span-3">Phone Number <i className="text-red-800">*</i></p>
 
         <div className="col-span-8 grid md:grid-cols-2 gap-4">
-          <AppInput name="firstname" placeholder="081XXXXXXXX" />
+          <AppInput name="phoneNumber"
+          error={res.fieldErrors && res.fieldErrors['phoneNumber']}
+           placeholder="081XXXXXXXX" />
         </div>
 
-        <p className="text-black-800 col-span-3">Location</p>
+        <p className="text-black-800 col-span-3">Location <i className="text-red-800">*</i></p>
 
         <div className="col-span-8 grid md:grid-cols-2 gap-4">
           <AppSelect
-            name="location"
+            readonly={!!(typeof states !== 'object' || !states || statesLoading || statesError)}
+            name="state"
+            error={res.fieldErrors && res.fieldErrors['state']}
+            
             value="location"
-            options={["select state"]}
+            onChange={changeLga}
+            options={allStates ? allStates.map((state:State) => state.name) : [] }
           />
           <AppSelect
-            name="location"
-            value="location"
-            options={["select area"]}
+            name="lga"
+            error={res.fieldErrors && res.fieldErrors['lga']}
+            readonly={!!(!lgas || statesLoading || statesError || !lgas.length)}
+            options={lgas ? lgas.map((lga:LGA) => lga.name) : ["loading"] }
           />
         </div>
 
-        <p className="text-black-800 col-span-3">Description *</p>
+        <p className="text-black-800 col-span-3">Description <i className="text-red-800">*</i></p>
 
         <div className="col-span-8 grid md:grid-cols-2 gap-4">
           <AppInput
-            name="firstname"
+            name="description"
+            error={res.fieldErrors && res.fieldErrors['description']}
+            
             textarea
             placeholder="Write about yourself"
           />
         </div>
-        <p className="text-black-800 col-span-3">facebook Username *</p>
+        <p className="text-black-800 col-span-3">facebook Link</p>
 
         <div className="col-span-8 grid md:grid-cols-2 gap-4">
-          <AppInput name="firstname" placeholder="Facebook.com/" />
+          <AppInput name="facebook"
+          error={res.fieldErrors && res.fieldErrors['facebook']}
+           placeholder="Facebook.com/" />
         </div>
 
-        <p className="text-black-800 col-span-3">instagram Username *</p>
+        <p className="text-black-800 col-span-3">instagram Link</p>
 
         <div className="col-span-8 grid md:grid-cols-2 gap-4">
-          <AppInput name="firstname" placeholder="instagram.com/" />
+          <AppInput name="instagram"
+          error={res.fieldErrors && res.fieldErrors['instagram']}
+           placeholder="instagram.com/" />
         </div>
 
-        <div className="col-span-3"></div>
+        <p className="text-black-800 col-span-3">(x) twitter Link</p>
+
+        <div className="col-span-8 grid md:grid-cols-2 gap-4">
+          <AppInput name="twitter"
+          error={res.fieldErrors && res.fieldErrors['twitter']}
+           placeholder="twitter.com/" />
+        </div>
+
+        <p className="text-black-800 col-span-3">linkedin Link</p>
+
+        <div className="col-span-8 grid md:grid-cols-2 gap-4">
+          <AppInput name="linkedin"
+          error={res.fieldErrors && res.fieldErrors['linkedin']}
+           placeholder="linkedin.com/" />
+        </div>
+
+        <div className="col-span-3 max-md:hidden"></div>
+        <div className="col-span-8 grid md:grid-cols-2 gap-4">
+          <FormMessage res={res} />
+        </div>
+
+        <div className="col-span-3 max-md:hidden"></div>
         <div className="">
-          <FormButton className="btn-primary py-2 px-6  max-md:w-full">
-            Next{" "}
+          <FormButton className="btn-primary py-2 px-6  max-md:w-full min-w-40">
+            Next
           </FormButton>
         </div>
       </div>

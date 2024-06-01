@@ -19,7 +19,8 @@ const paths = {
   // become a seller
   becomeASeller: "/become-a-seller",
   becomeASellerPersonalDetails: "/become-a-seller/personal-details",
-  becomeASellerEducation: "/become-a-seller/education",
+  becomeASellerPersonalInfo: "/become-a-seller/personal-information",
+  becomeASellerIdVerification: "/become-a-seller/id-verification",
 
   // dynamic paths
   artisan: (slug: string) => `/artisans/${slug}`,

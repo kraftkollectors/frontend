@@ -13,6 +13,18 @@ export function formDataToObject<T>(formData: FormData){
     return Object.fromEntries(formData.entries()) as T
 }
 
+export function objectToFormData(obj: any, formData: FormData = new FormData(), namespace = ""): FormData {
+    for (const key in obj) {
+      if (!obj.hasOwnProperty(key) || obj[key] === undefined) continue;
+  
+      const formKey = namespace ? `${namespace}[${key}]` : key;
+      formData.append(formKey, obj[key]);
+    }
+  
+    return formData;
+  }
+  
+
 export function debugLog(message: any) {
     const env:'debug'|'production' = "debug";
     if (env === "debug") {

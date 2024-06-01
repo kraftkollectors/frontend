@@ -11,6 +11,11 @@ const validators = {
     name: z.string().min(2, "must be 2 or more letters"),
     phoneNumber: z.string().min(10, "must be 10 or more digits")
     .regex(/^(?:\+88|01)?\d{11}$/, "invalid phone number"),
+    url: z.string(),
+    timeHour: z.string().min(4, 'invalid time'),
+    nin: z.string()
+    .min(10, 'must be 10 numbers')
+    .max(10, 'must be 10 numbers'),
 };
 
 export default validators;

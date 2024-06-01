@@ -12,7 +12,8 @@ export type Artisan = {
     phoneNumber: string,
     description: string,
     businessName: string,
-    location: string,
+    state: string,
+    lga: string,
     areaOfSpecialization: string,
     nin: string,
 }

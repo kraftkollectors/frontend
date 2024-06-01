@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   const hasAccessId = req.cookies.has(appCookies.accessId);
   if (pathname.includes("api")) {
     return NextResponse.next();
-  }else if (pathname.startsWith("/dashboard")) {
+  }else if (pathname.startsWith(paths.dashboard) || pathname.startsWith(paths.becomeASeller+'/')) {
     if (!(hasAccessToken || hasAccessId)) return NextResponse.redirect(new URL(paths.login, req.url));
   }else if (authPaths.map((item)=>pathname.startsWith(item)).includes(true)) {
     if (hasAccessToken && hasAccessId) return NextResponse.redirect(new URL(paths.dashboard, req.url));

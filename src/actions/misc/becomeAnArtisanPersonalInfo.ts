@@ -7,28 +7,23 @@ import { cookies } from "next/headers";
 import { z } from "zod";
 
 const schema = z.object({
-    businessName: validators.name,
-    phoneNumber: validators.phoneNumber,
-    description: validators.name,
-    facebook: validators.url,
-    instagram: validators.url,
-    twitter: validators.url,
-    linkedin: validators.url,
-    state: z.string().min(1, 'select 1'),
-    lga: z.string().min(1, 'select 1'),
+    workHourFrom: validators.timeHour,
+    workHourTo: validators.timeHour,
+    areaOfSpecialization: validators.name,
+    website: validators.url,
 })
 
-export type BecomeAnArtisanPersonalDetails = z.infer<typeof schema>
+export type BecomeAnArtisanPersonalInfo = z.infer<typeof schema>
 
-export async function becomeAnArtisanPersonalDetails(res: ActionResponse, formData: FormData): Promise<ActionResponse>{
-    const data = formDataToObject<BecomeAnArtisanPersonalDetails>(formData);
-    debugLog({res})
+export async function becomeAnArtisanPersonalInfo(res: ActionResponse, formData: FormData): Promise<ActionResponse>{
+    const data = formDataToObject<BecomeAnArtisanPersonalInfo>(formData);
+    debugLog(data)
     const tryParse = schema.safeParse(data);
     if(!tryParse.success) return {fieldErrors: tryParse.error.flatten().fieldErrors}
 
     try {
         const {set} = cookies();
-        set(appCookies.registerData, JSON.stringify(data), {
+        set(appCookies.registerData, JSON.stringify({...data, ...res.data}), {
             httpOnly: true,
             maxAge: 60 * 60 * 10
         })
