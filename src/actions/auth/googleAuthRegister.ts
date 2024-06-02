@@ -1,8 +1,8 @@
 "use server"
 
 import { GoogleAuthResponse } from "@/components/ContinueWithGoogleButton";
-import { debugLog } from "@/functions/helpers";
-import { appCookies, tags } from "@/utils";
+import { debugLog, formDataToObject } from "@/functions/helpers";
+import { appCookies, tags, validators } from "@/utils";
 import { ApiRequest } from "@/utils/apiRequest";
 import apis from "@/utils/apis";
 import { COOKIE_MAX_AGE, GOOGLE_AUTH_USER_INFO_API } from "@/utils/constants";
@@ -12,25 +12,31 @@ import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
+import { z } from "zod";
 
+const googleAuthRegisterSchema = z.object({
+    firstName: validators.name,
+    lastName: validators.name,
+    userName: validators.name,
+    gender: z.string(),
+    email: validators.email,
+})
 
-export async function googleAuth(data: {access_token: string}): Promise<ActionResponse> {
+type GoogleAuthRegisterFormData = z.infer<typeof googleAuthRegisterSchema>
+export async function googleAuthRegister(_:ActionResponse, formData:FormData): Promise<ActionResponse> {
     let success = false;
+    const data = formDataToObject<GoogleAuthRegisterFormData>(formData);
     debugLog(data);
+
+    const tryParse = googleAuthRegisterSchema.safeParse(data);
+    if(!tryParse.success) return {
+        error: "fill all fields correctly",
+        fieldErrors: tryParse.error.flatten().fieldErrors
+    }
     
     try {
-        const googReq = await ApiRequest.getJson(GOOGLE_AUTH_USER_INFO_API, {
-            headers:{
-                'Authorization': `Bearer ${data.access_token}`
-            }
-        });
-        const googRes = await googReq.json() as GoogleAuthResponse;
-        debugLog(googRes);
-        if(!googRes.email) return {
-            error: "Unable to signin with google"
-        }
-
-        const req = await ApiRequest.postJson(apis.googleAuth, googRes);
+        
+        const req = await ApiRequest.postJson(apis.googleAuth, data);
         const res = await (req.json()) as ApiResponse<ApiSignupResponse>;
         debugLog(res)
         if(res.statusCode === 201) {
@@ -44,10 +50,6 @@ export async function googleAuth(data: {access_token: string}): Promise<ActionRe
             revalidatePath('/');
             revalidateTag(tags.user);
         }
-        else if(res.data.toString().startsWith('Error creating account')) return {
-                error: "needs_register",
-                data: googRes
-            }
         else return {
             error: res.data as unknown as string ?? "Invalid login details"
         }

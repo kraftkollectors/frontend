@@ -1,11 +1,12 @@
 
 export type State = {
-    "name":string,
-    "capital":string,
-    "state_code":string,
-    "creation_date":string,
-    lgas: LGA[]
-  }
+    "name": string,
+    "capital": string,
+    "state_code": string,
+    "creation_date": string,
+    lgas: string[]
+    location: Location;
+}
 
 export type LGA = {
     name: string;

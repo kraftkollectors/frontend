@@ -3,6 +3,7 @@
 export {register, registerDetails, registerToken} from './auth/register'
 export {login} from './auth/login'
 export {googleAuth} from './auth/googleAuth'
+export {googleAuthRegister} from './auth/googleAuthRegister'
 export {logout} from './auth/logout'
 export {forgotPasswordSendEmail} from './auth/forgotPassword'
 

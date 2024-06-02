@@ -1,20 +1,22 @@
 'use client'
 import { becomeAnArtisanPersonalDetails } from "@/actions";
-import { FormButton, FormMessage, ImagePicker } from "@/components";
+import { FormButton, FormMessage } from "@/components";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import { debugLog } from "@/functions/helpers";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import { useBecomeArtisanStore } from "@/state";
 import { paths } from "@/utils";
-import { LGA, State } from "@/utils/types/location";
+import {  State } from "@/utils/types/location";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
 
 export default function PersonalDetailsForm() {
   const {push} = useRouter();
-  const [lgas, setLgas] = useState<LGA[]>([])
+  const [lgas, setLgas] = useState<string[]>([])
   const {data:states, isLoading:statesLoading, error:statesError} = useNigerianStates();
+  debugLog({states});
   const allStates = useMemo(() => {
     return statesLoading ? null : statesError ? null :
     (states && states !== 'error' && states.length) ? states : null
@@ -69,13 +71,13 @@ export default function PersonalDetailsForm() {
             
             value="location"
             onChange={changeLga}
-            options={allStates ? allStates.map((state:State) => state.name) : [] }
+            options={allStates ? allStates.map((state:State) => state.name) : ['loading...'] }
           />
           <AppSelect
             name="lga"
             error={res.fieldErrors && res.fieldErrors['lga']}
             readonly={!!(!lgas || statesLoading || statesError || !lgas.length)}
-            options={lgas ? lgas.map((lga:LGA) => lga.name) : ["loading"] }
+            options={lgas ? lgas : ["loading..."] }
           />
         </div>
 

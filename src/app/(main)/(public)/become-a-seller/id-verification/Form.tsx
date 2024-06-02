@@ -6,7 +6,7 @@ import UserAuth from "@/components/server/UserAuth";
 import AppInput from "@/components/ui/AppInput";
 import { debugLog, joinFormData, objectToFormData } from "@/functions/helpers";
 import { useRunOnce } from "@/hooks";
-import { useBecomeArtisanStore } from "@/state";
+import { useBecomeArtisanStore, useUserStore } from "@/state";
 import { paths } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -14,6 +14,7 @@ import { useFormState } from "react-dom";
 
 export default function IDForm() {
   const {replace, refresh} = useRouter();
+  const user = useUserStore(s=>s.user);
   const {artisan, updateArtisan} = useBecomeArtisanStore();
   useRunOnce(()=>{
     if(!artisan?.areaOfSpecialization) replace(paths.becomeASellerPersonalInfo);
@@ -59,6 +60,8 @@ export default function IDForm() {
         </div>
       </div>
       <UserAuth />
+      <input type="hidden" hidden name="firstName" value={user?.firstName} />
+      <input type="hidden" hidden name="lastName" value={user?.lastName} />
     </form>
   );
 }

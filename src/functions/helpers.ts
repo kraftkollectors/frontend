@@ -45,9 +45,8 @@ export function getStarSize(total: number, current: number): "full" | 'half' | '
 }
 
 export function fallbackImage(src?:string){
-    if(!(src ?? '').toLowerCase().startsWith('http')){
-        return '/images/auth-bg.png'
-    }
+    if(!src || !src.toLowerCase().startsWith('http')) return '/images/user-avatar.png'
+    return src;
 }
 
 export function joinFormData(formData1:FormData, formData2:FormData) {

@@ -1,5 +1,5 @@
 const API = "https://backends-865y.onrender.com";
-const STATES_AND_CITIES_API = 'https://nigeria-states-towns-lga.onrender.com/api'
+const STATES_AND_CITIES_API = 'http://localhost:3000/api'
 
 const apis = {
     login: API + "/users/login",
@@ -29,9 +29,9 @@ const apis = {
     },
     
     // states and cities
-    nigerianStates: STATES_AND_CITIES_API + "/all",
+    nigerianStates: `${STATES_AND_CITIES_API}/nigerian-states`,
     getStateLgas(state:string){
-        return `${STATES_AND_CITIES_API}/state/${state}/lgas`
+        return `${STATES_AND_CITIES_API}/nigerian-states`
     },
 
     artisan: API + "/users/artisan"

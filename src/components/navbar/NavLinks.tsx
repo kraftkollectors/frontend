@@ -1,23 +1,27 @@
-import React from "react";
+'use client'
+
 import { FaRegEnvelope, FaRegHeart } from "react-icons/fa6";
 import { BiSupport } from "react-icons/bi";
-import Image from "next/image";
 import Link from "next/link";
 import paths from "@/utils/paths";
 import ProfileDropdown from "./ProfileDropdown";
+import { useUserStore } from "@/state";
+import { fallbackImage } from "@/functions/helpers";
 
 export default function NavLinks() {
+  const user = useUserStore((s) => s.user);
   return (
     <nav className="flex w-fit gap-4 items-center max-md:hidden">
       {links.map((link) => (
         <NavLink key={link.label} {...link} />
       ))}
       <ProfileDropdown>
-        <Image
-          height={100}
-          width={100}
-          src="/images/auth-bg.png"
-          alt=""
+        <img
+          height={80}
+          width={80}
+          src={fallbackImage(user?.image)}
+          alt={user?.userName}
+          title={user?.userName}
           className=" size-8 avatar cursor-pointer overflow-hidden"
         />
       </ProfileDropdown>
