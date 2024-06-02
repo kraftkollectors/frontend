@@ -7,7 +7,8 @@ import EducationModal from "@/components/education/EducationModal";
 
 export default async function Educations() {
     const education = await fetchUserEducations({ throwsError: false });
-    if (!education || education == 'error') return <div className="info-box">failed to get Education</div>
+    if(!education) return <></>
+    if (education == 'error') return <div className="info-box">failed to get Education</div>
 
 
     return (

@@ -5,7 +5,8 @@ import { fetchUserCertificates } from "@/actions";
 
 export default async function Certificates() {
   const certs = await fetchUserCertificates({ throwsError: false });
-  if (!certs || certs == 'error') return <div className="info-box">failed to get certificates</div>
+  if(!certs) return <></>
+  if (certs == 'error') return <div className="info-box">failed to get certificates</div>
 
   return (
     <ProfileCategory

@@ -25,6 +25,7 @@ export async function fetchUserEducations({ redirect = true, throwsError = true 
         // debugLog(res);
 
         if (res.statusCode === 201) return res.data.existingRecord;
+        else if(res.data.toString() == 'No records found') return null;
         if (throwsError) throw new Error("Unable to connect")
         return 'error';
     } catch (error) {
