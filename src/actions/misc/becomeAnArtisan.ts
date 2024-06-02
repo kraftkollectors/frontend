@@ -12,7 +12,6 @@ import { z } from "zod";
 
 const schema = z.object({
     nin: validators.nin,
-    // __: z.string()
 })
 
 export type BecomeAnArtisan = z.infer<typeof schema>
