@@ -6,6 +6,7 @@ const apis = {
     googleAuth: API + "/users/google/signup",
     register: API + "/users/register",
     registerVerifyEmail: API + "/users/verifyemail",
+    resendVerificationCode: API + "/users/otpagain",
     forgotPasswordSendEmail: API + "/users/forgot",
     forgotPasswordReset: API + "/users/reset",
 
@@ -17,6 +18,9 @@ const apis = {
     },
     editEducation(id:string){
         return `${API}/users/education/${id}`
+    },
+    getArtisan(id:string){
+        return `${API}/users/artisan/${id}`
     },
     getUser(id:string){
         return `${API}/users/dashboard/${id}`

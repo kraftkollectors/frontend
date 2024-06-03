@@ -15,7 +15,8 @@ const validators = {
     timeHour: z.string().min(4, 'invalid time'),
     nin: z.string()
     .min(11, 'must be 11 numbers')
-    .max(11, 'must be 11 numbers'),
+    .max(11, 'must be 11 numbers')
+    .regex(/^[0-9]+$/, 'must be numbers'),
 };
 
 export default validators;

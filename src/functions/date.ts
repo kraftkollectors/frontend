@@ -8,3 +8,7 @@ export function getYearsBeforeToday() {
   
     return years.reverse();
   }
+
+  export function formatDate(date:string){
+    return new Date(date).toLocaleDateString()
+  }

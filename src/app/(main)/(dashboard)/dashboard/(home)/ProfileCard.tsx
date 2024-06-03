@@ -17,6 +17,7 @@ import {
 } from "@/components/dashboard";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useUserStore } from "@/state";
+import { formatDate } from "@/functions/date";
 export type ProfileCardprops =  {
   memberSince: string;
   location: string;
@@ -26,13 +27,14 @@ export type ProfileCardprops =  {
   website?: string;
   instagram?: string;
   facebook?: string;
-  x?: string;
+  twitter?: string;
   linkedin?: string;
 };
 /* eslint-disable @next/next/no-img-element */
 export default function ProfileCard(props: ProfileCardprops) {
   const vw = useWindowWidth();
   const user = useUserStore(s=>s.user);
+  const artisan = useUserStore(s=>s.artisan);
 
   return (
     <div className="w-full border  gap-2 bg-light  p-4 rounded-md">
@@ -40,16 +42,16 @@ export default function ProfileCard(props: ProfileCardprops) {
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">General Info</p>
-          <ProfileInfoLine
+          {user?.createdAt && <ProfileInfoLine
             title="Member Since"
-            value={props.memberSince}
+            value={formatDate(user!.createdAt)}
             icon={<LuUser2 />}
-          />
-          <ProfileInfoLine
+          />}
+          {artisan && <ProfileInfoLine
             title="Location"
-            value={props.location}
+            value={`${artisan.state}, ${artisan.lga}`}
             icon={<IoLocationOutline />}
-          />
+          />}
           <ProfileInfoLine
             title="Email"
             value={user?.email}
@@ -57,7 +59,10 @@ export default function ProfileCard(props: ProfileCardprops) {
           />
         </div>
         <hr />
-        <div className="flex flex-col gap-2">
+        {
+          user?.isArtisan &&
+          <>
+          <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">Contact Info</p>
           {props.availability && (
             <ProfileInfoLine
@@ -67,23 +72,23 @@ export default function ProfileCard(props: ProfileCardprops) {
             />
           )}
 
-          {props.phoneNumber && (
+          {artisan?.phoneNumber && (
             <ProfileInfoLine
               title="Phone Number"
-              value={props.phoneNumber}
+              value={artisan?.phoneNumber}
               icon={<LuPhone />}
             />
           )}
-          {props.website && (
+          {artisan?.website && (
             <ProfileInfoLine
               title="Website"
               value={
                 <a
                   className="link-btn text-body !font-normal"
-                  href={props.website}
+                  href={artisan?.website}
                   target="_blank"
                 >
-                  {props.website}
+                  {artisan?.website}
                 </a>
               }
               icon={<TbWorld />}
@@ -93,68 +98,70 @@ export default function ProfileCard(props: ProfileCardprops) {
         <hr />
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">Social Links</p>
-          {props.instagram && (
+          {artisan?.instagram && (
             <ProfileInfoLine
               title="Instagram"
               value={
                 <a
                   className="link-btn text-body !font-normal"
-                  href={props.instagram}
+                  href={artisan?.instagram}
                   target="_blank"
                 >
-                  {getUsernameFromLink(props.instagram)}
+                  {getUsernameFromLink(artisan?.instagram)}
                 </a>
               }
               icon={<FaInstagram />}
             />
           )}
-          {props.x && (
+          {artisan?.twitter && (
             <ProfileInfoLine
               title="x"
               value={
                 <a
                   className="link-btn text-body !font-normal"
-                  href={props.x}
+                  href={artisan?.twitter}
                   target="_blank"
                 >
-                  {getUsernameFromLink(props.x)}
+                  {getUsernameFromLink(artisan?.twitter)}
                 </a>
               }
               icon={<FaXTwitter />}
             />
           )}
-          {props.facebook && (
+          {artisan?.facebook && (
             <ProfileInfoLine
               title="Facebook"
               value={
                 <a
                   className="link-btn text-body !font-normal"
-                  href={props.facebook}
+                  href={artisan?.facebook}
                   target="_blank"
                 >
-                  {getUsernameFromLink(props.facebook)}
+                  {getUsernameFromLink(artisan?.facebook)}
                 </a>
               }
               icon={<FaFacebook />}
             />
           )}
 
-          {props.linkedin && (
+          {artisan?.linkedin && (
             <ProfileInfoLine
               title="Linked In"
               value={
                 <a
                   className="link-btn text-body !font-normal"
-                  href={props.linkedin}
+                  href={artisan?.linkedin}
                   target="_blank"
                 >
-                  {getUsernameFromLink(props.linkedin)}
+                  {getUsernameFromLink(artisan?.linkedin)}
                 </a>
               }
               icon={<FaLinkedin />}
             />
           )}
         </div>
+          </>
+        }
       </div>
     </div>
   );

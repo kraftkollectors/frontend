@@ -6,6 +6,7 @@ export {googleAuth} from './auth/googleAuth'
 export {googleAuthRegister} from './auth/googleAuthRegister'
 export {logout} from './auth/logout'
 export {forgotPasswordSendEmail} from './auth/forgotPassword'
+export {resendVerificationCode} from './auth/resendVerificationCode'
 
 export {fetchUser} from './fetch/fetchUser'
 export {fetchUserCertificates} from './fetch/fetchUserCertificates'

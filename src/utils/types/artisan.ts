@@ -1,7 +1,7 @@
 
 export type Artisan = {
     userId: string,
-    userEmail: string,
+    userEmail?: string,
     workHourFrom: string,
     workHourTo: string,
     website: string,
@@ -14,6 +14,13 @@ export type Artisan = {
     businessName: string,
     state: string,
     lga: string,
+    showContact: boolean;
     areaOfSpecialization: string,
     nin: string,
+}
+
+export type ArtisanDetails = Artisan & {
+    _id:string;
+    createdAt: string,
+      updatedAt: string,
 }

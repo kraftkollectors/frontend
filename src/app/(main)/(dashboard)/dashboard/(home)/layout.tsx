@@ -12,7 +12,7 @@ export const dummyProfileData: ProfileCardprops = {
   website: "www.johndeo.com",
   facebook: "https://www.facebook.com/johndoe",
   instagram: "https://www.instagram.com/johndoe",
-  x: "https://www.twitter.com/johndoe",
+  twitter: "https://www.twitter.com/johndoe",
   linkedin: "https://www.linkedin.com/johndoe",
 };
 export const dummyProfileCardData: ProfileCategoriesProps = {

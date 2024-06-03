@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa6";
 import ProfileCategory from "./ProfileCategory";
 import { fetchUserEducations } from "@/actions";
 import EducationModal from "@/components/education/EducationModal";
+import { debugLog } from "@/functions/helpers";
 
 export default async function Educations() {
     const education = await fetchUserEducations({ throwsError: false });

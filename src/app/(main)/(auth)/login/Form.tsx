@@ -3,18 +3,38 @@
 import AppInput, { AppInputProps } from "@/components/ui/AppInput";
 import { FormButton, FormMessage } from "@/components";
 import Link from "next/link";
-import { login } from "@/actions";
+import { login, resendVerificationCode } from "@/actions";
 import { useFormState } from "react-dom";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import AppToast from "@/components/Toast";
+import { useRouter } from "next/navigation";
+import { paths } from "@/utils";
 
 export default function LoginForm() {
+  const {push} = useRouter();
     const [res, action] = useFormState(login, {});
+    const [verify, setVerify] = useState(false);
+    useEffect(()=>{
+      if(res.error !== 'verify email first') return;
+
+      async function sendCode(){
+        const sent = await resendVerificationCode(res.data);
+        if(sent) setVerify(true);
+      }
+
+      sendCode();
+      
+    }, [res])
 
   return (
     <form action={action} className="flex flex-col gap-3 py-3">
       <FormMessage res={res} />
       {loginFields.map(item => {
-        return <AppInput key={item.name} {...item} />;
+        return <AppInput key={item.name} {...item} hidden={verify} type={verify ? 'hidden' : item.type} />;
       })}
+      {verify && <p className="text-black-400 font-semibold">Enter the verification code / token sent to your email</p>}
+      {verify && <AppInput name="token" type="number" title="Token" placeholder="Enter verification code" />}
       <div className="flex justify-end"> 
         <Link
           href="/forgot-password"

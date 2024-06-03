@@ -12,6 +12,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import { z } from "zod";
+import bcrypt from 'bcrypt'
 
 const registerSchema = z.object({
     email: validators.email,
@@ -81,7 +82,7 @@ export async function registerDetails(res: ActionResponse, formData: FormData): 
             error:  res.data as string ?? "Unable to signup"
         }
         set(appCookies.registerData, JSON.stringify(postData), {maxAge: 60 * 60 * 24});
-        set(appCookies.clientToken, res.data.otp, {maxAge: 60 * 60 * 24});
+        set(appCookies.clientToken, (await bcrypt.hash(res.data.otp, 10)), {maxAge: 60 * 60 * 24});
         set(appCookies.accessTokenTmp, res.data.token, {maxAge: COOKIE_MAX_AGE});
         set(appCookies.accessId, res.data.user._id, {maxAge: COOKIE_MAX_AGE});
         success = true;
@@ -117,7 +118,7 @@ export async function registerToken(res: ActionResponse, formData: FormData): Pr
         };
 
         const cookieToken = get(appCookies.clientToken)?.value
-        if(data.token !== cookieToken) return {
+        if(!(await bcrypt.compare(data.token, cookieToken??''))) return {
             error: "invalid token"
         }
         

@@ -56,7 +56,7 @@ export default function EducationForm() {
             type="time" placeholder="" value="17:00" name="workHourTo" error={res.fieldErrors && res.fieldErrors['workHourTo']} title="close" />
           </div>
           <div className="flex gap-2 items-center">
-            <input name="dontShowAfterWorkHour" type="checkBox" id="checkbox" className="rounded " />
+            <input name="showContact" type="checkBox" id="checkbox" value="true" className="rounded " />
             <label htmlFor="checkbox">
               Don&apos;t show contact after work hour
             </label>

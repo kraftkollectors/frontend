@@ -45,11 +45,11 @@ export default function IDForm() {
 
        
 
-        {/* <div className="col-span-3 max-md:hidden"></div> */}
         <div className="col-span-3 max-md:hidden"></div>
         <div className="col-span-5 ">
           <FormMessage res={res} />
         </div>
+        <div className="col-span-3 max-md:hidden"></div>
 
         <div className="col-span-3 max-md:hidden"></div>
         {/* <div className="col-span-3 max-md:hidden"></div> */}

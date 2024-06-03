@@ -11,11 +11,13 @@ import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
+import bcrypt from 'bcrypt'
 
 
 type LoginFormProps = {
     email: string;
     password: string;
+    token?: string;
 }
 
 export async function login(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
@@ -24,10 +26,20 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
 
     let success = false;
     try {
+        if (data.token) {
+            const token = cookies().get(appCookies.clientToken)?.value ?? '';
+            if(!(await bcrypt.compare(data.token, token))) return {error: 'Invalid token'}
+            
+            const req = await ApiRequest.postJson(apis.registerVerifyEmail, data);
+            const res = (await req.json()) as ApiResponse;
+            debugLog(res)
+
+            if(res.statusCode !== 201) throw new Error();
+        }
         const req = await ApiRequest.postJson(apis.login, data);
         const res = await (req.json()) as ApiResponse<ApiSignupResponse>;
         debugLog(res)
-        if(res.statusCode === 201) {
+        if (res.statusCode === 201) {
             success = true;
             cookies().set(appCookies.accessToken, res.data.token, {
                 maxAge: COOKIE_MAX_AGE
@@ -37,6 +49,10 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
             })
             revalidatePath('/');
             revalidateTag(tags.user);
+        }
+        else if(res.data.toString() === 'email not verified') return {
+            error: 'verify email first',
+            data: data.email
         }
         else return {
             error: res.data as unknown as string ?? "Invalid login details"

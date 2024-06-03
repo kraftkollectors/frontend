@@ -11,7 +11,7 @@ import { Education } from "@/utils/types/education";
 
 
 export type UserEducationApiResponse = {
-    existingRecord: Education[];
+    existingRecords: Education[];
 }
 
 export async function fetchUserEducations({ redirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Education[]>> {
@@ -24,7 +24,7 @@ export async function fetchUserEducations({ redirect = true, throwsError = true 
         const res = (await req.json()) as ApiResponse<UserEducationApiResponse>;
         // debugLog(res);
 
-        if (res.statusCode === 201) return res.data.existingRecord;
+        if (res.statusCode === 201) return res.data.existingRecords;
         else if(res.data.toString() == 'No records found') return null;
         if (throwsError) throw new Error("Unable to connect")
         return 'error';

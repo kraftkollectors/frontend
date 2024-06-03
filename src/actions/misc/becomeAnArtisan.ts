@@ -14,7 +14,7 @@ const schema = z.object({
     nin: validators.nin,
 })
 
-export type BecomeAnArtisan = z.infer<typeof schema>
+export type BecomeAnArtisan = z.infer<typeof schema> & Artisan;
 
 export async function becomeAnArtisan(_: ActionResponse, formData: FormData): Promise<ActionResponse>{
     const data = formDataToObject<BecomeAnArtisan>(formData);
@@ -30,13 +30,8 @@ export async function becomeAnArtisan(_: ActionResponse, formData: FormData): Pr
             del(appCookies.registerData);
             return {data: 'refresh'}
         }
-        const cookieArtisanJson:Artisan = JSON.parse(cookieArtisan);
-        if(!cookieArtisanJson.areaOfSpecialization || !cookieArtisanJson.businessName) {
-            del(appCookies.registerData);
-            return {data: 'refresh'}
-        }
 
-        const req = await ServerApiRequest.post(apis.artisan, data);
+        const req = await ServerApiRequest.post(apis.artisan, {...data, showContact: Boolean(data.showContact)});
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 
