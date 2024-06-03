@@ -18,8 +18,8 @@ export default function SideBar() {
         return (
           <Link
             key={href}
-            className={`block p-3 rounded hover:bg-[#00000011] ${
-              active ? "md:bg-[#00000033] md:font-bold" : ""
+            className={`block p-3 rounded hover:bg-primary-lightActive ${
+              active ? "md:bg-primary-lightActive2 md:font-semibold" : ""
             }`}
             href={href}
           >
@@ -37,7 +37,11 @@ const links = [
     href: paths.dashboardSettingsPersonalDetails,
   },
   {
-    title: "Account Settings",
+    title: "Change Password",
+    href: paths.dashboardSettingsPassword,
+  },
+  {
+    title: "Artisan Profile",
     href: paths.dashboardSettingsAccount,
   },
   {

@@ -16,7 +16,6 @@ export default function PersonalDetailsForm() {
   const {push} = useRouter();
   const [lgas, setLgas] = useState<string[]>([])
   const {data:states, isLoading:statesLoading, error:statesError} = useNigerianStates();
-  debugLog({states});
   const allStates = useMemo(() => {
     return statesLoading ? null : statesError ? null :
     (states && states !== 'error' && states.length) ? states : null

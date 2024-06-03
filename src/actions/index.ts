@@ -23,3 +23,8 @@ export {becomeAnArtisan} from './misc/becomeAnArtisan'
 
 export {deleteEducation} from './delete/deleteEducation'
 export {deleteCertificate} from './delete/deleteCertificate'
+
+export {updateUserProfile} from './update/updateUserProfile'
+export {updateArtisanProfile} from './update/updateArtisanProfile'
+export {updateArtisanSocials} from './update/updateArtisanSocials'
+export {updateUserPassword} from './update/updateUserPassword'

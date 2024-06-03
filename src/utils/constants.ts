@@ -8,3 +8,5 @@ export const JWT_SECRET = 'n7tdce8yhsu88209cry8y98d4suhd9y408w9ufs94';
 export const ARTISAN_DEGREE_TYPES = [
     "HND", 'OND', "Diploma", 'BSC', 'PHD', 'Others'
 ];
+
+export const GENDERS = ['male', 'female']

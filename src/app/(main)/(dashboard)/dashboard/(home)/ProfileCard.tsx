@@ -18,20 +18,9 @@ import {
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useUserStore } from "@/state";
 import { formatDate } from "@/functions/date";
-export type ProfileCardprops =  {
-  memberSince: string;
-  location: string;
-  displayName: string;
-  availability?: string;
-  phoneNumber?: string;
-  website?: string;
-  instagram?: string;
-  facebook?: string;
-  twitter?: string;
-  linkedin?: string;
-};
+
 /* eslint-disable @next/next/no-img-element */
-export default function ProfileCard(props: ProfileCardprops) {
+export default function ProfileCard() {
   const vw = useWindowWidth();
   const user = useUserStore(s=>s.user);
   const artisan = useUserStore(s=>s.artisan);
@@ -64,10 +53,10 @@ export default function ProfileCard(props: ProfileCardprops) {
           <>
           <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">Contact Info</p>
-          {props.availability && (
+          {true && (
             <ProfileInfoLine
               title="Availability"
-              value={props.availability}
+              value={'available'}
               icon={<IoTimeOutline />}
             />
           )}

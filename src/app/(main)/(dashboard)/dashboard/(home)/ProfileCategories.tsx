@@ -4,6 +4,7 @@ import ProfileCategory from "./ProfileCategory";
 import Certificates from "./Certificates";
 import Educations from "./Educations";
 import { Suspense } from "react";
+import Description from "./Description";
 
 export type ProfileCategoriesProps = {
   description: string;
@@ -29,17 +30,10 @@ export default function ProfileCategories({
       >
         <p className="text-black-400">{description}</p>
       </ProfileCategory>
-      <ProfileCategory
-        title="Away Message"
-        action={
-          <button className="edit-btn">
-            <FaRegEdit /> Edit
-          </button>
-        }
-      >
-        <p className="text-black-400">{awayMessage}</p>
-      </ProfileCategory>
+      
 
+
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Description /></Suspense>
       <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Educations /></Suspense>
       <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Certificates /></Suspense>
     </div>

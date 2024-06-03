@@ -22,7 +22,7 @@ export async function fetchUserCertificates({ redirect = true, throwsError = tru
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserCertificatesApiResponse>;
-        debugLog(res);
+        // debugLog(res);
 
         if (res.statusCode === 201) return res.data.existingRecords;
         else if(res.data.toString() == 'No records found') return null;

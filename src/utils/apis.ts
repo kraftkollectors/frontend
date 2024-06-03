@@ -25,11 +25,20 @@ const apis = {
     getUser(id:string){
         return `${API}/users/dashboard/${id}`
     },
+    updateUserPassword(id:string){
+        return `${API}/users/dashboard/password/${id}`
+    },
+    updateArtisanProfile(id:string){
+        return `${API}/users/artisan/${id}`
+    },
+    updateUserProfile(id:string){
+        return `${API}/users/dashboard/profile/${id}`
+    },
     getUserCertificates(id:string){
-        return `${API}/users/certificate/${id}`
+        return `${API}/users/certificate/user/${id}`
     },
     getUserEducations(id:string){
-        return `${API}/users/education/${id}`
+        return `${API}/users/education/user/${id}`
     },
     
     // states and cities

@@ -11,7 +11,7 @@ export default function MainLayout({ children }: AppPageProps) {
   const vw = useWindowWidth();
 
   return (
-    <main className="app-container py-10 md:bg-light-text">
+    <main className="app-container py-10 min-h-screen md:bg-light-text">
       <div className="md:grid md:grid-cols-9 gap-4">
         {(pathname === paths.dashboardSettings ||
           pathname === paths.dashboardSettings + "/" ||

@@ -31,7 +31,7 @@ export async function becomeAnArtisan(_: ActionResponse, formData: FormData): Pr
             return {data: 'refresh'}
         }
 
-        const req = await ServerApiRequest.post(apis.artisan, {...data, showContact: Boolean(data.showContact)});
+        const req = await ServerApiRequest.post(apis.artisan, {...data, showContact: !!(data.showContact)});
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 

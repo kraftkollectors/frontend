@@ -23,7 +23,7 @@ export default function SearchMobile() {
         </button>
       </>
       <div
-        className={`fixed top-0 left-0 h-screen w-screen bg-light z-50 flex flex-col justify-stretch ${
+        className={`fixed top-0 left-0 h-[100dvh] w-screen bg-light z-50 flex flex-col justify-stretch ${
           open ? "" : "hidden"
         }`}
       >
