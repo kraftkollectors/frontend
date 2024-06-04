@@ -18,7 +18,6 @@ export default function Form() {
   const { replace } = useRouter()
   const { artisan, setArtisan } = useUserStore(({ artisan, setArtisan }) => ({ artisan, setArtisan }));
 
-  if (!artisan) return;
 
   const [res, action] = useFormState(updateArtisanSocials, {});
   useLayoutEffect(() => {
@@ -26,8 +25,10 @@ export default function Form() {
     setArtisan(res.data)
     toast(<AppToast.success message={res?.success} />);
     replace(paths.dashboard)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res])
 
+  if (!artisan) return <div className="skeleton h-60 w-full"></div>;
   return (
     <form action={action} className="grid sm:grid-cols-2 gap-6 items-end">
 

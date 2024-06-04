@@ -26,9 +26,9 @@ export default function Form() {
       toast(<AppToast.success message={res.success}/>);
       replace(paths.dashboard);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res])
   
-  if(!user) return;
   const formFields: AppInputProps[] = useMemo(()=>[
     {
       name: "firstName",
@@ -54,8 +54,9 @@ export default function Form() {
       placeholder: "User Name",
       schema: z.string(),
     }
-  ], []);
+  ], [user]);
 
+  if(!user) return <div className="skeleton h-60 w-full"></div>;
   return (
     <form action={action} className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
       <div className="col-span-full"><FormMessage res={res} /></div>

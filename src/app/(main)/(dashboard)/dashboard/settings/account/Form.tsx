@@ -33,14 +33,13 @@ export default function Form() {
     const state = artisan?.state ? artisan.state : allStates[0].name
     const i = allStates.filter(i => i.name == state)[0]
     setLgas(i.lgas)
-  }, [allStates]);
+  }, [allStates, artisan]);
   function changeLga(e: string) {
     if (!allStates) return
     setLgas(allStates.filter(i => i.name == e)[0].lgas)
 
   }
 
-  if (!artisan) return;
 
   const formFields: AppInputProps[] = [
     {
@@ -75,8 +74,10 @@ export default function Form() {
     setArtisan(res.data)
     toast(<AppToast.success message={res?.success} />);
     replace(paths.dashboard)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res])
 
+  if (!artisan) return <div className="skeleton h-60 w-full"></div>;
   return (
     <form action={action} className="grid sm:grid-cols-2 gap-6 items-start">
       <div className="col-span-full"><FormMessage res={res} /></div>
