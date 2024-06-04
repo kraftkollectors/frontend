@@ -1,6 +1,7 @@
 
 export type Artisan = {
     userId: string,
+    awayMessage?: string,
     userEmail?: string,
     workHourFrom: string,
     workHourTo: string,

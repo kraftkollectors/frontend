@@ -13,11 +13,7 @@ export type ProfileCategoriesProps = {
   education?: string;
 };
 
-export default function ProfileCategories({
-  description,
-  awayMessage,
-  education,
-}: ProfileCategoriesProps) {
+export default function ProfileCategories() {
 
   return (
     <div className=" flex flex-col p-4 rounded-md bg-light gap-2 border">

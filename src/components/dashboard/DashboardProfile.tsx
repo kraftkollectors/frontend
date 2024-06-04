@@ -14,7 +14,7 @@ export default function DashboardProfile() {
         alt={user?.userName}
         height={64}
         width={64}
-        className="rounded-full size-16 object-cover"
+        className="rounded-full size-16 object-cover profile-img"
       />
       <p className="font-semibold text-title">{user?.userName}</p>
       <p className="">{user?.email}</p>

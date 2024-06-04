@@ -97,6 +97,9 @@
   .toast{
     @apply rounded-md shadow-lg bg-light border
   }
+  .profile-img{
+    @apply bg-primary-lightActive
+  }
 
 }
 

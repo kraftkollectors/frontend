@@ -3,11 +3,7 @@ import DashBoardNav from "./DashBoardNav";
 import ProfileCard from "./ProfileCard";
 import ProfileCategories, { ProfileCategoriesProps } from "./ProfileCategories";
 
-export const dummyProfileCardData: ProfileCategoriesProps = {
-  description: `Lorem ipsum dolor sit amet consectetur. Elit consequat dis ut quis pellentesque orci. Turpis diam iaculis id tristique. Et viverra erat amet pulvinar cras tortor felis leo eget. Eleifend aliquet pretium phasellus nisl porttitor. Ullamcorper laoreet ipsum venenatis amet. A ultricies consequat pretium duis blandit ut Et viverra erat amet pulvinar cras tortor felis leo eget. Eleifend aliquet pretium phasellus nisl porttitor. ut `,
 
-  awayMessage: `Lorem ipsum dolor sit amet consectetur. Elit consequat dis ut quis pellentesque orci. Turpis di`,
-};
 export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
@@ -17,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </div>
       <div className="col-span-3 flex flex-col gap-4 max-md:hidden">
         <ProfileCard  />
-        <ProfileCategories {...dummyProfileCardData} />
+        <ProfileCategories />
       </div>
       <div className="col-span-full  md:col-span-7 flex flex-col gap-2 max-md:bg-light-text">
         <div className="bg-light border-b md:border w-full">

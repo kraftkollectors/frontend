@@ -28,7 +28,7 @@ export async function updateUserPhoto(_: any, formData: FormData): Promise<Actio
             if (typeof img === 'string') return { error: img ?? "Image Upload failed" }
         }
 
-        const req = await ServerApiRequest.patch(apis.updateUserProfile(data.userId), { image: data.delete ? '' : img.url });
+        const req = await ServerApiRequest.patch(apis.updateUserProfile(data.userId), { image: data.delete ? '' : img.url, ...data });
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 

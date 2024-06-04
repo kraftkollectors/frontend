@@ -14,7 +14,7 @@ type ImagePickerProps = {
 
 export function ImagePicker({ big = false, onHasValueChange, placeholder = null, name = "file" }: ImagePickerProps) {
   const defaultImg: string = placeholder ?? "/images/user-avatar.png";
-  const [selectedImage, setImage] = useState<string | null>(null);
+  const [selectedImage, setImage] = useState<string | null>(placeholder);
   const inputRef = useRef<HTMLInputElement>(null)
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -52,6 +52,7 @@ export function ImagePicker({ big = false, onHasValueChange, placeholder = null,
         <img src={selectedImage ?? defaultImg} alt="" className="h-full w-full rounded-full z-[1] object-cover overflow-hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <CiCamera className=" text-black top-2  h-5 w-5 flex justify-center items-center" />
       </label>
+      <input type="checkbox" checked={!!selectedImage} name="delete" className='hidden' hidden />
       <input
 
         ref={inputRef}

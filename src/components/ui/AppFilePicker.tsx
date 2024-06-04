@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FileContent } from "use-file-picker/types";
 import { Validator } from "use-file-picker/validators";
 import { FaPlay } from "react-icons/fa6";
+import { debugLog } from "@/functions/helpers";
 
 export type AppFilePickerProps = {
   title: string;
@@ -30,6 +31,7 @@ export default function AppFilePicker({
     validators,
     onFilesSelected({ filesContent: data }) {
       setSelectedFiles(data);
+      data.map((item:any) => debugLog(item.content));
     },
   });
 

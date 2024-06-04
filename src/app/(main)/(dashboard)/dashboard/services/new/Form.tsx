@@ -1,6 +1,7 @@
 "use client";
 
-import { UseCurrentLocation } from "@/components";
+import { FormButton, UseCurrentLocation } from "@/components";
+import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
@@ -34,12 +35,11 @@ export default function ServicesForm() {
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
-            category
+            Category
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            {" "}
             <AppSelect name="category" options={["select a category"]} />
-            <AppSelect name="category" options={["Select A Subcategory"]} />
+            <AppSelect name="subCategory" options={["Select A Subcategory"]} />
           </div>
           <p className="col-span-4 text-label text-black-300">
             Select the most appropriate category that aligns with your service.
@@ -49,13 +49,12 @@ export default function ServicesForm() {
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
-            description
+            Description
           </label>
           <div className="col-span-5">
-            {" "}
             <AppInput
               textarea
-              name="title"
+              name="description"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -68,19 +67,19 @@ export default function ServicesForm() {
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
-            description
+            Estimated Price (&#8358;)
           </label>
           <div className="col-span-5 flex flex-col gap-2">
-            {" "}
-            <AppInput name="title" placeholder="Example: 20,000" rows={2} />
+            <AppInput name="estimatedPrice" placeholder="Example: 20,000" type="number" />
             <div className="flex gap-2">
               <input
                 type="radio"
                 hidden
                 className="radio-group hidden"
-                name="fixed"
+                name="charge"
                 id="fixed"
                 value="fixed"
+                defaultChecked
               />
               <label htmlFor="fixed" className="bg-light px-3 rounded">
                 fixed
@@ -89,11 +88,11 @@ export default function ServicesForm() {
                 type="radio"
                 hidden
                 className="radio-group hidden"
-                name="hourly"
+                name="charge"
                 id="hourly"
                 value="hourly"
               />
-              <label htmlFor="d" className="bg-light px-3 rounded">
+              <label htmlFor="hourly" className="bg-light px-3 rounded">
                 Hourly
               </label>
             </div>
@@ -105,8 +104,7 @@ export default function ServicesForm() {
             Service Location
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            {" "}
-            <AppSelect name="category" options={["select State"]} />
+            <AppSelect name="state" options={["select State"]} />
             <AppInput name="location" type="text" placeholder="Egbu" />
             <UseCurrentLocation />
           </div>
@@ -121,7 +119,7 @@ export default function ServicesForm() {
               onSelect={(_) => {}}
               accept="image/*"
               validators={[
-                new FileTypeValidator(["jpg", "png"]),
+                new FileTypeValidator(["jpg", "png", "jpeg"]),
                 new FileSizeValidator({
                   maxFileSize: 5 * 1024 * 1024 /* 5 MB */,
                 }),
@@ -155,7 +153,13 @@ export default function ServicesForm() {
             />
           </div>
         </div>
+
+        <div className="md:grid md:grid-cols-12 gap-4">
+          <div className="col-span-3 max-md:hidden"></div>
+          <FormButton className="btn-primary w-full md:w-60">Submit</FormButton>
+        </div>
       </div>
+      <UserAuth />
     </form>
   );
 }
