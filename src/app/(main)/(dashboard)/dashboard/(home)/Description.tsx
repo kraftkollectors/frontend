@@ -15,7 +15,7 @@ export default function Description() {
     const artisan = useUserStore(s=>s.artisan);
     return (
         <ProfileCategory
-        title="Away Message"
+        title="Description"
         action={
           <DescriptionModal />
         }
@@ -70,7 +70,7 @@ function DescriptionModal(){
               />
               
               <FormButton
-                className="btn-dark-tiny py-2 max-md:w-full w-60 px-6 "
+                className="btn-dark-tiny py-2 max-md:w-full w-60 px-6 mx-auto"
               >
                 <span>Done</span>
               </FormButton>

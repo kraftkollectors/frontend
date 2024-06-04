@@ -10,7 +10,7 @@ const apis = {
     forgotPasswordSendEmail: API + "/users/forgot",
     forgotPasswordReset: API + "/users/reset",
 
-    uploadSingleFile: API + "/geturl",
+    uploadSingleFile: API + "/users/geturl",
     uploadCertificate: API + "/users/certificate",
     uploadEducation: API + "/users/education",
     editCertificate(id:string){

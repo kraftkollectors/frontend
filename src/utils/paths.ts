@@ -36,6 +36,7 @@ const paths = {
   dashboardSettingsPersonalDetails: `/dashboard/settings/personal-details`,
   dashboardSettingsAccount: `/dashboard/settings/account`,
   dashboardSettingsPassword: `/dashboard/settings/change-password`,
+  dashboardSettingsPhoto: `/dashboard/settings/photo`,
   dashboardSettingsContactInfo: `/dashboard/settings/contact-information`,
   dashboardSettingsNotification: `/dashboard/settings/notification`,
   dashboardLogout: `/dashboard/logout`,
