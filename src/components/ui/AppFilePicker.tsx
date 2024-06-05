@@ -10,6 +10,7 @@ import { FaPlay } from "react-icons/fa6";
 import { debugLog } from "@/functions/helpers";
 
 export type AppFilePickerProps = {
+  name?: string;
   title: string;
   subtitle?: string;
   accept?: string;
@@ -18,6 +19,7 @@ export type AppFilePickerProps = {
 };
 
 export default function AppFilePicker({
+  name = "files",
   title,
   subtitle,
   accept,
@@ -31,7 +33,6 @@ export default function AppFilePicker({
     validators,
     onFilesSelected({ filesContent: data }) {
       setSelectedFiles(data);
-      data.map((item:any) => debugLog(item.content));
     },
   });
 
@@ -46,6 +47,7 @@ export default function AppFilePicker({
   }
   return (
     <div className="">
+      <input type="hidden" value={JSON.stringify(selectedFiles)} hidden name={name} />
       <div
         onClick={() => openFilePicker()}
         className="flex items-center flex-col border border-dotted border-gray-400 rounded h-24 w-full justify-center"

@@ -1,25 +1,29 @@
 "use client";
 
-import { FormButton, UseCurrentLocation } from "@/components";
+import { newService } from "@/actions";
+import { FormButton, FormMessage, UseCurrentLocation } from "@/components";
 import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import { useFormState } from "react-dom";
 import { MdMyLocation } from "react-icons/md";
+
 import {
   FileSizeValidator,
   FileTypeValidator,
 } from "use-file-picker/validators";
 export default function ServicesForm() {
+  const [res, action] = useFormState(newService, {});
+  
   return (
-    <form action="">
+    <form action={action}>
       <div className="flex flex-col gap-4">
         <div className="md:grid md:grid-cols-12 gap-4">
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
             Title
           </label>
           <div className="col-span-5">
-            {" "}
             <AppInput
               textarea
               name="title"
@@ -115,13 +119,14 @@ export default function ServicesForm() {
           </label>
           <div className="col-span-4">
             <AppFilePicker
+            name="coverPhoto"
               title="cover Photo"
               onSelect={(_) => {}}
               accept="image/*"
               validators={[
                 new FileTypeValidator(["jpg", "png", "jpeg"]),
                 new FileSizeValidator({
-                  maxFileSize: 5 * 1024 * 1024 /* 5 MB */,
+                  maxFileSize: 2 * 1024 * 1024 /* 2 MB */,
                 }),
               ]}
             />
@@ -133,6 +138,7 @@ export default function ServicesForm() {
           </label>
           <div className="col-span-4">
             <AppFilePicker
+            name="portfolio"
               accept=""
               title="cover Photo"
               subtitle="JPG, GIF, WebM, MP4, PNG, up to 5MB"
@@ -154,6 +160,12 @@ export default function ServicesForm() {
           </div>
         </div>
 
+        <div className="md:grid md:grid-cols-12 gap-4">
+          <div className="col-span-3 max-md:hidden"></div>
+          <div className="col-span-5">
+            <FormMessage res={res} />
+          </div>
+        </div>
         <div className="md:grid md:grid-cols-12 gap-4">
           <div className="col-span-3 max-md:hidden"></div>
           <FormButton className="btn-primary w-full md:w-60">Submit</FormButton>

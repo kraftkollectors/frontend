@@ -65,5 +65,5 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
     }
     if (success)
         redirect(paths.dashboard, RedirectType.replace);
-    return {}
+    return {error: "Unknown error"}
 }

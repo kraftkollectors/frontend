@@ -47,7 +47,8 @@ const apis = {
         return `${STATES_AND_CITIES_API}/nigerian-states`
     },
 
-    artisan: API + "/users/artisan"
+    artisan: API + "/users/artisan",
+    uploadService: API + "/users/ads"
 }
 
 export default apis;

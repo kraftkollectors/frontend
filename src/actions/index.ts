@@ -16,6 +16,7 @@ export {fetchNigerianStateLgas} from './fetch/fetchNigerianStateLgas'
 
 export {newEducation} from './new/newEducation'
 export {newCertificate} from './new/newCertificate'
+export {newService} from './new/newService'
 
 export {becomeAnArtisanPersonalDetails} from './misc/becomeAnArtisanPersonalDetails'
 export {becomeAnArtisanPersonalInfo} from './misc/becomeAnArtisanPersonalInfo'
