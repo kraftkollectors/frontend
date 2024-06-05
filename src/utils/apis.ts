@@ -11,6 +11,7 @@ const apis = {
     forgotPasswordReset: API + "/users/reset",
 
     uploadSingleFile: API + "/users/geturl",
+    uploadManyFiles: API + "/users/geturls",
     uploadCertificate: API + "/users/certificate",
     uploadEducation: API + "/users/education",
     editCertificate(id:string){
@@ -48,7 +49,10 @@ const apis = {
     },
 
     artisan: API + "/users/artisan",
-    uploadService: API + "/users/ads"
+    uploadService: API + "/users/adds",
+    getArtisanServices(id:string){
+        return `${API}/users/myads/${id}`
+    },
 }
 
 export default apis;

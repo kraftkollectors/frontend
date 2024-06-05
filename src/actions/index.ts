@@ -11,6 +11,7 @@ export {resendVerificationCode} from './auth/resendVerificationCode'
 export {fetchUser} from './fetch/fetchUser'
 export {fetchUserCertificates} from './fetch/fetchUserCertificates'
 export {fetchUserEducations} from './fetch/fetchUserEducations'
+export {fetchArtisanServices} from './fetch/fetchArtisanServices'
 export {fetchNigerianStates} from './fetch/fetchNigerianStates'
 export {fetchNigerianStateLgas} from './fetch/fetchNigerianStateLgas'
 

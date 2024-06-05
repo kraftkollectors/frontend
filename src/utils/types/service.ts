@@ -1,0 +1,17 @@
+
+export type Service = {
+    _id: string;
+    createdAt: string;
+    updatedAt: string;
+    address: string;
+    title: string;
+    category: string;
+    subCategory: string;
+    description: string;
+    estimatedPrice: string;
+    state: string;
+    charge: string;
+    userId: string;
+    portfolio: string[];
+    coverPhoto: string;
+}

@@ -6,6 +6,8 @@ import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import { debugLog } from "@/functions/helpers";
+import { useLayoutEffect } from "react";
 import { useFormState } from "react-dom";
 import { MdMyLocation } from "react-icons/md";
 
@@ -15,6 +17,11 @@ import {
 } from "use-file-picker/validators";
 export default function ServicesForm() {
   const [res, action] = useFormState(newService, {});
+
+  useLayoutEffect(()=>{
+    if(!res.success) return;
+    
+  }, [res])
   
   return (
     <form action={action}>
@@ -26,7 +33,7 @@ export default function ServicesForm() {
           <div className="col-span-5">
             <AppInput
               textarea
-              name="title"
+              error={res.fieldErrors && res.fieldErrors['title']} name="title"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -42,8 +49,8 @@ export default function ServicesForm() {
             Category
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            <AppSelect name="category" options={["select a category"]} />
-            <AppSelect name="subCategory" options={["Select A Subcategory"]} />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['category']} name="category" options={["select a category"]} />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']} name="subCategory" options={["Select A Subcategory"]} />
           </div>
           <p className="col-span-4 text-label text-black-300">
             Select the most appropriate category that aligns with your service.
@@ -58,7 +65,7 @@ export default function ServicesForm() {
           <div className="col-span-5">
             <AppInput
               textarea
-              name="description"
+              error={res.fieldErrors && res.fieldErrors['description']} name="description"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -74,13 +81,13 @@ export default function ServicesForm() {
             Estimated Price (&#8358;)
           </label>
           <div className="col-span-5 flex flex-col gap-2">
-            <AppInput name="estimatedPrice" placeholder="Example: 20,000" type="number" />
+            <AppInput error={res.fieldErrors && res.fieldErrors['estimatedPrice']} name="estimatedPrice" placeholder="Example: 20,000" type="number" />
             <div className="flex gap-2">
               <input
+              name="charge"
                 type="radio"
                 hidden
                 className="radio-group hidden"
-                name="charge"
                 id="fixed"
                 value="fixed"
                 defaultChecked
@@ -89,10 +96,10 @@ export default function ServicesForm() {
                 fixed
               </label>
               <input
+              name="charge"
                 type="radio"
                 hidden
                 className="radio-group hidden"
-                name="charge"
                 id="hourly"
                 value="hourly"
               />
@@ -108,8 +115,8 @@ export default function ServicesForm() {
             Service Location
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            <AppSelect name="state" options={["select State"]} />
-            <AppInput name="location" type="text" placeholder="Egbu" />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['state']} name="state" options={["select State"]} />
+            <AppInput error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
             <UseCurrentLocation />
           </div>
         </div>

@@ -7,7 +7,7 @@ export { ReviewLines } from "./ui/ReviewLines";
 export { ReadMoreReadLess } from "./ui/ReadMoreReadLess";
 export { ImagePicker } from "./ui/ImagePicker";
 export { UseCurrentLocation } from "./ui/UseCurrentLocation";
-export { Pagination } from "./ui/Pagination";
+// export { Pagination } from "./ui/Pagination";
 export { FavouriteButton } from "./ui/FavouriteButton";
 
 export { ContinueWithGoogleButton } from "./ContinueWithGoogleButton";
@@ -16,5 +16,6 @@ export { Navbar } from "./Navbar";
 export { default as Footer } from "./Footer";
 export { ServiceCard } from "./ServiceCard";
 export { ArtisanReviewCard } from "./ArtisanReviewCard";
+export { Pagination } from "./Pagination";
 
 export { MediaSlider } from "./mediaSlider/MediaSlider";

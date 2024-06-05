@@ -14,7 +14,7 @@ export default function searchPage() {
       </div>
       <PostList />
       <div className=" flex items-center justify-center py-2">
-        <Pagination />
+        {/* <Pagination /> */}
       </div>
     </div>
   );

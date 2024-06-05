@@ -1,25 +1,26 @@
+/* eslint-disable @next/next/no-img-element */
 import { FaEdit, FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 export type DashboardServiceCardProps = {
-  img: string;
+  coverPhoto: string;
   title: string;
-  price: string;
-  id: string;
+  estimatedPrice: string;
+  _id: string;
 };
 
 export function DashboardServiceCard({
-  img,
+  coverPhoto: img,
   title,
-  price,
-  id,
+  estimatedPrice: price,
+  _id: id,
 }: DashboardServiceCardProps) {
   return (
     <div className="flex gap-2 p-2 bg-light border rounded">
       <img
         src={img}
-        alt=""
-        className="w-4/12 md:w-40 h-full aspect-[5/3] object-cover"
+        alt={title}
+        className="w-4/12 md:w-40 h-full aspect-[5/3] object-cover rounded profile-img"
       />
       <div className="flex flex-col gap-1">
         <p className="text-back-400">{title}</p>
