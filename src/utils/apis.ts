@@ -49,7 +49,7 @@ const apis = {
     },
 
     artisan: API + "/users/artisan",
-    uploadService: API + "/users/adds",
+    uploadService: API + "/users/ads",
     getArtisanServices(id:string){
         return `${API}/users/myads/${id}`
     },
