@@ -1,5 +1,5 @@
 export type AppLayoutProps = Readonly<{ children: React.ReactNode }>;
-export type AppPageProps<T = any, K = any> = { params?: T, searchParams?: K };
+export type AppPageProps = { params?: any, searchParams?: any };
 
 export type BasicUser = {
   name: string;

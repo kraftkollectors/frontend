@@ -2,7 +2,7 @@ import { AppPageProps } from "@/utils/types/basicTypes";
 import ServicesForm from "./Form";
 import { fetchSingleArtisanService } from "@/actions";
 import { notFound } from "next/navigation";
-export default async function page({params}:AppPageProps<{slug:string}>) {
+export default async function page({params}:AppPageProps) {
     const service = await fetchSingleArtisanService(params.slug);
     if(!service) notFound()
     if(service == 'error') return null
