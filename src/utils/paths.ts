@@ -48,6 +48,7 @@ const paths = {
   //dashboard services
   dashboardServices: `/dashboard/services`,
   dashboardNewService: `/dashboard/services/new`,
+  dashboardEditService: (serviceId: string)=>`/dashboard/services/${serviceId}`,
 
   // app
   android: "/",

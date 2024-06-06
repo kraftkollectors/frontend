@@ -12,9 +12,9 @@ export default async function Page() {
       {services.existingRecords.map((service) => (
         <DashboardServiceCard key={service._id} {...service} />
       ))}
-      <div className="flex border rounded bg-light">
-        <Pagination baseUrl={paths.dashboardServices} totalItems={3} />
-      </div>
+        <Pagination
+         className="flex border rounded bg-light"
+         baseUrl={paths.dashboardServices} pagination={services} />
       <div className="flex flex-col  items-center bg-light p-3 gap-3">
         <h1 className="text-black-300 text-title">Post a new service</h1>
         <Link href={paths.dashboardNewService} className="btn-primary w-fit py-2 px-5">Post Service</Link>

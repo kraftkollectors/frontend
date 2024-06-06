@@ -12,6 +12,7 @@ export {fetchUser} from './fetch/fetchUser'
 export {fetchUserCertificates} from './fetch/fetchUserCertificates'
 export {fetchUserEducations} from './fetch/fetchUserEducations'
 export {fetchArtisanServices} from './fetch/fetchArtisanServices'
+export {fetchSingleArtisanService} from './fetch/fetchSingleArtisanService'
 export {fetchNigerianStates} from './fetch/fetchNigerianStates'
 export {fetchNigerianStateLgas} from './fetch/fetchNigerianStateLgas'
 
@@ -25,6 +26,7 @@ export {becomeAnArtisan} from './misc/becomeAnArtisan'
 
 export {deleteEducation} from './delete/deleteEducation'
 export {deleteCertificate} from './delete/deleteCertificate'
+export {deleteService} from './delete/deleteService'
 
 export {updateUserProfile} from './update/updateUserProfile'
 export {updateUserPhoto} from './update/updateUserPhoto'

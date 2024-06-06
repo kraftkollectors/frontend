@@ -53,6 +53,9 @@ const apis = {
     getArtisanServices(id:string){
         return `${API}/users/myads/${id}`
     },
+    getSingleArtisanService(id:string){
+        return `${API}/users/ads/${id}`
+    },
 }
 
 export default apis;

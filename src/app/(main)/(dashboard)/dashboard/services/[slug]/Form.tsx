@@ -6,6 +6,7 @@ import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import { Service } from "@/utils/types/service";
 import { useLayoutEffect } from "react";
 import { useFormState } from "react-dom";
 
@@ -13,7 +14,7 @@ import {
   FileSizeValidator,
   FileTypeValidator,
 } from "use-file-picker/validators";
-export default function ServicesForm() {
+export default function ServicesForm({service}:{service:Service}) {
   const [res, action] = useFormState(newService, {});
 
   useLayoutEffect(()=>{
@@ -31,7 +32,9 @@ export default function ServicesForm() {
           <div className="col-span-5">
             <AppInput
               textarea
-              error={res.fieldErrors && res.fieldErrors['title']} name="title"
+              error={res.fieldErrors && res.fieldErrors['title']}
+              value={service.title}
+               name="title"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -47,8 +50,12 @@ export default function ServicesForm() {
             Category
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            <AppSelect error={res.fieldErrors && res.fieldErrors['category']} name="category" options={["select a category"]} />
-            <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']} name="subCategory" options={["Select A Subcategory"]} />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['category']}
+            value={service.category}
+             name="category" options={["select a category"]} />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']}
+            value={service.subCategory}
+             name="subCategory" options={["Select A Subcategory"]} />
           </div>
           <p className="col-span-4 text-label text-black-300">
             Select the most appropriate category that aligns with your service.
@@ -63,7 +70,9 @@ export default function ServicesForm() {
           <div className="col-span-5">
             <AppInput
               textarea
-              error={res.fieldErrors && res.fieldErrors['description']} name="description"
+              error={res.fieldErrors && res.fieldErrors['description']}
+              value={service.description}
+               name="description"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -79,7 +88,9 @@ export default function ServicesForm() {
             Estimated Price (&#8358;)
           </label>
           <div className="col-span-5 flex flex-col gap-2">
-            <AppInput error={res.fieldErrors && res.fieldErrors['estimatedPrice']} name="estimatedPrice" placeholder="Example: 20,000" type="number" />
+            <AppInput error={res.fieldErrors && res.fieldErrors['estimatedPrice']}
+            value={service.estimatedPrice}
+             name="estimatedPrice" placeholder="Example: 20,000" type="number" />
             <div className="flex gap-2">
               <input
               name="charge"
@@ -88,13 +99,14 @@ export default function ServicesForm() {
                 className="radio-group hidden"
                 id="fixed"
                 value="fixed"
-                defaultChecked
-              />
+                defaultChecked={service.charge=="fiexd"}
+                />
               <label htmlFor="fixed" className="bg-light px-3 rounded">
                 fixed
               </label>
               <input
               name="charge"
+              defaultChecked={service.charge=="hourly"}
                 type="radio"
                 hidden
                 className="radio-group hidden"

@@ -1,30 +1,29 @@
 'use client'
 
 import * as Popover from '@radix-ui/react-popover';
-import { useCallback, useMemo } from "react";
+import { HTMLAttributes, useCallback, useMemo } from "react";
 import { debugLog } from "@/functions/helpers";
 import { useChangeSearchParams } from "@/hooks";
+import { Paginated } from '@/utils/types/basicTypes';
 
-export type PaginationProps = {
-    page?: number;
-    totalItems: number;
-    itemsPerPage?: number;
+export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
     baseUrl: string;
+    pagination: Paginated<any>;
 }
 
-export function Pagination({ page = 1, totalItems, itemsPerPage = 10, baseUrl }: PaginationProps) {
+export function Pagination({ pagination, baseUrl, ...props }: PaginationProps) {
+    const { currentPage: page, totalPages } = pagination;
     const {params, pushParams} = useChangeSearchParams(baseUrl);
     const toPage = (page:number)=>pushParams({'page': page.toString()})
 
     const _page = useMemo(() => +(params.get('page') ?? 1), [params])
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
     debugLog(_page);
 
     const firstThree = Array.from({ length: totalPages }, (_, i) => i + 1).slice(0, 3);
     const lastThree = Array.from({ length: totalPages }, (_, i) => i + 1).slice(totalPages - 3, totalPages).filter((page) => !firstThree.includes(page));
 
     return (
-        <nav aria-label="Page navigation example" className="py-2">
+        <nav aria-label="Page navigation" {...props}>
             <ul className="flex items-center -space-x-px h-10 text-base rounded overflow-hidden border w-fit">
                 {
                     page > 1 && (

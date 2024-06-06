@@ -1,5 +1,5 @@
 export type AppLayoutProps = Readonly<{ children: React.ReactNode }>;
-export type AppPageProps = { children: React.ReactNode };
+export type AppPageProps<T = any, K = any> = { params: T, searchParams: K };
 
 export type BasicUser = {
   name: string;
@@ -40,9 +40,10 @@ export type ActionApiResponse<T, K = null> = null | "error" | T | K
 
 export type Paginated<T = any> = {
   existingRecords: T[],
-    hasPreviousPage: false,
-    previousPages: 0,
-    hasNextPage: false,
-    nextPages: 0
+    hasPreviousPage: boolean,
+    previousPages: number,
+    hasNextPage: boolean,
+    nextPages: number,
+    totalPages: number,
+    currentPage: number
 }
-// export type ActionApiResponseWith<T> = null | 404 | "error" | T
