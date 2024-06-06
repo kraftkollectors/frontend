@@ -8,6 +8,7 @@ import { FileContent } from "use-file-picker/types";
 import { Validator } from "use-file-picker/validators";
 import { FaPlay } from "react-icons/fa6";
 import { debugLog } from "@/functions/helpers";
+import { JsonFile } from "@/functions/file";
 
 export type AppFilePickerProps = {
   name?: string;
@@ -16,7 +17,30 @@ export type AppFilePickerProps = {
   accept?: string;
   onSelect: (files: FileContent<string>[]) => void;
   validators?: Validator[];
+  value?: string[];
 };
+
+export type AppCustomFile = {
+  type: 'url';
+  data: string;
+} | {
+  type: 'file';
+  data: JsonFile;
+}
+
+type PickedFile = {
+  type: 'file',
+  data: FileContent<string>;
+}
+
+function getFileName(file:AppCustomFile) {
+  // debugLog(file.data);
+  return file.type == 'url' ? file.data : (file.data.name);
+}
+
+function getFileExtension(file:AppCustomFile) {
+  return getFileName(file).split('.').pop() || '';
+}
 
 export default function AppFilePicker({
   name = "files",
@@ -25,20 +49,22 @@ export default function AppFilePicker({
   accept,
   onSelect,
   validators,
+  value,
 }: AppFilePickerProps) {
-  const [selectedFiles, setSelectedFiles] = useState<FileContent<string>[]>([]);
+  const [prevFiles, setPrevFiles] = useState((value ?? []).map((url) => ({ type: 'url' as const, data: url })));
+  const [selectedFiles, setSelectedFiles] = useState<PickedFile[]>([]);
   const { openFilePicker, filesContent, loading } = useFilePicker({
     readAs: "DataURL",
     accept,
     validators,
     onFilesSelected({ filesContent: data }) {
-      setSelectedFiles(data);
+      setSelectedFiles((data as FileContent<string>[]).map((file) => ({ type: 'file', data: file })));
     },
   });
 
   useEffect(() => {
     // if(selectedFiles.length ){
-    onSelect(selectedFiles);
+    // onSelect(selectedFiles.map((file) => ({ type: 'file', data: file })));
     // }
   }, [selectedFiles]);
 
@@ -47,7 +73,7 @@ export default function AppFilePicker({
   }
   return (
     <div className="">
-      <input type="hidden" value={JSON.stringify(selectedFiles)} hidden name={name} />
+      <input type="hidden" defaultValue={JSON.stringify([...prevFiles, ...selectedFiles])} hidden name={name} />
       <div
         onClick={() => openFilePicker()}
         className="flex items-center flex-col border border-dotted border-gray-400 rounded h-24 w-full justify-center"
@@ -58,20 +84,31 @@ export default function AppFilePicker({
         </h1>
         <p className="text-small text-[#929292]">{subtitle}</p>
       </div>
-      {selectedFiles && (
+      {(selectedFiles || prevFiles.length > 0) && (
         <div className="flex gap-2 pt-2 overflow-x-auto">
           {selectedFiles.map((file, index) => (
             <MediaCard
               isVideo={["mp4", "m4a"].includes(
-                file.name
-                  .split(".")
-                  [file.name.split(".").length - 1].toLowerCase()
+                getFileExtension((file as unknown as AppCustomFile)).toLowerCase()
               )}
-              key={file.name}
-              data={file.content}
+              key={file.data.name}
+              data={file.data.content}
               onDelete={() => {
                 filesContent.splice(index, 1);
-                setSelectedFiles([...filesContent]);
+                const newFiles:PickedFile[] = filesContent.map(f => ({ type: 'file' as const, data: f }))
+                setSelectedFiles(newFiles);
+              }}
+            />
+          ))}
+          {prevFiles.map((file, index) => (
+            <MediaCard
+              isVideo={["mp4", "m4a"].includes(
+                getFileExtension(file).toLowerCase()
+              )}
+              key={file.data}
+              data={file.data}
+              onDelete={() => {
+                setPrevFiles(prevFiles.filter(f => f.data !== file.data));
               }}
             />
           ))}

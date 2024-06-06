@@ -6,7 +6,8 @@ import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
-import { useLayoutEffect } from "react";
+import { useNigerianStates } from "@/hooks/useNigerianStates";
+import { useLayoutEffect, useMemo } from "react";
 import { useFormState } from "react-dom";
 
 import {
@@ -14,6 +15,11 @@ import {
   FileTypeValidator,
 } from "use-file-picker/validators";
 export default function ServicesForm() {
+  const {data:states, isLoading:statesLoading, error:statesError} = useNigerianStates();
+  const allStates = useMemo(() => {
+    return statesLoading ? null : statesError ? null :
+    (states && states !== 'error' && states.length) ? states : null
+  }, [states, statesLoading, statesError]);
   const [res, action] = useFormState(newService, {});
 
   useLayoutEffect(()=>{
@@ -113,7 +119,7 @@ export default function ServicesForm() {
             Service Location
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            <AppSelect error={res.fieldErrors && res.fieldErrors['state']} name="state" options={["select State"]} />
+            <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]}  />
             <AppInput error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
             <UseCurrentLocation />
           </div>

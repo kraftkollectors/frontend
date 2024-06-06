@@ -30,6 +30,7 @@ export {deleteService} from './delete/deleteService'
 
 export {updateUserProfile} from './update/updateUserProfile'
 export {updateUserPhoto} from './update/updateUserPhoto'
+export {updateService} from './update/updateService'
 export {updateArtisanProfile} from './update/updateArtisanProfile'
 export {updateArtisanSocials} from './update/updateArtisanSocials'
 export {updateArtisanDescription} from './update/updateArtisanDescription'

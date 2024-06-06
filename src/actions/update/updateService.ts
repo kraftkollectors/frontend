@@ -9,7 +9,6 @@ import { JsonFile, createFileFromObject } from "@/functions/file"
 import { ServerApiRequest } from "@/utils/serverApiRequest"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
-import { AppCustomFile } from "@/components/ui/AppFilePicker"
 
 const schema = z.object({
     title: validators.name,
@@ -28,7 +27,7 @@ type ServiceFormData = z.infer<typeof schema> & {
     coverPhoto?: any;
 }
 
-export async function newService(_: ActionResponse, formData: FormData): Promise<ActionResponse> {
+export async function updateService(_: ActionResponse, formData: FormData): Promise<ActionResponse> {
     const data = formDataToObject<ServiceFormData>(formData);
     debugLog(data)
     const tryParse = schema.safeParse(data);
@@ -39,36 +38,28 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
     let coverPhotoUrl: string;
     let proceed = false;
     try {
-        const json = JSON.parse(data.coverPhoto)[0] as AppCustomFile;
-        if (json.type === 'file') {
-            const blob = createFileFromObject(json.data);
-            _formData.append('file', blob);
-            let coverPhoto = await uploadSingleFile(_formData)
-            if (typeof coverPhoto === 'string') return { error: coverPhoto }
-            coverPhotoUrl = coverPhoto.url;
-        } else coverPhotoUrl = json.data;
+        const blob = createFileFromObject(JSON.parse(data.coverPhoto)[0]);
+        _formData.append('file', blob);
+        let coverPhoto = await uploadSingleFile(_formData)
+        if (typeof coverPhoto === 'string') return { error: coverPhoto }
+        coverPhotoUrl = coverPhoto.url;
     } catch (error) {
         debugLog(error)
         return { error: "Failed to upload cover photo" }
     }
 
     const portfolioUrls: string[] = [];
-    const portfolios = JSON.parse(data.portfolio) as AppCustomFile[];
+    const portfolios = JSON.parse(data.portfolio) as JsonFile[];
     debugLog(portfolios.length)
     await Promise.all(portfolios.map(async (item) => {
         try {
-            if (item.type === 'file') {
-                const blob = createFileFromObject(item.data);
+                const blob = createFileFromObject(item);
                 _formData = new FormData()
                 _formData.append('file', blob);
                 let portfolio = await uploadSingleFile(_formData)
                 if (typeof portfolio === 'string') return { error: portfolio }
                 portfolioUrls.push(portfolio.url);
-            } else {
-                portfolioUrls.push(item.data);
-
-            }
-
+    
         } catch (error) {
             debugLog(error)
             return {
@@ -76,7 +67,7 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
             }
         }
     }));
-
+    
     const _data = { ...data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
 
     try {
@@ -84,17 +75,17 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 
-        if (res.statusCode === 201) {
+        if(res.statusCode === 201){
             revalidateTag(tags.myServices);
             revalidatePath(paths.dashboardServices);
             proceed = true;
         }
-        else return { error: res.data ?? "Something went wrong" }
+        else return {error: res.data ?? "Something went wrong"}
     } catch (error) {
         debugLog(error);
         return { error: "Something went wrong" }
     }
-    if (proceed) {
+    if(proceed){
         redirect(paths.dashboardServices);
     }
     return { error: "Unknown error" }

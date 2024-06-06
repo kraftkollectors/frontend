@@ -1,5 +1,5 @@
 const API = "https://backends-865y.onrender.com";
-const STATES_AND_CITIES_API = 'http://localhost:3000/api'
+const STATES_AND_CITIES_API = 'https://abundiko-api.vercel.app/api';
 
 const apis = {
     login: API + "/users/login",
