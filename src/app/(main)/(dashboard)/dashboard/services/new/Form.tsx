@@ -7,6 +7,7 @@ import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
+import { $1MB, ALLOWED_IMAGE_EXTENSIONS, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { useLayoutEffect, useMemo } from "react";
 import { useFormState } from "react-dom";
 
@@ -130,14 +131,15 @@ export default function ServicesForm() {
           </label>
           <div className="col-span-4">
             <AppFilePicker
+            max={1}
             name="coverPhoto"
               title="cover Photo"
               onSelect={(_) => {}}
-              accept="image/*"
+              accept=""
               validators={[
-                new FileTypeValidator(["jpg", "png", "jpeg"]),
+                new FileTypeValidator(["jpg", "png", "jpeg", 'mp4']),
                 new FileSizeValidator({
-                  maxFileSize: 2 * 1024 * 1024 /* 2 MB */,
+                  maxFileSize: 2 * $1MB /* 2 MB */,
                 }),
               ]}
             />
@@ -156,15 +158,11 @@ export default function ServicesForm() {
               onSelect={(_) => {}}
               validators={[
                 new FileTypeValidator([
-                  "jpg",
-                  "png",
-                  "webm",
-                  "png",
-                  "gif",
-                  "mp4",
+                  ...ALLOWED_IMAGE_EXTENSIONS,
+                  ...ALLOWED_VIDEO_EXTENSIONS,
                 ]),
                 new FileSizeValidator({
-                  maxFileSize: 5 * 1024 * 1024 /* 5 MB */,
+                  maxFileSize: 5 * $1MB /* 5 MB */,
                 }),
               ]}
             />

@@ -52,7 +52,7 @@ export function ImagePicker({ big = false, onHasValueChange, placeholder = null,
         <img src={selectedImage ?? defaultImg} alt="" className="h-full w-full rounded-full z-[1] object-cover overflow-hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
         <CiCamera className=" text-black top-2  h-5 w-5 flex justify-center items-center" />
       </label>
-      <input type="checkbox" checked={!!selectedImage} name="delete" className='hidden' hidden />
+      <input type="hidden" value={!!selectedImage ? 'false' : 'true'} name="delete" className='hidden' hidden />
       <input
 
         ref={inputRef}

@@ -1,5 +1,5 @@
 import { debugLog } from "./helpers";
-import {File} from '@web-std/file'
+// import {File} from '@web-std/file'
 
 
 export type JsonFile =  {
@@ -46,6 +46,10 @@ function base64ToBlob(base64: string): Blob {
 }
 
 export function createFileFromObject(fileObject: JsonFile) {
-    const blob = base64ToBlob(fileObject.content.split(',')[1]); // Remove the 'data:image/jpeg;base64,' part
-    return new File([blob], fileObject.name, { lastModified: fileObject.lastModified });
+    // debugLog(fileObject);
+    
+    const parts = fileObject.content.split(',');
+    const blob = base64ToBlob(parts[1]); // Remove the 'data:image/jpeg;base64,' part
+    const fileType = parts[0].replace('data:', '').trim().split(';')[0];
+    return new File([blob], fileObject.name, { lastModified: fileObject.lastModified, type: fileType });
 }

@@ -10,6 +10,7 @@ import { ServerApiRequest } from "@/utils/serverApiRequest"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
 import { AppCustomFile } from "@/components/ui/AppFilePicker"
+import { uploadFiles } from "../misc/uploadFiles"
 
 const schema = z.object({
     title: validators.name,
@@ -24,8 +25,10 @@ const schema = z.object({
 
 type ServiceFormData = z.infer<typeof schema> & {
     userId: string;
+    userEmail: string;
     portfolio?: any;
     coverPhoto?: any;
+    _id?: string;
 }
 
 export async function newService(_: ActionResponse, formData: FormData): Promise<ActionResponse> {
@@ -38,11 +41,15 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
     let _formData = new FormData();
     let coverPhotoUrl: string;
     let proceed = false;
+    if (data.coverPhoto == "[]" || data.portfolio == '[]') return { error: "please upload cover photo and portfolio" }
     try {
         const json = JSON.parse(data.coverPhoto)[0] as AppCustomFile;
         if (json.type === 'file') {
             const blob = createFileFromObject(json.data);
+            debugLog(blob.size);
             _formData.append('file', blob);
+            _formData.append('userId', data.userId);
+            _formData.append('userEmail', data.userEmail);
             let coverPhoto = await uploadSingleFile(_formData)
             if (typeof coverPhoto === 'string') return { error: coverPhoto }
             coverPhotoUrl = coverPhoto.url;
@@ -54,33 +61,40 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
 
     const portfolioUrls: string[] = [];
     const portfolios = JSON.parse(data.portfolio) as AppCustomFile[];
-    debugLog(portfolios.length)
-    await Promise.all(portfolios.map(async (item) => {
-        try {
-            if (item.type === 'file') {
-                const blob = createFileFromObject(item.data);
-                _formData = new FormData()
-                _formData.append('file', blob);
-                let portfolio = await uploadSingleFile(_formData)
-                if (typeof portfolio === 'string') return { error: portfolio }
-                portfolioUrls.push(portfolio.url);
-            } else {
-                portfolioUrls.push(item.data);
+    debugLog({ length: portfolios.length })
+    _formData = new FormData();
+    portfolios.forEach(i => {
+        if (i.type === 'file') {
+            const blob = createFileFromObject(i.data);
+            _formData.append('files', blob);
 
-            }
-
-        } catch (error) {
-            debugLog(error)
-            return {
-                error: "Failed to upload portfolio",
-            }
+        } else {
+            portfolioUrls.push(i.data);
         }
-    }));
+    })
 
+    try {
+
+        _formData.append('userId', data.userId);
+        _formData.append('userEmail', data.userEmail);
+        let portfolios = await uploadFiles(_formData)
+        if (typeof portfolios === 'string') throw new Error()
+        portfolioUrls.push(portfolios.url);
+    } catch (error) {
+        debugLog(error)
+        //    throw new Error()
+        return {
+            error: "Failed to upload portfolio",
+        }
+    }
+
+    // return { error: 'error' };
+
+    const postId = data._id;
     const _data = { ...data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
 
     try {
-        const req = await ServerApiRequest.post(apis.uploadService, _data);
+        const req = await (postId ? ServerApiRequest.patch(apis.editArtisanService(postId), _data) : ServerApiRequest.post(apis.uploadService, _data));
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 

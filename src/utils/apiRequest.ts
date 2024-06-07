@@ -12,12 +12,12 @@ export const ApiRequest = {
             signal: AbortSignal.timeout(15 * 1000) // 10 seconds
         })
     },
-    postFormData(url: string, body: any) {
+    postFormData(url: string, body: any, timeout: boolean = true) {
         debugLog(body);
         return fetch(url, {
             method: 'POST',
             body,
-            signal: AbortSignal.timeout(15 * 1000) // 10 seconds
+            signal: timeout ? AbortSignal.timeout(15 * 1000) : undefined // 10 seconds
         })
     },
     getJson(url: string, {headers, ...others}: RequestInit) {

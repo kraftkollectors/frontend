@@ -4,8 +4,8 @@ import { useFilePicker } from "use-file-picker";
 import { MdOutlineUpload } from "react-icons/md";
 import { IoCloseCircle } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { FileContent } from "use-file-picker/types";
-import { Validator } from "use-file-picker/validators";
+import { FileContent, UseFilePickerConfig } from "use-file-picker/types";
+import { FileAmountLimitValidator, Validator } from "use-file-picker/validators";
 import { FaPlay } from "react-icons/fa6";
 import { debugLog } from "@/functions/helpers";
 import { JsonFile } from "@/functions/file";
@@ -16,8 +16,9 @@ export type AppFilePickerProps = {
   subtitle?: string;
   accept?: string;
   onSelect: (files: FileContent<string>[]) => void;
-  validators?: Validator[];
+  validators?: Validator<unknown, UseFilePickerConfig<any>>[];
   value?: string[];
+  max?: number;
 };
 
 export type AppCustomFile = {
@@ -50,13 +51,14 @@ export default function AppFilePicker({
   onSelect,
   validators,
   value,
+  max = 1,
 }: AppFilePickerProps) {
   const [prevFiles, setPrevFiles] = useState((value ?? []).map((url) => ({ type: 'url' as const, data: url })));
   const [selectedFiles, setSelectedFiles] = useState<PickedFile[]>([]);
   const { openFilePicker, filesContent, loading } = useFilePicker({
     readAs: "DataURL",
     accept,
-    validators,
+    validators: [new FileAmountLimitValidator({min: 1, max: max - prevFiles.length}), ...(validators ? validators : [])],
     onFilesSelected({ filesContent: data }) {
       setSelectedFiles((data as FileContent<string>[]).map((file) => ({ type: 'file', data: file })));
     },

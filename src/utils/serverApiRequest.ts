@@ -29,9 +29,27 @@ export const ServerApiRequest = {
             ...others,
             method: 'POST',
             headers: {
-                ...headers,
                 'x-access-token': accessToken,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                ...headers,
+            },
+            body: JSON.stringify(body),
+        });
+    },
+    postFormdata(url: string,body:any, init: RequestInit = {}) {
+        debugLog(body);
+        const {get, has} = cookies();
+        if(!has(appCookies.accessToken)) return null;
+        const accessToken = get(appCookies.accessToken)!.value;
+        const {headers, ...others} = init;
+        
+        return fetch(url, {
+            ...others,
+            method: 'POST',
+            headers: {
+                'x-access-token': accessToken,
+                'Content-Type': 'multipart/form-data',
+                ...headers,
             },
             body: JSON.stringify(body),
         });

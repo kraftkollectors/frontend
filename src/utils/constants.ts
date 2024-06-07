@@ -10,3 +10,7 @@ export const ARTISAN_DEGREE_TYPES = [
 ];
 
 export const GENDERS = ['male', 'female']
+
+export const ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'gif']
+export const ALLOWED_VIDEO_EXTENSIONS = ['mp4', 'm4a'];
+export const $1MB = 1024 * 1024 * 1;

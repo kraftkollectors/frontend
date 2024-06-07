@@ -1,6 +1,6 @@
 "use client";
 
-import { updateService } from "@/actions";
+import { newService, updateService } from "@/actions";
 import { FormButton, FormMessage, UseCurrentLocation } from "@/components";
 import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
@@ -21,7 +21,7 @@ export default function ServicesForm({service}:{service:Service}) {
     return statesLoading ? null : statesError ? null :
     (states && states !== 'error' && states.length) ? states : null
   }, [states, statesLoading, statesError]);
-  const [res, action] = useFormState(updateService, {});
+  const [res, action] = useFormState(newService, {});
 
   useLayoutEffect(()=>{
     if(!res.success) return;
@@ -30,6 +30,7 @@ export default function ServicesForm({service}:{service:Service}) {
   
   return (
     <form action={action}>
+      <input type="hidden" name="_id" value={service._id} className="hidden" hidden />
       <div className="flex flex-col gap-4">
         <div className="md:grid md:grid-cols-12 gap-4">
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
@@ -133,7 +134,7 @@ export default function ServicesForm({service}:{service:Service}) {
           <div className="col-span-5  flex flex-col gap-2">
              <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]}  />
             
-            <AppInput error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
+            <AppInput value={service.address} error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
             <UseCurrentLocation />
           </div>
         </div>
@@ -145,6 +146,7 @@ export default function ServicesForm({service}:{service:Service}) {
             <AppFilePicker
             name="coverPhoto"
               title="cover Photo"
+              value={[service.coverPhoto]}
               onSelect={(_) => {}}
               accept="image/*"
               validators={[

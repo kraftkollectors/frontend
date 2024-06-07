@@ -23,12 +23,13 @@ export async function updateUserPhoto(_: any, formData: FormData): Promise<Actio
     }
     try {
         let img: any;
-        if (!data.delete) {
+        let del = data.delete == 'true';
+        if (!del) {
             img = await uploadSingleFile(formData);
             if (typeof img === 'string') return { error: img ?? "Image Upload failed" }
         }
 
-        const req = await ServerApiRequest.patch(apis.updateUserProfile(data.userId), { image: data.delete ? '' : img.url, ...data });
+        const req = await ServerApiRequest.patch(apis.updateUserProfile(data.userId), { image: del ? '' : img.url, ...data });
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 
