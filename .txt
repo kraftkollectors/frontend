@@ -153,6 +153,17 @@ post "/geturl" data to send.
 
 
 
+users/rateads/serviceID         GET    to get reviews for an add. the the one i sent last was to create reviws
+
+
+On Thu, Jun 6, 2024 at 7:46 PM chuks chibyke <chukschibyke92@gmail.com> wrote:
+users/contact       POST
+users/savead         POST
+users/getsavead/:userid     GET
+users/savead/:id    DELETE
+
+users/reportad        POST
+users/rateads         POST
 
 
 

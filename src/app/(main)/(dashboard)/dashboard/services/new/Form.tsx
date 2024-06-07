@@ -134,10 +134,11 @@ export default function ServicesForm() {
             max={1}
             name="coverPhoto"
               title="cover Photo"
+              subtitle="Select 1 image up to 2MB"
               onSelect={(_) => {}}
               accept=""
               validators={[
-                new FileTypeValidator(["jpg", "png", "jpeg", 'mp4']),
+                new FileTypeValidator(ALLOWED_IMAGE_EXTENSIONS),
                 new FileSizeValidator({
                   maxFileSize: 2 * $1MB /* 2 MB */,
                 }),
@@ -154,8 +155,9 @@ export default function ServicesForm() {
             name="portfolio"
               accept=""
               title="cover Photo"
-              subtitle="JPG, GIF, WebM, MP4, PNG, up to 5MB"
+              subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
               onSelect={(_) => {}}
+              max={5}
               validators={[
                 new FileTypeValidator([
                   ...ALLOWED_IMAGE_EXTENSIONS,

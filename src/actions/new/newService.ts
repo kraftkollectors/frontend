@@ -37,76 +37,88 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
     const tryParse = schema.safeParse(data);
 
     if (!tryParse.success) return { fieldErrors: tryParse.error.flatten().fieldErrors, error: "Fix errors and submit" };
-
     let _formData = new FormData();
     let coverPhotoUrl: string;
     let proceed = false;
-    if (data.coverPhoto == "[]" || data.portfolio == '[]') return { error: "please upload cover photo and portfolio" }
     try {
-        const json = JSON.parse(data.coverPhoto)[0] as AppCustomFile;
-        if (json.type === 'file') {
-            const blob = createFileFromObject(json.data);
-            debugLog(blob.size);
-            _formData.append('file', blob);
+        if (data.coverPhoto == "[]" || data.portfolio == '[]') return { error: "please upload cover photo and portfolio" }
+        try {
+            const json = JSON.parse(data.coverPhoto)[0] as AppCustomFile;
+            if (json.type === 'file') {
+                const blob = createFileFromObject(json.data);
+                debugLog(blob.size);
+                _formData.append('file', blob);
+                _formData.append('userId', data.userId);
+                _formData.append('userEmail', data.userEmail);
+                let coverPhoto = await uploadSingleFile(_formData)
+                if (typeof coverPhoto === 'string') return { error: coverPhoto }
+                coverPhotoUrl = coverPhoto.url;
+            } else coverPhotoUrl = json.data;
+        } catch (error) {
+            debugLog(error)
+            return { error: "Failed to upload cover photo" }
+        }
+
+        const portfolioUrls: string[] = [];
+        debugLog(data.portfolio!.length)
+        debugLog(data.portfolio![1048574])
+        debugLog(data.portfolio![1048575])
+        debugLog(data.portfolio![1048576])
+        debugLog(data.portfolio![1048577])
+        debugLog(data.portfolio!.lastIndexOf(']'))
+        const portfolios = JSON.parse(data.portfolio) as AppCustomFile[];
+        debugLog({ length: portfolios.length })
+        _formData = new FormData();
+        portfolios.forEach(i => {
+            if (i.type === 'file') {
+                const blob = createFileFromObject(i.data);
+                _formData.append('files', blob);
+
+            } else {
+                portfolioUrls.push(i.data);
+            }
+        })
+
+        try {
+
             _formData.append('userId', data.userId);
             _formData.append('userEmail', data.userEmail);
-            let coverPhoto = await uploadSingleFile(_formData)
-            if (typeof coverPhoto === 'string') return { error: coverPhoto }
-            coverPhotoUrl = coverPhoto.url;
-        } else coverPhotoUrl = json.data;
-    } catch (error) {
-        debugLog(error)
-        return { error: "Failed to upload cover photo" }
-    }
-
-    const portfolioUrls: string[] = [];
-    const portfolios = JSON.parse(data.portfolio) as AppCustomFile[];
-    debugLog({ length: portfolios.length })
-    _formData = new FormData();
-    portfolios.forEach(i => {
-        if (i.type === 'file') {
-            const blob = createFileFromObject(i.data);
-            _formData.append('files', blob);
-
-        } else {
-            portfolioUrls.push(i.data);
+            const portfolios = await uploadFiles(_formData)
+            if (typeof portfolios === 'string') throw new Error()
+            portfolioUrls.push(...portfolios);
+        } catch (error) {
+            debugLog(error)
+            //    throw new Error()
+            return {
+                error: "Failed to upload portfolio",
+            }
         }
-    })
 
-    try {
+        // return { error: 'error' };
 
-        _formData.append('userId', data.userId);
-        _formData.append('userEmail', data.userEmail);
-        let portfolios = await uploadFiles(_formData)
-        if (typeof portfolios === 'string') throw new Error()
-        portfolioUrls.push(portfolios.url);
-    } catch (error) {
-        debugLog(error)
-        //    throw new Error()
-        return {
-            error: "Failed to upload portfolio",
+        const postId = data._id;
+        const _data = { ...data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
+
+        try {
+            const req = await (postId ? ServerApiRequest.patch(apis.editArtisanService(postId), _data) : ServerApiRequest.post(apis.uploadService, _data));
+            const res = (await req?.json()) as ApiResponse;
+            debugLog(res);
+
+            if (res.statusCode === 201) {
+                revalidateTag(tags.myServices);
+                revalidatePath(paths.dashboardServices);
+                proceed = true;
+            }
+            else return { error: res.data ?? "Something went wrong" }
+        } catch (error) {
+            debugLog(error);
+            return { error: "Something went wrong" }
         }
-    }
 
-    // return { error: 'error' };
-
-    const postId = data._id;
-    const _data = { ...data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
-
-    try {
-        const req = await (postId ? ServerApiRequest.patch(apis.editArtisanService(postId), _data) : ServerApiRequest.post(apis.uploadService, _data));
-        const res = (await req?.json()) as ApiResponse;
-        debugLog(res);
-
-        if (res.statusCode === 201) {
-            revalidateTag(tags.myServices);
-            revalidatePath(paths.dashboardServices);
-            proceed = true;
-        }
-        else return { error: res.data ?? "Something went wrong" }
     } catch (error) {
         debugLog(error);
         return { error: "Something went wrong" }
+
     }
     if (proceed) {
         redirect(paths.dashboardServices);

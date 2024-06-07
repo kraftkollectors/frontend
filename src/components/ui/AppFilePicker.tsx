@@ -9,6 +9,8 @@ import { FileAmountLimitValidator, Validator } from "use-file-picker/validators"
 import { FaPlay } from "react-icons/fa6";
 import { debugLog } from "@/functions/helpers";
 import { JsonFile } from "@/functions/file";
+import { toast } from "react-toastify";
+import AppToast from "../Toast";
 
 export type AppFilePickerProps = {
   name?: string;
@@ -60,7 +62,11 @@ export default function AppFilePicker({
     accept,
     validators: [new FileAmountLimitValidator({min: 1, max: max - prevFiles.length}), ...(validators ? validators : [])],
     onFilesSelected({ filesContent: data }) {
+      try{
       setSelectedFiles((data as FileContent<string>[]).map((file) => ({ type: 'file', data: file })));
+      }catch(e){
+        toast(<AppToast.error message="Something went wrong" />)
+      }
     },
   });
 

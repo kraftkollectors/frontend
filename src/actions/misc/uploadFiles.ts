@@ -4,14 +4,14 @@ import { apis } from "@/utils";
 import { ApiRequest } from "@/utils/apiRequest";
 import { ApiResponse } from "@/utils/types/basicTypes";
 
-export async function uploadFiles(formData: FormData): Promise<(string | {url: string})>{
+export async function uploadFiles(formData: FormData): Promise<(string | string[])>{
     try {
         const req = await ApiRequest.postFormData(apis.uploadManyFiles, formData, false);
         const res = (await req.json()) as ApiResponse;
         debugLog({res});
 
         if(res.statusCode == 201){
-            return {url: res.data.uploadUrl}
+            return res.data.map((i:any) => i.uploadUrl)
         }
         return res.data.toString();
     } catch (error) {

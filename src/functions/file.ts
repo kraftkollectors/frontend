@@ -53,3 +53,14 @@ export function createFileFromObject(fileObject: JsonFile) {
     const fileType = parts[0].replace('data:', '').trim().split(';')[0];
     return new File([blob], fileObject.name, { lastModified: fileObject.lastModified, type: fileType });
 }
+
+export function splitLongString(str: string) {
+    const chunkSize = 1000000; // 1 million characters per chunk
+    const result = [];
+    
+    for (let i = 0; i < str.length; i += chunkSize) {
+        result.push(str.slice(i, i + chunkSize));
+    }
+    
+    return JSON.stringify(result);
+}

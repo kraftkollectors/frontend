@@ -55,3 +55,14 @@ export function joinFormData(formData1:FormData, formData2:FormData) {
     }
     return formData1;
   }
+
+
+
+
+  void function(){
+    const a = new FormData();
+    a.append('a', 'b');
+    a.append('a', 'd');
+
+    debugLog(formDataToObject(a))
+  }();

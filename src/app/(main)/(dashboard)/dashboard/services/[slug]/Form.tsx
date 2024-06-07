@@ -7,6 +7,7 @@ import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
+import { ALLOWED_IMAGE_EXTENSIONS, $1MB, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { Service } from "@/utils/types/service";
 import { useLayoutEffect, useMemo } from "react";
 import { useFormState } from "react-dom";
@@ -144,15 +145,17 @@ export default function ServicesForm({service}:{service:Service}) {
           </label>
           <div className="col-span-4">
             <AppFilePicker
+            value={[service.coverPhoto]}
+            max={1}
             name="coverPhoto"
               title="cover Photo"
-              value={[service.coverPhoto]}
+              subtitle="Select 1 image up to 2MB"
               onSelect={(_) => {}}
-              accept="image/*"
+              accept=""
               validators={[
-                new FileTypeValidator(["jpg", "png", "jpeg"]),
+                new FileTypeValidator(ALLOWED_IMAGE_EXTENSIONS),
                 new FileSizeValidator({
-                  maxFileSize: 2 * 1024 * 1024 /* 2 MB */,
+                  maxFileSize: 2 * $1MB /* 2 MB */,
                 }),
               ]}
             />
@@ -168,19 +171,16 @@ export default function ServicesForm({service}:{service:Service}) {
             name="portfolio"
               accept=""
               title="cover Photo"
-              subtitle="JPG, GIF, WebM, MP4, PNG, up to 5MB"
+              subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
               onSelect={(_) => {}}
+              max={5}
               validators={[
                 new FileTypeValidator([
-                  "jpg",
-                  "png",
-                  "webm",
-                  "png",
-                  "gif",
-                  "mp4",
+                  ...ALLOWED_IMAGE_EXTENSIONS,
+                  ...ALLOWED_VIDEO_EXTENSIONS,
                 ]),
                 new FileSizeValidator({
-                  maxFileSize: 5 * 1024 * 1024 /* 5 MB */,
+                  maxFileSize: 5 * $1MB /* 5 MB */,
                 }),
               ]}
             />
