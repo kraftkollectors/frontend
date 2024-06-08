@@ -96,7 +96,7 @@ export default memo(function AppInput({
               if (onChange) onChange(e.target.value);
             }}
             className={`app-input ${!icon ? "ps-3" : "ps-9"} ${
-              error ? "bg-red-100" : ""
+              (error||fieldError) ? "!bg-red-100" : ""
             }`}
           />
         ) : (
@@ -114,7 +114,7 @@ export default memo(function AppInput({
               if (onChange) onChange(e.target.value);
             }}
             className={`app-input ${ps ? ps : !icon ? "ps-4" : "ps-9"}  ${
-              error ? "bg-red-100" : ""
+              (error||fieldError) ? "!bg-red-100" : ""
             }`}
           />
         )}

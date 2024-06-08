@@ -7,7 +7,7 @@ export default function SimilarPosts() {
       <h1 className="text-title font-bold pb-6">Similar Posts</h1>
       <div className="services-grid">
         {dummyServices.map(service =>
-          <ServiceCard key={service.id} {...service} />
+          <ServiceCard key={service._id} {...service} />
         )}
       </div>
     </section>

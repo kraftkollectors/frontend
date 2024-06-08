@@ -1,81 +1,65 @@
 import { ArtisanReviewCardProps } from "@/components/ArtisanReviewCard";
-import { ServiceCardProps } from "@/components/ServiceCard";
+import { Service } from "@/utils/types/service";
 import { ReviewLineProps } from "@/components/ui/ReviewLines";
 
-export const dummyServices: ServiceCardProps[] = [
+const _dummyServices = [
   {
-    img: "/images/auth-bg.png",
+    coverPhoto: "/images/auth-bg.png",
     title: "I will create the altimate sound track for your events",
-    price: "200,000",
-    duration: "session",
+    estimatedPrice: "200,000",
+    charge: "session",
     category: "Entertainment | Dj",
-    id: "7912gfbh",
-    artisan: {
-      name: "John Doe",
-      img: "/images/auth-bg.png",
-    },
+    _id: "7912gfbh",
+    
   },
   {
-    img: "/images/auth-bg.png",
+    coverPhoto: "/images/auth-bg.png",
     title: "I will create the altimate sound track for your events",
-    price: "200,000",
-    duration: "session",
+    estimatedPrice: "200,000",
+    charge: "session",
     category: "Entertainment | Dj",
-    id: "h9fufos",
-    artisan: {
-      name: "John Doe",
-      img: "/images/auth-bg.png",
-    },
+    _id: "h9fufos",
+    
   },
   {
-    img: "/images/auth-bg.png",
+    coverPhoto: "/images/auth-bg.png",
     title: "I will create the altimate sound track for your events",
-    price: "200,000",
-    duration: "session",
+    estimatedPrice: "200,000",
+    charge: "session",
     category: "Entertainment | Dj",
-    id: "wf9huf",
-    artisan: {
-      name: "John Doe",
-      img: "/images/auth-bg.png",
-    },
+    _id: "wf9huf",
+    
   },
   {
-    img: "/images/auth-bg.png",
+    coverPhoto: "/images/auth-bg.png",
     title: "I will create the altimate sound track for your events",
-    price: "200,000",
-    duration: "session",
+    estimatedPrice: "200,000",
+    charge: "session",
     category: "Entertainment | Dj",
-    id: "ouhfefg",
-    artisan: {
-      name: "John Doe",
-      img: "/images/auth-bg.png",
-    },
+    _id: "ouhfefg",
+    
   },
   {
-    img: "/images/auth-bg.png",
+    coverPhoto: "/images/auth-bg.png",
     title: "I will create the altimate sound track for your events",
-    price: "200,000",
-    duration: "session",
+    estimatedPrice: "200,000",
+    charge: "session",
     category: "Entertainment | Dj",
-    id: "9un3v",
-    artisan: {
-      name: "John Doe",
-      img: "/images/auth-bg.png",
-    },
+    _id: "9un3v",
+    
   },
   {
-    img: "/images/auth-bg.png",
+    coverPhoto: "/images/auth-bg.png",
     title: "I will create the altimate sound track for your events",
-    price: "200,000",
-    duration: "session",
+    estimatedPrice: "200,000",
+    charge: "session",
     category: "Entertainment | Dj",
-    id: "9fuhufwje",
-    artisan: {
-      name: "John Doe",
-      img: "/images/auth-bg.png",
-    },
+    _id: "9fuhufwje",
+    
   },
 ];
+
+export const dummyServices = _dummyServices as Service[];
 
 export const dummyReviews: ArtisanReviewCardProps[] = [
   {
@@ -88,11 +72,11 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     review: "Excellent service, I wish I could give more than 5 stars",
     date: "12/12/2023",
     service: {
-      id: "97qfwbh",
+      _id: "97qfwbh",
       title: "Dj Sets",
-      duration: "session",
-      price: "20,000",
-      img: "/images/auth-bg.png",
+      charge: "session",
+      estimatedPrice: "20,000",
+      coverPhoto: "/images/auth-bg.png",
     },
   },
   {
@@ -105,11 +89,11 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     review: "Excellent service, I wish I could give more than 5 stars",
     date: "12/12/2023",
     service: {
-      id: "97qfwbh",
+      _id: "97qfwbh",
       title: "Dj Sets",
-      duration: "session",
-      price: "20,000",
-      img: "/images/auth-bg.png",
+      charge: "session",
+      estimatedPrice: "20,000",
+      coverPhoto: "/images/auth-bg.png",
     },
   },
   {
@@ -122,11 +106,11 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     review: "Excellent service, I wish I could give more than 5 stars",
     date: "12/12/2023",
     service: {
-      id: "97qfwbh",
+      _id: "97qfwbh",
       title: "Dj Sets",
-      duration: "session",
-      price: "20,000",
-      img: "/images/auth-bg.png",
+      charge: "session",
+      estimatedPrice: "20,000",
+      coverPhoto: "/images/auth-bg.png",
     },
   },
 ];

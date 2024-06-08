@@ -7,7 +7,7 @@ export default function MyServices() {
       <h1 className="font-bold pb-4 text-title">My Services</h1>
       <div className="services-grid">
         {dummyServices.map((service) => (
-          <ServiceCard key={service.id} {...service} />
+          <ServiceCard key={service._id} {...service} />
         ))}
       </div>
     </section>

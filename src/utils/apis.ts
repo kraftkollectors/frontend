@@ -49,7 +49,7 @@ const apis = {
     },
 
     artisan: API + "/users/artisan",
-    uploadService: API + "/users/ads",
+    services: API + "/users/ads",
     getArtisanServices(id:string){
         return `${API}/users/myads/${id}`
     },
@@ -59,6 +59,8 @@ const apis = {
     editArtisanService(id:string){
         return `${API}/users/ads/edit/${id}`
     },
+
+    contactSupport: API + "/users/contact",
 }
 
 export default apis;

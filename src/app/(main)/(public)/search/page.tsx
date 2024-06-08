@@ -1,10 +1,15 @@
 import RelatedSearch from "./RelatedSearch";
 import SearchResult from "./SearchResult";
 import SearchOption from "./SearchOption";
-import { Pagination } from "@/components";
 import PostList from "./PostList";
+import { fetchServices } from "@/actions";
+import { cookies } from "next/headers";
 
-export default function searchPage() {
+export default async function searchPage() {
+  cookies().get('__user_id')
+  const ads = await fetchServices();
+  if(!ads || ads == 'error') throw new Error("Connection error")
+  
   return (
     <div className="">
       <RelatedSearch />
@@ -12,7 +17,7 @@ export default function searchPage() {
         <SearchResult />
         <SearchOption />
       </div>
-      <PostList />
+      <PostList services={ads.existingRecords} />
       <div className=" flex items-center justify-center py-2">
         {/* <Pagination /> */}
       </div>

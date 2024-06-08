@@ -2,6 +2,7 @@ import { FaCediSign } from "react-icons/fa6";
 
 const paths = {
   home: "/",
+  search: (query = '') => `/search/${query}`,
 
   // auth paths
   login: "/login",

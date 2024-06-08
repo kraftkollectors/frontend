@@ -8,7 +8,7 @@ import { FileContent, UseFilePickerConfig } from "use-file-picker/types";
 import { FileAmountLimitValidator, Validator } from "use-file-picker/validators";
 import { FaPlay } from "react-icons/fa6";
 import { debugLog } from "@/functions/helpers";
-import { JsonFile } from "@/functions/file";
+import { chunkifyString, JsonFile } from "@/functions/file";
 import { toast } from "react-toastify";
 import AppToast from "../Toast";
 
@@ -79,9 +79,17 @@ export default function AppFilePicker({
   if (loading) {
     return <div>loading ...</div>;
   }
+  const allFiles = [...prevFiles, ...selectedFiles];
   return (
     <div className="">
-      <input type="hidden" defaultValue={JSON.stringify([...prevFiles, ...selectedFiles])} hidden name={name} />
+      <div>
+        <input  type="hidden" defaultValue={chunkifyString(JSON.stringify(allFiles)).length} hidden name={name} />
+        {
+          chunkifyString(JSON.stringify(allFiles)).map((chunk, index) => (
+            <input key={index} type="hidden" defaultValue={chunk} hidden name={name+index} />
+          ))
+        }
+      </div>
       <div
         onClick={() => openFilePicker()}
         className="flex items-center flex-col border border-dotted border-gray-400 rounded h-24 w-full justify-center"

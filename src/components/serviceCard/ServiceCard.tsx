@@ -1,27 +1,26 @@
 import { BasicService, BasicUser } from "@/utils/types/basicTypes";
+import { Service } from "@/utils/types/service";
+import { Suspense } from "react";
 import { FaRegHeart } from "react-icons/fa6";
+import UserProfile from "./UserProfile";
 
 /* eslint-disable @next/next/no-img-element */
 
-export type ServiceCardProps = BasicService & {
-  artisan: BasicUser;
-  category: string;
-};
 
 export function ServiceCard({
-  img,
-  artisan,
+  coverPhoto,
   category,
   title,
-  price,
-  duration,
-  id
-}: ServiceCardProps) {
+  estimatedPrice,
+  charge,
+   _id,
+   ...service
+}: Service) {
   return (
     <div className="flex flex-col gap-1">
       <div className="relative w-full h-44 md:h-48">
         <img
-          src={img}
+          src={coverPhoto}
           alt={title}
           className="rounded-md overflow-hidden object-cover w-full h-full"
         />
@@ -30,10 +29,12 @@ export function ServiceCard({
         </button>
       </div>
       <div className="flex gap-1 items-center">
-        <img src={artisan.img} alt={artisan.name} className="avatar size-6" />
-        <h1 className="text-label font-bold truncate line-clamp-1">
-          {artisan.name}
-        </h1>
+        <Suspense fallback={<>
+        <div className="skeleton avatar size-6"></div>
+        <div className="skeleton h-4 w-20"></div>
+    </>}>
+          <UserProfile userId={service.userId} />
+        </Suspense>
       </div>
       <p className="truncate text-label text-black-300">
         {category}
@@ -42,7 +43,7 @@ export function ServiceCard({
         {title}
       </p>
       <p className="font-bold text-black-600">
-        N{price} / {duration}
+        N{estimatedPrice} / {charge}
       </p>
     </div>
   );

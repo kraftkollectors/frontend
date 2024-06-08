@@ -7,12 +7,13 @@ export type BasicUser = {
 };
 
 export type BasicService = {
-  img: string;
+  coverPhoto: string;
   title: string;
-  price: string;
-  duration: string;
-  id: string;
+  estimatedPrice: string;
+  charge: string;
+  _id: string;
 };
+
 
 export type VideoOrImage = "video" | "image";
 

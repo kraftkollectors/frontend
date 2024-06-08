@@ -36,7 +36,7 @@ export function ArtisanReviewCard({
       {service && (
         <div className="flex gap-2 items-center">
           <img
-            src={service.img}
+            src={service.coverPhoto}
             alt={service.title}
             className="w-4/12 object-cover aspect-[5/3] rounded"
           />
@@ -44,7 +44,7 @@ export function ArtisanReviewCard({
             <h1 className="text-black-300">Reviewed</h1>
             <h2>{service.title}</h2>
             <p className="font-bold">
-              N{service.price} / {service.duration}
+              N{service.estimatedPrice} / {service.charge}
             </p>
           </div>
         </div>

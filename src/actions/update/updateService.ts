@@ -71,7 +71,7 @@ export async function updateService(_: ActionResponse, formData: FormData): Prom
     const _data = { ...data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
 
     try {
-        const req = await ServerApiRequest.post(apis.uploadService, _data);
+        const req = await ServerApiRequest.post(apis.services, _data);
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 

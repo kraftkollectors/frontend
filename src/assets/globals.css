@@ -49,7 +49,7 @@
     @apply btn gap-2 text-primary rounded-md hover:bg-blue-100 px-1.5;
   }
   .btn-primary-tiny {
-    @apply bg-primary border border-primary btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-primary-darkActive text-sm font-normal inline-flex gap-1;
+    @apply bg-primary border border-primary btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-primary-hover text-sm font-normal inline-flex gap-1;
   }
   .btn-dark-tiny {
     @apply bg-black-600 border border-black-600 btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-normal inline-flex gap-1;

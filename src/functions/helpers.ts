@@ -56,13 +56,10 @@ export function joinFormData(formData1:FormData, formData2:FormData) {
     return formData1;
   }
 
+export function capitalizeFirst(s:string){
+    return s.split('').map((v,i)=>i==0 ? v.toUpperCase() : v).join('');
+}
 
-
-
-  void function(){
-    const a = new FormData();
-    a.append('a', 'b');
-    a.append('a', 'd');
-
-    debugLog(formDataToObject(a))
-  }();
+export function fullName(...props: (string|undefined)[]){
+    return props.map(v=>capitalizeFirst(v ?? '')).join(' ');
+}

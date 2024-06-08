@@ -5,7 +5,7 @@ import { apis, paths, tags, validators } from "@/utils"
 import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes"
 import { z } from "zod"
 import { uploadSingleFile } from "../misc/uploadSingleFile"
-import { JsonFile, createFileFromObject } from "@/functions/file"
+import { JsonFile, createFileFromObject, loadFileFromFormData, removeFilesFromFormData } from "@/functions/file"
 import { ServerApiRequest } from "@/utils/serverApiRequest"
 import { revalidatePath, revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
@@ -33,7 +33,7 @@ type ServiceFormData = z.infer<typeof schema> & {
 
 export async function newService(_: ActionResponse, formData: FormData): Promise<ActionResponse> {
     const data = formDataToObject<ServiceFormData>(formData);
-    debugLog(data)
+    // debugLog(data)
     const tryParse = schema.safeParse(data);
 
     if (!tryParse.success) return { fieldErrors: tryParse.error.flatten().fieldErrors, error: "Fix errors and submit" };
@@ -41,9 +41,9 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
     let coverPhotoUrl: string;
     let proceed = false;
     try {
-        if (data.coverPhoto == "[]" || data.portfolio == '[]') return { error: "please upload cover photo and portfolio" }
+        if (data.coverPhoto == "0" || data.portfolio == '0') return { error: "please upload cover photo and portfolio" }
         try {
-            const json = JSON.parse(data.coverPhoto)[0] as AppCustomFile;
+            const json = JSON.parse(loadFileFromFormData(formData, 'coverPhoto', data.coverPhoto))[0] as AppCustomFile;
             if (json.type === 'file') {
                 const blob = createFileFromObject(json.data);
                 debugLog(blob.size);
@@ -60,13 +60,7 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
         }
 
         const portfolioUrls: string[] = [];
-        debugLog(data.portfolio!.length)
-        debugLog(data.portfolio![1048574])
-        debugLog(data.portfolio![1048575])
-        debugLog(data.portfolio![1048576])
-        debugLog(data.portfolio![1048577])
-        debugLog(data.portfolio!.lastIndexOf(']'))
-        const portfolios = JSON.parse(data.portfolio) as AppCustomFile[];
+        const portfolios = JSON.parse(loadFileFromFormData(formData, 'portfolio', data.portfolio)) as AppCustomFile[];
         debugLog({ length: portfolios.length })
         _formData = new FormData();
         portfolios.forEach(i => {
@@ -97,12 +91,15 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
         // return { error: 'error' };
 
         const postId = data._id;
-        const _data = { ...data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
+        let newFormData = removeFilesFromFormData(formData, 'coverPhoto', data.coverPhoto);
+        newFormData = removeFilesFromFormData(newFormData, 'portfolio', data.portfolio);
+        let _data = formDataToObject<ServiceFormData>(newFormData);
+        _data = { ..._data, coverPhoto: coverPhotoUrl, portfolio: portfolioUrls };
 
         try {
-            const req = await (postId ? ServerApiRequest.patch(apis.editArtisanService(postId), _data) : ServerApiRequest.post(apis.uploadService, _data));
+            const req = await (postId ? ServerApiRequest.patch(apis.editArtisanService(postId), _data) : ServerApiRequest.post(apis.services, _data));
             const res = (await req?.json()) as ApiResponse;
-            debugLog(res);
+            debugLog({response:res});
 
             if (res.statusCode === 201) {
                 revalidateTag(tags.myServices);

@@ -6,6 +6,7 @@ import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import FileInput from "@/components/ui/NewFilePicker";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import { ALLOWED_IMAGE_EXTENSIONS, $1MB, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { Service } from "@/utils/types/service";
@@ -165,6 +166,7 @@ export default function ServicesForm({service}:{service:Service}) {
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
             Portfolio
           </label>
+          {/* <FileInput /> */}
           <div className="col-span-4">
             <AppFilePicker
             value={service.portfolio}

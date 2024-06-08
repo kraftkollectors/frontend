@@ -64,3 +64,44 @@ export function splitLongString(str: string) {
     
     return JSON.stringify(result);
 }
+
+export function chunkifyString(str: string, chunkSize: number = 1000000): string[] {
+    const chunks: string[] = [];
+    let start = 0;
+    let end = chunkSize;
+
+    while (start < str.length) {
+        chunks.push(str.substring(start, end));
+        start = end;
+        end = start + chunkSize;
+    }
+
+    return chunks;
+}
+
+export function deChunkifyString(chunks: string[]): string {
+    return chunks.join('');
+}
+
+export function loadFileFromFormData(formData: FormData, key: string, c: any) {
+    const count = Number(c);
+    if(Number.isNaN(count) || count < 0) throw new Error("Invalid count");
+    let res = '';
+    for (let i = 0; i < count; i++) {
+        res += formData.get(`${key}${i}`) as string;
+    }
+    debugLog(count);
+    debugLog(res.length);
+    return res;
+}
+
+export function removeFilesFromFormData(formData: FormData, key: string, c: any) {
+    const count = Number(c);
+    if(Number.isNaN(count) || count < 0) throw new Error("Invalid count");
+    let newFormData = formData;
+    newFormData.delete(key);
+    for (let i = 0; i < count; i++) {
+        formData.delete(`${key}${i}`);
+    }
+    return newFormData;
+}
