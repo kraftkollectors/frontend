@@ -4,6 +4,8 @@ import SearchOption from "./SearchOption";
 import PostList from "./PostList";
 import { fetchServices } from "@/actions";
 import { cookies } from "next/headers";
+import { Pagination } from "@/components";
+import { paths } from "@/utils";
 
 export default async function searchPage() {
   cookies().get('__user_id')
@@ -19,7 +21,7 @@ export default async function searchPage() {
       </div>
       <PostList services={ads.existingRecords} />
       <div className=" flex items-center justify-center py-2">
-        {/* <Pagination /> */}
+        <Pagination baseUrl={paths.search()} pagination={ads} />
       </div>
     </div>
   );

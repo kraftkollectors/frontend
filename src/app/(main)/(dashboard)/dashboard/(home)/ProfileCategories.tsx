@@ -7,12 +7,6 @@ import { Suspense } from "react";
 import Description from "./Description";
 import AwayMessage from "./AwayMessage";
 
-export type ProfileCategoriesProps = {
-  description: string;
-  awayMessage: string;
-  education?: string;
-};
-
 export default function ProfileCategories() {
 
   return (

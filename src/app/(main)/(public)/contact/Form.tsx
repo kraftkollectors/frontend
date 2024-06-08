@@ -76,7 +76,7 @@ export default function ContactForm() {
         <div className="gap-2 flex items-center">
           <p className="whitespace-nowrap font-semibold">our socials</p>
           <div className="w-full flex-shrink md:hidden"></div>
-          <SocialIcons facebook={paths.facebook} x={paths.twitter} linkedin={paths.linkedin} instagram={paths.instagram} />
+          <SocialIcons facebook={paths.facebook} twitter={paths.twitter} linkedin={paths.linkedin} instagram={paths.instagram} />
         </div>
       </div>
     </form>

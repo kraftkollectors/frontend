@@ -8,26 +8,29 @@ import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
 import { ArtisanDetails } from "@/utils/types/artisan";
+import { ApiRequest } from "@/utils/apiRequest";
 
 
 export type ArtisanApiResponse = {
     existingRecord: ArtisanDetails
 }
-export async function fetchArtisan({  throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<ArtisanDetails>> {
+export async function fetchArtisan({ throwsError = true, isPublic = false, params }: ServerActionParams<string> = {} ): Promise<ActionApiResponse<ArtisanDetails>> {
     let proceed = false;
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getArtisan(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getArtisan(accessId ?? ''), {
             next: { tags: [tags.user, tags.artisan] },
-        });
-        if(!req) return null;
+        }) : ServerApiRequest.get(apis.getArtisan(params ?? ''), {
+            next: { tags: [tags.user, tags.artisan] },
+        }));
+        if (!req) return null;
         const res = (await req.json()) as ApiResponse<ArtisanApiResponse>;
         // debugLog(res);
 
-        if((res as any).message == 'Invalid Token') proceed = true;
+        if ((res as any).message == 'Invalid Token') proceed = true;
         else if (res.statusCode === 201) return res.data.existingRecord;
         else if (throwsError) throw new Error("Unable to connect")
-        if(!proceed) return 'error';
+        if (!proceed) return 'error';
     } catch (error) {
         debugLog(error)
         if (throwsError) throw new Error("Something went wrong")
@@ -38,5 +41,5 @@ export async function fetchArtisan({  throwsError = true }: ServerActionParams =
     //     cookies().delete(appCookies.accessId);
     //     redirect(paths.login)
     // };
-    return 'error' 
+    return 'error'
 }

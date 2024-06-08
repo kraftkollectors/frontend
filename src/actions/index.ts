@@ -13,7 +13,7 @@ export {fetchUserCertificates} from './fetch/fetchUserCertificates'
 export {fetchUserEducations} from './fetch/fetchUserEducations'
 export {fetchServices} from './fetch/fetchServices'
 export {fetchArtisanServices} from './fetch/fetchArtisanServices'
-export {fetchSingleArtisanService} from './fetch/fetchSingleArtisanService'
+export {fetchSingleService as fetchSingleArtisanService} from './fetch/fetchSingleArtisanService'
 export {fetchNigerianStates} from './fetch/fetchNigerianStates'
 export {fetchNigerianStateLgas} from './fetch/fetchNigerianStateLgas'
 

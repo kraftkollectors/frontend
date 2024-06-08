@@ -63,3 +63,15 @@ export function capitalizeFirst(s:string){
 export function fullName(...props: (string|undefined)[]){
     return props.map(v=>capitalizeFirst(v ?? '')).join(' ');
 }
+
+export function formatNumber(num: number, asMoney = false): string {
+    const _num = num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    if(asMoney) return`₦${_num}`
+    return _num;
+}
+
+export function sanitizeSearch(q:string) {
+    // remove all special or url breaking characters
+    q = q.replace(/[^a-zA-Z0-9 ]/g, '');
+    return decodeURIComponent(q);
+}

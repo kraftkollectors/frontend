@@ -17,7 +17,7 @@ export default function Page() {
             // ]}
             memberSince="2004"
             socials={{
-              x: "b",
+              twitter: "b",
               instagram: "n",
               facebook: "j",
               linkedin: "k",

@@ -9,19 +9,22 @@ import { cookies } from "next/headers";
 import {  UserDetailsPlus } from "@/utils/types/user";
 import { ServerActionParams } from "@/utils/types/actions";
 import { redirect } from "next/navigation";
+import { ApiRequest } from "@/utils/apiRequest";
 
 
 export type UserApiResponse = {
     userDetails: UserDetailsPlus
 }
 
-export async function fetchUser({ redirect: shouldRedirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
+export async function fetchUser({ redirect: shouldRedirect = true, throwsError = true, isPublic = false, params }: ServerActionParams<string> = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
     let proceed = false;
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getUser(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getUser(accessId ?? ''), {
             next: { tags: [tags.user] },
-        });
+        }) : ServerApiRequest.get(apis.getUser(params ?? ''), {
+            next: { tags: [tags.user] },
+        }));
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserApiResponse>;
         // debugLog(res);

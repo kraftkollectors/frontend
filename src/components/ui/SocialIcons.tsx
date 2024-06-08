@@ -4,12 +4,12 @@ import {SlSocialLinkedin} from 'react-icons/sl';
 import {LuFacebook} from 'react-icons/lu';
 
 export type SocialIconsProps = {
-  x?:string;
+  twitter?:string;
   facebook?:string;
   instagram?:string;
   linkedin?:string;
 }
-export function SocialIcons({x,facebook,linkedin,instagram}:SocialIconsProps){
+export function SocialIcons({twitter: x,facebook,linkedin,instagram}:SocialIconsProps){
   const className = "p-2 hover:opacity-100 rounded-2xl border hover:bg-gray-100";
   return <>
   {

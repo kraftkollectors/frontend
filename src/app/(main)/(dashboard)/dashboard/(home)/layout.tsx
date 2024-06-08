@@ -1,7 +1,7 @@
 import { DashboardProfile } from "@/components/dashboard";
 import DashBoardNav from "./DashBoardNav";
 import ProfileCard from "./ProfileCard";
-import ProfileCategories, { ProfileCategoriesProps } from "./ProfileCategories";
+import ProfileCategories from "./ProfileCategories";
 
 
 export default function Layout({ children }: { children: React.ReactNode }) {
