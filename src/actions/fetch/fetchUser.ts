@@ -19,10 +19,11 @@ export type UserApiResponse = {
 export async function fetchUser({ redirect: shouldRedirect = true, throwsError = true, isPublic = false, params }: ServerActionParams<string> = {}): Promise<ActionApiResponse<UserDetailsPlus>> {
     let proceed = false;
     try {
+        // debugLog({isPublic, params})
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await (isPublic ? ApiRequest.getJson(apis.getUser(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getUser(params??''), {
             next: { tags: [tags.user] },
-        }) : ServerApiRequest.get(apis.getUser(params ?? ''), {
+        }) : ServerApiRequest.get(apis.getUser(accessId ?? ''), {
             next: { tags: [tags.user] },
         }));
         if(!req) return null;

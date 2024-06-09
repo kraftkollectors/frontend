@@ -4,6 +4,7 @@ import ServiceDetails from "./ServiceDetails";
 import Profile from "./Profile";
 import { Service } from "@/utils/types/service";
 import { Suspense } from "react";
+import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
 
 export default function Main({s}: {s:Service}) {
   return (
@@ -16,13 +17,7 @@ export default function Main({s}: {s:Service}) {
       <div className="max-md:app-container">
       <ServiceDetails {...s} />
       <div className="md:hidden pb-4 border-b">
-      <Suspense fallback={
-          <div className="skeleton h-96 w-full flex items-center p-10 flex-col gap-4">
-            <div className="avatar skeleton size-28"></div>
-            <div className="skeleton h-5 w-28"></div>
-            <div className="skeleton h-4 w-40"></div>
-          </div>
-        }>
+      <Suspense fallback={<UserProfileSkeleton />}>
         <Profile userId={s.userId} />
         </Suspense>
       </div>

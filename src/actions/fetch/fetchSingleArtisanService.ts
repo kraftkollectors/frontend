@@ -6,18 +6,19 @@ import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { ServerActionParams } from "@/utils/types/actions";
 import { ApiRequest } from "@/utils/apiRequest";
-import { Service } from "@/utils/types/service";
+import { Service, ServiceDetails } from "@/utils/types/service";
 
 
 
-export async function fetchSingleService(serviceId: string, { throwsError = true, isPublic = false }: ServerActionParams = {}): Promise<ActionApiResponse<Service>> {
+export async function fetchSingleService(serviceId: string, { throwsError = true, isPublic = false }: ServerActionParams = {}): Promise<ActionApiResponse<ServiceDetails>> {
+    debugLog({isPublic})
     try {
         const req = await (isPublic ? ApiRequest.getJson(apis.getSingleArtisanService(serviceId), {next: { revalidate: 0 },}) : ServerApiRequest.get(apis.getSingleArtisanService(serviceId), {
             next: { revalidate: 0 },
         }));
         if (!req) return null;
-        const res = (await req.json()) as ApiResponse<{existingRecord:Service}>;
-        debugLog(res);
+        const res = (await req.json()) as ApiResponse<{existingRecord:ServiceDetails}>;
+        // debugLog(res);
 
         if (res.statusCode == 404) return null;
         else if (res.statusCode === 201) return res.data.existingRecord;

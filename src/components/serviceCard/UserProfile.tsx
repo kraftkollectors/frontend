@@ -3,7 +3,7 @@ import { fullName } from "@/functions/helpers";
 
 /* eslint-disable @next/next/no-img-element */
 export default async function UserProfile({userId}:{userId:string}) {
-    const artisan = await fetchUser({params: userId, isPublic: true});
+    const artisan = await fetchUser({params: userId, isPublic: true, throwsError: false});
     if(!artisan || artisan == 'error') return <>
     <div className="skeleton avatar size-6"></div>
     <div className="skeleton h-4 w-20"></div>

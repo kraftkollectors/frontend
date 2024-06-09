@@ -17,12 +17,12 @@ import { debugLog, fallbackImage } from "@/functions/helpers";
 import { notFound } from "next/navigation";
 
 export default async function Profile({ userId }: { userId: string; }) {
+  debugLog({userId})
   const user = await fetchUser({ isPublic: true, params: userId });
   if (user == 'error') return;
-  debugLog(user)
   if (!user?.isArtisan) notFound()
 
-  let art = await fetchArtisan({ isPublic: true, params: user?.artisan[0] });
+  let art = await fetchArtisan({ isPublic: true, params: userId });
   if (art == 'error' || !art) throw new Error("Connection error")
 
 

@@ -18,9 +18,9 @@ export async function fetchArtisan({ throwsError = true, isPublic = false, param
     let proceed = false;
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await (isPublic ? ApiRequest.getJson(apis.getArtisan(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getArtisan(params ?? ''), {
             next: { tags: [tags.user, tags.artisan] },
-        }) : ServerApiRequest.get(apis.getArtisan(params ?? ''), {
+        }) : ServerApiRequest.get(apis.getArtisan(accessId ?? ''), {
             next: { tags: [tags.user, tags.artisan] },
         }));
         if (!req) return null;

@@ -15,3 +15,8 @@ export type Service = {
     portfolio: string[];
     coverPhoto: string;
 }
+
+export type ServiceDetails = Service & {
+    similarAds: Service[];
+    cummulativeRating: { averageRating: number, totalRatings: number }
+}

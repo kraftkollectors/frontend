@@ -24,7 +24,7 @@
   }
 
   .avatar {
-    @apply rounded-full aspect-square overflow-hidden object-cover;
+    @apply !rounded-full aspect-square overflow-hidden object-cover;
   }
 
   .btn {
