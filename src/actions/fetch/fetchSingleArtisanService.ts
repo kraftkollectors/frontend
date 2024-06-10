@@ -6,7 +6,7 @@ import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { ServerActionParams } from "@/utils/types/actions";
 import { ApiRequest } from "@/utils/apiRequest";
-import { Service, ServiceDetails } from "@/utils/types/service";
+import { ServiceDetails } from "@/utils/types/service";
 
 
 

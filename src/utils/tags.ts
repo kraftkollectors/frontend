@@ -4,6 +4,7 @@ const tags = {
     userCertificates: "user_certificates",
     userEducation: "user_education",
     myServices: "myServices",
+    mySingleFav: (id:string)=> `fav-${id}`,
 }
 
 

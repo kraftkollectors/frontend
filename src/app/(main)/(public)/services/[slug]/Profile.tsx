@@ -17,7 +17,7 @@ import { debugLog, fallbackImage } from "@/functions/helpers";
 import { notFound } from "next/navigation";
 
 export default async function Profile({ userId }: { userId: string; }) {
-  debugLog({userId})
+  // debugLog({userId})
   const user = await fetchUser({ isPublic: true, params: userId });
   if (user == 'error') return;
   if (!user?.isArtisan) notFound()
@@ -89,7 +89,7 @@ export default async function Profile({ userId }: { userId: string; }) {
         </div>
       </div>
       <div className="flex w-full justify-end">
-        <ReportDialog>
+        <ReportDialog reportedId={userId}>
           <button className="btn-dark-border !text-label px-3 py-1">
             <TbMessageReport />
             <span>Report</span>

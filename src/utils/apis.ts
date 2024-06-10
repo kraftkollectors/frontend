@@ -61,6 +61,9 @@ const apis = {
     },
 
     contactSupport: API + "/users/contact",
+    reportService: API + "/users/reportad",
+    checkFavourite: (user: string, service: string) => (`${API}/users/checksavead?userId=${user}&serviceId=${service}`),
+    toggleFavourite: (id = '') => (`${API}/users/savead${id ? '/'+id : ''}`),
 }
 
 export default apis;
