@@ -40,6 +40,7 @@ export type ApiResponse<T = any> = {
 export type ActionApiResponse<T, K = null> = null | "error" | T | K
 
 export type Paginated<T = any> = {
+  saved?: T[];
   existingRecords: T[],
     hasPreviousPage: boolean,
     previousPages: number,

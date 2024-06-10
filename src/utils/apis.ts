@@ -59,6 +59,7 @@ const apis = {
     editArtisanService(id:string){
         return `${API}/users/ads/edit/${id}`
     },
+    myFavouriteServices: (id:string) => (`${API}/users/getsavead/${id}`),
 
     contactSupport: API + "/users/contact",
     reportService: API + "/users/reportad",

@@ -1,11 +1,23 @@
+import { fetchSavedServices } from "@/actions";
 import { DashboardSavedCard } from "@/components/dashboard";
+import { paths } from "@/utils";
+import { Pagination } from "@/components";
 
-export default function Page() {
+export default async function Page() {
+  const services = await fetchSavedServices();
+  if (services == 'error' || !services) return <div className="info-box">An Error Occurred</div>
+
   return (
     <div className="flex flex-col gap-3">
-      {services.map((service) => (
-        <DashboardSavedCard key={service.id} {...service} />
-      ))}
+      {
+        services.saved!.length == 0 ? <div className="info-box">No saved Services</div>
+          : services.saved!.map((service) => (
+            <DashboardSavedCard key={service._id} {...service} />
+          ))}
+      <Pagination
+        className="flex border rounded bg-light"
+        baseUrl={paths.dashboardServices} pagination={services} />
+
     </div>
   );
 }

@@ -44,7 +44,7 @@ export async function googleAuth(data: {access_token: string}): Promise<ActionRe
             revalidatePath('/');
             revalidateTag(tags.user);
         }
-        else if(res.data.toString().startsWith('Error creating account')) return {
+        else if((res.data as any as string).startsWith('Error creating account')) return {
                 error: "needs_register",
                 data: googRes
             }

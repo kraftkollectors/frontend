@@ -9,7 +9,7 @@ export default function ServiceDetails({title, estimatedPrice, description, _id,
       <div className="flex justify-between gap-4 border-b pb-4">
         <p className="text-primary r-font-semibold text-title">{formatNumber(Number(estimatedPrice), true)}</p>
         <div className="flex w-fit gap-2 items-center">
-          <p className="text-dark-gray r-font-semibold text-label">{averageRating}</p>
+          <p className="text-dark-gray r-font-semibold text-label">{averageRating.toFixed(1)}</p>
           <RatingStars value={averageRating} size="md" />
           <FavouriteButton serviceId={_id} />
         </div>

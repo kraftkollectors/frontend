@@ -4,7 +4,7 @@ import { googleAuth, googleAuthRegister } from "@/actions";
 import { debugLog } from "@/functions/helpers";
 import { Dialog } from "@radix-ui/themes";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import AppInput, { AppInputProps } from "./ui/AppInput";
 import AppSelect from "./ui/AppSelect";
@@ -40,11 +40,11 @@ export function ContinueWithGoogleButton({ onError }: SocialButtonProps) {
   async function handleSuccess(res: { access_token: string }) {
     const data = await googleAuth(res);
     setLoading(false);
-    debugLog(data);
-    if (data && data.error) {
-      if (data.error === 'needs_register') {
-        setGoogRes(data.data);
+    // debugLog(data);
+    if (data && data.error && data.error) {
+      if (data.error == 'needs_register') {
         setNeedsRegister(true);
+        setGoogRes(data.data);
         return;
       }
       toast(<AppToast.error message={data.error} />);
@@ -60,7 +60,7 @@ export function ContinueWithGoogleButton({ onError }: SocialButtonProps) {
 
   return (
     <>
-      <GoogleAuthForm open={needsRegister} googRes={googRes} />
+      <GoogleAuthForm onOpenChange={setNeedsRegister} open={needsRegister} googRes={googRes} />
       {hasError ?
         <p className="flex p-2 justify-between items-center bg-red-100 border-red-800 text-red-800">
           <span>{hasError}</span>
@@ -104,7 +104,7 @@ export function ContinueWithGoogleButton({ onError }: SocialButtonProps) {
 }
 
 
-export default function GoogleAuthForm({ open, googRes }: { open: boolean, googRes: GoogleAuthResponse | null }) {
+export default function GoogleAuthForm({ open, googRes, onOpenChange }: { open: boolean; onOpenChange: (s:boolean)=>void; googRes: GoogleAuthResponse | null }) {
   const formFields: AppInputProps[] = [
     {
       name: "userName",
@@ -130,9 +130,15 @@ export default function GoogleAuthForm({ open, googRes }: { open: boolean, googR
   const [res, action] = useFormState(googleAuthRegister, {});
   const [isOpen, setIsOpen] = useState(open);
 
+  useEffect(()=>{
+    setIsOpen(open)}, [open])
+
   return (
     <div>
-      <Dialog.Root open={isOpen} onOpenChange={(_)=>setIsOpen(_)}>
+      <Dialog.Root open={isOpen} onOpenChange={(_)=>{
+        onOpenChange(_);
+        setIsOpen(_);
+      }}>
         {/* <Dialog.Trigger></Dialog.Trigger> */}
         <Dialog.Content>
           <form action={action} className="flex flex-col gap-4">

@@ -10,11 +10,11 @@ import { ServerActionParams } from "@/utils/types/actions";
 import { Service } from "@/utils/types/service";
 
 
-export async function fetchArtisanServices({ throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
+export async function fetchSavedServices({ throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getArtisanServices(accessId ?? ''), {
-            next: { tags: [tags.userCertificates] },
+        const req = await ServerApiRequest.get(apis.myFavouriteServices(accessId ?? ''), {
+            next: { revalidate: 0 },
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<Paginated<Service>>;

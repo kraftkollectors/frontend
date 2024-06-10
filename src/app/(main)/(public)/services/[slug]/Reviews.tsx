@@ -13,7 +13,7 @@ export default async function Reviews({serviceId, cummulative:{totalRatings, ave
       <div className="flex flex-col gap-2">
         <h1 className=" text-black-400">Overall Rating</h1>
         <div className="flex items-center gap-2">
-          <h1 className="r-font-semibold text-title">{averageRating}</h1>
+          <h1 className="r-font-semibold text-title">{averageRating.toFixed(1)}</h1>
           <RatingStars value={averageRating} size="lg" />
         </div>
         
