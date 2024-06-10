@@ -1,16 +1,16 @@
 import { FavouriteButton, RatingStars, ReadMoreReadLess } from "@/components";
 import { formatNumber } from "@/functions/helpers";
-import { Service } from "@/utils/types/service";
+import { Service, ServiceDetails as DetailedService} from "@/utils/types/service";
 
-export default function ServiceDetails({title, estimatedPrice, description, _id}:Service) {
+export default function ServiceDetails({title, estimatedPrice, description, _id, cummulativeRating: {averageRating}}:DetailedService) {
   return (
     <div className="flex flex-col gap-3 my-5 mb-4 border rounded-md p-4 bg-light">
       <h1 className="font-bold text-title md:text-xl">{title}</h1>
       <div className="flex justify-between gap-4 border-b pb-4">
         <p className="text-primary r-font-semibold text-title">{formatNumber(Number(estimatedPrice), true)}</p>
         <div className="flex w-fit gap-2 items-center">
-          <p className="text-dark-gray r-font-semibold text-label">4.8</p>
-          <RatingStars value={4.8} size="md" />
+          <p className="text-dark-gray r-font-semibold text-label">{averageRating}</p>
+          <RatingStars value={averageRating} size="md" />
           <FavouriteButton serviceId={_id} />
         </div>
       </div>

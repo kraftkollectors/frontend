@@ -1,20 +1,20 @@
 import { ArtisanReviewCard, RatingStars, ReviewLines } from "@/components";
-import { dummyReviews, dummyReviewsLine } from "@/utils/dummy";
 import WriteReview from "./WriteReview";
 import { fetchServiceRatings } from "@/actions";
+import { CummulativeReview } from "@/utils/types/review";
 
-export default async function Reviews({serviceId}:{serviceId:string}) {
+export default async function Reviews({serviceId, cummulative:{totalRatings, averageRating}}:{serviceId:string, cummulative: CummulativeReview}) {
   const reviews = await fetchServiceRatings(serviceId);
   if(!reviews || reviews == 'error') return <></>
   
   return (
     <section className="py-4">
-      <h1 className="r-font-bold text-title">400 Reviews</h1>
+      <h1 className="r-font-bold text-title">{totalRatings} Review{ totalRatings === 1 ? '' : 's'}</h1>
       <div className="flex flex-col gap-2">
         <h1 className=" text-black-400">Overall Rating</h1>
         <div className="flex items-center gap-2">
-          <h1 className="r-font-semibold text-title">4.8</h1>
-          <RatingStars value={4.8} size="lg" />
+          <h1 className="r-font-semibold text-title">{averageRating}</h1>
+          <RatingStars value={averageRating} size="lg" />
         </div>
         
       </div>

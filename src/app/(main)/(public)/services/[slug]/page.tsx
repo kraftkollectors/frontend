@@ -15,7 +15,6 @@ export default async function Page({params}:AppPageProps) {
 
   if(service == 'error') throw new Error("Connection Error")
   const {category, subCategory, title} = service;
-  debugLog(service);
   
   return (
     <>

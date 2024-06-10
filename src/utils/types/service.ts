@@ -1,3 +1,4 @@
+import { CummulativeReview } from "./review";
 
 export type Service = {
     _id: string;
@@ -18,5 +19,5 @@ export type Service = {
 
 export type ServiceDetails = Service & {
     similarAds: Service[];
-    cummulativeRating: { averageRating: number, totalRatings: number }
+    cummulativeRating: CummulativeReview
 }

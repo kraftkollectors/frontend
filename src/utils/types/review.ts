@@ -7,3 +7,5 @@ export type Review = {
     _id: string;
     createdAt: string;
 }
+
+export type CummulativeReview = { averageRating: number, totalRatings: number }
