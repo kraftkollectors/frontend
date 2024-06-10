@@ -9,7 +9,7 @@ export async function checkFavourite({userId, serviceId}:{userId: string, servic
     debugLog({userId, serviceId})
     if(!userId || !serviceId) return false;
     try {
-        const req = await ServerApiRequest.get(apis.checkFavourite(userId, serviceId), {next: {tags: [tags.mySingleFav(serviceId)]}})
+        const req = await ServerApiRequest.get(apis.checkFavourite(userId, serviceId), {next: {tags: [tags.mySingleFav(userId,serviceId)]}})
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
         if(res.statusCode == 201){

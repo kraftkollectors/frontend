@@ -62,6 +62,8 @@ const apis = {
 
     contactSupport: API + "/users/contact",
     reportService: API + "/users/reportad",
+    rateService: API + "/users/rateads",
+    getServiceRatings: (id:string) => (`${API}/users/rateads/${id}`),
     checkFavourite: (user: string, service: string) => (`${API}/users/checksavead?userId=${user}&serviceId=${service}`),
     toggleFavourite: (id = '') => (`${API}/users/savead${id ? '/'+id : ''}`),
 }

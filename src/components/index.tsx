@@ -15,7 +15,7 @@ export { ContinueWithFacebookButton } from "./ContinueWithFacebookButton";
 export { Navbar } from "./Navbar";
 export { default as Footer } from "./Footer";
 export { ServiceCard } from "./serviceCard/ServiceCard";
-export { ArtisanReviewCard } from "./ArtisanReviewCard";
+export { ArtisanReviewCard } from "./reviewCard/ArtisanReviewServiceCard";
 export { Pagination } from "./Pagination";
 
 export { MediaSlider } from "./mediaSlider/MediaSlider";

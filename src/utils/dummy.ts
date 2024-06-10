@@ -1,4 +1,4 @@
-import { ArtisanReviewCardProps } from "@/components/ArtisanReviewCard";
+import { ArtisanReviewCardProps } from "@/components/reviewCard/ArtisanReviewServiceCard";
 import { Service } from "@/utils/types/service";
 import { ReviewLineProps } from "@/components/ui/ReviewLines";
 
@@ -63,55 +63,28 @@ export const dummyServices = _dummyServices as Service[];
 
 export const dummyReviews: ArtisanReviewCardProps[] = [
   {
-    id: "w78efg",
-    user: {
-      name: "Josh Binus",
-      img: "/images/auth-bg.png",
-    },
+    _id: "w78efg",
     rating: 4,
     review: "Excellent service, I wish I could give more than 5 stars",
-    date: "12/12/2023",
-    service: {
-      _id: "97qfwbh",
-      title: "Dj Sets",
-      charge: "session",
-      estimatedPrice: "20,000",
-      coverPhoto: "/images/auth-bg.png",
-    },
+    createdAt: "12/12/2023",
+    serviceId: "hewe cbdcn ,d",
+    userId: "null"
   },
   {
-    id: "8uwfhe",
-    user: {
-      name: "Josh Binus",
-      img: "/images/auth-bg.png",
-    },
+    _id: "8uwfhe",
     rating: 2,
     review: "Excellent service, I wish I could give more than 5 stars",
-    date: "12/12/2023",
-    service: {
-      _id: "97qfwbh",
-      title: "Dj Sets",
-      charge: "session",
-      estimatedPrice: "20,000",
-      coverPhoto: "/images/auth-bg.png",
-    },
+    createdAt: "12/12/2023",
+    serviceId: "hewe cbdcn ,d",
+    userId: "null"
   },
   {
-    id: "ouwvbiewbf",
-    user: {
-      name: "Josh Binus",
-      img: "/images/auth-bg.png",
-    },
+    _id: "ouwvbiewbf",
     rating: 3.5,
     review: "Excellent service, I wish I could give more than 5 stars",
-    date: "12/12/2023",
-    service: {
-      _id: "97qfwbh",
-      title: "Dj Sets",
-      charge: "session",
-      estimatedPrice: "20,000",
-      coverPhoto: "/images/auth-bg.png",
-    },
+    createdAt: "12/12/2023",
+    serviceId: "hewe cbdcn ,d",
+    userId: "null"
   },
 ];
 

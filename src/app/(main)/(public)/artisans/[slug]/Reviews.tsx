@@ -27,7 +27,7 @@ export default function Reviews() {
         </div>
         <div className="pt-10 gap-4 grid md:grid-cols-2 xl:grid-cols-3 md:flex flex-col">
           {dummyReviews.map((review) => (
-            <ArtisanReviewCard key={review.id} {...review} />
+            <ArtisanReviewCard key={review._id} {...review} />
           ))}
         </div>
       </div>

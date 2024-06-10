@@ -11,7 +11,6 @@ import { ServiceDetails } from "@/utils/types/service";
 
 
 export async function fetchSingleService(serviceId: string, { throwsError = true, isPublic = false }: ServerActionParams = {}): Promise<ActionApiResponse<ServiceDetails>> {
-    debugLog({isPublic})
     try {
         const req = await (isPublic ? ApiRequest.getJson(apis.getSingleArtisanService(serviceId), {next: { revalidate: 0 },}) : ServerApiRequest.get(apis.getSingleArtisanService(serviceId), {
             next: { revalidate: 0 },

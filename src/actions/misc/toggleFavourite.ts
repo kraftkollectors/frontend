@@ -1,9 +1,10 @@
 'use server'
 
 import { debugLog, formDataToObject } from "@/functions/helpers"
-import { apis } from "@/utils";
+import { apis, tags } from "@/utils";
 import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
+import { revalidateTag } from "next/cache";
 
 
 export type ToggleFavouriteFormData = {
@@ -22,6 +23,7 @@ export async function toggleFavourite(_: ActionResponse, formData: FormData): Pr
         debugLog(res);
 
         if(res.statusCode == 201){
+            revalidateTag(tags.mySingleFav(data.userId, data.serviceId));
             if(del) return {success: "Remover from favourites", data: false}
             return {success: "Added to favourites", data: true}
         } else return {error: res.data ?? "An error occurred", data:false}

@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <div className="py-2 flex flex-col gap-2">
       {dummyReviews.map((dummy) => (
-        <DashboardReviewCard key={dummy.id} {...dummy} />
+        <DashboardReviewCard key={dummy._id} {...dummy} />
       ))}
     </div>
   );

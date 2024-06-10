@@ -21,7 +21,7 @@ export default function Main({s}: {s:Service}) {
         <Profile userId={s.userId} />
         </Suspense>
       </div>
-      <Reviews />
+      <Reviews serviceId={s._id} />
       </div>
     </section>
   );

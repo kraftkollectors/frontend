@@ -7,6 +7,7 @@ import { formatNumber } from "@/functions/helpers";
 import { FavouriteButton } from "../ui/FavouriteButton";
 import Link from "next/link";
 import { paths } from "@/utils";
+import CardUserSkeleton from "../skeletons/CardUserSkeleton";
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -36,10 +37,7 @@ export function ServiceCard({
       </div>
       <Link href={paths.artisan(service.userId)}>
         <div className="flex gap-1 items-center">
-          <Suspense fallback={<>
-            <div className="skeleton avatar size-6"></div>
-            <div className="skeleton h-4 w-20"></div>
-          </>}>
+          <Suspense fallback={<CardUserSkeleton />}>
             <UserProfile userId={service.userId} />
           </Suspense>
         </div>
