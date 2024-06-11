@@ -15,6 +15,7 @@ export function staticMetadata({ title, description, img = '/images/banners/defa
         title,
         description,
         metadataBase: new URL(HOST),
+        icons: ["/images/icon.png"],
         appleWebApp: { capable: true, title: "KraftKollectors", startupImage: ["/images/banners/splash.png"] },
         applicationName: "KraftKollectors",
         keywords: keywords,

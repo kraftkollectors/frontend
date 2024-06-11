@@ -27,7 +27,7 @@ export default function Form() {
 
 
   return (
-    <form action={action} className="flex flex-col gap-6 md:items-center">
+    <form action={action} className="flex flex-col gap-6 md:items-center max-md:justify-center">
       <div className="col-span-full max-w-[400px]"><FormMessage res={res} /></div>
       <ImagePicker placeholder={user?.image} />
      <UserAuth />
