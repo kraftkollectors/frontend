@@ -1,3 +1,11 @@
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Terms and Conditions",
+  description: "Our legal terms and conditions, and privacy policy"
+})
+
 export default function page() {
   return (
     <main className="flex items-center justify-center  py-10 app-container">

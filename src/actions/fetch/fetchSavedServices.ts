@@ -18,7 +18,7 @@ export async function fetchSavedServices({ throwsError = true }: ServerActionPar
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<Paginated<Service>>;
-        // debugLog(res);
+        debugLog(res);
 
         if (res.statusCode === 201) return res.data;
         else if(res.data.toString() == 'No records found') return null;

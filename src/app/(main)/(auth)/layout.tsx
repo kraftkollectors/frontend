@@ -1,6 +1,13 @@
 import { AppLogo } from "@/components";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import Image from "next/image";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Sign-up",
+  description: "Create an account on KraftKollectors"
+})
 
 export default function RootLayout({ children }: AppLayoutProps) {
   return (

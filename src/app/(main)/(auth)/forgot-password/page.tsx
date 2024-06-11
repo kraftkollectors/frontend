@@ -1,5 +1,12 @@
 import React from "react";
 import ForgotPasswordForm from "./Form";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Forgot Password",
+  description: "Forgot your password? no worries! Recover your KraftKollectors password"
+})
 
 export default function Page() {
   return (

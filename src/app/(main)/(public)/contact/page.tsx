@@ -1,4 +1,12 @@
 import ContactForm from "./Form";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Contact & Support center",
+  description: "Reach out to us, report an issue or make a suggestion"
+})
+
 export default function Page() {
   return (
     <main className="flex items-center justify-center  py-6 app-container bg-light-text">

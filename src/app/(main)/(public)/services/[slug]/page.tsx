@@ -10,6 +10,20 @@ import { Suspense } from "react";
 import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
 import { FaChevronRight } from "react-icons/fa6";
 
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: AppPageProps<{ slug: string }>):Promise<Metadata|null>{
+  const service = await fetchSingleArtisanService(params?.slug ?? '', {isPublic: true});
+  if(!service || service == 'error') return null;
+
+  return staticMetadata({
+    title: `KraftKollectors | Service: ${service.title}`,
+    description: `Location: ${service.address}, ${service.state}. Description: ${service.description}`,
+    img: service.coverPhoto
+  })
+}
+
 export default async function Page({params}:AppPageProps) {
   const service = await fetchSingleArtisanService(params.slug, {isPublic: true});
   if(!service) notFound();

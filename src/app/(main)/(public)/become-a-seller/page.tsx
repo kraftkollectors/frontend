@@ -8,6 +8,13 @@ import {
   FaUser,
 } from "react-icons/fa6";
 import { MdPostAdd } from "react-icons/md";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Become a Seller",
+  description: "Ready to start selling your services? KraftKollectors is your platform for connecting with clients"
+})
 
 export default function SellerPage() {
   return (

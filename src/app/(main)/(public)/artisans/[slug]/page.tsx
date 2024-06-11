@@ -9,6 +9,22 @@ import { notFound } from "next/navigation";
 import { formatDate } from "@/functions/date";
 import { fallbackImage, fullName } from "@/functions/helpers";
 
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: AppPageProps<{ slug: string }>):Promise<Metadata|null>{
+  const userId = params?.slug;
+  if (!userId) return null;
+  const user = await fetchUser({ isPublic: true, params: userId });
+  if(!user || user == 'error') return null;
+
+  return staticMetadata({
+    title: `KraftKollectors | Artisan: ${fullName(user.firstName, user.lastName)}`,
+    description: `meet ${user.userName} on KraftKollectors, check out their services, reviews, certificates and education`,
+    img: user.image,
+  })
+}
+
 export default async function Page({ params }: AppPageProps<{ slug: string }>) {
   const userId = params?.slug;
   if (!userId) notFound();

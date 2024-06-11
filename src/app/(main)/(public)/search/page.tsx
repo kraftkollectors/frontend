@@ -6,6 +6,14 @@ import { fetchServices } from "@/actions";
 import { Pagination } from "@/components";
 import { paths } from "@/utils";
 import { Suspense } from "react";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Explore services and artisans",
+  description: "find the best services and artisans for your needs ranging from home needs to event planning and many more"
+})
+
 
 export default async function searchPage() {
   const ads = await fetchServices({isPublic: true});

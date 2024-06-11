@@ -1,13 +1,14 @@
 
-import { FaRegEdit } from "react-icons/fa";
-import ProfileCategory from "./ProfileCategory";
 import Certificates from "./Certificates";
 import Educations from "./Educations";
 import { Suspense } from "react";
 import Description from "./Description";
 import AwayMessage from "./AwayMessage";
+import { fetchUser } from "@/actions";
 
-export default function ProfileCategories() {
+export default async function ProfileCategories() {
+  const user = await fetchUser({throwsError: false});
+  if(!user || user == 'error' || !user.isArtisan) return <></>
 
   return (
     <div className=" flex flex-col p-4 rounded-md bg-light gap-2 border">

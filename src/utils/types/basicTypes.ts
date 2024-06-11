@@ -47,5 +47,6 @@ export type Paginated<T = any> = {
     hasNextPage: boolean,
     nextPages: number,
     totalPages: number,
+    totalDocuments: number,
     currentPage: number
 }

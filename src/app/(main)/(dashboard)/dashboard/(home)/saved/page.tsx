@@ -3,6 +3,14 @@ import { DashboardSavedCard } from "@/components/dashboard";
 import { paths } from "@/utils";
 import { Pagination } from "@/components";
 
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | My Saved Services",
+  description: "services saved by me"
+})
+
 export default async function Page() {
   const services = await fetchSavedServices();
   if (services == 'error' || !services) return <div className="info-box">An Error Occurred</div>

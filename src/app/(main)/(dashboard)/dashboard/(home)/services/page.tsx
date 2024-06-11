@@ -1,15 +1,27 @@
 import { DashboardServiceCard } from "@/components/dashboard";
 import Link from 'next/link';
 import paths from '@/utils/paths'
-import { fetchArtisanServices } from "@/actions";
-import { Pagination } from "@/components";
+import { fetchArtisanServices, fetchUser } from "@/actions";
+import { NotAnArtisan, Pagination } from "@/components";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | My Services",
+  description: "services provided by me"
+})
+
 export default async function Page() {
+  const user = await fetchUser();
+  if(!user || user == 'error') return <div className="info-box">An Error Occurred</div>
+  if(!user.isArtisan) return <NotAnArtisan />
+  
   const services = await fetchArtisanServices();
   if (services == 'error' || !services) return <div className="info-box">An Error Occurred</div>
 
   return (
     <div className="flex flex-col gap-3">
-      {services.existingRecords.length == 0 ? <div className="info-box">No saved Services</div>
+      {services.existingRecords.length == 0 ? <div className="info-box">No Services</div>
         : services.existingRecords.map((service) => (
           <DashboardServiceCard key={service._id} {...service} />
         ))}

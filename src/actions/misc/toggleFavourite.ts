@@ -24,7 +24,8 @@ export async function toggleFavourite(_: ActionResponse, formData: FormData): Pr
 
         if(res.statusCode == 201){
             revalidateTag(tags.mySingleFav(data.userId, data.serviceId));
-            if(del) return {success: "Remover from favourites", data: false}
+            revalidateTag(tags.myFavs(data.userId));
+            if(del) return {success: "Removed from favourites", data: false}
             return {success: "Added to favourites", data: true}
         } else return {error: res.data ?? "An error occurred", data:false}
     } catch (error) {

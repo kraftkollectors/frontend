@@ -1,4 +1,12 @@
 import ServicesForm from "./Form";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Create new service",
+  description: "create a new service, provide details to start meeting clients"
+})
+
 export default function page() {
   return (
     <main className="flex items-center bg-light-text  py-10 app-container">

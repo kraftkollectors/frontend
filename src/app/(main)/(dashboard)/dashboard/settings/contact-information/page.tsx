@@ -1,6 +1,7 @@
 import Form from "./Form";
 
-export default function page() {
+export default async function page() {
+  
   return (
     <section>
       <Form />

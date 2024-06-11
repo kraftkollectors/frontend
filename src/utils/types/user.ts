@@ -1,3 +1,5 @@
+import { Artisan } from "./artisan";
+
 export type UserDetails = {
     firstName: string;
     lastName: string;
@@ -19,5 +21,5 @@ export type UserDetails = {
   export type UserDetailsPlus = UserDetails & {
     certificates: any[],
     education: any[],
-    artisan: any[],
+    artisan: Artisan[],
   }

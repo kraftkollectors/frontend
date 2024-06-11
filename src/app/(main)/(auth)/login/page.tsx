@@ -5,6 +5,13 @@ import {
   ContinueWithGoogleButton,
   ContinueWithFacebookButton
 } from "@/components";
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Login",
+  description: "Login to view your dashboard"
+})
 
 export default function Page() {
   return (

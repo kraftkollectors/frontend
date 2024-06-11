@@ -8,6 +8,20 @@ import { paths } from "@/utils";
 import { AppPageProps } from "@/utils/types/basicTypes";
 import { sanitizeSearch } from "@/functions/helpers";
 
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: AppPageProps<{ query: string }>):Promise<Metadata|null>{
+    let q = typeof params?.query == 'string' ? params?.query : (params?.query ?? []).join(' ')
+    q = sanitizeSearch(q ?? '');
+    const ads = await fetchServices();
+    if (!ads || ads == 'error') return null;
+
+  return staticMetadata({
+    title: `KraftKollectors | Search results for: ${q}`,
+    description: `showing ${ads.totalDocuments} search results for ${q}`
+  })
+}
 export default async function searchPage({ params }: AppPageProps<{ query: string | string[] }>) {
     let q = typeof params?.query == 'string' ? params?.query : params?.query.join(' ')
     q = sanitizeSearch(q ?? '');
