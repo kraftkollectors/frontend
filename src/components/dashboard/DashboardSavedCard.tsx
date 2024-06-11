@@ -36,7 +36,7 @@ export function DashboardSavedCard({
       <img
         src={coverPhoto}
         alt={title}
-        className="w-4/12 md:w-40 h-full aspect-[5/3] object-cover"
+        className="w-4/12 md:w-40 h-full aspect-[5/3] object-cover rounded profile-img"
       />
       <div className="flex flex-col gap-1">
         <p className="text-back-400">{title}</p>
