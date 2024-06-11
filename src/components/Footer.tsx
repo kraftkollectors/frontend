@@ -16,10 +16,10 @@ export default function Footer() {
         <div className="grid gap-5 grid-cols-2 md:grid-cols-3 md:col-span-5">
           <div className="flex flex-col gap-2">
             <h2 className="font-bold">Categories</h2>
-            {categories.map((category) => (
+            {categories.map((category, i) => (
               <Link
                 className="hover-link"
-                key={category.href}
+                key={category.href+i}
                 href={category.href}
               >
                 {category.title}
@@ -28,10 +28,10 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-2">
             <h2 className="font-bold">Quick links</h2>
-            {quicklinks.map((quicklink) => (
+            {quicklinks.map((quicklink, i) => (
               <Link
                 className="hover-link"
-                key={quicklink.href}
+                key={quicklink.href+i}
                 href={quicklink.href}
               >
                 {quicklink.title}
@@ -40,11 +40,11 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-2">
             <h2 className="font-bold">Download</h2>
-            {downloads.map((download) => (
+            {downloads.map((download, i) => (
               <Link
                 target="_blank"
                 className="hover-link"
-                key={download.href}
+                key={download.href+i}
                 href={download.href}
               >
                 {download.title}
@@ -55,12 +55,12 @@ export default function Footer() {
 
         <div className="flex max-md:justify-center gap-2 md:col-span-3 max-md:pt-8">
           <p className="font-bold max-md:hidden">Get in touch</p>
-          {socials.map((social) => (
+          {socials.map((social, i) => (
             <Link
               target="_blank"
               className="text-2xl hover-link"
               href={social.href}
-              key={social.href}
+              key={social.href+i}
             >
               {social.icon}
             </Link>
