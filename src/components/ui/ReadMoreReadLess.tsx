@@ -1,24 +1,23 @@
 "use client";
 
-import { AppLayoutProps } from "@/utils/types/basicTypes";
-import { useState } from "react";
+import { useReadMore } from "@/hooks";
+import { HTMLAttributes } from "react";
 
 export function ReadMoreReadLess({
   children,
   className,
-  maxlineClass
-}: AppLayoutProps & {
-  className?: string;
-  maxlineClass?: string;
+  maxWords = 20,
+  ...props
+}: HTMLAttributes<HTMLDivElement> & {
+  maxWords?: number;
 }) {
-  const [open, setOpen] = useState(false);
+  const {displayText, hasMore,isExpanded,showLess,showMore} = useReadMore(String(children), maxWords);
 
   return (
-    <>
-    <div className={`${open ? "line-clamp-none" : maxlineClass ?? "line-clamp-6"} ${className}`}>
-      {children}
+    <div {...props} >
+      {displayText}
+      {hasMore && !isExpanded && "..."}
+    {hasMore && <button onClick={isExpanded ? showLess : showMore} className="link-btn">&nbsp;{isExpanded ? "Read Less" : "Read More"}</button>}
     </div>
-    <div className="flex justify-start"><button onClick={() => setOpen(!open)} className="link-btn">{open ? "Read Less" : "Read More"}</button></div>
-    </>
   );
 }

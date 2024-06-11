@@ -2,7 +2,6 @@
 
 import { checkFavourite, toggleFavourite } from "@/actions";
 import { debugLog } from "@/functions/helpers";
-import { useUserStore } from "@/state";
 import { HTMLAttributes, useEffect, useLayoutEffect, useState } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa6"
 import { FormButton } from "./FormButton";
@@ -15,20 +14,18 @@ export type FavouriteButtonProps = HTMLAttributes<HTMLButtonElement> & {
     serviceId:string;
 }
 export function FavouriteButton({serviceId, className, ...props}:FavouriteButtonProps) {
-    const user = useUserStore(s=>s.user);
     const [isFav, setIsFav] = useState<boolean|null>(false);
     const [res, action] = useFormState(toggleFavourite, {})
     
     useEffect(()=>{
-        debugLog(`effect ${user?._id} ${serviceId}`)
+        debugLog(`effect ${serviceId}`)
         async function check() {
-            if(!user?._id) return;
-            const req = await checkFavourite({serviceId, userId:user._id})
+            const req = await checkFavourite(serviceId)
             setIsFav(req);
         }
 
         check();
-    }, [user?._id, serviceId])
+    }, [serviceId])
     
     useLayoutEffect(()=>{
         if(res.success) setIsFav(res.data);

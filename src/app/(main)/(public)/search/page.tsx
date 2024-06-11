@@ -3,12 +3,10 @@ import SearchResult from "./SearchResult";
 import SearchOption from "./SearchOption";
 import PostList from "./PostList";
 import { fetchServices } from "@/actions";
-import { cookies } from "next/headers";
 import { Pagination } from "@/components";
 import { paths } from "@/utils";
 
 export default async function searchPage() {
-  cookies().get('__user_id')
   const ads = await fetchServices();
   if(!ads || ads == 'error') throw new Error("Connection error")
   

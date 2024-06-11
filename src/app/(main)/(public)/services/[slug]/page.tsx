@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import { debugLog } from "@/functions/helpers";
 import { Suspense } from "react";
 import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
+import { FaChevronRight } from "react-icons/fa6";
 
 export default async function Page({params}:AppPageProps) {
   const service = await fetchSingleArtisanService(params.slug, {isPublic: true});
@@ -19,10 +20,10 @@ export default async function Page({params}:AppPageProps) {
   return (
     <>
     <section className="md:app-container md:pt-5 pb-10 bg-gray-100">
-      <div className="pb-6 flex gap-2 max-md:hidden text-label text-black-400 font-semibold">
-        <span>home</span> &gt;
-        <span>{category}</span> &gt;
-        <span>{subCategory}</span> &gt;
+      <div className="pb-6 flex gap-2 max-md:hidden text-label text-black-400 font-semibold items-center flex-wrap">
+        <span>home</span> <FaChevronRight />
+        <span>{category}</span> <FaChevronRight />
+        <span>{subCategory}</span> <FaChevronRight />
         <span>{title}</span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-11 gap-4 md:gap-6">

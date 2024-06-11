@@ -15,6 +15,7 @@ import { fetchArtisan } from "@/actions/fetch/fetchArtisan";
 import { Artisan } from "@/utils/types/artisan";
 import { debugLog, fallbackImage } from "@/functions/helpers";
 import { notFound } from "next/navigation";
+import { formatTime } from "@/functions/date";
 
 export default async function Profile({ userId }: { userId: string; }) {
   // debugLog({userId})
@@ -60,7 +61,7 @@ export default async function Profile({ userId }: { userId: string; }) {
         <p className="text-body font-semibold text-start text-black-400">Contact Info</p>
         <ProfileInfoLine
           title="Work Hour"
-          value={`${art.workHourFrom} - ${art.workHourTo}`}
+          value={`${formatTime(art.workHourFrom)} - ${formatTime(art.workHourTo)}`}
           icon={<FaRegClock />}
         />
         <ProfileInfoLine

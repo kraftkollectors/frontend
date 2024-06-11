@@ -12,3 +12,9 @@ export function getYearsBeforeToday() {
   export function formatDate(date:string){
     return new Date(date).toLocaleDateString()
   }
+
+export function formatTime(time:string){
+  const parts = time.split(':');
+  if(parts.length !== 2) return time;
+  return `${parts[0]}:${parts[1]} ${Number(parts[0]) >= 12 ? 'PM' : 'AM'}`
+}

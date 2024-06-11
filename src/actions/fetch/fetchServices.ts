@@ -3,17 +3,18 @@
 import { debugLog } from "@/functions/helpers"
 import apis from "@/utils/apis";
 import { ServerApiRequest } from "@/utils/serverApiRequest";
-import { appCookies, tags } from "@/utils";
+import { tags } from "@/utils";
 import { ActionApiResponse, ApiResponse, Paginated } from "@/utils/types/basicTypes";
-import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
 import { Service } from "@/utils/types/service";
 import { ApiRequest } from "@/utils/apiRequest";
 
 
-export async function fetchServices({ throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
+export async function fetchServices({ throwsError = true, isPublic = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
     try {
-        const req = await ServerApiRequest.get(apis.services, {next: {tags: [tags.myServices]}});
+        const req = await (isPublic 
+            ? ApiRequest.getJson(apis.services, {next: {tags: [tags.myServices]}}) 
+            : ServerApiRequest.get(apis.services, {next: {tags: [tags.myServices]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<Service>>;
         debugLog(res);
 

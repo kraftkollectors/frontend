@@ -14,7 +14,7 @@ export async function fetchSavedServices({ throwsError = true }: ServerActionPar
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
         const req = await ServerApiRequest.get(apis.myFavouriteServices(accessId ?? ''), {
-            next: { revalidate: 0 },
+            next: { tags: [tags.myFavs(accessId??'')] },
         });
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<Paginated<Service>>;
