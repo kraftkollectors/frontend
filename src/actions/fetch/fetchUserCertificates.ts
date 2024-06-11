@@ -8,18 +8,21 @@ import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
 import { Certificate } from "@/utils/types/certificate";
+import { ApiRequest } from "@/utils/apiRequest";
 
 
 export type UserCertificatesApiResponse = {
     existingRecords: Certificate[];
 }
 
-export async function fetchUserCertificates({ redirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Certificate[]>> {
+export async function fetchUserCertificates({ isPublic = false, params, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Certificate[]>> {
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getUserCertificates(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getUserCertificates(params ?? ''), {
             next: { tags: [tags.userCertificates] },
-        });
+        }) : ServerApiRequest.get(apis.getUserCertificates(accessId ?? ''), {
+            next: { tags: [tags.userCertificates] },
+        }));
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserCertificatesApiResponse>;
         // debugLog(res);

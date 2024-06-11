@@ -22,12 +22,12 @@ import { formatDate } from "@/functions/date";
 /* eslint-disable @next/next/no-img-element */
 export default function ProfileCard() {
   const vw = useWindowWidth();
-  const user = useUserStore(s=>s.user);
-  const artisan = useUserStore(s=>s.artisan);
+  const user = useUserStore(s => s.user);
+  const artisan = useUserStore(s => s.artisan);
 
   return (
     <div className="w-full border  gap-2 bg-light  p-4 rounded-md">
-      {vw > 768 && <DashboardProfile  />}
+      {vw > 768 && <DashboardProfile />}
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">General Info</p>
@@ -51,104 +51,104 @@ export default function ProfileCard() {
         {
           user?.isArtisan &&
           <>
-          <div className="flex flex-col gap-2">
-          <p className="text-body font-semibold">Contact Info</p>
-          {true && (
-            <ProfileInfoLine
-              title="Availability"
-              value={'available'}
-              icon={<IoTimeOutline />}
-            />
-          )}
+            <div className="flex flex-col gap-2">
+              <p className="text-body font-semibold">Contact Info</p>
+              {true && (
+                <ProfileInfoLine
+                  title="Availability"
+                  value={'available'}
+                  icon={<IoTimeOutline />}
+                />
+              )}
 
-          {artisan?.phoneNumber && (
-            <ProfileInfoLine
-              title="Phone Number"
-              value={artisan?.phoneNumber}
-              icon={<LuPhone />}
-            />
-          )}
-          {artisan?.website && (
-            <ProfileInfoLine
-              title="Website"
-              value={
-                <a
-                  className="link-btn text-body !font-normal"
-                  href={artisan?.website}
-                  target="_blank"
-                >
-                  {artisan?.website}
-                </a>
-              }
-              icon={<TbWorld />}
-            />
-          )}
-        </div>
-        <hr />
-        <div className="flex flex-col gap-2">
-          <p className="text-body font-semibold">Social Links</p>
-          {artisan?.instagram && (
-            <ProfileInfoLine
-              title="Instagram"
-              value={
-                <a
-                  className="link-btn text-body !font-normal"
-                  href={artisan?.instagram}
-                  target="_blank"
-                >
-                  {getUsernameFromLink(artisan?.instagram)}
-                </a>
-              }
-              icon={<FaInstagram />}
-            />
-          )}
-          {artisan?.twitter && (
-            <ProfileInfoLine
-              title="x"
-              value={
-                <a
-                  className="link-btn text-body !font-normal"
-                  href={artisan?.twitter}
-                  target="_blank"
-                >
-                  {getUsernameFromLink(artisan?.twitter)}
-                </a>
-              }
-              icon={<FaXTwitter />}
-            />
-          )}
-          {artisan?.facebook && (
-            <ProfileInfoLine
-              title="Facebook"
-              value={
-                <a
-                  className="link-btn text-body !font-normal"
-                  href={artisan?.facebook}
-                  target="_blank"
-                >
-                  {getUsernameFromLink(artisan?.facebook)}
-                </a>
-              }
-              icon={<FaFacebook />}
-            />
-          )}
+              {artisan?.phoneNumber && (
+                <ProfileInfoLine
+                  title="Phone Number"
+                  value={artisan?.phoneNumber}
+                  icon={<LuPhone />}
+                />
+              )}
+              {artisan?.website && (
+                <ProfileInfoLine
+                  title="Website"
+                  value={
+                    <a
+                      className="link-btn text-body !font-normal"
+                      href={artisan?.website}
+                      target="_blank"
+                    >
+                      {artisan?.website}
+                    </a>
+                  }
+                  icon={<TbWorld />}
+                />
+              )}
+            </div>
+            <hr />
+            <div className="flex flex-col gap-2">
+              <p className="text-body font-semibold">Social Links</p>
+              {artisan?.instagram && (
+                <ProfileInfoLine
+                  title="Instagram"
+                  value={
+                    <a
+                      className="link-btn text-body !font-normal"
+                      href={artisan?.instagram}
+                      target="_blank"
+                    >
+                      {getUsernameFromLink(artisan?.instagram)}
+                    </a>
+                  }
+                  icon={<FaInstagram />}
+                />
+              )}
+              {artisan?.twitter && (
+                <ProfileInfoLine
+                  title="x"
+                  value={
+                    <a
+                      className="link-btn text-body !font-normal"
+                      href={artisan?.twitter}
+                      target="_blank"
+                    >
+                      {getUsernameFromLink(artisan?.twitter)}
+                    </a>
+                  }
+                  icon={<FaXTwitter />}
+                />
+              )}
+              {artisan?.facebook && (
+                <ProfileInfoLine
+                  title="Facebook"
+                  value={
+                    <a
+                      className="link-btn text-body !font-normal"
+                      href={artisan?.facebook}
+                      target="_blank"
+                    >
+                      {getUsernameFromLink(artisan?.facebook)}
+                    </a>
+                  }
+                  icon={<FaFacebook />}
+                />
+              )}
 
-          {artisan?.linkedin && (
-            <ProfileInfoLine
-              title="Linked In"
-              value={
-                <a
-                  className="link-btn text-body !font-normal"
-                  href={artisan?.linkedin}
-                  target="_blank"
-                >
-                  {getUsernameFromLink(artisan?.linkedin)}
-                </a>
-              }
-              icon={<FaLinkedin />}
-            />
-          )}
-        </div>
+              {artisan?.linkedin && (
+                <ProfileInfoLine
+                  title="Linked In"
+                  value={
+                    <a
+                      className="link-btn text-body !font-normal"
+                      href={artisan?.linkedin}
+                      target="_blank"
+                    >
+                      {getUsernameFromLink(artisan?.linkedin)}
+                    </a>
+                  }
+                  icon={<FaLinkedin />}
+                />
+              )}
+            </div>
           </>
         }
       </div>

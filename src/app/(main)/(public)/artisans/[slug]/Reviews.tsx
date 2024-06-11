@@ -1,15 +1,12 @@
-"use client";
-
 import { ArtisanReviewCard, RatingStars, ReviewLines } from "@/components";
 import { dummyReviews, dummyReviewsLine } from "@/utils/dummy";
 
-import { ThemeModeScript } from "flowbite-react";
+import ReviewsClient from "./ReviewsClient";
 
-export default function Reviews() {
+export default async function Reviews() {
   return (
     <section className="app-container py-10">
-      <ThemeModeScript />
-      <h1 className="r-font-bold text-title">400 Reviews</h1>
+      <ReviewsClient />
       <div className="flex justify-between max-md:flex-col">
         <div className="flex flex-col gap-2 w-full sticky top-0">
           <h1 className="r-font-semibold text-sm text-dark-gray">

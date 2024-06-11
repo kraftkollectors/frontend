@@ -1,6 +1,7 @@
 import ProfileInfoLine from "@/app/(main)/(dashboard)/dashboard/(home)/ProfileInfoLine";
 import { SocialIcons } from "@/components";
 import { SocialIconsProps } from "@/components/ui/SocialIcons";
+import { paths } from "@/utils";
 import Link from "next/link";
 import { CiMail } from "react-icons/ci";
 import { FaRegEnvelope } from "react-icons/fa6";
@@ -19,6 +20,7 @@ export type ProfileProps = {
   phone?: string;
   email?: string;
   website?: string;
+  userId: string;
 };
 
 /* eslint-disable @next/next/no-img-element */
@@ -32,6 +34,7 @@ export default function Profile({
   profession,
   socials,
   website,
+  userId
 }: ProfileProps) {
   return (
     <div className="flex flex-col gap-2 w-full md:col-span-4 items-center justify-center md:p-6 md:bg-light md:border rounded-md">
@@ -44,11 +47,11 @@ export default function Profile({
       </p>
       <p className="text-label">member since {memberSince}</p>
       <div className="flex gap-2 w-full justify-center">
-        <Link href="/" className="btn-primary p-2 w-5/12">
+        <Link href={paths.dashboardSingleChat(userId)} className="btn-primary p-2 w-5/12">
           <FaRegEnvelope />
           message
         </Link>
-        <Link href="/" className="btn-primary-border p-2 w-5/12">
+        <Link href={'tel:' + phone} className="btn-primary-border p-2 w-5/12">
           <IoCallOutline />
           phone
         </Link>
@@ -64,14 +67,16 @@ export default function Profile({
           />
           <ProfileInfoLine
             title="Email"
-            value={"kesh@gmail.com"}
+            value={<a target="_blank"
+              className="link-btn text-body !font-normal" href={'mailto:' + email}>{email}</a>}
             icon={<CiMail />}
           />
-          <ProfileInfoLine
+          {website && <ProfileInfoLine
             title="website"
-            value={"kesh.com"}
+            value={<a target="_blank"
+              className="link-btn text-body !font-normal" href={website}>{website}</a>}
             icon={<TbWorld />}
-          />
+          />}
         </div>
         <div className="w-full my-3 border-b"></div>
         <div className="flex gap-1  justify-between items-center w-full ">

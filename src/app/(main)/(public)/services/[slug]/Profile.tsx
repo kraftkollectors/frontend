@@ -16,11 +16,12 @@ import { Artisan } from "@/utils/types/artisan";
 import { debugLog, fallbackImage } from "@/functions/helpers";
 import { notFound } from "next/navigation";
 import { formatTime } from "@/functions/date";
+import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
 
 export default async function Profile({ userId }: { userId: string; }) {
   // debugLog({userId})
   const user = await fetchUser({ isPublic: true, params: userId });
-  if (user == 'error') return;
+  if (user == 'error') return <UserProfileSkeleton />;
   if (!user?.isArtisan) notFound()
 
   let art = await fetchArtisan({ isPublic: true, params: userId });

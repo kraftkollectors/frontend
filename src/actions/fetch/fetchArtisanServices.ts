@@ -8,14 +8,17 @@ import { ActionApiResponse, ApiResponse, Paginated } from "@/utils/types/basicTy
 import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
 import { Service } from "@/utils/types/service";
+import { ApiRequest } from "@/utils/apiRequest";
 
 
-export async function fetchArtisanServices({ throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
+export async function fetchArtisanServices({ throwsError = true, isPublic = false, params }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getArtisanServices(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getArtisanServices(params ?? ''), {
             next: { tags: [tags.userCertificates] },
-        });
+        }) : ServerApiRequest.get(apis.getArtisanServices(accessId ?? ''), {
+            next: { tags: [tags.userCertificates] },
+        }));
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<Paginated<Service>>;
         // debugLog(res);

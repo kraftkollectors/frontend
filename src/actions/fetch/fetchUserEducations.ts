@@ -8,18 +8,21 @@ import { ActionApiResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
 import { Education } from "@/utils/types/education";
+import { ApiRequest } from "@/utils/apiRequest";
 
 
 export type UserEducationApiResponse = {
     existingRecords: Education[];
 }
 
-export async function fetchUserEducations({ redirect = true, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Education[]>> {
+export async function fetchUserEducations({ throwsError = true, params, isPublic = false }: ServerActionParams = {}): Promise<ActionApiResponse<Education[]>> {
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.getUserEducations(accessId ?? ''), {
+        const req = await (isPublic ? ApiRequest.getJson(apis.getUserEducations(params ?? ''), {
             next: { tags: [tags.userEducation] },
-        });
+        }) : ServerApiRequest.get(apis.getUserEducations(accessId ?? ''), {
+            next: { tags: [tags.userEducation] },
+        }));
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<UserEducationApiResponse>;
         // debugLog(res);

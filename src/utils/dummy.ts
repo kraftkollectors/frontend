@@ -2,65 +2,6 @@ import { ArtisanReviewCardProps } from "@/components/reviewCard/ArtisanReviewSer
 import { Service } from "@/utils/types/service";
 import { ReviewLineProps } from "@/components/ui/ReviewLines";
 
-const _dummyServices = [
-  {
-    coverPhoto: "/images/auth-bg.png",
-    title: "I will create the altimate sound track for your events",
-    estimatedPrice: "200,000",
-    charge: "session",
-    category: "Entertainment | Dj",
-    _id: "7912gfbh",
-    
-  },
-  {
-    coverPhoto: "/images/auth-bg.png",
-    title: "I will create the altimate sound track for your events",
-    estimatedPrice: "200,000",
-    charge: "session",
-    category: "Entertainment | Dj",
-    _id: "h9fufos",
-    
-  },
-  {
-    coverPhoto: "/images/auth-bg.png",
-    title: "I will create the altimate sound track for your events",
-    estimatedPrice: "200,000",
-    charge: "session",
-    category: "Entertainment | Dj",
-    _id: "wf9huf",
-    
-  },
-  {
-    coverPhoto: "/images/auth-bg.png",
-    title: "I will create the altimate sound track for your events",
-    estimatedPrice: "200,000",
-    charge: "session",
-    category: "Entertainment | Dj",
-    _id: "ouhfefg",
-    
-  },
-  {
-    coverPhoto: "/images/auth-bg.png",
-    title: "I will create the altimate sound track for your events",
-    estimatedPrice: "200,000",
-    charge: "session",
-    category: "Entertainment | Dj",
-    _id: "9un3v",
-    
-  },
-  {
-    coverPhoto: "/images/auth-bg.png",
-    title: "I will create the altimate sound track for your events",
-    estimatedPrice: "200,000",
-    charge: "session",
-    category: "Entertainment | Dj",
-    _id: "9fuhufwje",
-    
-  },
-];
-
-export const dummyServices = _dummyServices as Service[];
-
 export const dummyReviews: ArtisanReviewCardProps[] = [
   {
     _id: "w78efg",
