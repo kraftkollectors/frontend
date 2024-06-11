@@ -15,7 +15,7 @@ import { useFormState } from "react-dom";
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-toastify";
 
-export default function WriteReview({serviceId}:{serviceId:string}) {  
+export default function WriteReview({serviceId, ownerId}:{serviceId:string; ownerId: string}) {  
   const {push} = useRouter();
   const [key, setKey] = useState('-');
   const [open, setOpen] = useState(false);
@@ -73,6 +73,7 @@ export default function WriteReview({serviceId}:{serviceId:string}) {
           </FormButton>
           <UserAuth />
           <input type="hidden" name="serviceId" hidden defaultValue={serviceId} />
+          <input type="hidden" name="ownerId" hidden defaultValue={ownerId} />
         </form>
       </AlertDialog.Content>
     </AlertDialog.Root>

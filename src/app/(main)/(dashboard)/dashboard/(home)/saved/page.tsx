@@ -18,8 +18,8 @@ export default async function Page() {
   return (
     <div className="flex flex-col gap-3">
       {
-        services.saved!.length == 0 ? <div className="info-box">No saved Services</div>
-          : services.saved!.map((service) => (
+        services.existingRecords.length == 0 ? <div className="info-box">No saved Services</div>
+          : services.existingRecords.map((service) => (
             <DashboardSavedCard key={service._id} {...service} />
           ))}
       <Pagination

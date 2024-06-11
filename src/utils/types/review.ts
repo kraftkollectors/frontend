@@ -1,7 +1,8 @@
 
 export type Review = {
     serviceId: string;
-    userId: string;
+    reviewerId: string;
+    ownerId: string;
     review: string;
     rating: number;
     _id: string;

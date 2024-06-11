@@ -13,7 +13,7 @@ export type ArtisanReviewCardProps = Review & {
 };
 
 export function ArtisanReviewCard({
-  userId: user,
+  reviewerId: user,
   createdAt: date,
   rating,
   review,

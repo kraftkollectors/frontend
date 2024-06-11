@@ -64,9 +64,11 @@ const apis = {
     contactSupport: API + "/users/contact",
     reportService: API + "/users/reportad",
     rateService: API + "/users/rateads",
+    userReviews: (userId:string) => (API + "/users/userreviews/" + userId),
     getServiceRatings: (id:string) => (`${API}/users/rateads/${id}`),
     checkFavourite: (user: string, service: string) => (`${API}/users/checksavead?userid=${user}&serviceid=${service}`),
-    toggleFavourite: (id = '') => (`${API}/users/savead${id ? '/'+id : ''}`),
+    makeFavourite: (id = '') => (`${API}/users/savead${id ? '/'+id : ''}`),
+    deleteFavourite: (userId:string, serviceId:string) => (`${API}/users/savead?userid=${userId}&serviceid=${serviceId}`),
 }
 
 export default apis;

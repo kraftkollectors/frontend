@@ -11,6 +11,8 @@ import { toast } from "react-toastify";
 import UserAuth from "../server/UserAuth";
 import AppToast from "../Toast";
 import { FormButton } from "../ui/FormButton";
+import Link from "next/link";
+import { paths } from "@/utils";
 
 export type DashboardSavedCardProps = {
   img: string;
@@ -26,20 +28,23 @@ export function DashboardSavedCard({
   _id,
 }: Service) {
   const [res, action] = useFormState(toggleFavourite, {});
-  useLayoutEffect(()=>{
-    if(res.error) toast(<AppToast.error message={res.error} />)
-      if(res.success) toast(<AppToast.success message={res.success} />)
+  useLayoutEffect(() => {
+    if (res.error) toast(<AppToast.error message={res.error} />)
+    if (res.success) toast(<AppToast.success message={res.success} />)
   }, [res])
-  
+
   return (
     <div className="flex gap-2 p-2 bg-light border rounded">
-      <img
-        src={coverPhoto}
-        alt={title}
-        className="w-4/12 md:w-40 h-full aspect-[5/3] object-cover rounded profile-img"
-      />
+      <Link href={paths.service(_id)}>
+        <img
+          src={coverPhoto}
+          alt={title}
+          className="w-4/12 md:w-40 aspect-[5/3] object-cover rounded profile-img"
+        /></Link>
       <div className="flex flex-col gap-1">
-        <p className="text-back-400">{title}</p>
+        <Link href={paths.service(_id)}>
+          <h3 className="text-back-400 line-clamp-3">{title}</h3>
+        </Link>
         <p className="text-black-600 font-semibold">{formatNumber(Number(estimatedPrice), true)}</p>
         <form action={action} className="flex gap-2">
           <FormButton className="delete-btn">

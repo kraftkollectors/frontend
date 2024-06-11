@@ -9,7 +9,7 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     review: "Excellent service, I wish I could give more than 5 stars",
     createdAt: "12/12/2023",
     serviceId: "hewe cbdcn ,d",
-    userId: "null"
+    reviewerId: "null"
   },
   {
     _id: "8uwfhe",
@@ -17,7 +17,7 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     review: "Excellent service, I wish I could give more than 5 stars",
     createdAt: "12/12/2023",
     serviceId: "hewe cbdcn ,d",
-    userId: "null"
+    reviewerId: "null"
   },
   {
     _id: "ouwvbiewbf",
@@ -25,7 +25,7 @@ export const dummyReviews: ArtisanReviewCardProps[] = [
     review: "Excellent service, I wish I could give more than 5 stars",
     createdAt: "12/12/2023",
     serviceId: "hewe cbdcn ,d",
-    userId: "null"
+    reviewerId: "null"
   },
 ];
 

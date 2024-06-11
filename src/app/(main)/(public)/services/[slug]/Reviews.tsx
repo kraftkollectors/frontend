@@ -3,7 +3,7 @@ import WriteReview from "./WriteReview";
 import { fetchServiceRatings } from "@/actions";
 import { CummulativeReview } from "@/utils/types/review";
 
-export default async function Reviews({serviceId, cummulative:{totalRatings, averageRating}}:{serviceId:string, cummulative: CummulativeReview}) {
+export default async function Reviews({serviceId, cummulative:{totalRatings, averageRating}, ownerId}:{ownerId: string; serviceId:string, cummulative: CummulativeReview}) {
   const reviews = await fetchServiceRatings(serviceId);
   if(!reviews || reviews == 'error') return <></>
   
@@ -19,7 +19,7 @@ export default async function Reviews({serviceId, cummulative:{totalRatings, ave
         
       </div>
       <div className="py-2">
-        <WriteReview serviceId={serviceId} />
+        <WriteReview ownerId={ownerId} serviceId={serviceId} />
       </div>
       <div className="pt-10 gap-4 grid grid-cols-1">
         {reviews.existingRecords.map((review) => (

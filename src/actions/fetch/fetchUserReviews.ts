@@ -3,22 +3,25 @@
 import { debugLog } from "@/functions/helpers"
 import apis from "@/utils/apis";
 import { ServerApiRequest } from "@/utils/serverApiRequest";
-import { appCookies, tags } from "@/utils";
+import { appCookies } from "@/utils";
 import { ActionApiResponse, ApiResponse, Paginated } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
-import { Service } from "@/utils/types/service";
+import { ApiRequest } from "@/utils/apiRequest";
+import { Review } from "@/utils/types/review";
 
 
-export async function fetchSavedServices({ throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
+export async function fetchUserReviews({ throwsError = true, isPublic = false, params }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Review>>> {
     try {
-        const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await ServerApiRequest.get(apis.myFavouriteServices(accessId ?? ''), {
-            next: { tags: [tags.myFavs(accessId??'')] },
-        });
+        const accessId = isPublic ? "" : cookies().get(appCookies.accessId)?.value
+        const req = await (isPublic ? ApiRequest.getJson(apis.userReviews(params ?? ''), {
+            next: { revalidate: 60 * 60 * 5 },
+        }) : ServerApiRequest.get(apis.userReviews(accessId ?? ''), {
+            next: { revalidate: 60 * 60 * 5 },
+        }));
         if(!req) return null;
-        const res = (await req.json()) as ApiResponse<Paginated<Service>>;
-        // debugLog(res);
+        const res = (await req.json()) as ApiResponse<Paginated<Review>>;
+        debugLog(res);
         // debugLog(res.data.existingRecords.length);
 
         if (res.statusCode === 201) return res.data;

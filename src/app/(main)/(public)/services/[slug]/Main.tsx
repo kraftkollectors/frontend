@@ -21,7 +21,7 @@ export default function Main({s}: {s:DetailedService}) {
         <Profile userId={s.userId} />
         </Suspense>
       </div>
-      <Reviews cummulative={s.cummulativeRating} serviceId={s._id} />
+      <Reviews ownerId={s.userId} cummulative={s.cummulativeRating} serviceId={s._id} />
       </div>
     </section>
   );

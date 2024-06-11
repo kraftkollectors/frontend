@@ -29,8 +29,7 @@ export async function rateService(_: ActionResponse, formData: FormData): Promis
     if(![1,2,3,4,5].includes(Number(data.rating))) return {error: "You must rate at least 1 star"}
 
     try {
-
-        const req = await ServerApiRequest.post(apis.rateService, data);
+        const req = await ServerApiRequest.post(apis.rateService, {...data, reviewerId: data.userId});
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 

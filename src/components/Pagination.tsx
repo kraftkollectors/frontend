@@ -7,7 +7,7 @@ import { useChangeSearchParams } from "@/hooks";
 import { Paginated } from '@/utils/types/basicTypes';
 
 export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
-    baseUrl: string;
+    baseUrl?: string;
     pagination: Paginated<any>;
 }
 

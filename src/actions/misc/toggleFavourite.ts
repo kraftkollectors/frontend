@@ -18,7 +18,7 @@ export async function toggleFavourite(_: ActionResponse, formData: FormData): Pr
     if(!data.userId) return {error: "You are not logged in"}
     try {
         const del = data.delete == 'true'
-        const req = await (del ? ServerApiRequest.delete(apis.toggleFavourite(data.serviceId), data) : ServerApiRequest.post(apis.toggleFavourite(), data));
+        const req = await (del ? ServerApiRequest.delete(apis.deleteFavourite(data.userId, data.serviceId), data) : ServerApiRequest.post(apis.makeFavourite(), data));
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 
