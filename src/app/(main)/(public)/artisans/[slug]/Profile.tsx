@@ -62,7 +62,7 @@ export default function Profile({
           <p className="text-body font-semibold">Contact Info</p>
           <ProfileInfoLine
             title="Phone Number"
-            value={"phoneNumber"}
+            value={phone}
             icon={<LuPhone />}
           />
           <ProfileInfoLine
