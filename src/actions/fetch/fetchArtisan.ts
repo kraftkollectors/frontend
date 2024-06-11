@@ -17,7 +17,7 @@ export type ArtisanApiResponse = {
 export async function fetchArtisan({ throwsError = true, isPublic = false, params }: ServerActionParams<string> = {} ): Promise<ActionApiResponse<ArtisanDetails>> {
     let proceed = false;
     try {
-        const accessId = cookies().get(appCookies.accessId)?.value
+        const accessId = isPublic ? '' : cookies().get(appCookies.accessId)?.value
         const req = await (isPublic ? ApiRequest.getJson(apis.getArtisan(params ?? ''), {
             next: { tags: [tags.user, tags.artisan] },
         }) : ServerApiRequest.get(apis.getArtisan(accessId ?? ''), {

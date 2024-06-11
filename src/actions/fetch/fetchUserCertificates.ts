@@ -17,7 +17,7 @@ export type UserCertificatesApiResponse = {
 
 export async function fetchUserCertificates({ isPublic = false, params, throwsError = true }: ServerActionParams = {}): Promise<ActionApiResponse<Certificate[]>> {
     try {
-        const accessId = cookies().get(appCookies.accessId)?.value
+        const accessId = isPublic ? '' : cookies().get(appCookies.accessId)?.value
         const req = await (isPublic ? ApiRequest.getJson(apis.getUserCertificates(params ?? ''), {
             next: { tags: [tags.userCertificates] },
         }) : ServerApiRequest.get(apis.getUserCertificates(accessId ?? ''), {

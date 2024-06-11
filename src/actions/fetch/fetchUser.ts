@@ -20,7 +20,7 @@ export async function fetchUser({ redirect: shouldRedirect = true, throwsError =
     let proceed = false;
     try {
         // debugLog({isPublic, params})
-        const accessId = cookies().get(appCookies.accessId)?.value
+        const accessId = isPublic ? '' : cookies().get(appCookies.accessId)?.value
         const req = await (isPublic ? ApiRequest.getJson(apis.getUser(params??''), {
             next: { tags: [tags.user] },
         }) : ServerApiRequest.get(apis.getUser(accessId ?? ''), {

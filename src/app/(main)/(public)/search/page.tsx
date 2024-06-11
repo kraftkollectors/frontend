@@ -5,9 +5,10 @@ import PostList from "./PostList";
 import { fetchServices } from "@/actions";
 import { Pagination } from "@/components";
 import { paths } from "@/utils";
+import { Suspense } from "react";
 
 export default async function searchPage() {
-  const ads = await fetchServices();
+  const ads = await fetchServices({isPublic: true});
   if(!ads || ads == 'error') throw new Error("Connection error")
   
   return (
@@ -19,7 +20,7 @@ export default async function searchPage() {
       </div>
       <PostList services={ads.existingRecords} />
       <div className=" flex items-center justify-center py-2">
-        <Pagination baseUrl={paths.search()} pagination={ads} />
+        <Suspense><Pagination baseUrl={paths.search()} pagination={ads} /></Suspense>
       </div>
     </div>
   );

@@ -17,7 +17,7 @@ export type UserEducationApiResponse = {
 
 export async function fetchUserEducations({ throwsError = true, params, isPublic = false }: ServerActionParams = {}): Promise<ActionApiResponse<Education[]>> {
     try {
-        const accessId = cookies().get(appCookies.accessId)?.value
+        const accessId = isPublic ? '' : cookies().get(appCookies.accessId)?.value
         const req = await (isPublic ? ApiRequest.getJson(apis.getUserEducations(params ?? ''), {
             next: { tags: [tags.userEducation] },
         }) : ServerApiRequest.get(apis.getUserEducations(accessId ?? ''), {

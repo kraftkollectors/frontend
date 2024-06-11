@@ -13,7 +13,7 @@ import { ApiRequest } from "@/utils/apiRequest";
 
 export async function fetchArtisanServices({ throwsError = true, isPublic = false, params }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
     try {
-        const accessId = cookies().get(appCookies.accessId)?.value
+        const accessId = isPublic ? '' : cookies().get(appCookies.accessId)?.value
         const req = await (isPublic ? ApiRequest.getJson(apis.getArtisanServices(params ?? ''), {
             next: { tags: [tags.userCertificates] },
         }) : ServerApiRequest.get(apis.getArtisanServices(accessId ?? ''), {
