@@ -59,7 +59,7 @@ export default async function Page({ params }: AppPageProps<{ slug: string }>) {
         </div>
       </section>
       <MyServices userId={user._id} />
-      <Reviews />
+      <Reviews userId={user._id} />
     </>
   );
 }

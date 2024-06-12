@@ -1,12 +1,13 @@
 import { fetchArtisanServices } from "@/actions";
-import { ServiceCard } from "@/components";
+import { Pagination, ServiceCard } from "@/components";
+import { paths } from "@/utils";
 
 export default async function MyServices({userId}:{userId:string}) {
   const services = await fetchArtisanServices({isPublic: true, throwsError: false, params: userId});
   if (services == 'error' || !services) return <div className="info-box">An Error Occurred</div>
   
   return (
-    <section className="app-container py-6 bg-light-text">
+    <section id="Services" className="app-container py-6 bg-light-text">
       <h1 className="font-bold pb-4 text-title">My Services</h1>
       <div className="services-grid">
         {
@@ -15,6 +16,7 @@ export default async function MyServices({userId}:{userId:string}) {
           <ServiceCard key={service._id} {...service} />
         ))}
       </div>
+      {services.totalPages > 1 && <Pagination pagination={services} baseUrl={paths.artisan(userId + "#Services")} />}
     </section>
   );
 }

@@ -1,5 +1,4 @@
 import { DashboardReviewCard } from "@/components/dashboard";
-import { dummyReviews } from "@/utils/dummy";
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
 import { fetchUser, fetchUserReviews } from "@/actions";

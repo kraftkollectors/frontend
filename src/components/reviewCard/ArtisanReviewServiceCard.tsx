@@ -1,4 +1,3 @@
-import { BasicService as string, BasicUser } from "@/utils/types/basicTypes";
 import { RatingStars } from "../ui/RatingStars";
 import UserProfile from "./UserProfile";
 import { Review } from "@/utils/types/review";
