@@ -18,6 +18,7 @@ import {
 import useWindowWidth from "@/hooks/useWindowWidth";
 import { useUserStore } from "@/state";
 import { formatDate } from "@/functions/date";
+import AvailableToggle from "./AvailableToggle";
 
 /* eslint-disable @next/next/no-img-element */
 export default function ProfileCard() {
@@ -56,7 +57,7 @@ export default function ProfileCard() {
               {true && (
                 <ProfileInfoLine
                   title="Availability"
-                  value={'available'}
+                  value={<AvailableToggle />}
                   icon={<IoTimeOutline />}
                 />
               )}

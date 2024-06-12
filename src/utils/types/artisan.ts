@@ -18,6 +18,7 @@ export type Artisan = {
     showContact: boolean;
     areaOfSpecialization: string,
     nin: string,
+    isActive: boolean;
 }
 
 export type ArtisanDetails = Artisan & {

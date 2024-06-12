@@ -34,6 +34,7 @@ export {reportService} from './misc/reportService'
 export {rateService} from './misc/rateService'
 export {checkFavourite} from './misc/checkFavourite'
 export {toggleFavourite} from './misc/toggleFavourite'
+export {toggleAvailability} from './misc/toggleAvailability'
 
 export {deleteEducation} from './delete/deleteEducation'
 export {deleteCertificate} from './delete/deleteCertificate'
