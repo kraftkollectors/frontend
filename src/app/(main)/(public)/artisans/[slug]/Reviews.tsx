@@ -19,7 +19,7 @@ export default async function Reviews({ userId }: { userId: string }) {
       value: val,
       percentage: (val * 100) / reviewsCount.totalRatings
     })
-  }).toReversed()
+  }).reverse()
   const avgRating = reviewsCount.sumRating / reviewsCount.totalRatings;
   
   
