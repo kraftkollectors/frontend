@@ -6,15 +6,17 @@ import { fetchServices } from "@/actions";
 import { Pagination } from "@/components";
 import { paths } from "@/utils";
 import { AppPageProps } from "@/utils/types/basicTypes";
-import { sanitizeSearch } from "@/functions/helpers";
+import { buildUrlQuery, sanitizeSearch } from "@/functions/helpers";
 
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
+import { SearchPageParams } from "@/utils/types/search";
 
-export async function generateMetadata({ params }: AppPageProps<{ query: string }>):Promise<Metadata|null>{
+export async function generateMetadata({ params, searchParams }: AppPageProps<{ query: string | string[] }, SearchPageParams>):Promise<Metadata|null>{
     let q = typeof params?.query == 'string' ? params?.query : (params?.query ?? []).join(' ')
     q = sanitizeSearch(q ?? '');
-    const ads = await fetchServices();
+    const filters = buildUrlQuery({...searchParams, q});
+    const ads = await fetchServices({params: filters});
     if (!ads || ads == 'error') return null;
 
   return staticMetadata({
@@ -22,10 +24,11 @@ export async function generateMetadata({ params }: AppPageProps<{ query: string 
     description: `showing ${ads.totalDocuments} search results for ${q}`
   })
 }
-export default async function searchPage({ params }: AppPageProps<{ query: string | string[] }>) {
-    let q = typeof params?.query == 'string' ? params?.query : params?.query.join(' ')
+export default async function searchPage({ params, searchParams }: AppPageProps<{ query: string | string[] }, SearchPageParams>) {
+    let q = typeof params?.query == 'string' ? params?.query : (params?.query ?? []).join(' ')
     q = sanitizeSearch(q ?? '');
-    const ads = await fetchServices();
+    const filters = buildUrlQuery({...searchParams, q});
+    const ads = await fetchServices({params: filters});
     if (!ads || ads == 'error') throw new Error("Connection error")
 
     return (

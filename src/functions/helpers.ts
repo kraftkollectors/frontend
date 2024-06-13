@@ -75,3 +75,7 @@ export function sanitizeSearch(q:string) {
     q = q.replace(/[^a-zA-Z0-9 ]/g, '');
     return decodeURIComponent(q);
 }
+
+export function buildUrlQuery(obj:{[key:string]:any}){
+    return "?" + Object.entries(obj).map(v=>`${v[0]}=${v[1]}`).join('&')
+}

@@ -10,13 +10,15 @@ import { Service } from "@/utils/types/service";
 import { ApiRequest } from "@/utils/apiRequest";
 
 
-export async function fetchServices({ throwsError = true, isPublic = true }: ServerActionParams = {}): Promise<ActionApiResponse<Paginated<Service>>> {
+export async function fetchServices({ throwsError = true, isPublic = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<Service>>> {
     try {
         const req = await (isPublic 
-            ? ApiRequest.getJson(apis.services, {next: {tags: [tags.myServices]}}) 
-            : ServerApiRequest.get(apis.services, {next: {tags: [tags.myServices]}}));
+            ? ApiRequest.getJson(apis.services + params, {next: {tags: [tags.myServices]}}) 
+            : ServerApiRequest.get(apis.services + params, {next: {tags: [tags.myServices]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<Service>>;
         debugLog(res);
+        debugLog(apis.services + params);
+
 
         if (res.statusCode === 201) return res.data;
         else if(res.data.toString() == 'No records found') return null;

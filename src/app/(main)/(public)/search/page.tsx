@@ -8,6 +8,9 @@ import { paths } from "@/utils";
 import { Suspense } from "react";
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
+import { AppPageProps } from "@/utils/types/basicTypes";
+import { SearchPageParams } from "@/utils/types/search";
+import { buildUrlQuery } from "@/functions/helpers";
 
 export const metadata:Metadata = staticMetadata({
   title: "KraftKollectors | Explore services and artisans",
@@ -15,8 +18,9 @@ export const metadata:Metadata = staticMetadata({
 })
 
 
-export default async function searchPage() {
-  const ads = await fetchServices({isPublic: true});
+export default async function SearchPage({ searchParams }: AppPageProps<null, SearchPageParams>) {
+  const filters = buildUrlQuery({...searchParams});
+  const ads = await fetchServices({params: filters});
   if(!ads || ads == 'error') throw new Error("Connection error")
   
   return (
