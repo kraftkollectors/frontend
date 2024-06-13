@@ -15,3 +15,22 @@ export const GENDERS = ['male', 'female']
 export const ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'gif']
 export const ALLOWED_VIDEO_EXTENSIONS = ['mp4', 'm4a'];
 export const $1MB = 1024 * 1024 * 1;
+
+export const SORT_OPTIONS =  [
+    {
+      title: "Best Rating",
+      value: "best-rating",
+    },
+    {
+      title: "Latest",
+      value: "latest",
+    },
+    {
+      title: "Lowest Price",
+      value: "lowest-price",
+    },
+    {
+      title: "Highest Price",
+      value: "highest-price",
+    },
+  ];

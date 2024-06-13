@@ -3,6 +3,7 @@ import AppIcons from "../AppIcons";
 import SearchMobile from "./SearchMobile";
 import { submitSearch } from "@/actions";
 import { FormButton } from "../ui/FormButton";
+import { Suspense } from "react";
 
 export default function NavSearch() {
   return (
@@ -19,7 +20,7 @@ export default function NavSearch() {
           Search
         </FormButton>
       </form>
-      <SearchMobile />
+      <Suspense><SearchMobile /></Suspense>
     </div>
   );
 }

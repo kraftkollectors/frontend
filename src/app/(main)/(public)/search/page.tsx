@@ -28,7 +28,7 @@ export default async function SearchPage({ searchParams }: AppPageProps<null, Se
       <RelatedSearch />
       <div className="app-container py-2">
         <SearchResult />
-        <SearchOption />
+        <Suspense><SearchOption /></Suspense>
       </div>
       <PostList services={ads.existingRecords} />
       <div className=" flex items-center justify-center py-2">

@@ -13,7 +13,7 @@ import { Metadata } from "next";
 import { SearchPageParams } from "@/utils/types/search";
 
 export async function generateMetadata({ params, searchParams }: AppPageProps<{ query: string | string[] }, SearchPageParams>):Promise<Metadata|null>{
-    let q = typeof params?.query == 'string' ? params?.query : (params?.query ?? []).join(' ')
+    let q = typeof params?.query == 'string' ? params?.query : (params?.query ?? []).toString()
     q = sanitizeSearch(q ?? '');
     const filters = buildUrlQuery({...searchParams, q});
     const ads = await fetchServices({params: filters});

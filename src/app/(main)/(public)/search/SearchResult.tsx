@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 export default function SearchResult() {
   let {query} = useParams();
   if(query && typeof query !== 'string'){
-    query = query.join('');
+    query = query.toString();
   }else if(!query) query = ''
   
   return (

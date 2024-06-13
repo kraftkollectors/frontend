@@ -13,6 +13,7 @@ import { FormButton } from "@/components";
 export default function CategoryPopOver() {
   const {pushParams, params} = useChangeSearchParams();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   function handleSubmit(e:any){
     e.preventDefault();
     const data = formDataToObject<{
@@ -20,18 +21,22 @@ export default function CategoryPopOver() {
       subCategory?:string;
     }>(new FormData(e.target));
 
-    if(!data.category || !data.subCategory) toast(<AppToast.error message="select a category and sub-category" />);
+    if(!data.category || !data.subCategory) return toast(<AppToast.error message="select a category and sub-category" />);
     setLoading(true)
     pushParams(data);
-    setTimeout(()=>setLoading(false), 2000)
+    setTimeout(()=>{
+      setOpen(false);
+      setLoading(false)
+    }, 3000)
   }
 
   useEffect(()=>{
     setLoading(false)
+    setOpen(false);
   }, [params])
   
   return (
-    <Popover.Root>
+    <Popover.Root onOpenChange={setOpen} open={open}>
       <Popover.Trigger>
         <button className="search-filter-btn">
           Category <FaChevronDown />

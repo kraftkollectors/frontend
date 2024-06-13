@@ -11,37 +11,50 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 export default function LocationPopOver() {
-    const {pushParams, params} = useChangeSearchParams();
+  const { pushParams, params } = useChangeSearchParams();
   const [loading, setLoading] = useState(false);
-  function handleSubmit(e:any){
+  const [open, setOpen] = useState(false);
+  function handleSubmit(e: any) {
     e.preventDefault();
     const data = formDataToObject<{
-      category?:string;
-      subCategory?:string;
+      latitude?: string;
+      longitude?: string;
+      location?: string;
+      radius?: string;
     }>(new FormData(e.target));
 
-    if(!data.category || !data.subCategory) toast(<AppToast.error message="select a category and sub-category" />);
+    if (
+      !data.latitude ||
+      !data.longitude ||
+      !data.location ||
+      !data.radius
+    ) return toast(<AppToast.error message="Invalid location selected" />);
     setLoading(true)
     pushParams(data);
-    setTimeout(()=>setLoading(false), 2000)
+    setTimeout(() => {
+      setOpen(false)
+      setLoading(false)
+    }, 3000)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
+    setOpen(false)
     setLoading(false)
   }, [params])
-  
+
   return (
-    <Popover.Root>
+    <Popover.Root onOpenChange={setOpen} open={open}>
       <Popover.Trigger>
         <button className="search-filter-btn">
           location <MdMyLocation />
         </button>
       </Popover.Trigger>
-      <Popover.Content>
-        <form 
-        onSubmit={handleSubmit}
+      <Popover.Content style={{minWidth: 320}}>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-2"
         >
-        <Location />
+          <Location />
 
           <FormButton loading={loading} className="btn-dark-tiny py-2 w-full">Apply</FormButton>
         </form>

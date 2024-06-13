@@ -109,6 +109,8 @@
   background-color: #d2d2d2;
 }
 
+@media screen and (min-width: 650px) {
+  
 ::-webkit-scrollbar-track {
   width: 8px;
   height: 8px;
@@ -134,3 +136,5 @@
   display: none !important;
 }
 
+
+}
