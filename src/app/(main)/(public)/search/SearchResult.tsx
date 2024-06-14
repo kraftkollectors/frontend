@@ -1,18 +1,18 @@
 'use client'
 
-import { sanitizeSearch } from "@/functions/helpers";
+import { formatNumber, sanitizeSearch } from "@/functions/helpers";
 import { useParams } from "next/navigation";
 
-export default function SearchResult() {
-  let {query} = useParams();
-  if(query && typeof query !== 'string'){
+export default function SearchResult({ count }: { count: number }) {
+  let { query } = useParams();
+  if (query && typeof query !== 'string') {
     query = query.toString();
-  }else if(!query) query = ''
-  
+  } else if (!query) query = ''
+
   return (
     <div className="">
       {query && <p className="text-black">
-        Search Result for <span className="font-semibold"> {sanitizeSearch(query)} (12,000)</span>
+        {count == 0 ? 'No' : formatNumber(count)} Search Result{count == 1 ? '' : 's'} for <span className="font-semibold"> {sanitizeSearch(query)}</span>
       </p>}
     </div>
   );

@@ -22,7 +22,7 @@ export default function NavLinks() {
           src={fallbackImage(user?.image)}
           alt={user?.userName}
           title={user?.userName}
-          className=" size-8 avatar cursor-pointer overflow-hidden"
+          className=" size-8 avatar cursor-pointer overflow-hidden profile-img border border-black-100"
         />
       </ProfileDropdown>
     </nav>

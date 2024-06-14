@@ -16,7 +16,7 @@ export async function toggleAvailability(_: any, formData: FormData): Promise<Ac
 
     try {
         if(!data.userId) return {error: "Invalid User"}
-        const req = await ServerApiRequest.patch(apis.updateArtisanProfile(data.userId), {...data, isActive: data.value === 'true' });
+        const req = await ServerApiRequest.patch(apis.updateArtisanProfile(data.userId), {...data, available: data.value === 'true' });
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 

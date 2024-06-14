@@ -35,7 +35,7 @@ export default async function searchPage({ params, searchParams }: AppPageProps<
         <div className="">
             <RelatedSearch />
             <div className="app-container py-2">
-                <SearchResult />
+                <SearchResult count={ads.totalDocuments} />
                 <SearchOption />
             </div>
             <PostList services={ads.existingRecords} />

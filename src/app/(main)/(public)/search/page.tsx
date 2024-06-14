@@ -27,7 +27,7 @@ export default async function SearchPage({ searchParams }: AppPageProps<null, Se
     <div className="">
       <RelatedSearch />
       <div className="app-container py-2">
-        <SearchResult />
+        <SearchResult  count={ads.totalDocuments} />
         <Suspense><SearchOption /></Suspense>
       </div>
       <PostList services={ads.existingRecords} />
