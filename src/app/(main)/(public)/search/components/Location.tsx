@@ -8,7 +8,7 @@ export default function Location() {
   
   return (
     <div className="flex flex-col gap-2">
-      <AppInput name="location" placeholder="Enter Location" />
+      <AppInput name="location" placeholder="Enter Location" value={params.get('location') || undefined} />
       <UseCurrentLocation />
       <AppSelect name="radius" options={radius} value={params.get('radius') ?? radius[0].value} />
     </div>
