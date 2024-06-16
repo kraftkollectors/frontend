@@ -50,7 +50,7 @@ export default function MobileNav({ children }: MobileNavProps) {
           } flex flex-col gap-6 shadow transition-all duration-500 delay-100`}
         >
           <div className="flex justify-end">
-            <button className="p-2 text-xl" onClick={() => setOpen(false)}>
+            <button className="p-2 text-xl icon-btn" onClick={() => setOpen(false)}>
               <IoClose />
             </button>
           </div>

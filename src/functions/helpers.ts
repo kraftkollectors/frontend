@@ -79,3 +79,7 @@ export function sanitizeSearch(q:string) {
 export function buildUrlQuery(obj:{[key:string]:any}){
     return "?" + Object.entries(obj).map(v=>`${v[0]}=${v[1]}`).join('&')
 }
+
+export function generateRoomId(str1:string, str2:string){
+    return [str1, str2].sort().join('-');
+}

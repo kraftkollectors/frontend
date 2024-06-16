@@ -5,10 +5,16 @@ import SideBar from "./SideBar";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import paths from "@/utils/paths";
+import { useWS } from "@/hooks";
 
 export default function MainLayout({ children }: AppLayoutProps) {
+
+  // const {} = useWS();
+
   const pathname = usePathname();
   const vw = useWindowWidth();
+
+
 
   return (
     <main className="md:app-container md:py-10 md:bg-light-text md:max-h-screen md:h-screen">

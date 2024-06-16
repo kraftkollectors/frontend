@@ -15,7 +15,7 @@ export function ChatTopbar({ name, img, lastSeen }: ChatTopbarProps) {
           src={img}
           alt={name}
           title={`Conversation with ${name}`}
-          className="rounded-full aspect-square size-12 flex-shrink-0"
+          className="rounded-full aspect-square size-12 flex-shrink-0 profile-img"
         />
         <div className="w-full flex-shrink">
           <h1 className="font-semibold">
