@@ -31,7 +31,10 @@ export function ChatBottombar({ socket, roomId }: { socket: Socket; roomId: stri
     if (v.connected) {
       setChatMsg('')
       setSending(false);
-
+    } else {
+      setTimeout(() => {
+        setSending(false);
+      }, 2000);
     }
   }
 
