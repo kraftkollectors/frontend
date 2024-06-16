@@ -1,14 +1,12 @@
 "use client";
 
-import { dummyConversations } from "@/utils/data";
-
-import paths from "@/utils/paths";
-import Conversations from "./Conversations";
 import AppInput from "@/components/ui/AppInput";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useWS } from "@/hooks";
+import { ChatHead } from "@/utils/types/chat";
+import { ConversationTile } from "./components";
 
-export default function SideBar() {
+export default function SideBar({chatHeads}:{chatHeads: ChatHead[]}) {
   const {isConnected} = useWS();
   
   return (
@@ -24,7 +22,11 @@ export default function SideBar() {
           icon={<FaMagnifyingGlass />}
         />
       </div>
-      <Conversations conversations={dummyConversations} />
+      <div className="flex flex-col overflow-y-auto ">
+      {chatHeads.map(conversation =>
+        <ConversationTile key={conversation._id} {...conversation} />
+      )}
+    </div>
     </div>
   );
 }

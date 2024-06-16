@@ -70,6 +70,11 @@ const apis = {
     checkFavourite: (user: string, service: string) => (`${API}/users/checksavead?userid=${user}&serviceid=${service}`),
     makeFavourite: (id = '') => (`${API}/users/savead${id ? '/'+id : ''}`),
     deleteFavourite: (userId:string, serviceId:string) => (`${API}/users/savead?userid=${userId}&serviceid=${serviceId}`),
+
+    getChatHeads: (userId: string)=>`${API}/users/chatheads/${userId}`,
+    deleteChat: (chatId: string)=>`${API}/users/chat/${chatId}`,
+    updateLastSeen: (userId: string)=>`${API}/users/lastseen/${userId}`,
+    getChats: (userId: string, guestId: string)=>`${API}/users/chat?userid=${userId}&receiverid=${guestId}`,
 }
 
 export default apis;

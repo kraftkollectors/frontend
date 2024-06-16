@@ -2,36 +2,50 @@
 import { useEffect, useRef, useState } from "react";
 import { ChatInfoMessage, ChatMessage } from "../components";
 import { Socket } from "socket.io-client";
-import { debugLog } from "@/functions/helpers";
+import { debugLog, generateRoomId } from "@/functions/helpers";
 import { ChatMessage as ChatMessageType } from "@/utils/types/chat";
 import { useUserStore } from "@/state";
 import useLocalStorage from "use-local-storage";
 import { FaArrowDown } from "react-icons/fa6";
+import { tags, wse } from "@/utils";
+import { useQuery } from "@tanstack/react-query";
+import { fetchChats } from "@/actions";
 
-export default function ChatView({ socket, roomId, onNewMessage }: { socket: Socket; roomId: string, onNewMessage: () => void }) {
+export default function ChatView({ socket, receiverId }: { socket: Socket; receiverId: string;}) {
   const user = useUserStore(s => s.user);
   const chatRef = useRef<HTMLDivElement>(null);
-  const [locChats, setLocChats] = useLocalStorage<ChatMessageType[]>(roomId, []);
+  const [locChats, setLocChats] = useLocalStorage<ChatMessageType[]>(generateRoomId(user!._id, receiverId), []);
   const [chats, setChats] = useState<ChatMessageType[]>(locChats);
   const [toBottom, setToBottom] = useState(true); // if the view should scroll to bottom on new messages recieved
+
+  const {data, isLoading, error} = useQuery({
+    queryFn: ()=>fetchChats(receiverId, {params: 1}),
+    queryKey: [tags.chats(user!._id, receiverId)],
+  });
+
+  useEffect(()=>{
+    debugLog(data);
+  }, [data])
+  
   useEffect(() => {
     if (chatRef.current)
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }, []);
 
   useEffect(() => {
-    socket.on('message', (msg: ChatMessageType) => {
-      debugLog(msg);
+    socket.on(wse.new_message, (msg: ChatMessageType) => {
+      if(!msg.type) return;
+      // debugLog({msg});
       setChats(v => {
         setLocChats(v.slice(-10));
         return [...v, msg]
       });
-      if (chatRef.current && msg.userId == user?._id)
+      if (chatRef.current && msg.sender_id == user?._id)
         chatRef.current.scrollTop = chatRef.current.scrollHeight
     });
 
     return () => {
-      socket.off('message');
+      socket.off(wse.new_message);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -70,12 +84,8 @@ export default function ChatView({ socket, roomId, onNewMessage }: { socket: Soc
       <ChatInfoMessage message="today" />
       {chats.map((chat, i) => {
         return <ChatMessage key={i}
-          me={user?._id == chat.userId}
-          message={chat.message}
-          datetime=""
-          id=""
-          status="seen"
-        //  {...chat} 
+          me={user?._id == chat.sender_id}
+         {...chat} 
         />;
       })}
 

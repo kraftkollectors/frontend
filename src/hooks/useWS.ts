@@ -1,6 +1,7 @@
 import { debugLog } from '@/functions/helpers';
 import { WS_URL } from '@/utils/constants';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { io } from 'socket.io-client';
 
 const socket = io(WS_URL, { autoConnect: false, ackTimeout: 5000, timeout: 5000, });
@@ -21,8 +22,9 @@ export function useWS() {
             setIsConnected(false);
         }
 
-        function onError() {
-            debugLog('error');
+        function onError(res:any) {
+            toast(res.message)
+            debugLog({'error' : res});
         }
 
         // function onFooEvent(value) {

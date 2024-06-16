@@ -1,10 +1,7 @@
+import { ChatMessage } from '@/utils/types/chat';
 import {motion} from 'framer-motion'
 
-export type ChatMessageProps = {
-  id: string;
-  message: string;
-  datetime: string;
-  status: string;
+export type ChatMessageProps = ChatMessage & {
   me: boolean;
 };
 
@@ -21,10 +18,10 @@ const motionProps = {
   },
 }
 
-export function ChatMessage({
-  id,
+export function ChatBubble({
+  _id,
   message,
-  datetime,
+  createdAt,
   status,
   me = false
 }: ChatMessageProps) {
@@ -44,7 +41,7 @@ export function ChatMessage({
         </p>
         <div className="flex gap-1 justify-end">
           <span className="text-small text-black-100">
-            {datetime}
+            {createdAt}
           </span>
           <span className="text-small text-black-100">
             {status}

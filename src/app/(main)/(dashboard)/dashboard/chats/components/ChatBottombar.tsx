@@ -1,14 +1,17 @@
 'use client'
 
 import { FormButton } from "@/components";
+import { newMessageChat } from "@/functions/chat";
 import { debugLog } from "@/functions/helpers";
 import { useUserStore } from "@/state";
+import { wse } from "@/utils";
+import { ChatMessage } from "@/utils/types/chat";
 import { ChangeEvent, useState } from "react";
 import { GrFormAttachment } from "react-icons/gr";
 import { VscSend } from "react-icons/vsc";
 import { Socket } from "socket.io-client";
 
-export function ChatBottombar({ socket, roomId }: { socket: Socket; roomId: string }) {
+export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiverId: string }) {
   const [chatMsg, setChatMsg] = useState('');
   const [sending, setSending] = useState(false);
   const user = useUserStore(s => s.user);
@@ -27,7 +30,11 @@ export function ChatBottombar({ socket, roomId }: { socket: Socket; roomId: stri
   function sendMsg() {
     if (!chatMsg.trim() || !user) return;
     setSending(true);
-    const v = socket.emit('chatMessage', { userId: user._id, roomId: roomId, message: chatMsg });
+    const v = socket.emit(wse.send_message, newMessageChat({
+      message: chatMsg,
+      senderId: user._id,
+      receiverId
+    }));
     if (v.connected) {
       setChatMsg('')
       setSending(false);

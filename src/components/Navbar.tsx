@@ -9,8 +9,10 @@ import { FaBars } from "react-icons/fa6";
 import MobileNav from "./navbar/MobileNav";
 import { useUserStore } from "@/state";
 import Link from "next/link";
+import { useUpdateOnline } from "@/hooks";
 
 export function Navbar() {
+  useUpdateOnline();
   const user = useUserStore(s=>s.user);
   const pathname = usePathname();
   const [show, setShow] = useState(true);

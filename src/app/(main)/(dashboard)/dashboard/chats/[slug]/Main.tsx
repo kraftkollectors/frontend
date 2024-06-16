@@ -7,21 +7,20 @@ import { useUserStore } from "@/state";
 import { useLayoutEffect } from "react";
 import { useWS } from "@/hooks";
 import { fallbackImage, fullName, generateRoomId } from "@/functions/helpers";
+import { wse } from "@/utils";
 
 export default function Main({guest}:{guest: UserDetails}) {
   const user = useUserStore(s=>s.user);
   const {socket, isConnected} = useWS();
-  const roomId = user ? generateRoomId(user._id, guest._id) : null;
 
   useLayoutEffect(()=>{
-    if(!user || !isConnected || !roomId) return;
-    socket.emit('joinRoom', { userId: user._id, roomId: roomId })
+    if(!user || !isConnected) return;
+    socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })
+    // socket.on(wse.joined_room, ()=>alert('user joined'));
     
-  }, [user, guest._id, socket, isConnected, roomId])
+  }, [user, guest._id, socket, isConnected])
   
-  function onNewMessage(){
-    
-  }
+
   
   return (
     <div className="flex flex-col justify-stretch h-full">
@@ -31,9 +30,9 @@ export default function Main({guest}:{guest: UserDetails}) {
         img={fallbackImage(guest.image)}
       />
       {
-        (roomId) && <>
-        <ChatView socket={socket} roomId={roomId} onNewMessage={onNewMessage} />
-        <ChatBottombar socket={socket} roomId={roomId} />
+        (user?._id && guest._id) && <>
+        <ChatView socket={socket} receiverId={guest._id}/>
+        <ChatBottombar socket={socket} receiverId={guest._id} />
         </>
       }
     </div>

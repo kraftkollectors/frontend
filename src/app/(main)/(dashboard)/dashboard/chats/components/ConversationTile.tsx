@@ -1,25 +1,23 @@
 "use client";
 
+import { fallbackImage } from "@/functions/helpers";
 /* eslint-disable @next/next/no-img-element */
 import paths from "@/utils/paths";
+import { ChatHead } from "@/utils/types/chat";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export type ConversationTileProps = {
-  id: string;
-  name: string;
-  img: string;
-  message: string;
+export type ConversationTileProps = ChatHead & {
   datetime: string;
 };
 
 export function ConversationTile({
-  id,
-  name,
-  message,
-  img,
+  _id: id,
+  userName: name,
+  lastMessage: message,
+  image: img,
   datetime
-}: ConversationTileProps) {
+}: ChatHead) {
   const pathname = usePathname();
   const href = paths.dashboardSingleChat(id);
   const active = pathname.includes(href);
@@ -32,10 +30,10 @@ export function ConversationTile({
           : ""} `}
       >
         <img
-          src={img}
+          src={fallbackImage(img)}
           alt={name}
           title={`Conversation with ${name}`}
-          className="rounded-full aspect-square size-12 flex-shrink-0"
+          className="rounded-full aspect-square size-12 flex-shrink-0 avatar profile-img"
         />
         <div className="w-full flex-shrink">
           <h1 className="font-semibold line-clamp-1">
