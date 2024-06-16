@@ -18,7 +18,7 @@ export default function MainLayout({ children }: AppLayoutProps) {
 
   return (
     <main className="md:app-container md:py-10 md:bg-light-text md:max-h-screen md:h-screen">
-      <div className="md:grid md:grid-cols-10 gap-4 md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)]">
+      <div className="md:grid md:grid-cols-10 gap-4 md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] place-items-end">
         {(pathname === paths.dashboardChats ||
           pathname === paths.dashboardChats + "/" ||
           vw >= 768) &&

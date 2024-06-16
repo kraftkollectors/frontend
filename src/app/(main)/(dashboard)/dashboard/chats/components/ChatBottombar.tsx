@@ -13,12 +13,15 @@ export function ChatBottombar({ socket, roomId }: { socket: Socket; roomId: stri
   const [sending, setSending] = useState(false);
   const user = useUserStore(s => s.user);
 
-  function handleInputChange(e: ChangeEvent<HTMLTextAreaElement>){
-    setChatMsg(e.target.value);
-    // const computedStyle = getComputedStyle(e.target);
-    // const lineHeight = parseFloat(computedStyle.getPropertyValue('line-height'));
-    // const lines = e.target.scrollHeight / lineHeight;
-    // if (lines > 1) debugLog('passed 1 line')
+  function handleInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    const value = e.target.value;
+    setChatMsg(value);
+    const computedStyle = getComputedStyle(e.target);
+    const fontSize = parseFloat(computedStyle.getPropertyValue('font-size'));
+    const px = parseFloat(computedStyle.getPropertyValue('padding-inline'));
+    const w = parseFloat(computedStyle.getPropertyValue('width')) - px;
+    const _w = (fontSize / 1.6) * value.length;
+    if (_w > w) e.target.setAttribute('rows', '4'); else e.target.setAttribute('rows', '1');
   }
 
   function sendMsg() {
@@ -40,15 +43,17 @@ export function ChatBottombar({ socket, roomId }: { socket: Socket; roomId: stri
         </label>
         <input type="file" hidden name="file" id="file-select" />
       </div>
-      <div className="w-full bg-red-300 relative">
-        <div className="absolute bottom-0 left-0 w-full bg-red-100 max-h-40 flex flex-col">
+      <div className="w-full relative">
+        <div className="absolute bottom-0 left-0 w-full max-h-32 min-h-6 flex flex-col">
           <textarea
-          onKeyDown={(e)=>{
-            if(e.key == 'Enter'){
-              e.preventDefault();
-              sendMsg();
-            }
-          }}
+            onKeyDown={(e) => {
+              if (e.key == 'Enter') {
+                if (!e.shiftKey || !e.ctrlKey) {
+                  e.preventDefault();
+                  sendMsg();
+                }
+              }
+            }}
             onChange={handleInputChange}
             placeholder="enter message"
             rows={1}

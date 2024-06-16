@@ -1,3 +1,5 @@
+import {motion} from 'framer-motion'
+
 export type ChatMessageProps = {
   id: string;
   message: string;
@@ -5,6 +7,19 @@ export type ChatMessageProps = {
   status: string;
   me: boolean;
 };
+
+const motionProps = {
+  initial: {
+    opacity: 0,
+    scale: .5,
+    translateY: -10,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    translateY: 0,
+  },
+}
 
 export function ChatMessage({
   id,
@@ -15,8 +30,12 @@ export function ChatMessage({
 }: ChatMessageProps) {
   return (
     <div className={`flex px-2 py-0.5 ${me ? "flex-row-reverse" : ""}`}>
-      <div
-        className={`w-90 max-w-[280px] rounded-lg p-2 flex flex-col gap-1 ${me
+      <motion.div
+      {...motionProps}
+      transition={{
+        
+      }}
+        className={`w-90 max-w-[280px] relative rounded-lg p-2 flex flex-col gap-1 ${me
           ? "bg-primary-lightActive2"
           : "bg-light"}`}
       >
@@ -31,7 +50,7 @@ export function ChatMessage({
             {status}
           </span>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

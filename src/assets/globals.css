@@ -64,7 +64,7 @@
     @apply r-font-semibold text-base hover:text-primary;
   }
   .icon-btn {
-    @apply rounded-md hover:bg-primary-lightActive cursor-pointer;
+    @apply rounded-md hover:bg-primary-lightActive cursor-pointer inline-flex justify-center items-center;
   }
   .media-slider-arrow {
     @apply absolute left-4 top-1/2 -translate-y-1/2 size-8 aspect-square rounded-full bg-light shadow-md flex items-center justify-center text-xl;
