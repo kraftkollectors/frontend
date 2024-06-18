@@ -1,8 +1,13 @@
+import { formatChatTime } from '@/functions/date';
+import { wse } from '@/utils';
 import { ChatMessage } from '@/utils/types/chat';
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { Socket } from "socket.io-client";
 
 export type ChatMessageProps = ChatMessage & {
   me: boolean;
+  socket: Socket;
 };
 
 const motionProps = {
@@ -23,15 +28,27 @@ export function ChatBubble({
   message,
   createdAt,
   status,
-  me = false
+  me = false,
+  socket,
+  ...props
 }: ChatMessageProps) {
+
+  useEffect(()=>{
+    if(status !== 'seen' && socket.connected){
+      socket.emit(wse.mark_seen, {
+        senderId: props.senderId, receiverId: props.receiverId, chatId: _id, status: 'seen'
+      })
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, status])
+
   return (
-    <div className={`flex px-2 py-0.5 ${me ? "flex-row-reverse" : ""}`}>
+    <div className={`flex px-2 py-0.5 z-[1] ${me ? "flex-row-reverse" : ""}`}>
       <motion.div
-      {...motionProps}
-      transition={{
-        
-      }}
+        {...motionProps}
+        transition={{
+
+        }}
         className={`w-90 max-w-[280px] relative rounded-lg p-2 flex flex-col gap-1 ${me
           ? "bg-primary-lightActive2"
           : "bg-light"}`}
@@ -39,13 +56,15 @@ export function ChatBubble({
         <p className="text-label text-black-300">
           {message}
         </p>
-        <div className="flex gap-1 justify-end">
-          <span className="text-small text-black-100">
-            {createdAt}
+        <div className="flex gap-1 justify-end text-small text-black-100">
+          <span>
+            {formatChatTime(createdAt)}
           </span>
-          <span className="text-small text-black-100">
-            {status}
-          </span>
+          {
+            me &&
+            <span>
+              {status}
+            </span>}
         </div>
       </motion.div>
     </div>

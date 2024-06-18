@@ -16,6 +16,7 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
   const [sending, setSending] = useState(false);
   const user = useUserStore(s => s.user);
 
+  // onChange of the chat input field
   function handleInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value;
     setChatMsg(value);
@@ -27,6 +28,7 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
     if (_w > w) e.target.setAttribute('rows', '4'); else e.target.setAttribute('rows', '1');
   }
 
+  // submit the chat
   function sendMsg() {
     if (!chatMsg.trim() || !user) return;
     setSending(true);
@@ -58,7 +60,7 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
           <textarea
             onKeyDown={(e) => {
               if (e.key == 'Enter') {
-                if (!e.shiftKey || !e.ctrlKey) {
+                if (!e.shiftKey && !e.ctrlKey) {
                   e.preventDefault();
                   sendMsg();
                 }
@@ -72,9 +74,11 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
           />
         </div>
       </div>
-      <FormButton onClick={sendMsg} loading={sending} className="icon-btn p-2">
-        <VscSend />
-      </FormButton>
+      {
+        !!chatMsg.length &&
+        <FormButton onClick={sendMsg} loading={sending} className="icon-btn p-2">
+          <VscSend />
+        </FormButton>}
     </div>
   );
 }

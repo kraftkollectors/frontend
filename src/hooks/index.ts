@@ -4,3 +4,5 @@ export {useRunOnce} from './useRunOnce';
 export {useReadMore} from './useReadMore';
 export {useWS} from './useWS';
 export {useUpdateOnline} from './useUpdateOnline';
+export {useLastSeen} from './useLastSeen';
+export {useTypingDetector} from './useTypingDetector';

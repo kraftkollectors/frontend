@@ -15,6 +15,7 @@ export type UserDetails = {
     _id: string;
     createdAt: string;
     updatedAt: string;
+    lastSeen: string;
     __v: number;
   };
 

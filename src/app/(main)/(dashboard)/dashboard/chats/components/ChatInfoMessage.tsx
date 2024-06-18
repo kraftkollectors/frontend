@@ -27,7 +27,7 @@ export function ChatInfoMessage({
   }
 
   return (
-    <div className="flex justify-center items-center px-4 py-1 sticky left-0 top-0 bg-light-text">
+    <div className="flex justify-center items-center px-4 py-1 sticky left-0 top-0 bg-light-text z-[2]">
       <div
         className={`text-label py-1 rounded-md px-2 ${className} flex flex-wrap items-center gap-1`}
       >

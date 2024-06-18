@@ -12,10 +12,6 @@ export function useUpdateOnline() {
         if(!user) return;
         setStarted(true);
         const status = await updateOnlineStatus();
-        debugLog({
-            time: Date.now().toLocaleString(),
-            status
-        })
         setTimeout(()=>{
             updateLastSeen();
         }, 
