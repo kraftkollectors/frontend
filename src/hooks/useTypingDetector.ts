@@ -1,5 +1,6 @@
 
 
+import { debugLog } from '@/functions/helpers';
 import { useState, useEffect, useRef } from 'react';
 
 
@@ -7,12 +8,13 @@ export function useTypingDetector(delayBeforeTyping = 2000, delayBeforeStoppedTy
     const [isTyping, setIsTyping] = useState(false);
     const typingTimeoutRef = useRef<any>(null);
     const stoppedTypingTimeoutRef = useRef<any>(null);
+    const inputRef = useRef<HTMLTextAreaElement>(null);
 
     const handleKeyDown = () => {
         setIsTyping(true);
         clearTimeout(stoppedTypingTimeoutRef.current);
         typingTimeoutRef.current = setTimeout(() => {
-            console.log('typing');
+            // debugLog('typing');
         }, delayBeforeTyping);
     };
 
@@ -20,23 +22,36 @@ export function useTypingDetector(delayBeforeTyping = 2000, delayBeforeStoppedTy
         clearTimeout(typingTimeoutRef.current);
         stoppedTypingTimeoutRef.current = setTimeout(() => {
             setIsTyping(false);
-            console.log('stopped typing');
+            // debugLog('stopped typing');
         }, delayBeforeStoppedTyping);
     };
 
+    const handleBlur = () => {
+        clearTimeout(typingTimeoutRef.current);
+        stoppedTypingTimeoutRef.current = setTimeout(() => {
+            setIsTyping(false);
+            // debugLog('blur: stopped typing');
+        }, delayBeforeStoppedTyping / 2);
+    };
+
     useEffect(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('keyup', handleKeyUp);
+        if (!inputRef || !inputRef.current) return;
+        const element = inputRef.current;
+        element.addEventListener('keydown', handleKeyDown);
+        element.addEventListener('keyup', handleKeyUp);
+        element.addEventListener('blur', handleKeyUp);
         return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('keyup', handleKeyUp);
+            if (!inputRef || !element) return;
+            element.removeEventListener('keydown', handleKeyDown);
+            element.removeEventListener('keyup', handleKeyUp);
+            element.removeEventListener('blur', handleBlur);
             clearTimeout(typingTimeoutRef.current);
             clearTimeout(stoppedTypingTimeoutRef.current);
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return isTyping;
+    return [isTyping, inputRef] as const;
 }
 
 export default useTypingDetector;

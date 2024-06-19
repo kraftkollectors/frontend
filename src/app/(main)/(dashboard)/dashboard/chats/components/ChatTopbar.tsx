@@ -18,7 +18,6 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
   const fullname = useMemo(()=>fullName(guest.firstName, guest.lastName), [guest])
   const [typing, setTyping] = useState(false);
   const lastSeen = useLastSeen(guest._id);
-  const isTyping = useTypingDetector();
 
   // hadle when a guest is typing
   useEffect(()=>{
@@ -32,20 +31,11 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
     }
 
     return ()=>{
-      socket.off(wse.start_typing);
-      socket.off(wse.stop_typing);
+      socket.off(wse.started_typing);
+      socket.off(wse.stopped_typing);
     }
   }, [socket, guest])
 
-  // hadle when this user is typing
-  useEffect(()=>{
-    if(!user) return;
-    if(socket.connected){
-      debugLog(isTyping);
-      if(isTyping) socket.emit(wse.start_typing, {senderId: user._id, receiverId: guest._id});
-      else if (!isTyping) socket.emit(wse.stop_typing, {senderId: user._id, receiverId: guest._id});
-    }
-  }, [socket, isTyping, user, guest])
   
   return (
     <header className="py-2 px-4 flex items-center justify-between border-b border-black-50">
@@ -61,10 +51,10 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
             {fullname}
           </h1>
           <p className="line-clamp-2 overflow-ellipsis text-black-300 text-label flex items-center gap-3">
-            {lastSeen}
-            {
-              typing && "typing..."
-            }
+            <span>{lastSeen}</span>
+            <span>
+            {typing && "typing..."}
+            </span>
           </p>
         </div>
       </div>

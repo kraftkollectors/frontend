@@ -3,10 +3,11 @@
 import { FormButton } from "@/components";
 import { newMessageChat } from "@/functions/chat";
 import { debugLog } from "@/functions/helpers";
+import { useTypingDetector } from "@/hooks";
 import { useUserStore } from "@/state";
 import { wse } from "@/utils";
 import { ChatMessage } from "@/utils/types/chat";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { GrFormAttachment } from "react-icons/gr";
 import { VscSend } from "react-icons/vsc";
 import { Socket } from "socket.io-client";
@@ -15,6 +16,17 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
   const [chatMsg, setChatMsg] = useState('');
   const [sending, setSending] = useState(false);
   const user = useUserStore(s => s.user);
+  const [isTyping, inputRef] = useTypingDetector();
+
+
+  // hadle when this user is typing
+  useEffect(() => {
+    if (!user) return;
+    if (socket.connected) {
+      if (isTyping) socket.emit(wse.start_typing, { senderId: user._id, receiverId });
+      else if (!isTyping) socket.emit(wse.stop_typing, { senderId: user._id, receiverId });
+    }
+  }, [socket, isTyping, user, receiverId])
 
   // onChange of the chat input field
   function handleInputChange(e: ChangeEvent<HTMLTextAreaElement>) {
@@ -58,6 +70,7 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
       <div className="w-full relative">
         <div className="absolute bottom-0 left-0 w-full max-h-32 min-h-6 flex flex-col">
           <textarea
+            ref={inputRef}
             onKeyDown={(e) => {
               if (e.key == 'Enter') {
                 if (!e.shiftKey && !e.ctrlKey) {
