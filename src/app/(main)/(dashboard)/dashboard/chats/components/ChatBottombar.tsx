@@ -50,7 +50,8 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
       receiverId
     }));
     if (v.connected) {
-      setChatMsg('')
+      setChatMsg('');
+      inputRef.current?.setAttribute('rows', '1');
       setSending(false);
     } else {
       setTimeout(() => {
@@ -60,7 +61,7 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
   }
 
   return (
-    <div className="flex gap-2 md:gap-4 p-4">
+    <div className="flex gap-2 md:gap-4 p-4 z-[3]">
       <div className="relative">
         <label htmlFor="file-select" className="block icon-btn text-title p-2">
           <GrFormAttachment />

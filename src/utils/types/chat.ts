@@ -1,11 +1,10 @@
+import { UserDetails } from "./user";
 
 export type ChatStatus = "seen" | "delivered" | "sent"
 
 export type ChatMessage = {
     message: string;
-    sender_id: string;
     senderId: string;
-    receiver_id: string;
     receiverId: string;
     createdAt: string;
     _id: string;
@@ -15,6 +14,12 @@ export type ChatMessage = {
     type: "text" | 'file';
     data: string | string[] // if type == text, data will be a string, else data will be an array of file urls
 }
+
+export type ChatMessageOld = {
+    sender: UserDetails;
+    receiver: UserDetails;
+    timestamp: string;
+} & Omit<ChatMessage, 'senderId' | 'receiverId' | 'createdAt'>
 
 export type ChatHead =  {
     _id: string;

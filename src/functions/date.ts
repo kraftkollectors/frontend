@@ -1,32 +1,35 @@
+import { SERVER_TIME_DIFFERENCE } from "@/utils/constants";
+import { debugLog } from "./helpers";
+
 export function getYearsBeforeToday() {
-    const currentYear = new Date().getFullYear();
-    const years = [];
-  
-    for (let year = currentYear - 29; year <= currentYear; year++) {
-      years.push(year.toString());
-    }
-  
-    return years.reverse();
+  const currentYear = new Date().getFullYear();
+  const years = [];
+
+  for (let year = currentYear - 29; year <= currentYear; year++) {
+    years.push(year.toString());
   }
 
-  export function formatDate(date:string){
-    return new Date(date).toLocaleDateString()
-  }
+  return years.reverse();
+}
 
-export function formatTime(time:string){
+export function formatDate(date: string) {
+  return new Date(date).toLocaleDateString()
+}
+
+export function formatTime(time: string) {
   const parts = time.split(':');
-  if(parts.length !== 2) return time;
+  if (parts.length !== 2) return time;
   return `${parts[0]}:${parts[1]} ${Number(parts[0]) >= 12 ? 'PM' : 'AM'}`
 }
 
-export function formatChatTime(timestamp:string) {
+export function formatChatTime(timestamp: string) {
   const date = new Date(timestamp);
   const now = new Date();
-  
+
   const diffMs = Math.abs(now.getTime() - date.getTime()); // Difference in milliseconds
-  
+
   // Helper function to pad numbers with leading zeros
-  const pad = (num:number) => (num < 10 ? '0' + num : num.toString());
+  const pad = (num: number) => (num < 10 ? '0' + num : num.toString());
 
   // If the difference is more than a day, return the time in "hh:mm am/pm" format
   if (diffMs >= 24 * 60 * 60 * 1000) {
@@ -97,10 +100,15 @@ export function getChatDate(timestamp: string): string {
 }
 
 
-export function compareDates(updated: string, checked: string): string {
+export function compareDates(updated: string, checked?: string): string {
   // Parse date strings into Date objects
-  const updatedTime = new Date(updated);
-  const checkedTime = new Date(checked);
+  const checkedTime = checked ? new Date(checked) : new Date();
+  const parts = updated.split(/[ :-]/);
+  let updatedTime = new Date(`${parts[2]}-${parts[1]}-${parts[0]} ${parts[3]}:${parts[4]}:${parts[5]}`);
+  updatedTime.setHours(updatedTime.getHours() + SERVER_TIME_DIFFERENCE);
+
+  // debugLog(updatedTime.getTime());
+  // debugLog(checkedTime.getTime());
 
   // Calculate the difference in milliseconds
   const timeDifference = updatedTime.getTime() - checkedTime.getTime();
@@ -110,8 +118,43 @@ export function compareDates(updated: string, checked: string): string {
 
   // Check if the time difference is more than 50 seconds
   if (secondsDifference > 50) {
-      return updated; // return 'updated' as a date string
+    return updatedTime.toString(); // return 'updated' as a date string
   } else {
-      return 'online'; // return 'online' if less than or equal to 50 seconds apart
+    return 'online'; // return 'online' if less than or equal to 50 seconds apart
   }
+}
+
+export function formatChatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+
+  // Calculate the difference in milliseconds between now and the provided date
+  const diffMs = now.getTime() - date.getTime();
+
+  // Convert the difference to days
+  const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
+  // If the date is within the same day
+  if (diffDays === 0) {
+      return formatChatTime(dateString); // Return the input date string
+  }
+
+  // If the date is yesterday
+  if (diffDays === 1) {
+      return 'yesterday';
+  }
+
+  // If the date is within 7 days (less than a week)
+  if (diffDays <= 7) {
+      return `${diffDays} d`;
+  }
+
+  // If the date is within 30 days (less than a month)
+  if (diffDays <= 30) {
+      return `${Math.ceil(diffDays / 7)} wk`;
+  }
+
+  // If the date is more than a month ago, return the actual date in MM/DD/YYYY format
+  const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+  return formattedDate;
 }

@@ -4,49 +4,51 @@ import { debugLog } from '@/functions/helpers';
 import { useState, useEffect, useRef } from 'react';
 
 
-export function useTypingDetector(delayBeforeTyping = 2000, delayBeforeStoppedTyping = 3000) {
+export function useTypingDetector(delayBeforeTyping = 200, delayBeforeStoppedTyping = 3000) {
     const [isTyping, setIsTyping] = useState(false);
-    const typingTimeoutRef = useRef<any>(null);
-    const stoppedTypingTimeoutRef = useRef<any>(null);
-    const inputRef = useRef<HTMLTextAreaElement>(null);
+    const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const stoppedTypingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
     const handleKeyDown = () => {
+        if (!inputRef.current) return;
         setIsTyping(true);
-        clearTimeout(stoppedTypingTimeoutRef.current);
+        clearTimeout(stoppedTypingTimeoutRef.current!);
         typingTimeoutRef.current = setTimeout(() => {
-            // debugLog('typing');
+            debugLog('typing');
         }, delayBeforeTyping);
     };
 
     const handleKeyUp = () => {
-        clearTimeout(typingTimeoutRef.current);
+        if (!inputRef.current) return;
+        clearTimeout(typingTimeoutRef.current!);
         stoppedTypingTimeoutRef.current = setTimeout(() => {
             setIsTyping(false);
-            // debugLog('stopped typing');
+            debugLog('stopped typing');
         }, delayBeforeStoppedTyping);
     };
 
     const handleBlur = () => {
-        clearTimeout(typingTimeoutRef.current);
+        if (!inputRef.current) return;
+        clearTimeout(typingTimeoutRef.current!);
         stoppedTypingTimeoutRef.current = setTimeout(() => {
             setIsTyping(false);
-            // debugLog('blur: stopped typing');
+            debugLog('blur: stopped typing');
         }, delayBeforeStoppedTyping / 2);
     };
 
     useEffect(() => {
-        if (!inputRef || !inputRef.current) return;
+        if (!inputRef.current) return;
         const element = inputRef.current;
         element.addEventListener('keydown', handleKeyDown);
         element.addEventListener('keyup', handleKeyUp);
         element.addEventListener('blur', handleKeyUp);
         return () => {
-            if (!inputRef || !element) return;
             element.removeEventListener('keydown', handleKeyDown);
             element.removeEventListener('keyup', handleKeyUp);
             element.removeEventListener('blur', handleBlur);
-            clearTimeout(typingTimeoutRef.current);
-            clearTimeout(stoppedTypingTimeoutRef.current);
+            clearTimeout(typingTimeoutRef.current!);
+            clearTimeout(stoppedTypingTimeoutRef.current!);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

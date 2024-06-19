@@ -18,19 +18,44 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
   const [locChats, setLocChats] = useLocalStorage<ChatMessageType[]>(generateRoomId(user!._id, receiverId), []);
   const [chats, setChats] = useState<ChatMessageType[]>(locChats);
   const [toBottom, setToBottom] = useState(true); // if the view should scroll to bottom on new messages recieved
+  const [loadingMore, setLoadingMore] = useState(false); // if there are more chats fetching
+  const [hasMore, setHasMore] = useState(true); // if there are more chats to fetch
+  const [lastDate, setLastDate] = useState('');
 
-  // const { data, isLoading, error } = useQuery({
-  //   queryFn: () => fetchChats(receiverId, { params: 1 }),
-  //   queryKey: [tags.chats(user!._id, receiverId)],
-  //   refetchOnReconnect: (query) => {
-  //     return false;
-  //   },
+  const { data, isLoading, error, refetch,  } = useQuery({
+    queryFn: () => {
+      debugLog({ lastDate });
+      return fetchChats(receiverId, { params: lastDate, throwsError: false })
+    },
+    queryKey: [receiverId, "chats"],
+    refetchOnReconnect: false,
+  });
 
-  // });
+  function scrollToBottom(){
+    if (!chatRef.current) return;
+    chatRef.current.scrollTop = chatRef.current.scrollHeight;
+  }
 
-  // useEffect(() => {
-  //   debugLog(data);
-  // }, [data])
+  useEffect(() => {
+    debugLog({ data });
+    setLoadingMore(false);
+    if (!data || data == 'error' || !data.existingRecords || error) return;
+    if (data.existingRecords.length < 10) setHasMore(false);
+    const c = data.existingRecords.reverse();
+    const messages: ChatMessageType[] = c.map(v => ({
+      ...v,
+      createdAt: v.timestamp,
+      senderId: v.sender._id,
+      receiverId: v.receiver._id,
+    }));
+
+    if (lastDate) setChats(v => [ ...messages, ...v]);
+    else setChats(messages);
+
+    setLastDate(c[0].timestamp);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error])
 
   // initial scroll to bottom on page load
   useEffect(() => {
@@ -54,8 +79,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
           senderId: msg.senderId, receiverId: msg.receiverId, chatId: msg._id, status: 'seen'
         })
       }
-      if (chatRef.current && msg.senderId == user?._id)
-        chatRef.current.scrollTop = chatRef.current.scrollHeight
+      if (msg.senderId == user?._id) scrollToBottom();
     });
 
     return () => {
@@ -91,18 +115,18 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
   // handle scroll to bottom
   useEffect(() => {
-    if (toBottom && chatRef.current)
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
+    if (toBottom) scrollToBottom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);
 
 
   return (
     <section
-      className="w-full h-full overflow-y-auto bg-light-text flex flex-col relative scroll-smooth"
+      className="w-full h-full overflow-y-auto bg-light-text flex flex-col relative scroll-smooth z-[1]"
       ref={chatRef}
       onScroll={() => {
         if (chatRef.current) {
+          
           const scrollTop = chatRef.current.scrollTop;
           const atBottom = chatRef.current.scrollHeight - chatRef.current.clientHeight === scrollTop;
           if (atBottom !== toBottom) setToBottom(atBottom);
@@ -111,17 +135,34 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     >
 
 
-      <ChatInfoMessage type="warning" message="Do not pay in advance" />
-
+      <ChatInfoMessage key="__warning" type="warning" message="Do not pay in advance" />
+      {isLoading || loadingMore && <ChatInfoMessage key="__loading" type="success" message="loading messages..." />}
+      {error && <ChatInfoMessage key="__error" type="danger" message="Failed to load messages" />}
+      {
+        (!isLoading && !loadingMore && hasMore ) &&
+        <div className="flex p-2 justify-center items-center">
+          <button onClick={()=>{
+            if(!chatRef.current) return;
+            if (chatRef.current.scrollTop === 0 && !isLoading && hasMore && !loadingMore) {
+              setLoadingMore(true);
+              refetch();
+              chatRef.current.scrollTop = 50;
+            }
+          }} className="btn-primary !py-1.5">load more</button>
+        </div>
+      }
       {chats.map((chat, i) => {
         return (
           <>
             {
+              i == 0 ? 
+              <ChatInfoMessage key={`info-${chat._id}`} message={getChatDate(chats[i].createdAt)} />
+               :
               (chats[i - 1] && getChatDate(chats[i - 1].createdAt) !== getChatDate(chats[i].createdAt))
               && <ChatInfoMessage key={`info-${chat._id}`} message={getChatDate(chats[i].createdAt)} />
             }
             <ChatMessage
-              key={`chat-${chat._id}`}
+              key={chat._id}
               me={user?._id == chat.senderId}
               {...chat}
               socket={socket}

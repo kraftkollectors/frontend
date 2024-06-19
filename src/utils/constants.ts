@@ -1,5 +1,6 @@
 export const COOKIE_MAX_AGE = 60 * 60 * 24;
 export const HOST = "https://kraftkollectors.vercel.app";
+export const SERVER_TIME_DIFFERENCE = 1; // 1 hour
 
 export const WS_URL = "wss://backends-865y.onrender.com"
 // export const WS_URL = "wss://backends-865y.onrender.com/socket.io/?EIO=4&transport=polling&t=P0TH-jM"

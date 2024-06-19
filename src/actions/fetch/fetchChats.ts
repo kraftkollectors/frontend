@@ -7,18 +7,20 @@ import { appCookies, tags } from "@/utils";
 import { ActionApiResponse, ApiResponse, Paginated } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
 import { ServerActionParams } from "@/utils/types/actions";
-import { ChatMessage } from "@/utils/types/chat";
+import { ChatMessageOld } from "@/utils/types/chat";
 
 
-export async function fetchChats(guestId: string, { throwsError = true, params = 1 }: ServerActionParams<number> = {}): Promise<ActionApiResponse<Paginated<ChatMessage>>> {
+export async function fetchChats(guestId: string, { throwsError = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<ChatMessageOld>>> {
     try {
         const accessId = cookies().get(appCookies.accessId)?.value
-        const req = await (ServerApiRequest.get(apis.getChats(accessId ?? '', guestId) + `&page=${params}`, {
+        const timeParam = !params ? '' : `&time=${params}`
+        debugLog(apis.getChats(accessId ?? '', guestId) + timeParam)
+        const req = await (ServerApiRequest.get(apis.getChats(accessId ?? '', guestId) + timeParam, {
             next: { revalidate: 0 },
         }));
         if(!req) return null;
-        const res = (await req.json()) as ApiResponse<Paginated<ChatMessage>>;
-        debugLog(res.data.existingRecords);
+        const res = (await req.json()) as ApiResponse<Paginated<ChatMessageOld>>;
+        // debugLog(res.data.existingRecords);
 
         if (res.statusCode === 201) return res.data;
         else if(res.data.toString() == 'No records found') return null;
