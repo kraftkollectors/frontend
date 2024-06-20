@@ -44,7 +44,7 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
           src={fallbackImage(guest.image)}
           alt={fullname}
           title={`Conversation with ${fullname}`}
-          className="rounded-full aspect-square size-12 flex-shrink-0 profile-img"
+          className="rounded-full aspect-square size-12 flex-shrink-0 profile-img avatar object-cover"
         />
         <div className="w-full flex-shrink">
           <h1 className="font-semibold">

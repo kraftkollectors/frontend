@@ -11,6 +11,7 @@ import { tags, wse } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import { fetchChats } from "@/actions";
 import { getChatDate } from "@/functions/date";
+import { usePathname } from "next/navigation";
 
 export default function ChatView({ socket, receiverId }: { socket: Socket; receiverId: string; }) {
   const user = useUserStore(s => s.user);
@@ -21,13 +22,14 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
   const [loadingMore, setLoadingMore] = useState(false); // if there are more chats fetching
   const [hasMore, setHasMore] = useState(true); // if there are more chats to fetch
   const [lastDate, setLastDate] = useState('');
+  const pathname = usePathname();
 
   const { data, isLoading, error, refetch,  } = useQuery({
     queryFn: () => {
       debugLog('querying...');
       return fetchChats(receiverId, { params: lastDate, throwsError: false })
     },
-    queryKey: ["chats"],
+    queryKey: ["chats", pathname],
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
@@ -36,6 +38,11 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     if (!chatRef.current) return;
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }
+
+  useEffect(()=>{
+  setLastDate('');
+  setChats([]);
+  }, [pathname]);
 
   useEffect(() => {
     debugLog({ data });
