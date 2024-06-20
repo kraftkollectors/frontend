@@ -1,4 +1,5 @@
 import { formatChatTime } from '@/functions/date';
+import { useUserStore } from '@/state';
 import { wse } from '@/utils';
 import { ChatMessage } from '@/utils/types/chat';
 import { motion } from 'framer-motion';
@@ -33,13 +34,16 @@ export function ChatBubble({
   ...props
 }: ChatMessageProps) {
 
-  useEffect(()=>{
-    if(status !== 'seen' && socket.connected){
+  const user = useUserStore(s => s.user);
+  useEffect(() => {
+    if (status !== 'seen' &&
+      socket.connected && user &&
+      user._id == props.receiverId) {
       socket.emit(wse.mark_seen, {
         senderId: props.senderId, receiverId: props.receiverId, chatId: _id, status: 'seen'
       })
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, status])
 
   return (
