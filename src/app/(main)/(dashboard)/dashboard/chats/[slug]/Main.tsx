@@ -6,7 +6,6 @@ import ChatView from "./ChatView";
 import { useUserStore } from "@/state";
 import { useLayoutEffect } from "react";
 import { useWS } from "@/hooks";
-import { fallbackImage, fullName, generateRoomId } from "@/functions/helpers";
 import { wse } from "@/utils";
 
 export default function Main({ guest }: { guest: UserDetails }) {

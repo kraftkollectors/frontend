@@ -13,4 +13,8 @@ export const wse = {
     connect: "connect",
     disconnect: "disconnect",
     mark_seen: "markSeen",
+    login_room: "loginRoom",
+    logged_in: "userLogged",
+    sent_message: "senderMessage",
+    received_message: "receiverMessage",
 } as const

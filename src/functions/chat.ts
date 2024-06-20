@@ -1,4 +1,4 @@
-import { ChatMessage, ChatStatus } from "@/utils/types/chat";
+import { ChatMessage } from "@/utils/types/chat";
 
 export function newMessageChat(props: {
     senderId: string;

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { ChatInfoMessage, ChatMessage } from "../components";
 import { Socket } from "socket.io-client";
 import { debugLog, generateRoomId } from "@/functions/helpers";
@@ -24,10 +24,12 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
   const { data, isLoading, error, refetch,  } = useQuery({
     queryFn: () => {
+      debugLog('querying...');
       return fetchChats(receiverId, { params: lastDate, throwsError: false })
     },
-    queryKey: [receiverId, "chats"],
+    queryKey: ["chats"],
     refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
   });
 
   function scrollToBottom(){
@@ -66,7 +68,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
   // handle new message
   useEffect(() => {
     socket.on(wse.new_message, (m: { data: ChatMessageType }) => {
-      debugLog(m);
+      debugLog({m});
       const msg = typeof m == 'string' ? null : m.data;
       if (!msg || !msg?.type) return;
       setChats(v => {
@@ -153,7 +155,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
       }
       {chats.map((chat, i) => {
         return (
-          <>
+          <Fragment key={chat._id}>
             {
               i == 0 ? 
               <ChatInfoMessage key={`info-${chat._id}`} message={getChatDate(chats[i].createdAt)} />
@@ -167,7 +169,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
               {...chat}
               socket={socket}
             />
-          </>);
+          </Fragment>);
       })}
 
       {!toBottom &&
