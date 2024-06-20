@@ -7,8 +7,6 @@ export function newMessageChat(props: {
 }): ChatMessage{
     return {
         senderId: props.senderId,
-        senderId: props.senderId,
-        receiverId: props.receiverId,
         receiverId: props.receiverId,
         data: props.message,
         message: props.message,

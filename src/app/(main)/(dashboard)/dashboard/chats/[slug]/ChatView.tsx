@@ -24,7 +24,6 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
   const { data, isLoading, error, refetch,  } = useQuery({
     queryFn: () => {
-      debugLog({ lastDate });
       return fetchChats(receiverId, { params: lastDate, throwsError: false })
     },
     queryKey: [receiverId, "chats"],
@@ -41,6 +40,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     setLoadingMore(false);
     if (!data || data == 'error' || !data.existingRecords || error) return;
     if (data.existingRecords.length < 10) setHasMore(false);
+    if(data.existingRecords.length == 0) return;
     const c = data.existingRecords.reverse();
     const messages: ChatMessageType[] = c.map(v => ({
       ...v,
@@ -148,7 +148,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
               refetch();
               chatRef.current.scrollTop = 50;
             }
-          }} className="btn-primary !py-1.5">load more</button>
+          }} className="btn-dark-border !px-4 !py-1.5">load more</button>
         </div>
       }
       {chats.map((chat, i) => {
