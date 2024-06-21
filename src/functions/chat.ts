@@ -31,6 +31,7 @@ export function reorderChatHeads(heads: ChatHead[], id: string): ChatHead[] {
     if (index === -1) return heads;
     const headToTop = heads.splice(index, 1)[0];
     heads.unshift(headToTop);
+    console.log({heads, headToTop});
     return heads;
 }
 

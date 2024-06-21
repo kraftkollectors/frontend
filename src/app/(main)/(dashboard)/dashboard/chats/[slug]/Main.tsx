@@ -20,10 +20,6 @@ export default function Main({ guest }: { guest: UserDetails }) {
       socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })
     });
 
-    return ()=>{
-      socket.off(wse.connect);
-    }
-
   }, [user, guest._id, socket, isConnected])
 
 

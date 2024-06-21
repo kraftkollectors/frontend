@@ -14,9 +14,9 @@ import { useUserStore } from "@/state";
 import { debugLog } from "@/functions/helpers";
 import { buildChatHeadFromChatMessage, buildChatHeadFromUser, reorderChatHeads } from "@/functions/chat";
 
-export default function SideBar({ chatHeads:heads }: { chatHeads: ChatHead[] }) {
+export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] }) {
   const [chatHeads, setChatHeads] = useState(heads);
-  const user = useUserStore(s=>s.user);
+  const user = useUserStore(s => s.user);
   const { isConnected, socket } = useWS();
   const { slug } = useParams();
   const { data: slugUser, isLoading, error } = useQuery({
@@ -29,58 +29,54 @@ export default function SideBar({ chatHeads:heads }: { chatHeads: ChatHead[] }) 
 
 
   // listen for new chatheads
-  useLayoutEffect(()=>{
-    if(!user) return;
-    socket.emit(wse.login_room, {userId: user._id});
-    function startListening(){
-      socket.on(wse.logged_in, ()=>{
-        debugLog('joined personal')
-      })
-        socket.on(wse.sent_message, ({data:msg}: {data: ChatMessage})=>{
-          debugLog({sentMessage: msg});
-          const newHeads = chatHeads.map(i => {
-            if(i._id == msg.receiverId) return buildChatHeadFromChatMessage(msg, i);
-            return i;
-          });
-  
-          setChatHeads(reorderChatHeads(newHeads, msg.receiverId));
-        })
-  
-        socket.on(wse.received_message, async ({data:msg}: {data: ChatMessage})=>{
-          debugLog({receivedMessage: msg});
-          // check if the senderId of the new head is already in my chat heads
-          const inHeads = chatHeads.some(i => i._id == msg.senderId);
-          if(!inHeads){
-            const head = await fetchUser({ isPublic: true, throwsError: false, params: msg.senderId });
-            if(!head || head == 'error') return;
-            setChatHeads(prev => [buildChatHeadFromUser(head, msg), ...prev]);
-            return;
-          }
-          const newHeads = chatHeads.map(i => {
-            if(i._id == msg.senderId) return {...buildChatHeadFromChatMessage(msg, i), isNew: slug !== msg.senderId};
-            return i;
-          });
-  
-          setChatHeads(reorderChatHeads(newHeads, msg.receiverId));
-        })
-    }
+  useLayoutEffect(() => {
+    if (!user) return;
+    socket.emit(wse.login_room, { userId: user._id });
+    socket.on(wse.logged_in, () => {
+      debugLog('joined personal')
+    })
+    socket.on(wse.sent_message, ({ data: msg }: { data: ChatMessage }) => {
+      debugLog({ sentMessage: msg });
+      const newHeads = chatHeads.map(i => {
+        if (i._id == msg.receiverId) return buildChatHeadFromChatMessage(msg, i);
+        return i;
+      });
 
-    startListening();
+      setChatHeads(reorderChatHeads(newHeads, msg.receiverId));
+    },)
 
-    return()=>{
-      socket.off(wse.logged_in);
-      socket.off(wse.sent_message);
-      socket.off(wse.received_message);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    socket.on(wse.received_message, async ({ data: msg }: { data: ChatMessage }) => {
+      debugLog({ receivedMessage: msg });
+      // check if the senderId of the new head is already in my chat heads
+      const inHeads = chatHeads.some(i => i._id == msg.senderId);
+      if (!inHeads) {
+        const head = await fetchUser({ isPublic: true, throwsError: false, params: msg.senderId });
+        if (!head || head == 'error') return;
+        setChatHeads(prev => [buildChatHeadFromUser(head, msg), ...prev]);
+        return;
+      }
+      const newHeads = chatHeads.map(i => {
+        if (i._id == msg.senderId) return { ...buildChatHeadFromChatMessage(msg, i), isNew: slug !== msg.senderId };
+        return i;
+      });
+
+      setChatHeads(reorderChatHeads(newHeads, msg.receiverId));
+    })
+
+    // return () => {
+    //   socket.off(wse.logged_in);
+    //   socket.off(wse.sent_message);
+    //   socket.off(wse.received_message);
+    // }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, slug, user]);
 
   // use the current url id to build chathead
-  useEffect(()=>{
-    if(!isLoading && !error && slugUser !== 'error' && slugUser && chatHeads.filter(i=>i._id === slugUser._id).length === 0){
+  useEffect(() => {
+    if (!isLoading && !error && slugUser !== 'error' && slugUser && chatHeads.filter(i => i._id === slugUser._id).length === 0) {
       setChatHeads(prev => [buildChatHeadFromUser(slugUser), ...prev]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slugUser])
 
   return (
@@ -99,10 +95,10 @@ export default function SideBar({ chatHeads:heads }: { chatHeads: ChatHead[] }) 
       <div className="flex flex-col overflow-y-auto ">
         {chatHeads.map(conversation =>
           <ConversationTile key={conversation._id}
-          onClick={()=>{
-            setChatHeads(prev=>prev.map(i=>({...i, isNew: false})));
-          }}
-           {...conversation} />
+            onClick={() => {
+              setChatHeads(prev => prev.map(i => ({ ...i, isNew: false })));
+            }}
+            {...conversation} />
         )}
       </div>
     </div>
