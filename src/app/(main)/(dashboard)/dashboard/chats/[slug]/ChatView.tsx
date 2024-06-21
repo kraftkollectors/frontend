@@ -41,7 +41,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
   useEffect(()=>{
   setLastDate('');
-  setChats([]);
+  // setChats([]);
   }, [pathname]);
 
   useEffect(() => {
@@ -145,7 +145,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
 
       <ChatInfoMessage key="__warning" type="warning" message="Do not pay in advance" />
-      {isLoading || loadingMore && <ChatInfoMessage key="__loading" type="success" message="loading messages..." />}
+      {isLoading || loadingMore && <ChatInfoMessage key="__loading" type="warning" message="loading messages..." />}
       {error && <ChatInfoMessage key="__error" type="danger" message="Failed to load messages" />}
       {
         (!isLoading && !loadingMore && hasMore ) &&
@@ -155,9 +155,8 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
             if (chatRef.current.scrollTop === 0 && !isLoading && hasMore && !loadingMore) {
               setLoadingMore(true);
               refetch();
-              chatRef.current.scrollTop = 50;
             }
-          }} className="btn-dark-border !px-4 !py-1.5">load more</button>
+          }} className="btn-dark-border !px-4 !py-1.5 !font-normal !text-label">load more</button>
         </div>
       }
       {chats.map((chat, i) => {

@@ -29,7 +29,14 @@ export function useTypingDetector(delayBeforeTyping = 200, delayBeforeStoppedTyp
     };
 
     const handleBlur = () => {
-        document.documentElement.style.height = window.innerHeight + 'px'
+        document.documentElement.style.height = window.innerHeight + 'px';
+        document.body.style.height = window.innerHeight + 'px';
+        const chatView = document.getElementById('ChatView');
+        if(chatView){
+            chatView.style.height = window.innerHeight + 'px';
+            chatView.style.maxHeight = window.innerHeight + 'px';
+            chatView.style.minHeight = window.innerHeight + 'px';
+        }
         if (!inputRef.current) return;
         clearTimeout(typingTimeoutRef.current!)
         setIsTyping(false);
@@ -37,7 +44,13 @@ export function useTypingDetector(delayBeforeTyping = 200, delayBeforeStoppedTyp
     };
 
     function handleFocus(){
-        document.documentElement.style.height = window.innerHeight + 'px'
+        document.documentElement.style.height = window.innerHeight + 'px';
+        document.body.style.height = window.innerHeight + 'px';
+        const chatView = document.getElementById('ChatView');
+        if(!chatView) return;
+        chatView.style.height = window.innerHeight + 'px';
+        chatView.style.maxHeight = window.innerHeight + 'px';
+        chatView.style.minHeight = window.innerHeight + 'px';
     }
 
     useEffect(() => {

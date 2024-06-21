@@ -7,9 +7,10 @@ import paths from "@/utils/paths";
 import { ChatHead } from "@/utils/types/chat";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HTMLAttributes } from "react";
 
-export type ConversationTileProps = ChatHead & {
-  datetime: string;
+export type ConversationTileProps = ChatHead & HTMLAttributes<HTMLAnchorElement> & {
+  isNew?: boolean;
 };
 
 export function ConversationTile({
@@ -17,14 +18,16 @@ export function ConversationTile({
   userName: name,
   lastMessage: message,
   image: img,
-  datetime
-}: ChatHead) {
+  datetime,
+  isNew = false,
+  ...props
+}: ConversationTileProps) {
   const pathname = usePathname();
   const href = paths.dashboardSingleChat(id);
   const active = pathname.includes(href);
 
   return (
-    <Link href={href}>
+    <Link href={href} {...props}>
       <div
         className={`flex hover:bg-black-50 p-3 gap-3 items-start ${active
           ? "md:bg-primary-lightActive2 hover:bg-primary-lightActive2"
@@ -44,8 +47,9 @@ export function ConversationTile({
             {message}
           </p>
         </div>
-        <p className="whitespace-nowrap truncate flex-shrink-0 text-black-200 text-small">
-          {datetime ? formatChatDate(datetime) : ''}
+        <p className="whitespace-nowrap truncate flex-shrink-0 text-black-200 text-small flex flex-col gap-4 items-end">
+          <span>{datetime ? formatChatDate(datetime) : ''}</span>
+          {isNew && <div className={`size-2 rounded-full bg-lime-600`}></div>}
         </p>
       </div>
     </Link>

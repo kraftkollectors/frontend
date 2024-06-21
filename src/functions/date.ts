@@ -25,7 +25,7 @@ export function formatTime(time: string) {
 
 export function formatChatTime(timestamp: string) {
   const date = new Date(timestamp);
-  date.setHours(date.getHours() + SERVER_TIME_DIFFERENCE);
+  // date.setHours(date.getHours() + SERVER_TIME_DIFFERENCE);
   const now = new Date();
 
   const diffMs = Math.abs(now.getTime() - date.getTime()); // Difference in milliseconds
