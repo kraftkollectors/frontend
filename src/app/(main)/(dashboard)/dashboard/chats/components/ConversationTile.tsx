@@ -1,5 +1,6 @@
 "use client";
 
+import { formatChatDate } from "@/functions/date";
 import { fallbackImage } from "@/functions/helpers";
 /* eslint-disable @next/next/no-img-element */
 import paths from "@/utils/paths";
@@ -44,7 +45,7 @@ export function ConversationTile({
           </p>
         </div>
         <p className="whitespace-nowrap truncate flex-shrink-0 text-black-200 text-small">
-          {datetime}
+          {datetime ? formatChatDate(datetime) : ''}
         </p>
       </div>
     </Link>

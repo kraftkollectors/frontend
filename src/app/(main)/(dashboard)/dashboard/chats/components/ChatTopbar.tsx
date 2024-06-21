@@ -21,14 +21,14 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
 
   // hadle when a guest is typing
   useEffect(()=>{
-    if(socket.connected){
+    // if(socket.connected){
       socket.on(wse.started_typing, (res: { senderId: string, receiverId: string })=>{
         if(res.senderId == guest._id) setTyping(true)
       });
       socket.on(wse.stopped_typing, (res: { senderId: string, receiverId: string })=>{
         if(res.senderId == guest._id) setTyping(false)
       });
-    }
+    // }
 
     return ()=>{
       socket.off(wse.started_typing);
@@ -47,7 +47,7 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
           className="rounded-full aspect-square size-12 flex-shrink-0 profile-img avatar object-cover"
         />
         <div className="w-full flex-shrink">
-          <h1 className="font-semibold">
+          <h1 className="font-semibold line-clamp-1">
             {fullname}
           </h1>
           <p className="line-clamp-2 overflow-ellipsis text-black-300 text-label flex items-center gap-3">
@@ -60,7 +60,7 @@ export function ChatTopbar({guest, socket }: ChatTopbarProps) {
       </div>
       <button className="btn-primary-border px-4">
         <FiPhone />
-        <span>Show Contact</span>
+        <span className="max-md:hidden">Show Contact</span>
       </button>
     </header>
   );

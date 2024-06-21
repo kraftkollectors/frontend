@@ -13,7 +13,8 @@ export default function Main({ guest }: { guest: UserDetails }) {
   const { socket, isConnected } = useWS();
 
   useLayoutEffect(() => {
-    if (!user || !isConnected) return;
+    if (!user) return;
+    if(!isConnected) socket.connect();
     socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })
     socket.on(wse.connect, () => {
       socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })

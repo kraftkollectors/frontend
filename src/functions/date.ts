@@ -19,25 +19,27 @@ export function formatDate(date: string) {
 export function formatTime(time: string) {
   const parts = time.split(':');
   if (parts.length !== 2) return time;
-  return `${parts[0]}:${parts[1]} ${Number(parts[0]) >= 12 ? 'PM' : 'AM'}`
+  const isPm = Number(parts[0]) >= 12;
+  return `${ isPm ? Number(parts[0]) - 12 : parts[0]}:${parts[1]} ${ isPm ? 'PM' : 'AM'}`
 }
 
 export function formatChatTime(timestamp: string) {
   const date = new Date(timestamp);
+  date.setHours(date.getHours() + SERVER_TIME_DIFFERENCE);
   const now = new Date();
 
   const diffMs = Math.abs(now.getTime() - date.getTime()); // Difference in milliseconds
 
   // Helper function to pad numbers with leading zeros
-  const pad = (num: number) => (num < 10 ? '0' + num : num.toString());
+  function pad(num: number) { return (num < 10 ? '0' + num : num.toString()); }
 
-  // If the difference is more than a day, return the time in "hh:mm am/pm" format
-  if (diffMs >= 24 * 60 * 60 * 1000) {
+  // If the date is yesterday
+  const yesterday = new Date(new Date().setDate(new Date().getDate() - 1));
+  if (date.toDateString() === yesterday.toDateString()) {
     const hours = pad(date.getHours());
     const minutes = pad(date.getMinutes());
-    const period = Number(hours) < 12 ? 'am' : 'pm';
-    const formattedTime = `${Number(hours) % 12 || 12}:${minutes} ${period}`;
-    return formattedTime.toLowerCase(); // Return time in lowercase
+    const formattedTime = `${hours}:${minutes}`;
+    return formatTime(formattedTime.toLowerCase()); // Return time in lowercase
   }
 
   // Otherwise, return the time difference in relative format ("now", "2m", "3h")
@@ -47,20 +49,15 @@ export function formatChatTime(timestamp: string) {
   const days = Math.floor(hours / 24);
 
   if (days > 0) {
-    return `${days}d`;
+    return `${days}dy`;
   } else if (hours > 0) {
-    return `${hours}h`;
+    return `${hours}hr`;
   } else if (minutes > 0) {
-    return `${minutes}m`;
+    return `${minutes}min`;
   } else {
     return 'now';
   }
 }
-
-// Example usage:
-// const timestamp = "2024-06-17T21:37:16.333Z";
-// console.log(formatTime(timestamp)); // Example output: "2h"
-
 
 export function getChatDate(timestamp: string): string {
   const date = new Date(timestamp);
@@ -76,7 +73,7 @@ export function getChatDate(timestamp: string): string {
   };
 
   // Function to format date as dd/mm/yy
-  const formatDate = (date: Date): string => {
+  const _formatDate = (date: Date): string => {
     const day = ('0' + date.getDate()).slice(-2);
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const year = date.getFullYear().toString().slice(-2);
@@ -96,9 +93,8 @@ export function getChatDate(timestamp: string): string {
   }
 
   // Otherwise, return the date as dd/mm/yy
-  return formatDate(date);
+  return _formatDate(date);
 }
-
 
 export function compareDates(updated: string, checked?: string): string {
   // Parse date strings into Date objects
@@ -118,6 +114,7 @@ export function compareDates(updated: string, checked?: string): string {
 
   // Check if the time difference is more than 50 seconds
   if (secondsDifference > 50) {
+    updatedTime.setHours(updatedTime.getHours() + SERVER_TIME_DIFFERENCE)
     return updatedTime.toString(); // return 'updated' as a date string
   } else {
     return 'online'; // return 'online' if less than or equal to 50 seconds apart
@@ -126,6 +123,7 @@ export function compareDates(updated: string, checked?: string): string {
 
 export function formatChatDate(dateString: string): string {
   const date = new Date(dateString);
+  date.setHours(date.getHours() + SERVER_TIME_DIFFERENCE);
   const now = new Date();
 
   // Calculate the difference in milliseconds between now and the provided date
@@ -136,22 +134,22 @@ export function formatChatDate(dateString: string): string {
 
   // If the date is within the same day
   if (diffDays === 0) {
-      return formatChatTime(dateString); // Return the input date string
+    return formatChatTime(dateString); // Return the input date string
   }
 
   // If the date is yesterday
   if (diffDays === 1) {
-      return 'yesterday';
+    return 'yesterday';
   }
 
   // If the date is within 7 days (less than a week)
   if (diffDays <= 7) {
-      return `${diffDays} d`;
+    return `${diffDays} d`;
   }
 
   // If the date is within 30 days (less than a month)
   if (diffDays <= 30) {
-      return `${Math.ceil(diffDays / 7)} wk`;
+    return `${Math.ceil(diffDays / 7)} wk`;
   }
 
   // If the date is more than a month ago, return the actual date in MM/DD/YYYY format

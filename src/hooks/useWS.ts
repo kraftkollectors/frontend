@@ -1,4 +1,5 @@
 import { debugLog } from '@/functions/helpers';
+import { wse } from '@/utils';
 import { WS_URL } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -11,6 +12,7 @@ export function useWS() {
 
     useEffect(() => {
         if(!socket.connected) socket.connect();
+        setIsConnected(socket.connected);
         
         function onConnect() {
             setIsConnected(true);
@@ -23,27 +25,22 @@ export function useWS() {
         }
 
         function onError(res:any) {
-            toast(res.message)
+            // debugLog(res.message)
             debugLog({'error' : res});
         }
 
-        // function onFooEvent(value) {
-        //   setFooEvents(previous => [...previous, value]);
-        // }
-
-        socket.on('connect', onConnect);
-        socket.on('disconnect', onDisconnect);
-        socket.on('error', onError)
-        // socket.on('foo', onFooEvent);
+        socket.on(wse.connect, onConnect);
+        socket.on(wse.disconnect, onDisconnect);
+        socket.on(wse.error, onError)
 
         return () => {
-            socket.off('connect', onConnect);
-            socket.off('disconnect', onDisconnect);
+            socket.off(wse.connect, onConnect);
+            socket.off(wse.disconnect, onDisconnect);
             socket.disconnect();
             setIsConnected(false);
-            //   socket.off('foo', onFooEvent);
         };
     }, []);
+
 
 
     return {isConnected, socket}

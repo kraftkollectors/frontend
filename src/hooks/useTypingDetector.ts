@@ -29,13 +29,16 @@ export function useTypingDetector(delayBeforeTyping = 200, delayBeforeStoppedTyp
     };
 
     const handleBlur = () => {
+        document.documentElement.style.height = window.innerHeight + 'px'
         if (!inputRef.current) return;
-        clearTimeout(typingTimeoutRef.current!);
-        stoppedTypingTimeoutRef.current = setTimeout(() => {
-            setIsTyping(false);
-            debugLog('blur: stopped typing');
-        }, delayBeforeStoppedTyping / 2);
+        clearTimeout(typingTimeoutRef.current!)
+        setIsTyping(false);
+        debugLog('blur: stopped typing');
     };
+
+    function handleFocus(){
+        document.documentElement.style.height = window.innerHeight + 'px'
+    }
 
     useEffect(() => {
         if (!inputRef.current) return;
@@ -43,10 +46,12 @@ export function useTypingDetector(delayBeforeTyping = 200, delayBeforeStoppedTyp
         element.addEventListener('keydown', handleKeyDown);
         element.addEventListener('keyup', handleKeyUp);
         element.addEventListener('blur', handleKeyUp);
+        element.addEventListener('focus', handleFocus);
         return () => {
             element.removeEventListener('keydown', handleKeyDown);
             element.removeEventListener('keyup', handleKeyUp);
             element.removeEventListener('blur', handleBlur);
+            element.removeEventListener('focus', handleFocus);
             clearTimeout(typingTimeoutRef.current!);
             clearTimeout(stoppedTypingTimeoutRef.current!);
         };

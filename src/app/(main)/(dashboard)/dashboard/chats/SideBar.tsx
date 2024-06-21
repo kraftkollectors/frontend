@@ -47,7 +47,7 @@ export default function SideBar({ chatHeads:heads }: { chatHeads: ChatHead[] }) 
       socket.on(wse.received_message, ({data:msg}: {data: ChatMessage})=>{
         debugLog({receivedMessage: msg});
         const newHeads = chatHeads.map(i => {
-          if(i._id == msg.receiverId) return {
+          if(i._id == msg.senderId) return {
             _id: i._id,
             datetime: msg.createdAt,
             image: i.image,
