@@ -29,10 +29,9 @@ export function buildChatHeadFromChatMessage(msg: ChatMessage, i: ChatHead): Cha
 export function reorderChatHeads(heads: ChatHead[], id: string): ChatHead[] {
     const index = heads.findIndex(i => i._id == id);
     if (index === -1) return heads;
-    const newHeads = [...heads];
-    newHeads.splice(index, 1);
-    newHeads.unshift(heads[index]);
-    return newHeads;
+    const headToTop = heads.splice(index, 1)[0];
+    heads.unshift(headToTop);
+    return heads;
 }
 
 export function buildChatHeadFromUser(user: UserDetails, msg?: ChatMessage): ChatHead {

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { io } from 'socket.io-client';
 
-const socket = io(WS_URL, { autoConnect: false, ackTimeout: 5000, timeout: 5000, });
+const socket = io(WS_URL, { autoConnect: false, ackTimeout: 5000, timeout: 5000,  });
 
 export function useWS() {
     const [isConnected, setIsConnected] = useState(socket.connected);
