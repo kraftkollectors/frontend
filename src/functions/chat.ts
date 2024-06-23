@@ -19,7 +19,7 @@ export function newMessageChat(props: {
 export function buildChatHeadFromChatMessage(msg: ChatMessage, i: ChatHead): ChatHead {
     return {
         _id: i._id,
-        datetime: msg.createdAt,
+        lastMessageTime: msg.createdAt,
         image: i.image,
         lastMessage: msg.message,
         userName: i.userName,
@@ -38,7 +38,7 @@ export function reorderChatHeads(heads: ChatHead[], id: string): ChatHead[] {
 export function buildChatHeadFromUser(user: UserDetails, msg?: ChatMessage): ChatHead {
     return {
         _id: user._id,
-        datetime: msg?.createdAt ?? '',
+        lastMessageTime: msg?.createdAt ?? '',
         image: user.image,
         lastMessage: msg?.message ?? 'new conversation',
         userName: user.userName,

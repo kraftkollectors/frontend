@@ -16,9 +16,13 @@ export default function Main({ guest }: { guest: UserDetails }) {
     if (!user) return;
     if(!isConnected) socket.connect();
     socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })
-    socket.on(wse.connect, () => {
-      socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })
-    });
+    // socket.on(wse.connect, () => {
+    //   socket.emit(wse.join_room, { senderId: user._id, receiverId: guest._id })
+    // });
+
+    return () => {
+      socket.off(wse.join_room);
+    }
 
   }, [user, guest._id, socket, isConnected])
 

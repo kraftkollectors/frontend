@@ -1,5 +1,5 @@
 "use client";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ChatInfoMessage, ChatMessage } from "../components";
 import { Socket } from "socket.io-client";
 import { debugLog, generateRoomId } from "@/functions/helpers";
@@ -21,6 +21,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
   const [toBottom, setToBottom] = useState(true); // if the view should scroll to bottom on new messages recieved
   const [loadingMore, setLoadingMore] = useState(false); // if there are more chats fetching
   const [hasMore, setHasMore] = useState(true); // if there are more chats to fetch
+  const [hasFetchedMore, setHasFetchedMore] = useState(false); // if there are more chats to fetch
   const [lastDate, setLastDate] = useState('');
   const pathname = usePathname();
 
@@ -29,7 +30,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
       debugLog('querying...');
       return fetchChats(receiverId, { params: lastDate, throwsError: false })
     },
-    queryKey: ["chats", pathname],
+    queryKey: ["chats", receiverId],
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
   });
@@ -39,9 +40,9 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }
 
-  useEffect(()=>{
+  useLayoutEffect(()=>{
   setLastDate('');
-  // setChats([]);
+  setChats([]);
   }, [pathname]);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
       receiverId: v.receiver._id,
     }));
 
-    if (lastDate) setChats(v => [ ...messages, ...v]);
+    if ((lastDate || lastDate !== c[0].timestamp) && hasFetchedMore) setChats(v => [ ...messages, ...v]);
     else setChats(messages);
 
     setLastDate(c[0].timestamp);
@@ -135,9 +136,8 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
       ref={chatRef}
       onScroll={() => {
         if (chatRef.current) {
-          
           const scrollTop = chatRef.current.scrollTop;
-          const atBottom = chatRef.current.scrollHeight - chatRef.current.clientHeight === scrollTop;
+          const atBottom = chatRef.current.scrollHeight - chatRef.current.clientHeight >= scrollTop - 50;
           if (atBottom !== toBottom) setToBottom(atBottom);
         }
       }}
@@ -153,6 +153,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
           <button onClick={()=>{
             if(!chatRef.current) return;
             if (chatRef.current.scrollTop === 0 && !isLoading && hasMore && !loadingMore) {
+              setHasFetchedMore(true);
               setLoadingMore(true);
               refetch();
             }
@@ -170,7 +171,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
               && <ChatInfoMessage key={`info-${chat._id}`} message={getChatDate(chats[i].createdAt)} />
             }
             <ChatMessage
-              key={chat._id}
+              key={'message-'+chat._id}
               me={user?._id == chat.senderId}
               {...chat}
               socket={socket}
@@ -178,7 +179,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
           </Fragment>);
       })}
 
-      {!toBottom &&
+      {/* {!toBottom &&
         <button title="latest message"
           onClick={() => {
             if (!chatRef.current) return;
@@ -188,7 +189,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
           className={`bg-light z-10 icon-btn p-2 size-8 sticky bottom-4 left-[96%] shadow-md hidden ${toBottom ? '!inline-flex' : 'hidden'}`}
         >
           <FaArrowDown />
-        </button>}
+        </button>} */}
     </section>
   );
 }

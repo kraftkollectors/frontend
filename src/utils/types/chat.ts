@@ -26,5 +26,5 @@ export type ChatHead =  {
     userName: string;
     image: string;
     lastMessage: string;
-    datetime: string;
+    lastMessageTime: string;
   }

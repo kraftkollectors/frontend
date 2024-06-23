@@ -18,7 +18,7 @@ export function ConversationTile({
   userName: name,
   lastMessage: message,
   image: img,
-  datetime,
+  lastMessageTime: datetime,
   isNew = false,
   ...props
 }: ConversationTileProps) {
