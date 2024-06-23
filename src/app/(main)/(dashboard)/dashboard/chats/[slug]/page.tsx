@@ -12,7 +12,7 @@ export default async function page({ params }: AppPageProps<{ slug: string }>) {
   
   return (
     <section className="h-full flex flex-col justify-stretch">
-      <Main guest={user} />
+      <Main key={userId} guest={user} />
     </section>
   );
 }
