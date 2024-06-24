@@ -16,6 +16,22 @@ export function newMessageChat(props: {
     } as ChatMessage
 }
 
+export function newFileChat(props: {
+    senderId: string;
+    receiverId: string;
+    message: string;
+    data: string[];
+}): ChatMessage {
+    return {
+        senderId: props.senderId,
+        receiverId: props.receiverId,
+        data: props.data,
+        message: props.message,
+        status: "sent",
+        type: "file",
+    } as ChatMessage
+}
+
 export function buildChatHeadFromChatMessage(msg: ChatMessage, i: ChatHead): ChatHead {
     return {
         _id: i._id,

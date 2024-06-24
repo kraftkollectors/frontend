@@ -47,10 +47,10 @@ export function ConversationTile({
             {message}
           </p>
         </div>
-        <p className="whitespace-nowrap truncate flex-shrink-0 text-black-200 text-small flex flex-col gap-4 items-end">
+        <div className="whitespace-nowrap truncate flex-shrink-0 text-black-200 text-small flex flex-col gap-4 items-end">
           <span>{datetime ? formatChatDate(datetime) : ''}</span>
           {isNew && <div className={`size-2 rounded-full bg-lime-600`}></div>}
-        </p>
+        </div>
       </div>
     </Link>
   );

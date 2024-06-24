@@ -60,8 +60,10 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     }));
 
     if ((lastDate || lastDate !== c[0].timestamp) && hasFetchedMore) setChats(v => [ ...messages, ...v]);
-    else setChats(messages);
-
+    else {
+      setChats(messages);
+      scrollToBottom();
+    };
     setLastDate(c[0].timestamp);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,6 +110,31 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
           const isSame = i._id == m.chatId;
           if (isSame) {
             i.status = 'seen'
+          }
+          return i;
+        })
+        setLocChats(ret.slice(-10));
+        return ret;
+      });
+
+    });
+
+    return () => {
+      socket.off(wse.mark_seen);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
+
+  // handle message marked delivered
+  useEffect(() => {
+    socket.on(wse.mark_delivered, (m: { chatId: string }) => {
+      debugLog(m);
+      if (!m.chatId) return;
+      setChats(v => {
+        const ret = v.map(i => {
+          const isSame = i._id == m.chatId;
+          if (isSame) {
+            i.status = 'delivered'
           }
           return i;
         })

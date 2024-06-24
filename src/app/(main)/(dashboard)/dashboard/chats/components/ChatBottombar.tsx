@@ -1,7 +1,7 @@
 'use client'
 
 import { FormButton } from "@/components";
-import { newMessageChat } from "@/functions/chat";
+import { newFileChat, newMessageChat } from "@/functions/chat";
 import { debugLog } from "@/functions/helpers";
 import { useTypingDetector } from "@/hooks";
 import { useUserStore } from "@/state";
@@ -11,6 +11,9 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { GrFormAttachment } from "react-icons/gr";
 import { VscSend } from "react-icons/vsc";
 import { Socket } from "socket.io-client";
+import FileSender from "./FileSender";
+import { ALLOWED_IMAGE_EXTENSIONS, ALLOWED_VIDEO_EXTENSIONS, $1MB } from "@/utils/constants";
+import { FileTypeValidator, FileSizeValidator } from "use-file-picker/validators";
 
 export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiverId: string }) {
   const [chatMsg, setChatMsg] = useState('');
@@ -60,14 +63,41 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
     }
   }
 
+  // submit the file
+  function sendFile(files: string[]) {
+    if (!chatMsg.trim() || !user) return;
+    setSending(true);
+    const v = socket.emit(wse.send_message, newFileChat({
+      message: String(files.length),
+      data: files,
+      senderId: user._id,
+      receiverId
+    }));
+    if (v.connected) {
+      setSending(false);
+    } else {
+      setTimeout(() => {
+        setSending(false);
+      }, 2000);
+    }
+  }
+
+
   return (
-    <div className="flex gap-2 md:gap-4 p-4 z-[3]">
-      <div className="relative">
-        <label htmlFor="file-select" className="block icon-btn text-title p-2">
-          <GrFormAttachment />
-        </label>
-        <input type="file" hidden name="file" id="file-select" />
-      </div>
+
+    <FileSender 
+    name="files"
+    max={4}
+    validators={[
+      new FileTypeValidator([
+        ...ALLOWED_IMAGE_EXTENSIONS,
+        ...ALLOWED_VIDEO_EXTENSIONS,
+      ]),
+      new FileSizeValidator({
+        maxFileSize: 5 * $1MB /* 5 MB */,
+      }),
+    ]}
+    onInvoke={sendFile}>
       <div className="w-full relative">
         <div className="absolute bottom-0 left-0 w-full max-h-32 min-h-6 flex flex-col">
           <textarea
@@ -93,6 +123,6 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
         <FormButton onClick={sendMsg} loading={sending} className="icon-btn p-2">
           <VscSend />
         </FormButton>}
-    </div>
+    </FileSender>
   );
 }

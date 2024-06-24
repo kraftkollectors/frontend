@@ -37,12 +37,14 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
     })
     socket.on(wse.sent_message, ({ data: msg }: { data: ChatMessage }) => {
       debugLog({ sentMessage: msg });
-      const newHeads = chatHeads.map(i => {
-        if (i._id == msg.receiverId) return buildChatHeadFromChatMessage(msg, i);
-        return i;
-      });
 
-      setChatHeads(reorderChatHeads(newHeads, msg.receiverId));
+      setChatHeads(v => {
+        const newHeads = v.map(i => {
+          if (i._id == msg.receiverId) return buildChatHeadFromChatMessage(msg, i);
+          return i;
+        });
+        return reorderChatHeads(newHeads, msg.receiverId)
+      });
     },)
 
     socket.on(wse.received_message, async ({ data: msg }: { data: ChatMessage }) => {
@@ -55,12 +57,14 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
         setChatHeads(prev => [buildChatHeadFromUser(head, msg), ...prev]);
         return;
       }
-      const newHeads = chatHeads.map(i => {
-        if (i._id == msg.senderId) return { ...buildChatHeadFromChatMessage(msg, i), isNew: slug !== msg.senderId };
-        return i;
-      });
 
-      setChatHeads(reorderChatHeads(newHeads, msg.receiverId));
+      setChatHeads(v => {
+        const newHeads = v.map(i => {
+          if (i._id == msg.senderId) return { ...buildChatHeadFromChatMessage(msg, i), isNew: slug !== msg.senderId };
+          return i;
+        });
+        return reorderChatHeads(newHeads, msg.receiverId)
+      });
     })
 
     // return () => {
