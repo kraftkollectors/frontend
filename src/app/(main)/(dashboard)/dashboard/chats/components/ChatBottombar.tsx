@@ -68,11 +68,12 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
     if (!chatMsg.trim() || !user) return;
     setSending(true);
     const v = socket.emit(wse.send_message, newFileChat({
-      message: String(files.length),
+      message: `${files.length} file${files.length == 1 ? '' : 's'}`,
       data: files,
       senderId: user._id,
       receiverId
     }));
+    debugLog(3)
     if (v.connected) {
       setSending(false);
     } else {

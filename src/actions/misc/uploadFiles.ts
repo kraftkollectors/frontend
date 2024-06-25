@@ -6,6 +6,7 @@ import { ApiResponse } from "@/utils/types/basicTypes";
 
 export async function uploadFiles(formData: FormData): Promise<(string | string[])>{
     try {
+        debugLog('hmmmmmm');
         const req = await ApiRequest.postFormData(apis.uploadManyFiles, formData, false);
         const res = (await req.json()) as ApiResponse;
         debugLog({res});

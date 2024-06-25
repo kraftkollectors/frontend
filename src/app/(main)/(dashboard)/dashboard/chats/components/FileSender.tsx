@@ -4,7 +4,7 @@
 import { useFilePicker } from "use-file-picker";
 import { MdCancel, MdOutlineUpload } from "react-icons/md";
 import { IoCloseCircle } from "react-icons/io5";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { FileContent, UseFilePickerConfig } from "use-file-picker/types";
 import { FileAmountLimitValidator, Validator } from "use-file-picker/validators";
 import { FaPlay } from "react-icons/fa6";
@@ -45,10 +45,14 @@ export type FileSenderProps = Omit<AppFilePickerProps, "title" | "subtitle" | 'o
 function _realFormData(f: FormData): FormData {
     const formData = new FormData()
     const d = formDataToObject<{ files: string }>(f);
-    const files = JSON.parse(loadFileFromFormData(formData, 'files', d.files)) as AppCustomFile[];
+    debugLog({d})
+    const fs = loadFileFromFormData(formData, 'files', d.files);
+    debugLog({fs})
+    const files = JSON.parse(fs) as AppCustomFile[];
+    debugLog({files})
     files.forEach(i => {
         if (i.type !== 'file') return;
-        const blob = createFileFromObject(i.data);
+    const blob = createFileFromObject(i.data);
         formData.append('files', blob);
     })
     return formData;
@@ -67,6 +71,7 @@ export default function FileSender({
     const [prevFiles, setPrevFiles] = useState((value ?? []).map((url) => ({ type: 'url' as const, data: url })));
     const [selectedFiles, setSelectedFiles] = useState<PickedFile[]>([]);
     const [sendingFile, setSendingFile] = useState(true);
+    const formRef = useRef<HTMLFormElement>(null);
     const { openFilePicker, filesContent, loading, clear } = useFilePicker({
         readAs: "DataURL",
         accept,
@@ -90,9 +95,15 @@ export default function FileSender({
             if(!user) return;
             formData.append('userId', user._id);
             formData.append('userEmail', user.email);
+            debugLog(11)
             const res = await uploadFiles(formData);
+            debugLog(2)
             if (typeof res === 'string') throw new Error();
+            debugLog(3)
             onInvoke(res);
+        },
+        onError: (e)=>{
+            debugLog({'error': e})
         }
     })
 
@@ -110,6 +121,7 @@ export default function FileSender({
             </div>
             {sendingFile ?
                 <form
+                ref={formRef}
                 onSubmit={(e)=>{
                     e.preventDefault();
                     e.stopPropagation();
@@ -159,7 +171,11 @@ export default function FileSender({
             {
                 sendingFile &&
                 <div className="relative w-8 flex flex-col gap-2">
-                    <FormButton className="block icon-btn text-title p-2">
+                    <FormButton
+                    onClick={()=>{
+                        formRef.current?.requestSubmit();
+                    }}
+                     loading={isPending} className="block icon-btn text-title p-2">
                         <VscSend />
                     </FormButton>
                     <button onClick={() => {
