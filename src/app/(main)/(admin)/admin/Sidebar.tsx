@@ -6,18 +6,18 @@ import { AppLogo } from "@/components";
 
 export default function Sidebar() {
     return (
-        <div className="w-full flex flex-col gap-4 sticky top-0 left-0 h-screen p-4">
+        <div className="w-full flex flex-col gap-4 sticky top-0 left-0 h-screen p-4 overflow-y-auto">
             <AppLogo />
-            <div className="flex gap-2 border rounded-md p-3">
+            <div className="flex gap-2 border rounded-md p-2">
                 <Image height={60} width={60} src="/images/user-avatar.png" alt="admin" className="avatar size-10" />
                 <div>
                     <h2 className="text-black-500 font-semibold">email@admin.com</h2>
                     <p className="text-black-300 text-label">Admin User</p>
                 </div>
             </div>
-            <div className="flex flex-col gap-3">
-            {
-                    links.splice(0, 2).map(link =>
+            <div className="flex flex-col gap-2">
+                {
+                    links.slice(0, 2).map(link =>
                         <SidebarLink
                             key={link.href}
                             icon={link.icon}
@@ -27,8 +27,10 @@ export default function Sidebar() {
                     )
                 }
 
+
+
                 {
-                    links.splice(2).map(link =>
+                    links.slice(2).map(link =>
                         <SidebarLink
                             key={link.href}
                             icon={link.icon}
@@ -60,11 +62,6 @@ const links: SidebarLinkProps[] = [
         href: paths.adminServices,
     },
     {
-        title: "Users",
-        icon: <AppIcons.AdminUsers />,
-        href: paths.adminUsers,
-    },
-    {
         title: "Categories",
         icon: <AppIcons.AdminCategories />,
         href: paths.adminCategories,
@@ -83,5 +80,11 @@ const links: SidebarLinkProps[] = [
         title: "Settings",
         icon: <AppIcons.AdminSettings />,
         href: paths.adminSettings,
+    },
+    {
+        className: "admin-side-link-logout mt-10",
+        title: "Log out",
+        icon: <AppIcons.AdminLogout />,
+        href: paths.adminLogout,
     },
 ]

@@ -73,6 +73,7 @@ const paths = {
   adminPayments: "/admin/payments",
   adminAdverts: "/admin/adverts",
   adminSettings: "/admin/settings",
+  adminLogout: "/admin/logout",
 };
 
 export default paths;
