@@ -1,13 +1,29 @@
+'use client'
+
 import Image from "next/image";
 import SidebarLink, { SidebarLinkProps } from "./SidebarLink";
 import AppIcons from "@/components/AppIcons";
 import { paths } from "@/utils";
 import { AppLogo } from "@/components";
+import { FaX } from "react-icons/fa6";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
+    const pathname = usePathname();
+    const [open, setOpen] = useState(false);
+    useEffect(()=>{
+        setOpen(false);
+    }, [pathname]);
+    
     return (
-        <div className="w-full flex flex-col gap-4 sticky top-0 left-0 h-screen p-4 overflow-y-auto">
+        <div className={`w-full flex flex-col gap-4 fixed md:sticky bg-light top-0 left-0 h-screen p-4 overflow-y-auto transition-transform ${open ? 'max-md:translate-x-0' : 'max-md:translate-x-[-110%]'}`}>
+            <div className="flex justify-between items-center">
             <AppLogo />
+            <button className="text-xl icon-btn md:hidden">
+                <FaX />
+            </button>
+            </div>
             <div className="flex gap-2 border rounded-md p-2">
                 <Image height={60} width={60} src="/images/user-avatar.png" alt="admin" className="avatar size-10" />
                 <div>
@@ -17,25 +33,10 @@ export default function Sidebar() {
             </div>
             <div className="flex flex-col gap-2">
                 {
-                    links.slice(0, 2).map(link =>
+                    links.map(link =>
                         <SidebarLink
                             key={link.href}
-                            icon={link.icon}
-                            title={link.title}
-                            href={link.href}
-                        />
-                    )
-                }
-
-
-
-                {
-                    links.slice(2).map(link =>
-                        <SidebarLink
-                            key={link.href}
-                            icon={link.icon}
-                            title={link.title}
-                            href={link.href}
+                            {...link}
                         />
                     )
                 }
@@ -55,6 +56,16 @@ const links: SidebarLinkProps[] = [
         title: "Users",
         icon: <AppIcons.AdminUsers />,
         href: paths.adminUsers,
+    },
+    {
+        title: "Feedback",
+        icon: <AppIcons.AdminFeedback />,
+        href: paths.adminFeedback,
+    },
+    {
+        title: "Report",
+        icon: <AppIcons.AdminReport />,
+        href: paths.adminReports,
     },
     {
         title: "Services",
