@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { VideoOrImage } from "@/utils/types/basicTypes";
 
 type MediaSliderCardProps = {

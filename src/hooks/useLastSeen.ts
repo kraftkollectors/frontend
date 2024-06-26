@@ -29,6 +29,5 @@ export function useLastSeen(userId: string): LastSeen {
             }
         }
     }, [isLoading, error, data])
-
     return lastSeen;
 }

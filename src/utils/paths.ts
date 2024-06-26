@@ -61,6 +61,18 @@ const paths = {
   twitter: "/",
   tiktok: "/",
   linkedin: "/",
+
+  // admin
+  admin: "/admin",
+  adminUsers: "/admin/users",
+  adminSingleUser: (userId: string) => `/admin/users/${userId}`,
+  adminFeedback: "/admin/feedback",
+  adminReports: "/admin/reports",
+  adminServices: "/admin/services",
+  adminCategories: "/admin/categories",
+  adminPayments: "/admin/payments",
+  adminAdverts: "/admin/adverts",
+  adminSettings: "/admin/settings",
 };
 
 export default paths;
