@@ -10,7 +10,7 @@
 
 @layer utilities {
   .admin-side-link{
-    @apply flex gap-3 items-center text-black-400 hover:text-primary p-3 rounded-md hover:bg-primary-lightActive
+    @apply flex gap-3 items-center text-black-400 hover:text-primary p-3 rounded-md hover:bg-primary-lightActive2
   }
   
   

@@ -2,26 +2,33 @@ import Image from "next/image";
 import SidebarLink, { SidebarLinkProps } from "./SidebarLink";
 import AppIcons from "@/components/AppIcons";
 import { paths } from "@/utils";
+import { AppLogo } from "@/components";
 
 export default function Sidebar() {
     return (
-        <div className="w-full flex flex-col gap-4 sticky top-0 left-0 h-screen">
-            <div className="flex gap-2 border rounded-md p-4">
-                <Image height={60} width={60} src="/images/user-avatar.png" alt="admin" className="avatar size-14" />
+        <div className="w-full flex flex-col gap-4 sticky top-0 left-0 h-screen p-4">
+            <AppLogo />
+            <div className="flex gap-2 border rounded-md p-3">
+                <Image height={60} width={60} src="/images/user-avatar.png" alt="admin" className="avatar size-10" />
                 <div>
                     <h2 className="text-black-500 font-semibold">email@admin.com</h2>
-                    <p className="text-black-300 text-label"></p>
+                    <p className="text-black-300 text-label">Admin User</p>
                 </div>
             </div>
             <div className="flex flex-col gap-3">
-                <SidebarLink
-                    icon={links[0].icon}
-                    title={links[0].title}
-                    href={links[0].href}
-                />
+            {
+                    links.splice(0, 2).map(link =>
+                        <SidebarLink
+                            key={link.href}
+                            icon={link.icon}
+                            title={link.title}
+                            href={link.href}
+                        />
+                    )
+                }
 
                 {
-                    links.splice(1).map(link =>
+                    links.splice(2).map(link =>
                         <SidebarLink
                             key={link.href}
                             icon={link.icon}
@@ -37,6 +44,11 @@ export default function Sidebar() {
 
 
 const links: SidebarLinkProps[] = [
+    {
+        title: "Overview",
+        icon: <AppIcons.AdminOverview />,
+        href: paths.admin,
+    },
     {
         title: "Users",
         icon: <AppIcons.AdminUsers />,
