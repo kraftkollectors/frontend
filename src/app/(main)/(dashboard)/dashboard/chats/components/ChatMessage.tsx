@@ -67,13 +67,12 @@ export function ChatBubble({
               <p className="text-label text-black-300">
                 {message}
               </p> :
-              <div className={`w-full grid gap-1 ${gridClass}`}>
+              <div className={`w-full grid gap-2 ${gridClass}`}>
                 {data.map(item => {
                   return ALLOWED_VIDEO_EXTENSIONS.includes(item.split('.').pop() ?? 'png') ?
-                  <video key={item} src={item} className="aspect-square rounded-md bg-slate-100 object-cover" />
-                  :  <img key={item} src={item} alt="slider item" className="aspect-square rounded-md bg-slate-100 object-cover" />
+                  <video key={item} src={item} className="aspect-square w-full rounded-md bg-slate-100 object-cover" />
+                  :  <img key={item} src={item} alt="slider item" className="aspect-square w-full rounded-md bg-slate-100 object-cover" />
                 }
-
                 )}
               </div>
           }
