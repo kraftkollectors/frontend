@@ -165,7 +165,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
       onScroll={() => {
         if (chatRef.current) {
           const scrollTop = chatRef.current.scrollTop;
-          const atBottom = chatRef.current.scrollHeight - chatRef.current.clientHeight == scrollTop;
+          const atBottom = chatRef.current.scrollHeight - scrollTop - chatRef.current.clientHeight <= 50;
           if (atBottom !== toBottom) setToBottom(atBottom);
         }
       }}

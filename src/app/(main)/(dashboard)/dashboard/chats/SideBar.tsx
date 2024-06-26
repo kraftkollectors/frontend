@@ -16,6 +16,7 @@ import { buildChatHeadFromChatMessage, buildChatHeadFromUser, reorderChatHeads }
 
 export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] }) {
   const [chatHeads, setChatHeads] = useState(heads);
+  const [search, setSearch] = useState('');
   const user = useUserStore(s => s.user);
   const { isConnected, socket } = useWS();
   const { slug } = useParams();
@@ -35,10 +36,9 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
 
     const handleLoggedIn = () => {
       debugLog('joined personal')
-    }
-    socket.on(wse.logged_in, handleLoggedIn)
+    }; socket.on(wse.logged_in, handleLoggedIn)
 
-    const handleSentMessage =  ({ data: msg }: { data: ChatMessage }) => {
+    const handleSentMessage = ({ data: msg }: { data: ChatMessage }) => {
       debugLog({ sentMessage: msg });
 
       setChatHeads(v => {
@@ -48,11 +48,12 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
         });
         return reorderChatHeads(newHeads, msg.receiverId)
       });
-    }
-    socket.on(wse.sent_message, handleSentMessage);
+    }; socket.on(wse.sent_message, handleSentMessage);
 
     const handleReceiveMessage = async ({ data: msg }: { data: ChatMessage }) => {
       debugLog({ receivedMessage: msg });
+      // check if the sender is also the receiver
+      if (msg.senderId == user._id) return;
       // check if the senderId of the new head is already in my chat heads
       const inHeads = chatHeads.some(i => i._id == msg.senderId);
       if (!inHeads) {
@@ -67,10 +68,9 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
           if (i._id == msg.senderId) return { ...buildChatHeadFromChatMessage(msg, i), isNew: slug !== msg.senderId };
           return i;
         });
-        return reorderChatHeads(newHeads, msg.receiverId)
+        return reorderChatHeads(newHeads, msg.senderId)
       });
-    }
-    socket.on(wse.received_message, handleReceiveMessage);
+    }; socket.on(wse.received_message, handleReceiveMessage);
 
     return () => {
       socket.off(wse.logged_in, handleLoggedIn);
@@ -99,13 +99,16 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
           placeholder="search..."
           name="search"
           icon={<FaMagnifyingGlass />}
+          onChange={(v)=>setSearch(v)}
         />
       </div>
       <div className="flex flex-col overflow-y-auto ">
-        {chatHeads.map(conversation =>
+        {chatHeads
+        .filter(i=>i.userName.toLowerCase().includes(search.toLowerCase()))
+        .map(conversation =>
           <ConversationTile key={conversation._id}
             onClick={() => {
-              setChatHeads(prev => prev.map(i => ({ ...i, isNew: false })));
+              setChatHeads(prev => prev.map(i => i._id === conversation._id ? ({ ...i, isNew: false }) : i));
             }}
             {...conversation} />
         )}
