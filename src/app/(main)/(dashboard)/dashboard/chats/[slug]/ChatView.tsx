@@ -152,6 +152,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
   // handle scroll to bottom
   useEffect(() => {
+    debugLog({toBottom})
     if (toBottom) scrollToBottom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);
@@ -179,7 +180,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
         <div className="flex p-2 justify-center items-center">
           <button onClick={()=>{
             if(!chatRef.current) return;
-            if (chatRef.current.scrollTop === 0 && !isLoading && hasMore && !loadingMore) {
+            if (!isLoading && hasMore && !loadingMore) {
               setHasFetchedMore(true);
               setLoadingMore(true);
               refetch();

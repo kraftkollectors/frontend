@@ -17,6 +17,7 @@ import { FileTypeValidator, FileSizeValidator } from "use-file-picker/validators
 
 export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiverId: string }) {
   const [chatMsg, setChatMsg] = useState('');
+  const [fileKey, setFIleKey] = useState('1');
   const [sending, setSending] = useState(false);
   const user = useUserStore(s => s.user);
   const [isTyping, inputRef] = useTypingDetector();
@@ -65,17 +66,19 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
 
   // submit the file
   function sendFile(files: string[]) {
-    if (!chatMsg.trim() || !user) return;
+    if (!user) return;
     setSending(true);
-    const v = socket.emit(wse.send_message, newFileChat({
+    const fileChat = newFileChat({
       message: `${files.length} file${files.length == 1 ? '' : 's'}`,
       data: files,
       senderId: user._id,
       receiverId
-    }));
+    });
+    const v = socket.emit(wse.send_message, fileChat);
     debugLog(3)
     if (v.connected) {
       setSending(false);
+      setFIleKey(v=>v+'1')
     } else {
       setTimeout(() => {
         setSending(false);
@@ -87,6 +90,7 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
   return (
 
     <FileSender 
+    key={fileKey}
     name="files"
     max={4}
     validators={[
@@ -98,7 +102,10 @@ export function ChatBottombar({ socket, receiverId }: { socket: Socket; receiver
         maxFileSize: 5 * $1MB /* 5 MB */,
       }),
     ]}
-    onInvoke={sendFile}>
+    onFileUploaded={(e)=>{
+      debugLog(2.8);
+      sendFile(e)
+    }}>
       <div className="w-full relative">
         <div className="absolute bottom-0 left-0 w-full max-h-32 min-h-6 flex flex-col">
           <textarea

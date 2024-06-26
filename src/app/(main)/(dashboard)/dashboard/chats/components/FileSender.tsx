@@ -38,7 +38,7 @@ function getFileExtension(file: AppCustomFile) {
 }
 
 export type FileSenderProps = Omit<AppFilePickerProps, "title" | "subtitle" | 'onSelect'> & {
-    onInvoke: (files: string[]) => void;
+    onFileUploaded: (files: string[]) => void;
     children: ReactNode;
 }
 
@@ -46,7 +46,7 @@ function _realFormData(f: FormData): FormData {
     const formData = new FormData()
     const d = formDataToObject<{ files: string }>(f);
     debugLog({d})
-    const fs = loadFileFromFormData(formData, 'files', d.files);
+    const fs = loadFileFromFormData(f, 'files', d.files);
     debugLog({fs})
     const files = JSON.parse(fs) as AppCustomFile[];
     debugLog({files})
@@ -64,12 +64,13 @@ export default function FileSender({
     validators,
     value,
     children,
-    onInvoke,
+    onFileUploaded: onInvoke,
     max = 1,
 }: FileSenderProps) {
     const user = useUserStore(s=>s.user);
     const [prevFiles, setPrevFiles] = useState((value ?? []).map((url) => ({ type: 'url' as const, data: url })));
     const [selectedFiles, setSelectedFiles] = useState<PickedFile[]>([]);
+    const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
     const [sendingFile, setSendingFile] = useState(true);
     const formRef = useRef<HTMLFormElement>(null);
     const { openFilePicker, filesContent, loading, clear } = useFilePicker({
@@ -95,11 +96,9 @@ export default function FileSender({
             if(!user) return;
             formData.append('userId', user._id);
             formData.append('userEmail', user.email);
-            debugLog(11)
             const res = await uploadFiles(formData);
-            debugLog(2)
             if (typeof res === 'string') throw new Error();
-            debugLog(3)
+            setUploadedFiles(res);
             onInvoke(res);
         },
         onError: (e)=>{
@@ -125,7 +124,8 @@ export default function FileSender({
                 onSubmit={(e)=>{
                     e.preventDefault();
                     e.stopPropagation();
-                    mutate(new FormData(e.target as HTMLFormElement));
+                    if(uploadedFiles.length !== 0) onInvoke(uploadedFiles);
+                    else mutate(new FormData(e.target as HTMLFormElement));
                 }}
                  className="w-[calc(100%-7rem)]">
                     <div>
@@ -220,3 +220,4 @@ function MediaCard({ data, isVideo = false, onDelete }: MediaCardProps) {
         </div>
     );
 }
+

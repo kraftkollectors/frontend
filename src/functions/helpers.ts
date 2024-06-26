@@ -28,7 +28,7 @@ export function objectToFormData(obj: any, formData: FormData = new FormData(), 
 export function debugLog(message: any) {
     const env:'debug'|'production' = "debug";
     if (env === "debug") {
-        console.log(message);
+        return console.log(message);
     }
 }
 
