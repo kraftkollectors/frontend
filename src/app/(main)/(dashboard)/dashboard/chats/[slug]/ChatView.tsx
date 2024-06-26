@@ -40,11 +40,13 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
   }
 
+  // clear chats
   useLayoutEffect(()=>{
   setLastDate('');
   setChats([]);
   }, [pathname]);
 
+  // initial fetch previous chats
   useEffect(() => {
     debugLog({ data });
     setLoadingMore(false);
@@ -71,8 +73,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
 
   // initial scroll to bottom on page load
   useEffect(() => {
-    if (chatRef.current)
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    scrollToBottom();
   }, []);
 
   // handle new message
@@ -145,7 +146,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     });
 
     return () => {
-      socket.off(wse.mark_seen);
+      socket.off(wse.mark_delivered);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket]);
@@ -157,7 +158,6 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);
 
-
   return (
     <section
       className="w-full h-full overflow-y-auto bg-light-text flex flex-col relative scroll-smooth z-[1]"
@@ -165,7 +165,7 @@ export default function ChatView({ socket, receiverId }: { socket: Socket; recei
       onScroll={() => {
         if (chatRef.current) {
           const scrollTop = chatRef.current.scrollTop;
-          const atBottom = chatRef.current.scrollHeight - chatRef.current.clientHeight >= scrollTop - 50;
+          const atBottom = chatRef.current.scrollHeight - chatRef.current.clientHeight == scrollTop;
           if (atBottom !== toBottom) setToBottom(atBottom);
         }
       }}

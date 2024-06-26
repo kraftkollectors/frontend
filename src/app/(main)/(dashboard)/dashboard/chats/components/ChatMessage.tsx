@@ -70,8 +70,8 @@ export function ChatBubble({
               <div className={`grid gap-1 ${gridClass}`}>
                 {data.map(item => {
                   return ALLOWED_VIDEO_EXTENSIONS.includes(item.split('.').pop() ?? 'png') ?
-                  <video src={item} className="size-32 rounded-md bg-slate-100 object-cover" />
-                  :  <img src={item} alt="slider item" className="size-32 rounded-md bg-slate-100 object-cover" />
+                  <video key={item} src={item} className="size-32 rounded-md bg-slate-100 object-cover" />
+                  :  <img key={item} src={item} alt="slider item" className="size-32 rounded-md bg-slate-100 object-cover" />
                 }
 
                 )}

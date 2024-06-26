@@ -32,10 +32,13 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
   useLayoutEffect(() => {
     if (!user) return;
     socket.emit(wse.login_room, { userId: user._id });
-    socket.on(wse.logged_in, () => {
+
+    const handleLoggedIn = () => {
       debugLog('joined personal')
-    })
-    socket.on(wse.sent_message, ({ data: msg }: { data: ChatMessage }) => {
+    }
+    socket.on(wse.logged_in, handleLoggedIn)
+
+    const handleSentMessage =  ({ data: msg }: { data: ChatMessage }) => {
       debugLog({ sentMessage: msg });
 
       setChatHeads(v => {
@@ -45,9 +48,10 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
         });
         return reorderChatHeads(newHeads, msg.receiverId)
       });
-    },)
+    }
+    socket.on(wse.sent_message, handleSentMessage);
 
-    socket.on(wse.received_message, async ({ data: msg }: { data: ChatMessage }) => {
+    const handleReceiveMessage = async ({ data: msg }: { data: ChatMessage }) => {
       debugLog({ receivedMessage: msg });
       // check if the senderId of the new head is already in my chat heads
       const inHeads = chatHeads.some(i => i._id == msg.senderId);
@@ -65,13 +69,14 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
         });
         return reorderChatHeads(newHeads, msg.receiverId)
       });
-    })
+    }
+    socket.on(wse.received_message, handleReceiveMessage);
 
-    // return () => {
-    //   socket.off(wse.logged_in);
-    //   socket.off(wse.sent_message);
-    //   socket.off(wse.received_message);
-    // }
+    return () => {
+      socket.off(wse.logged_in, handleLoggedIn);
+      socket.off(wse.sent_message, handleSentMessage);
+      socket.off(wse.received_message, handleReceiveMessage);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, slug, user]);
 
@@ -81,7 +86,7 @@ export default function SideBar({ chatHeads: heads }: { chatHeads: ChatHead[] })
       setChatHeads(prev => [buildChatHeadFromUser(slugUser), ...prev]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [slugUser])
+  }, [slugUser]);
 
   return (
     <div className="flex flex-col gap-1 md:max-h-full md:h-full rounded-md md:bg-light md:border border-black-50 overflow-hidden">
