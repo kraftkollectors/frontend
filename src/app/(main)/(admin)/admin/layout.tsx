@@ -10,6 +10,7 @@ export default function Layout({ children }: AppLayoutProps) {
             <aside className="w-full bg-light-text min-h-screen px-4 md:px-8">
                 <div className="py-2" />
                 {children}
+                <div className="py-2" />
             </aside>
         </section>
     );
