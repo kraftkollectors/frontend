@@ -7,20 +7,23 @@ import { paths } from "@/utils";
 import { AppLogo } from "@/components";
 import { FaX } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useAdminStore } from "@/state";
 
 export default function Sidebar() {
     const pathname = usePathname();
-    const [open, setOpen] = useState(false);
+    const open = useAdminStore(s=>s.sidebarOpen);
+    const setOpen = useAdminStore(s=>s.setSidebar);
     useEffect(()=>{
         setOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
     
     return (
         <div className={`w-full flex flex-col gap-4 fixed md:sticky bg-light top-0 left-0 h-screen p-4 overflow-y-auto transition-transform ${open ? 'max-md:translate-x-0' : 'max-md:translate-x-[-110%]'}`}>
             <div className="flex justify-between items-center">
             <AppLogo />
-            <button className="text-xl icon-btn md:hidden">
+            <button onClick={()=>setOpen(false)} className="text-xl icon-btn md:hidden p-2">
                 <FaX />
             </button>
             </div>
