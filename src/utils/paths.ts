@@ -77,6 +77,7 @@ const paths = {
   // admin auth
   adminLogin: "/admin-login",
   adminRegister: "/admin-register",
+  adminLogout: "/admin/logout",
 };
 
 export default paths;

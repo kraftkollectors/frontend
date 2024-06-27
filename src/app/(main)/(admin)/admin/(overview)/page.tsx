@@ -1,5 +1,13 @@
+import { PageTitle } from "@/components/admin";
+import CardsGrid from "./CardsGrid";
+import OtherGrids from "./OtherGrids";
+
 export default function Page() {
     return (
-        <main>overview page</main>
+        <section className="flex flex-col gap-6">
+            <PageTitle>Overview</PageTitle>
+            <CardsGrid />
+            <OtherGrids />
+        </section>
     );
 }
