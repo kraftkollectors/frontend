@@ -21,11 +21,11 @@ export default function TableRow({
       <td className="py-1">{formatDate(createdAt)}</td>
       <td className="py-1">
         {isArtisan ? (
-          <span className="text-[#599f79] inline-flex items-center gap-2">
+          <span className="text-[#599f79] inline-flex items-center gap-2 text-small">
             Verified <AppIcons.Verified />
           </span>
         ) : (
-          <span className="text-[#a87b3b] bg-[#FAF1E5] p-1 rounded-md">
+          <span className="text-[#a87b3b] bg-[#FAF1E5] p-1 rounded-md text-small">
             unverifed
           </span>
         )}

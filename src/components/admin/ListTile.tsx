@@ -4,11 +4,12 @@ import { FaChevronRight } from "react-icons/fa6";
 
 export type ListTileProps = HTMLAttributes<HTMLAnchorElement> & LinkProps & {
     before: ReactNode;
+    after?: ReactNode;
     children: ReactNode;
 }
 
 export default function ListTile({
-    children, before: prefix, className, ...props
+    children, before: prefix, className,after, ...props
 }: ListTileProps) {
     return (
         <Link {...props}>
@@ -17,7 +18,7 @@ export default function ListTile({
             <div className="w-full flex-shrink grow">
                 {children}
             </div>
-            <FaChevronRight className='text-[#292D32]' />
+            {after ?? <FaChevronRight className='text-[#292D32]' />}
         </div>
         </Link>
     );

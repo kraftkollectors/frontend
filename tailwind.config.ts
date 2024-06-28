@@ -100,6 +100,7 @@ const config: Config = {
         },
         danger: {
           DEFAULT: "#BE2828",
+          hover: "#991414",
           dark: "#00000",
         },
       },

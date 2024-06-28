@@ -11,7 +11,7 @@ export type UserState = {
 export const useAdminStore =  create<UserState>(
     (set) => ({
         admin: null,
-        sidebarOpen: true,
+        sidebarOpen: false,
         setAdmin: (user) => set({admin: user}),
         setSidebar: (open) => set({sidebarOpen: open}),
     })

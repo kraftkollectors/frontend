@@ -7,7 +7,7 @@ export default function Layout({ children }: AppLayoutProps) {
             <aside className="w-0 md:w-[280px] md:min-w-[280px] flex-shrink-0 relative border-r">
                 <Sidebar />
             </aside>
-            <aside className="w-full bg-light-text min-h-screen px-4 md:px-8">
+            <aside className="w-full md:w-[calc(100%-280px)] md:max-w-[calc(100%-280px)] bg-light-text min-h-screen px-4 md:px-8">
                 <div className="py-2" />
                 {children}
                 <div className="py-2" />
