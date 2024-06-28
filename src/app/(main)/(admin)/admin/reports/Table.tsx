@@ -9,6 +9,7 @@ export default function Table() {
         <tbody>
           <tr className="bg-black-50 font-bold rounded-md rounded-br-md rounded-bl-md">
             <td className="py-2 !ps-12">Message From</td>
+            <td>Reported post</td>
             <td>Date</td>
             <td>Status</td>
             <td></td>

@@ -3,6 +3,8 @@ import { UserDetails } from "./types/user";
 import { Artisan } from "./types/artisan";
 import { Service } from "./types/service";
 import { Payment } from "./types/payment";
+import { ContactMessage } from "./types/contact";
+import { resolve } from "path";
 
 export const dummyRelatedSearch = [
   {
@@ -90,4 +92,17 @@ export const dummyPayment:Payment = {
   date: "02-04-2024 12:45:30",
   duration: 'monthly',
   isActive: false
+}
+
+export const dummyContact: ContactMessage = {
+  _id: "ggdgg",
+  createdAt: "04-04-2024 12:45:30",
+  email: "hello@gmail.com",
+  message: "i don't cut grass",
+  name: "jake",
+  phone: "0708456233",
+  read: true,
+  subject: "",
+  status: "resolved"
+
 }

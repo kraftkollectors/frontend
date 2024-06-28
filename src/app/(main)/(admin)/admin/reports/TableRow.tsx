@@ -18,13 +18,19 @@ export default function TableRow({
     <tr className=" text-black-400 font-semibold text-label bg-light border-b first-of-type:bg-red-400 typ">
       <td className="py-1 flex gap-2 items-center">
         {
-          read ? <AppIcons.RoundFeedback /> : <AppIcons.RoundFeedbackNew /> 
+          read ? <AppIcons.RoundReport /> : <AppIcons.RoundReportNew /> 
         }
         <div className="flex flex-col leading-tight">
           <h2>{fullName(name)}</h2>
           <p className="py-2">{email}</p>
         </div>
       </td>
+       <td>
+       <div className="flex flex-col">
+          <p> I Will Create the Ultimate Sound track for your...</p>
+          <p>Entertainment | Dj</p>
+        </div>
+       </td>
 
       <td className="py-1">{formatDate(createdAt)}</td>
       <td className="py-1">
