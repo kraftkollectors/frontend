@@ -11,11 +11,11 @@ type DetailsProps = {
     children: ReactNode;
 }
 
-export default function UserDetails({user, artisan}:{
+export default function UserDetails({ user, artisan }: {
     user: UserDetailsType;
     artisan?: Artisan;
 }) {
-    const details:(DetailsProps | null)[] = [
+    const details: (DetailsProps | null)[] = [
         {
             title: 'Menber Since',
             children: formatDate(user.createdAt),
@@ -43,9 +43,9 @@ export default function UserDetails({user, artisan}:{
         artisan ? {
             title: 'Website',
             children: <a target="_blank" href={artisan.website} className="inline-flex gap-1 items-center">
-            <PiGlobe />
-            <span className="line-clamp-1">{artisan.website}</span>
-        </a>
+                <PiGlobe />
+                <span className="line-clamp-1">{artisan.website}</span>
+            </a>
         } : null,
         artisan ? {
             title: 'Location',
@@ -56,8 +56,8 @@ export default function UserDetails({user, artisan}:{
             children: artisan.phoneNumber,
         } : null,
     ];
-    const filteredDetails = details.filter(i=>!!i);
-    
+    const filteredDetails = details.filter(i => !!i);
+
     return (
         <ListGroup
             title="User Details"
@@ -65,12 +65,15 @@ export default function UserDetails({user, artisan}:{
         >
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {
-                    filteredDetails.map(({title, children})=>(
-                        <div key={title} className="flex flex-col gap-3">
+                    filteredDetails.map((item) => {
+                        if(!item) return <></>
+                        const {title, children} = item;
+                        return (<div key={title} className="flex flex-col gap-3">
                             <h4 className="text-black-200 font-semibold text-label">{title}</h4>
                             <div className="text-label text-black-400 font-semibold">{children}</div>
-                        </div>
-                    ))
+                        </div>)
+                    }
+                    )
                 }
             </div>
         </ListGroup>
