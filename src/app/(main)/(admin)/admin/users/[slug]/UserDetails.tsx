@@ -15,15 +15,15 @@ export default function UserDetails({user, artisan}:{
     user: UserDetailsType;
     artisan?: Artisan;
 }) {
-    const details:(DetailsProps | undefined)[] = [
+    const details:(DetailsProps | null)[] = [
         {
             title: 'Menber Since',
             children: formatDate(user.createdAt),
         },
-        artisan && {
+        artisan ? {
             title: 'Occupation',
             children: artisan.areaOfSpecialization,
-        },
+        } : null,
         {
             title: 'Social links',
             children: <div className="flex gap-2"><SocialIcons {...artisan} /></div>,
@@ -32,31 +32,31 @@ export default function UserDetails({user, artisan}:{
             title: 'Email',
             children: user.email,
         },
-        artisan && {
+        artisan ? {
             title: 'Availability',
             children: <div>
                 {formatTime(artisan.workHourFrom)}
                 <span> - </span>
                 {formatTime(artisan.workHourTo)}
             </div>,
-        },
-        artisan && {
+        } : null,
+        artisan ? {
             title: 'Website',
             children: <a target="_blank" href={artisan.website} className="inline-flex gap-1 items-center">
             <PiGlobe />
             <span className="line-clamp-1">{artisan.website}</span>
         </a>
-        },
-        artisan && {
+        } : null,
+        artisan ? {
             title: 'Location',
             children: `${artisan.lga}, ${artisan.state}`,
-        },
-        artisan && {
+        } : null,
+        artisan ? {
             title: 'Phone Number',
             children: artisan.phoneNumber,
-        },
+        } : null,
     ];
-    const filteredDetails = details.filter(i=>i!=undefined);
+    const filteredDetails = details.filter(i=>!!i);
     
     return (
         <ListGroup
