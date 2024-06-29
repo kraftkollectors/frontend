@@ -55,7 +55,8 @@ export default function UserDetails({user, artisan}:{
             title: 'Phone Number',
             children: artisan.phoneNumber,
         },
-    ]
+    ];
+    const filteredDetails = details.filter(i=>i!=undefined);
     
     return (
         <ListGroup
@@ -64,7 +65,7 @@ export default function UserDetails({user, artisan}:{
         >
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
                 {
-                    details.filter(i=>i!=undefined).map(({title, children})=>(
+                    filteredDetails.map(({title, children})=>(
                         <div key={title} className="flex flex-col gap-3">
                             <h4 className="text-black-200 font-semibold text-label">{title}</h4>
                             <div className="text-label text-black-400 font-semibold">{children}</div>
