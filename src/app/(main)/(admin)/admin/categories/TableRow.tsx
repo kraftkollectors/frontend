@@ -3,6 +3,7 @@ import SubCategoryRowGroup from "./SubCategoryRowGroup";
 import SubCategoryRow from "./components/SubCategoryRow";
 import ExpandCategory from "./components/ExpandCategory";
 import OptionsPopOver from "./OptionsPopOver";
+import { Suspense } from "react";
 
 export default function TableRow({
   _id,
@@ -22,7 +23,7 @@ export default function TableRow({
 
         <td className="py-1">{servicesCount}</td>
         <td className="py-1">
-          <OptionsPopOver {...{_id, title}} />
+          <Suspense><OptionsPopOver {...{_id, title}} /></Suspense>
         </td>
       </tr>
       <SubCategoryRowGroup id={_id}>

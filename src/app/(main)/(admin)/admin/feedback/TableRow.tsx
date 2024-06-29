@@ -1,10 +1,10 @@
 import AppIcons from "@/components/AppIcons";
 import { formatDate } from "@/functions/date";
 import { fullName } from "@/functions/helpers";
-import { UserDetails } from "@/utils/types/user";
 import OptionsPopOver from "./OptionsPopOver";
 import SmallComponents from "@/components/SmallComponents";
 import { ContactMessage } from "@/utils/types/contact";
+import { Suspense } from "react";
 
 export default function TableRow({
   _id,
@@ -35,7 +35,7 @@ export default function TableRow({
         )}
       </td>
       <td className="py-1">
-        <OptionsPopOver id={_id} />
+        <Suspense><OptionsPopOver id={_id} /></Suspense>
       </td>
     </tr>
   );

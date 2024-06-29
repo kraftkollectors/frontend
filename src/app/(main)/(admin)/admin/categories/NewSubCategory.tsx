@@ -12,7 +12,7 @@ import { useLayoutEffect, useMemo, useState } from "react";
 import { FaX } from "react-icons/fa6";
 
 export default function NewSubCategory() {
-    const { replace } = useRouter();
+    const { back } = useRouter();
     const { params } = useChangeSearchParams()
     const [open, setOpen] = useState(false);
     const [subCats, setSubCats] = useState<string[]>([]);
@@ -29,7 +29,7 @@ export default function NewSubCategory() {
     }, [params]);
 
     function closeModal() {
-        replace(paths.adminCategories);
+        back();
     }
 
     return (

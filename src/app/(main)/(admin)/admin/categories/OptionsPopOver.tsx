@@ -1,11 +1,11 @@
 "use client"
-import { FormButton } from "@/components";
-import AppIcons from "@/components/AppIcons";
-import { paths } from "@/utils";
+
+import { useChangeSearchParams } from "@/hooks";
 import { Popover } from "@radix-ui/themes";
-import Link from "next/link";
 import { FaEllipsisVertical } from "react-icons/fa6";
 export default function OptionsPopOver({ _id: id, title }: { _id: string; title: string }) {
+    const { pushParams } = useChangeSearchParams();
+
     return (
         <Popover.Root>
             <Popover.Trigger>
@@ -15,7 +15,13 @@ export default function OptionsPopOver({ _id: id, title }: { _id: string; title:
             </Popover.Trigger>
             <Popover.Content>
                 <div className="flex flex-col divide-y">
-                    <Link href={paths.adminCategories + `?category=${title}&categoryId=${id}&action=new_subcategory`} className="flex gap-3 fony-semibold text-black-400 pb-1">Add sub-category + </Link>
+                    <button
+                        onClick={() => pushParams({
+                            category: title,
+                            categoryId: id,
+                            action: 'new_subcategory'
+                        })}
+                        className="flex gap-3 fony-semibold text-black-400 pb-1">Add sub-category + </button>
                 </div>
             </Popover.Content>
         </Popover.Root>

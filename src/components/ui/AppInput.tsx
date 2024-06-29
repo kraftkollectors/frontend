@@ -69,7 +69,7 @@ export default memo(function AppInput({
       {title && (
         <label
           htmlFor={`${title}-input`}
-          className="inline-block pb-1 text-black-700"
+          className="inline-block pb-1 text-black-300 text-label"
         >
           {title}
         </label>
