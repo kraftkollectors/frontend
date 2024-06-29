@@ -86,7 +86,7 @@ const links: SidebarLinkProps[] = [
         href: paths.adminPayments,
     },
     {
-        title: "Adverts",
+        title: "Advertisements",
         icon: <AppIcons.AdminAdverts />,
         href: paths.adminAdverts,
     },

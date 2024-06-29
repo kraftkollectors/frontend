@@ -5,6 +5,7 @@ import { Service } from "./types/service";
 import { Payment } from "./types/payment";
 import { ContactMessage } from "./types/contact";
 import { resolve } from "path";
+import { CategoryDetails, SubCategoryDetails } from "./types/category";
 
 export const dummyRelatedSearch = [
   {
@@ -33,7 +34,7 @@ export const dummyReviewsLine: ReviewLineProps[] = [
   { label: 1, value: 30, percentage: 20 },
 ];
 
-export const dummyUser:UserDetails = {
+export const dummyUser: UserDetails = {
   _id: "hsdvajfh",
   firstName: "John",
   lastName: "Doe",
@@ -47,7 +48,7 @@ export const dummyUser:UserDetails = {
   isArtisan: true,
 } as UserDetails;
 
-export const dummyArtisan:Artisan = {
+export const dummyArtisan: Artisan = {
   userId: "hvbdhabdjkbj",
   businessName: "John's spoon",
   areaOfSpecialization: "Professional chef",
@@ -69,7 +70,7 @@ export const dummyArtisan:Artisan = {
   userEmail: "john@gmail.com"
 }
 
-export const dummyService:Service = {
+export const dummyService: Service = {
   _id: "vhjbdasncfs",
   address: "that str, aba road",
   category: "food and resturant",
@@ -79,14 +80,14 @@ export const dummyService:Service = {
   description: "I can cook and I can clean, lemme do this thing for u",
   estimatedPrice: "20000",
   portfolio: ["/images/galaxy s24.jpg", "/images/galaxy s24.jpg"],
-  state:"imo",
+  state: "imo",
   subCategory: "cooking",
   title: "I cook the best dishes",
   userId: "jnakcamanskdnsdk",
   updatedAt: ''
 }
 
-export const dummyPayment:Payment = {
+export const dummyPayment: Payment = {
   _id: "njbdmsn",
   amount: "20000",
   date: "02-04-2024 12:45:30",
@@ -105,4 +106,31 @@ export const dummyContact: ContactMessage = {
   subject: "",
   status: "resolved"
 
+}
+
+export const dummySubCategory: SubCategoryDetails = {
+  _id: '1234569',
+  title: "eatery",
+  categoryId: "1256789",
+  servicesCount: 10,
+}
+
+export const dummyCategory: CategoryDetails = {
+  _id: '1256789',
+  title: 'food and resturant',
+  servicesCount: 10,
+  subCategories: [
+    dummySubCategory,
+    dummySubCategory,
+  ]
+}
+
+export const dummyCategory2: CategoryDetails = {
+  _id: '16789',
+  title: 'Code and tech',
+  servicesCount: 10,
+  subCategories: [
+    dummySubCategory,
+    dummySubCategory,
+  ]
 }
