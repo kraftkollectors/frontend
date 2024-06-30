@@ -72,8 +72,7 @@ export default function UserDetails({ user, artisan }: {
                             <h4 className="text-black-200 font-semibold text-label">{title}</h4>
                             <div className="text-label text-black-400 font-semibold">{children}</div>
                         </div>)
-                    }
-                    )
+                    })
                 }
             </div>
         </ListGroup>

@@ -1,6 +1,8 @@
 import { UserDetails } from "@/utils/types/user";
 import TableRow from "./TableRow";
 import { dummyContact } from "@/utils/dummy";
+import { Suspense } from "react";
+import SingleReport from "./SingleReport";
 
 export default function Table() {
   return (
@@ -21,6 +23,9 @@ export default function Table() {
           <TableRow {...dummyContact} />
         </tbody>
       </table>
+      <Suspense>
+        <SingleReport />
+      </Suspense>
     </div>
   );
 }
