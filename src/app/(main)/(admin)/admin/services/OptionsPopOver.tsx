@@ -16,8 +16,8 @@ export default function OptionsPopOver({id}:{id: string}) {
                 </button>
             </Popover.Trigger>
             <Popover.Content>
-                <div className="flex flex-col divide-y">
-                    <Link href={paths.adminSingleUser(id)} className="flex gap-3 fony-semibold text-black-400 pb-1">View Details <AppIcons.ExternalLink/> </Link>
+                <div className="flex flex-col divide-y font-semibold">
+                    <Link href={paths.adminSingleUser(id)} className="flex gap-3 text-black-400 pb-1">View Details <AppIcons.ExternalLink/> </Link>
                   <form action="">
                   <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1">Unblock<MdOutlineBlock /> <CgUnblock />
 

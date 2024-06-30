@@ -1,6 +1,7 @@
 import { Suspense } from "react";
-import TotalMessages from "./components/TotalMessages";
-import TotalUnresolvedMessages from "./components/TotalUnresolvedMessages";
+import TotalAdvertisements from "./components/TotalAdvertisements";
+import InactiveAdvertisements from "./components/InactiveAdvertisements";
+import ActiveAdvertisements from "./components/ActiveAdvertisements";
 
 export default function GridRows() {
     
@@ -9,14 +10,15 @@ export default function GridRows() {
     return (
         <div className=" grid lg:grid-cols-3 gap-4">
             <Suspense fallback={loading}>
-                <TotalMessages />
+                <TotalAdvertisements />
             </Suspense>
             <Suspense fallback={loading}>
-                <TotalUnresolvedMessages />
+                <ActiveAdvertisements />
             </Suspense>
             <Suspense fallback={loading}>
-                <TotalUnresolvedMessages />
+                <InactiveAdvertisements />
             </Suspense>
+            
         </div>
     );
 }

@@ -15,7 +15,7 @@ export default function AppSelect({ name, title, options, value, readonly, onCha
   return (
     <div>
       {title &&
-        <label htmlFor={`${title}-select`} className="inline-block pb-1">
+        <label htmlFor={`${title}-select`} className="inline-block pb-1 text-black-300 text-label">
           {title}
         </label>}
       <select 

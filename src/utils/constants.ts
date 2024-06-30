@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export const COOKIE_MAX_AGE = 60 * 60 * 24;
 export const HOST = "https://kraftkollectors.vercel.app";
 export const SERVER_TIME_DIFFERENCE = 1; // 1 hour
@@ -38,3 +40,22 @@ export const SORT_OPTIONS =  [
       value: "highest-price",
     },
   ];
+
+  export const ADVERT_DURATIONS = [
+    {
+      title: "1 day",
+      value: "1"
+    },
+    {
+      title: "3 days",
+      value: "3"
+    },
+    {
+      title: "7 days",
+      value: "7"
+    },
+    {
+      title: "12 days",
+      value: "12"
+    },
+  ]

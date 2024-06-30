@@ -14,14 +14,14 @@ export default function OptionsPopOver({ _id: id, title }: { _id: string; title:
                 </button>
             </Popover.Trigger>
             <Popover.Content>
-                <div className="flex flex-col divide-y">
+                <div className="flex flex-col divide-y font-semibold">
                     <button
                         onClick={() => pushParams({
                             category: title,
                             categoryId: id,
                             action: 'new_subcategory'
                         })}
-                        className="flex gap-3 fony-semibold text-black-400 pb-1">Add sub-category + </button>
+                        className="flex gap-3 text-black-400 pb-1">Add sub-category + </button>
                 </div>
             </Popover.Content>
         </Popover.Root>

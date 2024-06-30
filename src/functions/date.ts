@@ -16,6 +16,26 @@ export function formatDate(date: string) {
   return new Date(date).toLocaleDateString()
 }
 
+export function addDays(date: string, days: string): string {
+  // Step 1: Parse the input date string into a Date object
+  const originalDate = new Date(date);
+
+  // Step 2: Parse the days string into a number
+  const numberOfDays = parseInt(days, 10);
+
+  // Step 3: Add the parsed number of days to the Date object
+  originalDate.setDate(originalDate.getDate() + numberOfDays);
+
+  // Step 4: Return the result as a string in the same format as the input date
+  // Assuming the input date format is "YYYY-MM-DD", we can format it accordingly
+  const year = originalDate.getFullYear();
+  const month = ('0' + (originalDate.getMonth() + 1)).slice(-2); // Months are zero indexed
+  const day = ('0' + originalDate.getDate()).slice(-2);
+
+  return `${year}-${month}-${day}`;
+}
+
+
 export function formatTime(time: string) {
   const parts = time.split(':');
   if (parts.length !== 2) return time;

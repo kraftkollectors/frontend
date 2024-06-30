@@ -25,7 +25,7 @@ export type AppInputProps = {
 export default memo(function AppInput({
   icon,
   placeholder,
-  value = "",
+  value,
   name,
   type = "text",
   onChange,

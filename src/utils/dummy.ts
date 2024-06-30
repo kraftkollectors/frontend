@@ -6,6 +6,7 @@ import { Payment } from "./types/payment";
 import { ContactMessage } from "./types/contact";
 import { resolve } from "path";
 import { CategoryDetails, SubCategoryDetails } from "./types/category";
+import { Advert } from "./types/advert";
 
 export const dummyRelatedSearch = [
   {
@@ -133,4 +134,16 @@ export const dummyCategory2: CategoryDetails = {
     dummySubCategory,
     dummySubCategory,
   ]
+}
+
+
+export const dummyAdvert: Advert = {
+  _id: "gvhsdbcj",
+  createdAt: "04-04-2024 12:45:30",
+  duration: "7",
+  image: "/images/become-a-seller.png",
+  isActive: true,
+  startDate: "04-04-2024 12:45:30",
+  title: "Are you looking to get the best food? we have the best goat meat",
+  url: "https://goats.com"
 }

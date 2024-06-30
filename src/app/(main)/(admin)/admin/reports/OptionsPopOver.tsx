@@ -19,10 +19,10 @@ export default function OptionsPopOver({id}:{id: string}) {
                 </button>
             </Popover.Trigger>
             <Popover.Content>
-                <div className="flex flex-col divide-y">
+                <div className="flex flex-col divide-y font-semibold">
                     <button
                      onClick={()=>pushParams({reportId: id})}
-                      className="flex gap-3 fony-semibold text-black-400 pb-1">Open <AppIcons.ExternalLink/> </button>
+                      className="flex gap-3 text-black-400 pb-1">Open <AppIcons.ExternalLink/> </button>
                   <form action="">
                   <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1">Delete<MdOutlineBlock />
                   </FormButton>

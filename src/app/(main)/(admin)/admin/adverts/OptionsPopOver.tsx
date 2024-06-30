@@ -5,7 +5,6 @@ import AppIcons from "@/components/AppIcons";
 import { useChangeSearchParams } from "@/hooks";
 import { Popover } from "@radix-ui/themes";
 import { FaEllipsisVertical } from "react-icons/fa6";
-import { MdOutlineBlock } from "react-icons/md";
 export default function OptionsPopOver({ id }: { id: string }) {
     const { pushParams } = useChangeSearchParams();
 
@@ -19,10 +18,10 @@ export default function OptionsPopOver({ id }: { id: string }) {
             <Popover.Content>
                 <div className="flex flex-col divide-y font-semibold">
                     <button onClick={() => pushParams({
-                        feedbackId: id,
-                    })} className="flex gap-3 text-black-400 pb-1">Open <AppIcons.ExternalLink /> </button>
+                        advertId: id,
+                    })} className="flex gap-3  text-black-400 pb-1 justify-between">Edit <AppIcons.EditPencil /> </button>
                     <form action="">
-                        <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1">Delete<MdOutlineBlock />
+                        <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1 justify-between">Delete <AppIcons.Delete />
                         </FormButton>
                     </form>
                 </div>
