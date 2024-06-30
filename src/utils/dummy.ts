@@ -1,7 +1,7 @@
 import { ReviewLineProps } from "@/components/ui/ReviewLines";
 import { UserDetails } from "./types/user";
 import { Artisan } from "./types/artisan";
-import { Service } from "./types/service";
+import { Service, ServiceDetails } from "./types/service";
 import { Payment } from "./types/payment";
 import { ContactMessage } from "./types/contact";
 import { resolve } from "path";
