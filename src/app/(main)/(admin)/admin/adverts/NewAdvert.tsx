@@ -32,8 +32,9 @@ export default function NewAdvert() {
             placeholder: "Start date",
             title: "Start Date",
             type: 'date',
+            readonly: false,
             inputProps: {
-                min: new Date().toISOString().split('T')[0]
+                min: new Date().toISOString().split('T')[0],
             }
         },
     ], [])
@@ -63,15 +64,15 @@ export default function NewAdvert() {
                         <AppIcons.AdminAdverts />
                     </div>
                     <h2 className="font-bold text-black-500 text-center">New Advert</h2>
-                    <form action="" className="flex gap-4 flex-col [&_#Image-input]:!py-0 [&_label]:font-semibold">
+                    <form action="" className="flex gap-4 flex-col [&_#Image-input]:!py-0  [&_label]:font-semibold [&_#Image-input]:pointer-events-auto [&_#Image-input]:opacity-100 ">
                         {
                             fields.map(field => <AppInput key={field.name} {...field} />)
-                            }
-                       <AppSelect 
-                       name="duration"
-                       title="Dutation"
-                       options={ADVERT_DURATIONS}
-                       />
+                        }
+                        <AppSelect
+                            name="duration"
+                            title="Dutation"
+                            options={ADVERT_DURATIONS}
+                        />
                         <div className="pt-6 flex justify-end">
                             <FormButton className="btn-dark-tiny flex-shrink-0 px-10 font-semibold py-2">Add</FormButton>
                         </div>

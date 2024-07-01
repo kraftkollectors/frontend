@@ -73,7 +73,7 @@ export default function EditAdvert() {
                     <h2 className="font-bold text-black-500 text-center">Edit Advert</h2>
                     {isLoading 
                     ? <SmallComponents.Loading />  
-                    : <form action="" className="flex gap-4 flex-col [&_#Image-input]:!py-0 [&_label]:font-semibold">
+                    : <form action="" className="flex gap-4 flex-col [&_#Image-input]:!py-0  [&_label]:font-semibold [&_#Image-input]:pointer-events-auto [&_#Image-input]:opacity-100 ">
                         {
                             fields.map(field => <AppInput key={field.name} {...field} />)
                             }
