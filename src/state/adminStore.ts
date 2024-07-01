@@ -1,9 +1,9 @@
-import { UserDetailsPlus } from '@/utils/types/user';
+import { AdminUser } from '@/utils/types/admin';
 import {create} from 'zustand';
 
 export type AdminState = {
-    admin: UserDetailsPlus | null;
-    setAdmin: (user: any) => void;
+    admin: AdminUser | null;
+    setAdmin: (user: AdminUser | null) => void;
     sidebarOpen: boolean;
     setSidebar: (open: boolean) => void;
 

@@ -1,5 +1,6 @@
 const API = "https://backends-865y.onrender.com";
 const STATES_AND_CITIES_API = 'https://abundiko-api.vercel.app/api';
+const admin = API + '/admin';
 
 const apis = {
     login: API + "/users/login",
@@ -75,6 +76,24 @@ const apis = {
     deleteChat: (chatId: string)=>`${API}/users/chat/${chatId}`,
     updateLastSeen: (userId: string)=>`${API}/users/lastseen/${userId}`,
     getChats: (userId: string, guestId: string)=>`${API}/users/chat?userid=${userId}&receiverid=${guestId}`,
+
+    // admin endpoints
+    adminRegister: `${admin}/register`,
+    adminLogin: `${admin}/login`,
+    adminDashboard: (adminId: string)=>`${admin}/dashboard/${adminId}`,
+    /**
+     * PATCH - edit admin password. {password: string}
+     */
+    adminPassword: (adminId: string)=>`${admin}/dashboard/password/${adminId}`,
+    /**
+     * GET - get user details
+     * 
+     * PATCH - activate/disable user. {active: true|false}
+     * 
+     * DELETE - delete a user
+     */
+    adminSingleUser: (userId: string)=>`${admin}/users/${userId}`,
+    
 }
 
 export default apis;
