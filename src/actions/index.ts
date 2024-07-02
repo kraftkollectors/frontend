@@ -22,6 +22,7 @@ export {fetchNigerianStates} from './fetch/fetchNigerianStates'
 export {fetchNigerianStateLgas} from './fetch/fetchNigerianStateLgas'
 export {fetchChatHeads} from './fetch/fetchChatHeads'
 export {fetchChats} from './fetch/fetchChats'
+export {fetchUsers} from './fetch/fetchUsers'
 
 export {newEducation} from './new/newEducation'
 export {newCertificate} from './new/newCertificate'

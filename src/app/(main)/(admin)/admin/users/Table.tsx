@@ -1,7 +1,12 @@
 import { UserDetails } from "@/utils/types/user";
 import TableRow from "./TableRow";
+import { fetchUsers } from "@/actions";
+import { Pagination } from "@/components";
 
-export default function Table() {
+export default async function Table({query}:{query: string}) {
+  const users = await fetchUsers({ throwsError: false, params: query });
+  if (users === 'error' || !users) throw new Error('Connection error | Failed to load Users');
+  
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">
@@ -16,32 +21,13 @@ export default function Table() {
             <td></td>
           </tr>
           <tr><td className="p-2"></td></tr>
-          <TableRow
-            {...{
-              firstName: "Kesh",
-              lastName: "Maduakolam",
-              email: "john@gmail.com",
-              _id: "nj5jjjtjkjtkkkk",
-              userName: "kesh",
-              createdAt: "10-12-2023 12:02:45",
-              isArtisan: true,
-            } as UserDetails
-            }
-          />
-          <TableRow
-            {...{
-              firstName: "Kesh",
-              lastName: "Maduakolam",
-              email: "john@gmail.com",
-              _id: "nj5jjjtjkjtkkkk",
-              userName: "kesh",
-              createdAt: "10-12-2023 12:02:45",
-              isArtisan: false,
-            } as UserDetails
-            }
-          />
+          {
+            users.existingRecords.length === 0 ? <tr><td colSpan={7}><div className="info-box">No users found</div></td></tr> :
+            users.existingRecords.map(user=><TableRow key={user._id} {...user} />)
+          }
         </tbody>
       </table>
+      <Pagination pagination={users} />
     </div>
   );
 }

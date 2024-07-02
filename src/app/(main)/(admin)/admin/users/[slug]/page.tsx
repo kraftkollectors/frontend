@@ -6,29 +6,48 @@ import { dummyArtisan, dummyUser } from "@/utils/dummy";
 import ListedServices from "./ListedServices";
 import { Suspense } from "react";
 import PaymentHistory from "./PaymentHistory";
+import { AppPageProps } from "@/utils/types/basicTypes";
+import { fetchUser } from "@/actions";
+import { notFound } from "next/navigation";
+import { Artisan } from "@/utils/types/artisan";
+import { fetchArtisan } from "@/actions/fetch/fetchArtisan";
+import { fullName } from "@/functions/helpers";
 
-export default function Page() {
-    const user = dummyUser;
-    const artisan = dummyArtisan;
+export default async function Page({ params }: AppPageProps<{ slug: string }>) {
+    if (!params) notFound();
+    const user = await fetchUser({ isPublic: true, params: params.slug });
+    if (!user) notFound();
+    if (user == 'error') throw new Error("Unable to connect");
+    let artisan: Artisan | undefined;
+    if (user.isArtisan) {
+        const _artisan = await fetchArtisan({ params: params.slug, isPublic: true });
+        if (!_artisan || _artisan == 'error') artisan = undefined;
+        else artisan = _artisan;
+    }
 
     return (
         <div className="flex flex-col gap-4">
             <PageTitle>
-                <span className="text-black-300">Users/</span>
-                Maduakolam Justice
+                <span className="text-black-300">Users /</span>
+                {fullName(user.firstName, user.lastName)}
             </PageTitle>
             <Profile {...user} />
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 <UserDetails user={user} artisan={artisan} />
-                <Suspense fallback={loadingEdcation}>
-                    <EducationAndCertification />
-                </Suspense>
-                <Suspense fallback={loadingServices}>
-                    <ListedServices userId="" />
-                </Suspense>
-                <Suspense fallback={loadingEdcation}>
-                    <PaymentHistory userId="" />
-                </Suspense>
+                {
+                    user.isArtisan &&
+                    <>
+                        <Suspense fallback={loadingEdcation}>
+                            <EducationAndCertification userId={user._id} />
+                        </Suspense>
+                        <Suspense fallback={loadingServices}>
+                            <ListedServices userId={user._id} />
+                        </Suspense>
+                        <Suspense fallback={loadingEdcation}>
+                            <PaymentHistory userId={user._id} />
+                        </Suspense>
+                    </>
+                }
             </div>
         </div>
     );

@@ -76,7 +76,8 @@ export function sanitizeSearch(q:string) {
     return decodeURIComponent(q);
 }
 
-export function buildUrlQuery(obj:{[key:string]:any}){
+export function buildUrlQuery(obj:{[key:string]:any} | undefined) {
+    if(!obj) return '';
     return "?" + Object.entries(obj).map(v=>`${v[0]}=${v[1]}`).join('&')
 }
 

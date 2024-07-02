@@ -1,29 +1,16 @@
+import { fetchUserCertificates, fetchUserEducations } from "@/actions";
 import { ListGroup } from "@/components/admin";
 import ListTile from "@/components/admin/ListTile";
 import AppIcons from "@/components/AppIcons";
 import { Certificate } from "@/utils/types/certificate";
 import { Education } from "@/utils/types/education";
 
-export default function EducationAndCertification() {
+export default async function EducationAndCertification({userId}:{userId:string}) {
+    const education = await fetchUserEducations({throwsError: false, params: userId, isPublic: true});
+    if(!education || education == 'error') return null;
+    const certificates = await fetchUserCertificates({throwsError: false, params: userId, isPublic: true});
+    if(!certificates || certificates == 'error') return null;
 
-    const education: Education[] = [
-        {
-            _id: "vgsdab",
-            areaOfStudy: "Cookery Engineering",
-            degree: "PhD",
-            university: "Uni-cook",
-            year: "2024",
-        }
-    ]
-
-    const certificates: Certificate[] = [
-        {
-            _id: "vgsdab",
-            certificate: "Cookery Engineering",
-            certifiedBy: "Uni-cook",
-            year: "2024",
-        }
-    ]
 
     return (
         <ListGroup

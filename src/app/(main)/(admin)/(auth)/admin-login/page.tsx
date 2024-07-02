@@ -1,18 +1,23 @@
+'use client'
+
+import { adminLogin } from "@/actions/admin";
 import { FormMessage, FormButton } from "@/components";
 import AppInput, { AppInputProps } from "@/components/ui/AppInput";
 import { paths } from "@/utils";
-import { verify } from "crypto";
 import Link from "next/link";
+import { useFormState } from "react-dom";
 
 export default function Page() {
+  const [res, action] = useFormState(adminLogin, {});
+  
   return (
     <div className=" py-8">
       <h2 className=" text-headline font-bold">Login Admin</h2>
       <form
-        //  action={action}
+         action={action}
         className="flex flex-col gap-3 py-3"
       >
-        <FormMessage res={{}} />
+        <FormMessage res={res} />
         {loginFields.map((item) => {
           return <AppInput key={item.name} {...item} />;
         })}

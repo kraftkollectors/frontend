@@ -59,3 +59,22 @@ export const SORT_OPTIONS =  [
       value: "12"
     },
   ]
+
+export const ADMIN_USERS_FILTERS = [{
+  title: 'All',
+  value: "",
+}, {
+  title: 'Artisans',
+  value: "true",
+}, {
+  title: 'Users',
+  value: "false",
+}]
+
+export const ADMIN_USERS_SORT = [{
+  title: 'Newest to Oldest',
+  value: "date"
+}, {
+  title: 'A-Z',
+  value: "a-z"
+}]
