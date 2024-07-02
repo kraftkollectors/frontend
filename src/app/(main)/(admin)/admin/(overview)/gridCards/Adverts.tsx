@@ -2,15 +2,18 @@ import { AdminCard } from "@/components/admin";
 import AppIcons from "@/components/AppIcons";
 import { ViewAll } from "./ViewAll";
 import { paths } from "@/utils";
+import { fetchAdverts } from "@/actions/admin";
+import { formatNumber } from "@/functions/helpers";
 
 export default async function Adverts() {
-    // const users = await fetchUser
+    const adverts = await fetchAdverts();
+    if(!adverts || adverts == 'error') return null;
     
     return (
         <AdminCard
         icon={<AppIcons.AdminAdverts />}
         label="Adverts"
-        title="2,000"
+        title={formatNumber(adverts.totalDocuments)}
         bg="secondary"
         >
             <ViewAll href={paths.adminAdverts} />

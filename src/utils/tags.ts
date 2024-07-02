@@ -9,6 +9,11 @@ const tags = {
     chatHeads: (userId:string)=> `${userId}-chat`,
     myFavs: (userId:string)=> `${userId}-fav`,
     serviceReviews: (serviceId:string)=> `reviews-${serviceId}`,
+
+    // admin
+    admin: "admin",
+    adverts: "adverts",
+    categories: "categories",
 }
 
 

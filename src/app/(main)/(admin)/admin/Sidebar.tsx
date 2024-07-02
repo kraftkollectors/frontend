@@ -7,18 +7,25 @@ import { paths } from "@/utils";
 import { AppLogo } from "@/components";
 import { FaX } from "react-icons/fa6";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useAdminStore } from "@/state";
+import { AdminUser } from "@/utils/types/admin";
 
-export default function Sidebar() {
+export default function Sidebar({admin}:{admin: AdminUser}) {
     const pathname = usePathname();
-    const open = useAdminStore(s=>s.sidebarOpen);
-    const setOpen = useAdminStore(s=>s.setSidebar);
+    const {sidebarOpen:open, setSidebar:setOpen, setAdmin, admin:_admin} = useAdminStore();
+
+    useLayoutEffect(()=>{
+        setAdmin(admin);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [admin]);
+    
     useEffect(()=>{
         setOpen(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname]);
     
+    if(_admin)
     return (
         <div className={`w-full flex flex-col gap-4 fixed md:sticky bg-light top-0 left-0 h-screen p-4 overflow-y-auto transition-transform ${open ? 'max-md:translate-x-0' : 'max-md:translate-x-[-110%]'}`}>
             <div className="flex justify-between items-center">
@@ -27,10 +34,10 @@ export default function Sidebar() {
                 <FaX />
             </button>
             </div>
-            <div className="flex gap-2 border rounded-md p-2">
-                <Image height={60} width={60} src="/images/user-avatar.png" alt="admin" className="avatar size-10" />
-                <div>
-                    <h2 className="text-black-500 font-semibold">email@admin.com</h2>
+            <div className="flex gap-2 border rounded-md p-2 justify-stretch">
+                <Image height={60} width={60} src="/images/user-avatar.png" alt="admin" className="avatar size-10 flex-shrink-0" />
+                <div className=" overflow-hidden">
+                    <h2 className="text-black-500 font-semibold line-clamp-1 w-full">{_admin.email}</h2>
                     <p className="text-black-300 text-label">Admin User</p>
                 </div>
             </div>
