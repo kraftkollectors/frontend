@@ -24,10 +24,10 @@ export default function UserDetails({ user, artisan }: {
             title: 'Occupation',
             children: artisan.areaOfSpecialization,
         } : null,
-        {
+        artisan ? {
             title: 'Social links',
             children: <div className="flex gap-2"><SocialIcons {...artisan} /></div>,
-        },
+        } : null,
         {
             title: 'Email',
             children: user.email,
