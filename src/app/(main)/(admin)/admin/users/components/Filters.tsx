@@ -9,10 +9,10 @@ export default function Filters() {
   return (
     <div className="flex gap-3 [&_select]:!py-1.5">
       <AppSelect
-        value={params.get('adminOnly') ?? undefined}
+        value={params.get('artisanOnly') ?? ''}
         name="filter"
         options={ADMIN_USERS_FILTERS}
-        onChange={(e) => pushParams({ adminOnly: e })}
+        onChange={(e) => pushParams({ artisanOnly: e })}
       />
       <AppSelect
         value={params.get('sort') ?? "date"}

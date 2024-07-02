@@ -13,7 +13,7 @@ export async function fetchUsers({ throwsError = false, params = ''}: ServerActi
     try {
         const req = await ApiRequest.getJson(apis.getUsers + params, {next: {tags: [tags.user]}}) 
         const res = (await req?.json()) as ApiResponse<Paginated<UserDetails>>;
-        debugLog({params});
+        // debugLog({params});
 
         if (res.statusCode === 201) return res.data;
         if (throwsError) throw new Error("Unable to connect")

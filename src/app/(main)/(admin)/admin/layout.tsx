@@ -5,6 +5,8 @@ import { debugLog } from "@/functions/helpers";
 import { redirect, RedirectType } from "next/navigation";
 import { paths } from "@/utils";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Layout({ children }: AppLayoutProps) {
     const admin = await adminDashboard();
     if(!admin || admin === 'error') redirect(paths.adminLogin, RedirectType.replace);
