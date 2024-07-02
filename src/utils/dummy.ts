@@ -92,8 +92,10 @@ export const dummyPayment: Payment = {
   _id: "njbdmsn",
   amount: "20000",
   date: "02-04-2024 12:45:30",
+  createdAt: "02-04-2024 12:45:30",
   duration: 'monthly',
-  isActive: false
+  isActive: false,
+  userId: "edrftgyhu"
 }
 
 export const dummyContact: ContactMessage = {
