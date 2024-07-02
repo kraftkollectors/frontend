@@ -116,7 +116,7 @@ const apis = {
      * GET - get all adverts.
      */
     getTransactions: `${admin}/transactions`,
-    categories: ``
+    getCategories: ``,
 }
 
 export default apis;

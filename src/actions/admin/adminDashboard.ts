@@ -24,7 +24,7 @@ export async function adminDashboard() {
 
         if (!req) return 'error';
         const res = (await req.json()) as ApiResponse<AdminApiResponse>;
-        debugLog(res);
+        // debugLog(res);
 
         if ((res as any).message == 'Invalid Token') proceed = true;
         else if (res.statusCode === 201) return res.data.existingAdmin;

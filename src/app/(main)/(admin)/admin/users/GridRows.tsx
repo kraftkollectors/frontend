@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import TotalUsers from "./components/TotalUsers";
 import TotalVerifiedUsers from "./components/TotalVerifiedUsers";
 import ActivePayment from "./components/ActivePayment";
+import TotalNormalUsers from "./components/TotalNormalUsers";
 
 export default function GridRows() {
     
@@ -16,7 +17,7 @@ export default function GridRows() {
                 <TotalVerifiedUsers />
             </Suspense>
             <Suspense fallback={loading}>
-                <ActivePayment />
+                <TotalNormalUsers />
             </Suspense>
             
         </div>

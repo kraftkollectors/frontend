@@ -1,13 +1,24 @@
 'use client'
 
+import { useChangeSearchParams } from "@/hooks";
+
 export type AdminSearchProps<T extends () => any> = {
-    action: T;
+    action?: T;
 }
 
 export default function AdminSearch({ action }: AdminSearchProps<any>) {
+    const { pushParams, params } = useChangeSearchParams();
+
     return (
-        <form action={action} className="flex gap-3 justify-stretch">
-            <input placeholder="Enter your email to search " name="search" className="p-2 flex-shrink grow md:w-80 border border-black-100 rounded outline-primary" />
+        <form onSubmit={(e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target as HTMLFormElement);
+            const q = String(formData.get('search') ?? "");
+            pushParams({ q })
+        }} className="flex gap-3 justify-stretch">
+            <input
+            defaultValue={`${params.get('q')}`}
+             placeholder="Enter your email to search " name="search" className="p-2 flex-shrink grow md:w-80 border border-black-100 rounded outline-primary" />
             <button className="btn-dark-tiny flex-shrink-0 px-4">Search</button>
         </form>
     );
