@@ -9,7 +9,7 @@ export default function Page({ searchParams }: AppPageProps<any, {
     page?: string;
     q?: string;
     sort?: string;
-    adminOnly?: string;
+    artisanOnly?: string;
 }>) {
     const query = buildUrlQuery(searchParams);
     // debugLog(query)

@@ -1,7 +1,11 @@
+import { fetchServices, fetchUsers } from "@/actions";
 import TableRow from "./TableRow";
 import {  dummyService } from "@/utils/dummy";
+import { Pagination } from "@/components";
 
-export default function Table() {
+export default async function Table({query}:{query: string}) {
+  const services = await fetchServices({ throwsError: false, params: query });
+  if (services === 'error' || !services) throw new Error('Connection error | Failed to load Services');
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">
@@ -17,10 +21,13 @@ export default function Table() {
           <tr>
             <td className="p-2"></td>
           </tr>
-          <TableRow {...dummyService} />
-          <TableRow {...dummyService} />
+          {
+            services.existingRecords.length === 0 ? <tr><td colSpan={6}><div className="info-box">No users found</div></td></tr> :
+            services.existingRecords.map(service=><TableRow key={service._id} {...service} />)
+          }
         </tbody>
       </table>
+      <Pagination pagination={services} />
     </div>
   );
 }

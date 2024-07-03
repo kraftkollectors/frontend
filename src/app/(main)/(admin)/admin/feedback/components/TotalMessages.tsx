@@ -1,10 +1,14 @@
+import { fetchFeedbacks } from "@/actions";
 import { AdminCard } from "@/components/admin";
 import AppIcons from "@/components/AppIcons";
+import { formatNumber } from "@/functions/helpers";
 
 export default async function TotalMessages() {
+    const feedbacks = await fetchFeedbacks({ throwsError: false });
+    if (feedbacks === 'error' || !feedbacks) return null;
     return (
         <AdminCard
-        title="2,000"
+        title={formatNumber(feedbacks.totalDocuments)}
         label="Total Messages"
         icon={<AppIcons.AdminFeedback />}
         bg="secondary"

@@ -1,10 +1,12 @@
-import { UserDetails } from "@/utils/types/user";
 import TableRow from "./TableRow";
 import { dummyContact } from "@/utils/dummy";
 import { Suspense } from "react";
 import SingleFeedback from "./SingleFeedback";
+import { fetchFeedbacks } from "@/actions";
 
-export default function Table() {
+export default async function Table({query}:{query: string}) {
+  const feedbacks = await fetchFeedbacks({ throwsError: false, params: query });
+  if (feedbacks === 'error' || !feedbacks) throw new Error('Connection error | Failed to load feedback');
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">
@@ -18,8 +20,10 @@ export default function Table() {
           <tr>
             <td className="p-2"></td>
           </tr>
-          <TableRow {...dummyContact} />
-          <TableRow {...dummyContact} />
+          {
+            feedbacks.existingRecords.length === 0 ? <tr><td colSpan={6}><div className="info-box">No users found</div></td></tr> :
+            feedbacks.existingRecords.map(feedback=><TableRow key={feedback._id} {...feedback} />)
+          }
         </tbody>
       </table>
       <Suspense>
