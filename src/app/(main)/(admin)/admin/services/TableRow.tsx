@@ -1,6 +1,7 @@
 import { formatDate } from "@/functions/date";
 import OptionsPopOver from "./OptionsPopOver";
 import { Service } from "@/utils/types/service";
+import { UserName } from "@/components/admin";
 
 export default function TableRow({
   _id,
@@ -18,7 +19,7 @@ export default function TableRow({
        {title}
       </td>
        <td>
-       {userId}
+       <UserName userId={userId} />
        </td>
        <td>{category}</td>
        <td>{subCategory}</td>

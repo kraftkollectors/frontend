@@ -340,7 +340,17 @@ const apis = {
      * DELETE - edit a sub-category
      */
     singleSubCategory: (id:string)=>`${admin}/cat/subcategory/${id}`,
-    
+    /**
+     * GET - get all adverts
+     */
+    adverts: `${admin}/paidads`,
+    /**
+     * GET - get one advert
+     * PATCH - edit an advert
+     * DELETE - delete an advert
+     */
+    singleAdvert: (id:string)=>`${admin}/paidads/${id}`,
+
     getTransactions: `${admin}/transactions`,
     getCategories: ``,
 }
