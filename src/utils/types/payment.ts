@@ -8,4 +8,6 @@ export type Payment = {
     date: string;
     isActive: boolean;
     amount: string;
+    userId: string;
+    createdAt: string;
 }
