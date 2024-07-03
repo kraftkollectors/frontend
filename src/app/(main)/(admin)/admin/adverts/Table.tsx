@@ -3,8 +3,12 @@ import { dummyAdvert } from "@/utils/dummy";
 import { Suspense } from "react";
 import NewAdvert from "./NewAdvert";
 import EditAdvert from "./EditAdvert";
+import { fetchAdverts } from "@/actions";
+import { Pagination } from "@/components";
 
-export default function Table() {
+export default async function Table({query}:{query: string}) {
+  const adverts = await fetchAdverts({ throwsError: false, params: query });
+  if (adverts === 'error' || !adverts) throw new Error('Connection error | Failed to load Services');
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">
@@ -22,10 +26,14 @@ export default function Table() {
           <tr>
             <td className="p-2"></td>
           </tr>
-          <TableRow {...dummyAdvert} />
-          <TableRow {...dummyAdvert} />
+          {
+            adverts.existingRecords.length === 0 ? <tr><td colSpan={8}><div className="info-box">No adverts found</div></td></tr> :
+            adverts.existingRecords.map(advert=><TableRow key={advert._id} {...advert} />)
+          }
         </tbody>
       </table>
+
+      <Pagination pagination={adverts} />
       <Suspense>
         <NewAdvert />
         <EditAdvert />

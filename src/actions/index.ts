@@ -23,6 +23,7 @@ export {fetchChatHeads} from './fetch/fetchChatHeads'
 export {fetchChats} from './fetch/fetchChats'
 export {fetchUsers} from './fetch/fetchUsers'
 export {fetchFeedbacks} from './fetch/fetchFeedbacks'
+export {fetchAdverts} from './fetch/fetchAdverts'
 
 export {newEducation} from './new/newEducation'
 export {newCertificate} from './new/newCertificate'

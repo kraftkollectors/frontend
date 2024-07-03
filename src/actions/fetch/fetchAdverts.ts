@@ -8,14 +8,15 @@ import { ActionApiResponse, ApiResponse, Paginated } from "@/utils/types/basicTy
 import { ServerActionParams } from "@/utils/types/actions";
 import { ApiRequest } from "@/utils/apiRequest";
 import { ContactMessage } from "@/utils/types/contact";
+import { Advert } from "@/utils/types/advert";
 
 
-export async function fetchFeedbacks({ throwsError = true, isPublic = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<ContactMessage>>> {
+export async function fetchAdverts({ throwsError = true, isPublic = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<Advert>>> {
     try {
         const req = await (isPublic 
-            ? ApiRequest.getJson(apis.getFeedbacks + params, {next: {tags: [tags.feedbacks]}}) 
-            : ServerApiRequest.get(apis.getFeedbacks + params, {next: {tags: [tags.feedbacks]}}));
-        const res = (await req?.json()) as ApiResponse<Paginated<ContactMessage>>;
+            ? ApiRequest.getJson(apis.adverts + params, {next: {tags: [tags.adverts]}}) 
+            : ServerApiRequest.get(apis.adverts + params, {next: {tags: [tags.adverts]}}));
+        const res = (await req?.json()) as ApiResponse<Paginated<Advert>>;
         debugLog(res);
         debugLog(apis.services + params);
 
