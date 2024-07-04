@@ -15,9 +15,10 @@ export async function middleware(req: NextRequest) {
     if (!(hasAccessToken || hasAccessId)) return NextResponse.redirect(new URL(paths.login, req.url));
   }else if (pathname === paths.admin || pathname.startsWith(paths.admin+'/')) {
     if (!(_hasAccessToken || _hasAccessId)) return NextResponse.redirect(new URL(paths.adminLogin, req.url));
-  }else if (authPaths.map((item)=>pathname.startsWith(item)).includes(true)) {
-    if (hasAccessToken && hasAccessId) return NextResponse.redirect(new URL(paths.dashboard, req.url));
   }
+  // else if (authPaths.map((item)=>pathname.startsWith(item)).includes(true)) {
+    // if (hasAccessToken && hasAccessId) return NextResponse.redirect(new URL(paths.dashboard, req.url));
+  // }
 }
 
 const authPaths = [

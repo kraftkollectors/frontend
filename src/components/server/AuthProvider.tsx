@@ -6,15 +6,19 @@ import { Artisan } from "@/utils/types/artisan";
 
 
 export default async function AuthProvider() {
-    const user = await fetchUser({throwsError: false});
-    if(user == 'error') return;
+    const user = await fetchUser({ throwsError: false });
+    // if(!user)
+    if (user as any == 'conflict') {
+        return null;
+    };
+    if (user == 'error') return;
 
-    let artisan:Artisan|null = null;
-    if(user?.isArtisan || true){
-        let art = await fetchArtisan({throwsError: false});
-        if(art !== 'error' && art) artisan = art;
+    let artisan: Artisan | null = null;
+    if (user?.isArtisan || true) {
+        let art = await fetchArtisan({ throwsError: false });
+        if (art !== 'error' && art) artisan = art;
     }
-    
+
 
     return (
         <UserStateProvider artisan={artisan} user={user}>

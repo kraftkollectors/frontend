@@ -1,6 +1,8 @@
 'use client'
 
-import { FormButton } from "@/components";
+import { newAdvert } from "@/actions";
+import { FormButton, FormMessage } from "@/components";
+import { AdminAuth } from "@/components/admin";
 import AppIcons from "@/components/AppIcons";
 import AppInput, { AppInputProps } from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
@@ -9,6 +11,7 @@ import { ADVERT_DURATIONS } from "@/utils/constants";
 import { Dialog } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useLayoutEffect, useMemo, useState } from "react";
+import { useFormState } from "react-dom";
 import { FaX } from "react-icons/fa6";
 
 export default function NewAdvert() {
@@ -26,6 +29,15 @@ export default function NewAdvert() {
             placeholder: "Select Photo",
             title: "Image",
             type: 'file',
+            inputProps: {
+                accept: "image/*, video/*"
+            }
+        },
+        {
+            name: 'url',
+            placeholder: "URL Link",
+            title: "URL Link",
+            type: 'url',
         },
         {
             name: 'startDate',
@@ -51,6 +63,8 @@ export default function NewAdvert() {
         back();
     }
 
+    const [res, action] = useFormState(newAdvert, {});
+
     return (
         <Dialog.Root open={open}>
             <Dialog.Content style={{
@@ -64,15 +78,18 @@ export default function NewAdvert() {
                         <AppIcons.AdminAdverts />
                     </div>
                     <h2 className="font-bold text-black-500 text-center">New Advert</h2>
-                    <form action="" className="flex gap-4 flex-col [&_#Image-input]:!py-0  [&_label]:font-semibold [&_#Image-input]:pointer-events-auto [&_#Image-input]:opacity-100 ">
+                    <form action={action} className="flex gap-4 flex-col [&_#Image-input]:!py-0  [&_label]:font-semibold [&_#Image-input]:pointer-events-auto [&_#Image-input]:opacity-100 ">
                         {
-                            fields.map(field => <AppInput key={field.name} {...field} />)
+                            fields.map(field => <AppInput key={field.name} {...field} error={res.fieldErrors && res.fieldErrors[field.name]} />)
                         }
                         <AppSelect
                             name="duration"
                             title="Dutation"
                             options={ADVERT_DURATIONS}
+                            error={res.fieldErrors && res.fieldErrors['duration']}
                         />
+                        <FormMessage res={res} />
+                        <AdminAuth />
                         <div className="pt-6 flex justify-end">
                             <FormButton className="btn-dark-tiny flex-shrink-0 px-10 font-semibold py-2">Add</FormButton>
                         </div>

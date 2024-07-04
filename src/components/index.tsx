@@ -9,6 +9,7 @@ export { ImagePicker } from "./ui/ImagePicker";
 export { UseCurrentLocation } from "./ui/UseCurrentLocation";
 export { NotAnArtisan } from "./ui/NotAnArtisan";
 export { FavouriteButton } from "./ui/FavouriteButton";
+export { default as ErrorPage } from "./ui/ErrorPage";
 
 export { ContinueWithGoogleButton } from "./ContinueWithGoogleButton";
 export { ContinueWithFacebookButton } from "./ContinueWithFacebookButton";

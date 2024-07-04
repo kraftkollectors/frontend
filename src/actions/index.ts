@@ -32,6 +32,7 @@ export {newCertificate} from './new/newCertificate'
 export {newService} from './new/newService'
 export {newCategory} from './new/newCategory'
 export {newSubCategory} from './new/newSubCategory'
+export {newAdvert} from './new/newAdvert'
 
 export {becomeAnArtisanPersonalDetails} from './misc/becomeAnArtisanPersonalDetails'
 export {becomeAnArtisanPersonalInfo} from './misc/becomeAnArtisanPersonalInfo'

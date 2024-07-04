@@ -8,7 +8,7 @@ import { Pagination } from "@/components";
 
 export default async function Table({query}:{query: string}) {
   const adverts = await fetchAdverts({ throwsError: false, params: query });
-  if (adverts === 'error' || !adverts) throw new Error('Connection error | Failed to load Services');
+  if (adverts === 'error' || !adverts) throw new Error('Connection error | Failed to load Advertisements');
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">

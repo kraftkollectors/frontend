@@ -6,10 +6,9 @@ import { AdminAuth } from "@/components/admin";
 import AppIcons from "@/components/AppIcons";
 import AppInput from "@/components/ui/AppInput";
 import { useChangeSearchParams } from "@/hooks";
-import { paths } from "@/utils";
 import { Dialog } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import { FaX } from "react-icons/fa6";
 
@@ -29,7 +28,12 @@ export default function NewCategory() {
 
     }, [params]);
 
-    const [res, action] = useFormState(newCategory, {});
+    const [res, action] = useFormState(newCategory, {}); useEffect(()=>{
+        if(res.data && res.data === 'success'){
+            closeModal();
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [res])
 
     function closeModal() {
         back();
@@ -62,6 +66,9 @@ export default function NewCategory() {
                                             (item, index) => (index === i ? val : item)
                                         )
                                     )}
+                                    inputProps={{
+                                        autoFocus: i === subCats.length - 1
+                                    }}
                                     value={v}
                                     key={i} title="Sub-category name" placeholder="Enter new sub-catergory" name="_" />
                             ))

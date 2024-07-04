@@ -37,6 +37,11 @@ export type ApiResponse<T = any> = {
   data: T
 } 
 
+export type AppPageError = {
+  error: Error & { digest?: string },
+  reset: () => void
+}
+
 export type ActionApiResponse<T, K = null> = null | "error" | T | K
 
 export type Paginated<T = any> = {

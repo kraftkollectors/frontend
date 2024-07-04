@@ -7,7 +7,6 @@ import AppIcons from "@/components/AppIcons";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import { useChangeSearchParams } from "@/hooks";
-import { paths } from "@/utils";
 import { Dialog } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
@@ -18,7 +17,7 @@ export default function NewSubCategory() {
     const { back } = useRouter();
     const { params } = useChangeSearchParams()
     const [open, setOpen] = useState(false);
-    const [subCats, setSubCats] = useState<string[]>([]);
+    const [subCats, setSubCats] = useState<string[]>(['']);
     const category = useMemo(() => params.get('category'), [params]);
     const categoryId = useMemo(() => params.get('categoryId'), [params]);
 
@@ -75,6 +74,9 @@ export default function NewSubCategory() {
                                             (item, index) => (index === i ? val : item)
                                         )
                                     )}
+                                    inputProps={{
+                                        autoFocus: i === subCats.length - 1
+                                    }}
                                     value={v}
                                     key={i} title="Sub-category name" placeholder="Enter new sub-catergory" name="" />
                             ))
