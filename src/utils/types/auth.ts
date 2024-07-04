@@ -17,3 +17,8 @@ export type UserAuthProps = {
     userId: string;
     userEmail: string;
 }
+
+export type AdminAuthProps = {
+    adminId: string;
+    adminEmail: string;
+}

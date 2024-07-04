@@ -9,11 +9,11 @@ import { ApiRequest } from "@/utils/apiRequest";
 import { Category } from "@/utils/types/category";
 
 
-export async function fetchCategories({ throwsError = false, params = ''}: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<Category>>> {
+export async function fetchSubCategories({ throwsError = false, params = ''}: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<Category>>> {
     try {
-        const req = await ApiRequest.getJson(apis.category + params, {next: {tags: [tags.categories]}}) 
+        const req = await ApiRequest.getJson(apis.subCategory + params, {next: {tags: [tags.categories]}}) 
         const res = (await req?.json()) as ApiResponse<Paginated<Category>>;
-        // debugLog({daa: res.data});
+        // debugLog(res.data);
 
         if (res.statusCode === 201) return res.data;
         if (throwsError) throw new Error("Unable to connect")

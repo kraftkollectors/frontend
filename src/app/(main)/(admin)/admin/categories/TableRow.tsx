@@ -1,4 +1,4 @@
-import { CategoryDetails } from "@/utils/types/category";
+import { Category } from "@/utils/types/category";
 import SubCategoryRowGroup from "./SubCategoryRowGroup";
 import SubCategoryRow from "./components/SubCategoryRow";
 import ExpandCategory from "./components/ExpandCategory";
@@ -8,9 +8,9 @@ import { Suspense } from "react";
 export default function TableRow({
   _id,
   title,
-  servicesCount,
-  subCategories
-}: CategoryDetails) {
+  serviceCount: servicesCount,
+  subcategories: subCategories
+}: Category) {
   return (
     <>
       <tr className=" text-black-400 font-semibold text-label bg-light first-of-type:bg-red-400 typ">

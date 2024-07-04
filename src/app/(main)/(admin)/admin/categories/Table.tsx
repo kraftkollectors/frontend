@@ -3,8 +3,13 @@ import TableRow from "./TableRow";
 import { dummyCategory, dummyCategory2 } from "@/utils/dummy";
 import NewCategory from "./NewCategory";
 import NewSubCategory from "./NewSubCategory";
+import { fetchCategories } from "@/actions";
+import { Pagination } from "@/components";
 
-export default function Table() {
+export default async function Table({query}:{query: string}) {
+  const categories = await fetchCategories({ throwsError: false, params: query });
+  if (categories === 'error' || !categories) throw new Error('Connection error | Failed to load Categories');
+  
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table [&_tr]:border-b">
@@ -18,10 +23,13 @@ export default function Table() {
           <tr>
             <td className="p-2"></td>
           </tr>
-          <TableRow {...dummyCategory} />
-          <TableRow {...dummyCategory2} />
+          {
+            categories.existingRecords.length === 0 ? <tr><td colSpan={4}><div className="info-box">No categories found</div></td></tr> :
+            categories.existingRecords.map(cat=><TableRow key={cat._id} {...cat} />)
+          }
         </tbody>
       </table>
+      <Pagination pagination={categories} />
       <Suspense>
         <NewCategory />
         <NewSubCategory />

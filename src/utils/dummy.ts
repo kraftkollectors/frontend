@@ -5,7 +5,7 @@ import { Service, ServiceDetails } from "./types/service";
 import { Payment } from "./types/payment";
 import { ContactMessage } from "./types/contact";
 import { resolve } from "path";
-import { CategoryDetails, SubCategoryDetails } from "./types/category";
+import { Category, SubCategory } from "./types/category";
 import { Advert } from "./types/advert";
 
 export const dummyRelatedSearch = [
@@ -111,28 +111,28 @@ export const dummyContact: ContactMessage = {
 
 }
 
-export const dummySubCategory: SubCategoryDetails = {
+export const dummySubCategory: SubCategory = {
   _id: '1234569',
   title: "eatery",
   categoryId: "1256789",
-  servicesCount: 10,
+  serviceCount: 10,
 }
 
-export const dummyCategory: CategoryDetails = {
+export const dummyCategory: Category = {
   _id: '1256789',
   title: 'food and resturant',
-  servicesCount: 10,
-  subCategories: [
+  serviceCount: 10,
+  subcategories: [
     dummySubCategory,
     dummySubCategory,
   ]
 }
 
-export const dummyCategory2: CategoryDetails = {
+export const dummyCategory2: Category = {
   _id: '16789',
   title: 'Code and tech',
-  servicesCount: 10,
-  subCategories: [
+  serviceCount: 10,
+  subcategories: [
     dummySubCategory,
     dummySubCategory,
   ]

@@ -320,26 +320,27 @@ const apis = {
     getSingleFeedbacks: (id: string)=>`${admin}/contact`,
     /**
      * GET - get all categories
+     * QueryParams: page=pageNumber, q=searchQuery
      * POST - create a category
      */
-    category: `${admin}/cat/category`,
+    category: `${admin}/dashboard/cat/category`,
     /**
      * GET - get a categories
      * PATCH - edit a category
      * DELETE - edit a category
      */
-    singleCategory: (id:string)=>`${admin}/cat/category/${id}`,
+    singleCategory: (id:string)=>`${admin}/dashboard/cat/category/${id}`,
     /**
      * GET - get all sub-categories
      * POST - create a sub-category
      */
-    subCategory: `${admin}/cat/subcategory`,
+    subCategory: `${admin}/dashboard/cat/subcategory`,
     /**
      * GET - get one sub-category
      * PATCH - edit a sub-category
      * DELETE - edit a sub-category
      */
-    singleSubCategory: (id:string)=>`${admin}/cat/subcategory/${id}`,
+    singleSubCategory: (id:string)=>`${admin}/dashboard/cat/subcategory/${id}`,
     /**
      * GET - get all adverts
      */
