@@ -6,7 +6,6 @@ import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { tags } from "@/utils";
 import { ActionApiResponse, ApiResponse, Paginated } from "@/utils/types/basicTypes";
 import { ServerActionParams } from "@/utils/types/actions";
-import { Service } from "@/utils/types/service";
 import { ApiRequest } from "@/utils/apiRequest";
 import { ContactMessage } from "@/utils/types/contact";
 
@@ -14,8 +13,8 @@ import { ContactMessage } from "@/utils/types/contact";
 export async function fetchFeedbacks({ throwsError = true, isPublic = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<ContactMessage>>> {
     try {
         const req = await (isPublic 
-            ? ApiRequest.getJson(apis.services + params, {next: {tags: [tags.feedbacks]}}) 
-            : ServerApiRequest.get(apis.services + params, {next: {tags: [tags.feedbacks]}}));
+            ? ApiRequest.getJson(apis.getFeedbacks + params, {next: {tags: [tags.feedbacks]}}) 
+            : ServerApiRequest.get(apis.getFeedbacks + params, {next: {tags: [tags.feedbacks]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<ContactMessage>>;
         debugLog(res);
         debugLog(apis.services + params);

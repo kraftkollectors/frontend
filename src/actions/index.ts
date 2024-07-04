@@ -25,6 +25,7 @@ export {fetchUsers} from './fetch/fetchUsers'
 export {fetchFeedbacks} from './fetch/fetchFeedbacks'
 export {fetchCategories} from './fetch/fetchCategories'
 export {fetchSubCategories} from './fetch/fetchSubCategories'
+export {fetchAdverts} from './fetch/fetchAdverts'
 
 export {newEducation} from './new/newEducation'
 export {newCertificate} from './new/newCertificate'

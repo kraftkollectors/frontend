@@ -304,10 +304,6 @@ const apis = {
      */
     getUsers: `${admin}/users`,
     /**
-     * GET - get all adverts.
-     */
-    getAdverts: `${admin}/paidads`,
-    /**
      * GET - get all feedbacks.
      */
     getFeedbacks: `${admin}/contact`,

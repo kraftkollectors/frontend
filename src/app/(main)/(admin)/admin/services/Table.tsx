@@ -22,7 +22,7 @@ export default async function Table({query}:{query: string}) {
             <td className="p-2"></td>
           </tr>
           {
-            services.existingRecords.length === 0 ? <tr><td colSpan={6}><div className="info-box">No users found</div></td></tr> :
+            services.existingRecords.length === 0 ? <tr><td colSpan={6}><div className="info-box">No services found</div></td></tr> :
             services.existingRecords.map(service=><TableRow key={service._id} {...service} />)
           }
         </tbody>

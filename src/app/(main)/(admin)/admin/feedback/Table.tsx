@@ -21,7 +21,7 @@ export default async function Table({query}:{query: string}) {
             <td className="p-2"></td>
           </tr>
           {
-            feedbacks.existingRecords.length === 0 ? <tr><td colSpan={6}><div className="info-box">No users found</div></td></tr> :
+            feedbacks.existingRecords.length === 0 ? <tr><td colSpan={6}><div className="info-box">No feedback found</div></td></tr> :
             feedbacks.existingRecords.map(feedback=><TableRow key={feedback._id} {...feedback} />)
           }
         </tbody>
