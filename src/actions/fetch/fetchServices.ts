@@ -16,8 +16,8 @@ export async function fetchServices({ throwsError = true, isPublic = true, param
             ? ApiRequest.getJson(apis.services + params, {next: {tags: [tags.myServices]}}) 
             : ServerApiRequest.get(apis.services + params, {next: {tags: [tags.myServices]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<Service>>;
-        debugLog(res);
-        debugLog(apis.services + params);
+        // debugLog(res);
+        // debugLog(apis.services + params);
 
 
         if (res.statusCode === 201) return res.data;

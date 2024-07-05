@@ -12,6 +12,7 @@ export default function TableRow({
   isArtisan,
   userName,
   lastName,
+  active
 }: UserDetails) {
   return (
     <tr className=" text-black-400 font-semibold text-label bg-light border-b first-of-type:bg-red-400 typ">
@@ -32,7 +33,7 @@ export default function TableRow({
       </td>
       <td className="py-1">none</td>
       <td className="py-1">
-        <OptionsPopOver id={_id} />
+        <OptionsPopOver id={_id} active={active} />
       </td>
     </tr>
   );

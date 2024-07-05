@@ -4,7 +4,7 @@ import { fallbackImage, fullName } from "@/functions/helpers";
 import DisableButton from "./components/DisableButton";
 import { UserDetails } from "@/utils/types/user";
 
-export default function Profile({ userName, firstName, lastName, isArtisan, image }: UserDetails) {
+export default function Profile({ userName, firstName, lastName, isArtisan, image, active }: UserDetails) {
     return (
         <div className="flex justify-between flex-wrap items-center grid-block gap-3">
             <div className="flex gap-4">
@@ -17,7 +17,7 @@ export default function Profile({ userName, firstName, lastName, isArtisan, imag
                     </p>}
                 </div>
             </div>
-            <DisableButton />
+            <DisableButton active={active} />
         </div>
     );
 }

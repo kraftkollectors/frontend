@@ -10,7 +10,7 @@ import { useChangeSearchParams } from "@/hooks";
 import { ADVERT_DURATIONS } from "@/utils/constants";
 import { Dialog } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
 import { FaX } from "react-icons/fa6";
 
@@ -64,6 +64,10 @@ export default function NewAdvert() {
     }
 
     const [res, action] = useFormState(newAdvert, {});
+    useEffect(()=>{
+        if(res.success) closeModal()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [res])
 
     return (
         <Dialog.Root open={open}>

@@ -6,3 +6,4 @@ export {useWS} from './useWS';
 export {useUpdateOnline} from './useUpdateOnline';
 export {useLastSeen} from './useLastSeen';
 export {useTypingDetector} from './useTypingDetector';
+export {useDisableOrEnableUser} from './useDisableOrEnableUser';

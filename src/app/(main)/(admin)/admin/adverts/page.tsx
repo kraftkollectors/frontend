@@ -2,7 +2,6 @@ import { AdminSearch, PageTitle } from "@/components/admin";
 import GridRows from "./GridRows";
 import Filters from "./components/Filters";
 import Table from "./Table";
-import { redirect } from "next/navigation";
 import { paths } from "@/utils";
 import Link from "next/link";
 import { AppPageProps } from "@/utils/types/basicTypes";

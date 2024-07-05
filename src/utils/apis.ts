@@ -165,9 +165,23 @@ const apis = {
      * response: {name: string, capital: string, lgas: []}
      */
     nigerianStates: `${STATES_AND_CITIES_API}/nigerian-states`,
-
-
+    /**
+     * GET - get a user's artisan odject with (/user._id)
+     */
     artisan: API + "/users/artisan",
+    /**
+     * GET - get all services
+     * queryParams:?category?: string;
+    subCategory?: string;
+    q?: string; search query
+    location?: string;
+    minPrice?: number;
+    maxPrice?: number;
+    longitude?: number;
+    latitude?: number;
+    radius?: number; in km, eg: 2
+    sort?: string; best-rating latest lowest-price highest-price  
+     */
     services: API + "/users/ads",
       /**
      * @param id (the user _id)
@@ -339,6 +353,10 @@ const apis = {
     singleSubCategory: (id:string)=>`${admin}/dashboard/cat/subcategory/${id}`,
     /**
      * GET - get all adverts
+     * QueryParams {
+     * q: search query,
+     * sort: date | a-z. (default is date),
+     * }
      */
     adverts: `${admin}/paidads`,
     /**
@@ -347,9 +365,14 @@ const apis = {
      * DELETE - delete an advert
      */
     singleAdvert: (id:string)=>`${admin}/paidads/${id}`,
+    /**
+     * PATCH - update a user's details (for active and disabled)
+     * DELETE - delete a user
+     * @param id the user _id
+     */
+    adminEditUser: (id:string)=>`${admin}/users/${id}`,
 
     getTransactions: `${admin}/transactions`,
-    getCategories: ``,
 }
 
 export default apis;

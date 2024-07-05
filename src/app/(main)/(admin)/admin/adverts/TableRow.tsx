@@ -27,7 +27,7 @@ export default function TableRow({
         <img src={image} alt={title} className="rounded-md w-20 aspect-[4/3] bg-black-50" />
       </td>
       <td>
-        <a href={url}>{url.split('//').shift() || url}</a>
+        <a href={url}>{url.split('//').pop() || url}</a>
       </td>
       <td className="py-1">{formatDate(startDate)}</td>
       <td className="py-1">{formatDate(addDays(createdAt, duration))}</td>

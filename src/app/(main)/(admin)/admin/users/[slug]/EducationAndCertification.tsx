@@ -45,8 +45,8 @@ function Card({ item }: { item: Education | Certificate }) {
             <div className="flex justify-stretch items-start gap-3 py-1" >
                 <AppIcons.RoundEducation />
                 <div>
-                    <h3 className="font-bold text-black-400 text-label line-clamp-1">{i.certifiedBy}</h3>
-                    <h4 className="font-semibold text-black-300 text-label line-clamp-1">{i.certificate}</h4>
+                    <h3 className="font-bold text-black-400 text-label line-clamp-1">{i.certificate}</h3>
+                    <h4 className="font-semibold text-black-300 text-label line-clamp-1">{i.certifiedBy}</h4>
                     <p className="font-semibold text-black-300 text-label line-clamp-1">year of graduation {i.year}</p>
                 </div>
             </div>

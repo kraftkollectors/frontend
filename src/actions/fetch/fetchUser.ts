@@ -26,7 +26,7 @@ export async function fetchUser({ redirect: shouldRedirect = true, throwsError =
         return "conflict" as 'error';
     } else {
         try {
-            debugLog({ isPublic, params, accessId })
+            // debugLog({ isPublic, params, accessId })
             const req = await (isPublic ? ApiRequest.getJson(apis.getUser(params ?? ''), {
                 next: { tags: [tags.user] },
             }) : ServerApiRequest.get(apis.getUser(accessId ?? ''), {
@@ -34,7 +34,7 @@ export async function fetchUser({ redirect: shouldRedirect = true, throwsError =
             }));
             if (!req) return null;
             const res = (await req.json()) as ApiResponse<UserApiResponse>;
-            debugLog(res);
+            // debugLog(res);
 
             if ((res as any).message == 'Invalid Token') proceed = true;
             else if (res.statusCode === 201) return res.data.userDetails;
