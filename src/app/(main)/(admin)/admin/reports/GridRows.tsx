@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import TotalMessages from "./components/TotalReports";
 import TotalUnresolvedMessages from "./components/TotalUnresolvedReports";
-
+import { TotalUnreadReports } from "./components/TotalUnreadReports";
 export default function GridRows() {
     
     const loading = <div className="skeleton !rounded-md h-40" />;
@@ -12,7 +12,7 @@ export default function GridRows() {
                 <TotalMessages />
             </Suspense>
             <Suspense fallback={loading}>
-                <TotalUnresolvedMessages />
+                <TotalUnreadReports />
             </Suspense>
             <Suspense fallback={loading}>
                 <TotalUnresolvedMessages />

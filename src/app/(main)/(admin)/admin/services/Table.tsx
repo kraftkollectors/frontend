@@ -1,6 +1,5 @@
 import { fetchServices, fetchUsers } from "@/actions";
 import TableRow from "./TableRow";
-import {  dummyService } from "@/utils/dummy";
 import { Pagination } from "@/components";
 
 export default async function Table({query}:{query: string}) {

@@ -371,6 +371,14 @@ const apis = {
      * @param id the user _id
      */
     adminEditUser: (id:string)=>`${admin}/users/${id}`,
+    /**
+     * GET - get all reports
+     * QueryParams {
+     * q: search query,
+     * sort: date | a-z. (default is date),
+     * }
+     */
+    reports: `${admin}/report`,
 
     getTransactions: `${admin}/transactions`,
 }

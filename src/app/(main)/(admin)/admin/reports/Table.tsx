@@ -1,10 +1,12 @@
-import { UserDetails } from "@/utils/types/user";
 import TableRow from "./TableRow";
-import { dummyContact } from "@/utils/dummy";
 import { Suspense } from "react";
 import SingleReport from "./SingleReport";
+import { fetchReports, fetchServices } from "@/actions";
+import { Pagination } from "@/components";
 
-export default function Table() {
+export default async function Table({query}:{query: string}) {
+  const reports = await fetchReports({ throwsError: false, params: query });
+  if (reports === 'error' || !reports) throw new Error('Connection error | Failed to load Reports');
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">
@@ -19,10 +21,13 @@ export default function Table() {
           <tr>
             <td className="p-2"></td>
           </tr>
-          <TableRow {...dummyContact} />
-          <TableRow {...dummyContact} />
+          {
+            reports.existingRecords.length === 0 ? <tr><td colSpan={5}><div className="info-box">No report found</div></td></tr> :
+            reports.existingRecords.map(report=><TableRow key={report._id} {...report} />)
+          }
         </tbody>
       </table>
+      <Pagination pagination={reports} />
       <Suspense>
         <SingleReport />
       </Suspense>
