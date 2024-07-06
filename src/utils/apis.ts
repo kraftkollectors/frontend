@@ -378,6 +378,12 @@ const apis = {
      */
     adminEditUser: (id:string)=>`${admin}/users/${id}`,
     /**
+     * PATCH - update a service's details (for active and disabled)
+     * DELETE - delete a service
+     * @param id the user _id
+     */
+    adminEditService: (id:string)=>`${admin}/ads/${id}`,
+    /**
      * GET - get all reports
      * QueryParams {
      * q: search query,

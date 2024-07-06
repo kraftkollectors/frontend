@@ -3,6 +3,7 @@ export {adminRegister} from './adminRegister';
 export {adminDashboard} from './adminDashboard';
 export {fetchAdverts} from './fetchAdverts';
 export {enableOrDisableUser} from './enableOrDisableUser';
+export {enableOrDisableService} from './enableOrDisableService';
 export {deleteAdvert} from './deleteAdvert';
 export {markContactOrReportResolved} from './markContactOrReportResolved';
 export {deleteContactOrReport} from './deleteContactOrReport';

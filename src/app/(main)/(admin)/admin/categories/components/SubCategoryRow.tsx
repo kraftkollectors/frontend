@@ -26,7 +26,7 @@ export default function SubCategoryRow({
                     error ? "--"
                         : isLoading ? "..."
                         // : JSON.stringify(data)
-                            : `${data.serviceCount ?? '--'}`
+                            : `${Number(data.serviceCount) ?? '--'}`
                 }
             </td>
             <td></td>

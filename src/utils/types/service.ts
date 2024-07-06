@@ -15,6 +15,7 @@ export type Service = {
     userId: string;
     portfolio: string[];
     coverPhoto: string;
+    active: boolean;
 }
 
 export type ServiceDetails = Service & {

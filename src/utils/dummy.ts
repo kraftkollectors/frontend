@@ -85,7 +85,8 @@ export const dummyService: Service = {
   subCategory: "cooking",
   title: "I cook the best dishes",
   userId: "jnakcamanskdnsdk",
-  updatedAt: ''
+  updatedAt: '',
+  active: true,
 }
 
 export const dummyPayment: Payment = {

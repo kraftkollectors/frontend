@@ -7,7 +7,14 @@ import Link from "next/link";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import { MdOutlineBlock } from "react-icons/md";
 import { CgUnblock } from "react-icons/cg";
-export default function OptionsPopOver({id}:{id: string}) {
+import { useDisableOrEnableService } from "@/hooks";
+import { AdminAuth } from "@/components/admin";
+
+
+
+export default function OptionsPopOver({id, active}:{id: string; active:boolean}) {
+    const {action, enabled} = useDisableOrEnableService(active);
+    
     return (
         <Popover.Root>
             <Popover.Trigger>
@@ -18,11 +25,15 @@ export default function OptionsPopOver({id}:{id: string}) {
             <Popover.Content>
                 <div className="flex flex-col divide-y font-semibold">
                     <Link href={paths.service(id)} target="_blank" className="flex gap-3 text-black-400 pb-1">View Details <AppIcons.ExternalLink/> </Link>
-                  <form action="">
-                  <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1">Unblock<MdOutlineBlock /> <CgUnblock />
-
-                  </FormButton>
-                  </form>
+                    <form action={action}>
+                        <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1">
+                            <span>{!enabled ? "Unblock" : "Block"}</span>
+                            {!enabled ? <CgUnblock /> : <MdOutlineBlock />}
+                        </FormButton>
+                        <input type="hidden" name="serviceId" value={id} />
+                        <input type="hidden" name="enable" value={`${!enabled}`} />
+                        <AdminAuth />
+                    </form>
 
 
                 </div>

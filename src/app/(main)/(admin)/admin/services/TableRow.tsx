@@ -9,9 +9,8 @@ export default function TableRow({
    subCategory,
    title,
    userId,
-   createdAt
- 
- 
+   createdAt,
+   active
 }: Service) {
   return (
     <tr className=" text-black-400 font-semibold text-label bg-light border-b first-of-type:bg-red-400 typ">
@@ -26,7 +25,7 @@ export default function TableRow({
 
       <td className="py-1">{formatDate(createdAt)}</td>
       <td className="py-1">
-        <OptionsPopOver id={_id} />
+        <OptionsPopOver id={_id} active={active} />
       </td>
     </tr>
   );
