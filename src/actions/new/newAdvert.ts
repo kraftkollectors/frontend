@@ -20,7 +20,10 @@ const certificateSchema = z.object({
     url: validators.url,
 })
 
-type CategoryFormData =  AdminAuthProps & z.infer<typeof certificateSchema>;
+type CategoryFormData =  AdminAuthProps & z.infer<typeof certificateSchema> & {
+    advertId?: string;
+    image?: string;
+};
 
 export async function newAdvert(_res:ActionResponse, formData:FormData):Promise<ActionResponse> {
     const data = formDataToObject<CategoryFormData>(formData);
@@ -28,17 +31,29 @@ export async function newAdvert(_res:ActionResponse, formData:FormData):Promise<
 
     const tryParse = certificateSchema.safeParse(data);
     if(!tryParse.success) return {fieldErrors: tryParse.error.flatten().fieldErrors}
+    const isEdit = !!data.advertId;
     
     try {
-        const tryImg = await uploadSingleFile(formData);
-        if(typeof tryImg === 'string') return({error: "Failed to upload file"});
-        const {url:image} = tryImg;
-        const req = await ServerApiRequest.post(apis.adverts, {...data, image,});
+        let req: Response | null;
+        let image = data.image;
+        if(isEdit){
+            if((formData.get('file') as File).size > 0 ){
+                const res = await uploadSingleFile(formData);
+                if(typeof res === 'string') return {error: 'File upload failed'}
+                image = res.url;
+            }
+            req = await ServerApiRequest.patch(apis.singleAdvert(data.advertId!), {...data, image});
+        }else{
+            const res = await uploadSingleFile(formData);
+            if(typeof res === 'string') return({error: "Failed to upload file"});
+            image = res.url;
+            req = await ServerApiRequest.post(apis.adverts, {...data, image});
+        }
         const res = (await req?.json()) as ApiResponse
         debugLog(res);
         if(res.statusCode == 201){
-            revalidateTag(tags.categories);
-            return {data: 'success'};
+            revalidateTag(tags.adverts);
+            return {data: 'success', success: "successful"};
         }
         return {error: res.data ?? "Failed to create category", data: res};
     } catch (error) {

@@ -24,7 +24,7 @@ export default function TableRow({
         <p className=" max-w-80 line-clamp-2">{title}</p>
       </td>
       <td className="py-1">
-        <img src={image} alt={title} className="rounded-md w-20 aspect-[4/3] bg-black-50" />
+        <img src={image} alt={title} className="rounded-md w-20 aspect-[4/3] bg-black-50 object-contain" />
       </td>
       <td>
         <a href={url}>{url.split('//').pop() || url}</a>
