@@ -6,6 +6,6 @@ export type ContactMessage = {
     subject: string;
     message: string;
     read: boolean;
-    status: 'resolved' | 'unresolved';
+    resolved: boolean;
     createdAt: string;
 }

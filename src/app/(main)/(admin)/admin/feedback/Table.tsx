@@ -1,5 +1,4 @@
 import TableRow from "./TableRow";
-import { dummyContact } from "@/utils/dummy";
 import { Suspense } from "react";
 import SingleFeedback from "./SingleFeedback";
 import { fetchFeedbacks } from "@/actions";
@@ -7,6 +6,7 @@ import { fetchFeedbacks } from "@/actions";
 export default async function Table({query}:{query: string}) {
   const feedbacks = await fetchFeedbacks({ throwsError: false, params: query });
   if (feedbacks === 'error' || !feedbacks) throw new Error('Connection error | Failed to load feedback');
+  
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">

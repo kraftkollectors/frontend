@@ -319,15 +319,18 @@ const apis = {
     getUsers: `${admin}/users`,
     /**
      * GET - get all feedbacks.
+     * queryParams={
+     * only=unresolved|unread
+     * }
      */
-    getFeedbacks: `${admin}/contact`,
+    feedbacks: `${admin}/contact`,
     /**
      * @param id (the feedback _id)
      * GET - get single feedback.
      * PATCH - update the feedback
      * DELETE - delete the feedback
      */
-    getSingleFeedbacks: (id: string)=>`${admin}/contact`,
+    singleFeedback: (id: string)=>`${admin}/contact/${id}`,
     /**
      * GET - get all categories
      * QueryParams: page=pageNumber, q=searchQuery
@@ -361,6 +364,9 @@ const apis = {
     adverts: `${admin}/paidads`,
     /**
      * GET - get one advert
+     * queryParams={
+     * activeOnly=true(only active adverts)|false(only inactive adverts)
+     * }
      * PATCH - edit an advert
      * DELETE - delete an advert
      */
@@ -379,6 +385,13 @@ const apis = {
      * }
      */
     reports: `${admin}/report`,
+    /**
+     * GET - get single report
+     * PATCH - edit report
+     * DELETE - delete report
+     * @param id the report _id
+     */
+    singleReport: (id:string)=>`${admin}/report/${id}`,
 
     getTransactions: `${admin}/transactions`,
 }

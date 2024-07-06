@@ -46,6 +46,7 @@ export {checkFavourite} from './misc/checkFavourite'
 export {toggleFavourite} from './misc/toggleFavourite'
 export {toggleAvailability} from './misc/toggleAvailability'
 export {updateOnlineStatus} from './misc/updateOnlineStatus'
+export {revalidateTags} from './misc/revalidateTags'
 
 export {deleteEducation} from './delete/deleteEducation'
 export {deleteCertificate} from './delete/deleteCertificate'
