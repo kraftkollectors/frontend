@@ -10,6 +10,7 @@ const tags = {
     myFavs: (userId:string)=> `${userId}-fav`,
     serviceReviews: (serviceId:string)=> `reviews-${serviceId}`,
     feedbacks: 'feedbacks',
+    reports: 'reports',
 
     // admin
     admin: "admin",

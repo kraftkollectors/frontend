@@ -4,7 +4,7 @@ import AppIcons from "@/components/AppIcons";
 import { formatNumber } from "@/functions/helpers";
 
 export default async function TotalUnreadMessages() {
-    const feedbacks = await fetchFeedbacks({ throwsError: false });
+    const feedbacks = await fetchFeedbacks({ throwsError: false, params: "?only=unread" });
     if (feedbacks === 'error' || !feedbacks) return null;
     return (
         <AdminCard

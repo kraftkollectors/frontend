@@ -11,7 +11,7 @@ export default function TableRow({
   email,
   name,
   createdAt,
-  status,
+  resolved,
   read,
 }: ContactMessage) {
   return (
@@ -28,7 +28,7 @@ export default function TableRow({
 
       <td className="py-1">{formatDate(createdAt)}</td>
       <td className="py-1">
-        {status === 'resolved' ? (
+        {resolved ? (
           <SmallComponents.Resolved />
         ) : (
           <SmallComponents.EndedPayment />

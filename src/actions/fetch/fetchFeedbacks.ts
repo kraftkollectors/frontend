@@ -13,8 +13,8 @@ import { ContactMessage } from "@/utils/types/contact";
 export async function fetchFeedbacks({ throwsError = true, isPublic = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<ContactMessage>>> {
     try {
         const req = await (isPublic 
-            ? ApiRequest.getJson(apis.getFeedbacks + params, {next: {tags: [tags.feedbacks]}}) 
-            : ServerApiRequest.get(apis.getFeedbacks + params, {next: {tags: [tags.feedbacks]}}));
+            ? ApiRequest.getJson(apis.feedbacks + params, {next: {tags: [tags.feedbacks]}}) 
+            : ServerApiRequest.get(apis.feedbacks + params, {next: {tags: [tags.feedbacks]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<ContactMessage>>;
         debugLog(res);
         debugLog(apis.services + params);
