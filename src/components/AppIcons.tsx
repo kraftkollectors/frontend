@@ -445,9 +445,9 @@ const AppIcons = {
         <path
           d="M13.2083 3H17V6.79167M16.1875 3.8125L12.125 7.875M10.5 4.08333H5.625C5.19402 4.08333 4.7807 4.25454 4.47595 4.55928C4.1712 4.86403 4 5.27736 4 5.70833V14.375C4 14.806 4.1712 15.2193 4.47595 15.524C4.7807 15.8288 5.19402 16 5.625 16H14.2917C14.7226 16 15.136 15.8288 15.4407 15.524C15.7455 15.2193 15.9167 14.806 15.9167 14.375V9.5"
           stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     );

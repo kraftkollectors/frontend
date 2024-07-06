@@ -4,7 +4,7 @@ import AppIcons from "@/components/AppIcons";
 import { formatNumber } from "@/functions/helpers";
 
 export  async function TotalUnreadReports() {
-    const reports = await fetchReports({ throwsError: false });
+    const reports = await fetchReports({ throwsError: false, params: "?only=unread" });
     if (reports === 'error' || !reports) return null;
     return (
         <AdminCard

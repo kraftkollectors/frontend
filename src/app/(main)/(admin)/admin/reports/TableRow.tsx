@@ -6,30 +6,25 @@ import OptionsPopOver from "./OptionsPopOver";
 import SmallComponents from "@/components/SmallComponents";
 import { ContactMessage } from "@/utils/types/contact";
 import { Report } from "@/utils/types/reports";
+import { ServiceCell, UserCell } from "./components/TableRowCells";
 
 export default function TableRow({
   _id,
-  reportedId,
+  reporterId,
   createdAt,
   resolved,
-  read,
+  read,postId
 }: Report) {
   return (
-    <tr className=" text-black-400 font-semibold text-label bg-light border-b first-of-type:bg-red-400 typ">
+    <tr className=" text-black-400 font-semibold text-label bg-light border-b">
       <td className="py-1 flex gap-2 items-center">
         {
           read ? <AppIcons.RoundReport /> : <AppIcons.RoundReportNew /> 
         }
-        <div className="flex flex-col leading-tight">
-          <h2>{fullName(reportedId)}</h2>
-          {/* <p className="py-2">{email}</p> */}
-        </div>
+        <UserCell userId={reporterId} />
       </td>
        <td>
-       <div className="flex flex-col">
-          <p> I Will Create the Ultimate Sound track for your...</p>
-          <p>Entertainment | Dj</p>
-        </div>
+       <ServiceCell serviceId={postId} />
        </td>
 
       <td className="py-1">{formatDate(createdAt)}</td>

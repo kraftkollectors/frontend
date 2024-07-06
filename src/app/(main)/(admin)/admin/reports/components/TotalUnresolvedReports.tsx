@@ -4,7 +4,7 @@ import AppIcons from "@/components/AppIcons";
 import { formatNumber } from "@/functions/helpers";
 
 export default async function TotalUnresolvedReports() {
-    const reports = await fetchReports({ throwsError: false });
+    const reports = await fetchReports({ throwsError: false, params: "?only=unresolved"  });
     if (reports === 'error' || !reports) return null;
     return (
         <AdminCard

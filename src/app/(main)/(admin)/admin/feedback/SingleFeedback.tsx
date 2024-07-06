@@ -6,7 +6,7 @@ import { Dialog } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import { useLayoutEffect, useState } from "react";
 import { FaX } from "react-icons/fa6";
-import { useFetchContactMessage, useMarkFeedbackResolved } from "./hooks";
+import { useDeleteFeedback, useFetchContactMessage, useMarkFeedbackResolved } from "./hooks";
 import SmallComponents from "@/components/SmallComponents";
 import { fullName } from "@/functions/helpers";
 import { FormButton } from "@/components";
@@ -31,6 +31,7 @@ export default function SingleFeedback() {
 
     const { data, isLoading, error } = useFetchContactMessage(params.get('feedbackId'));
     const {resolveAction, isResolved} = useMarkFeedbackResolved(data ? data.resolved : false);
+    const deleteAction = useDeleteFeedback(closeModal);
 
     return (
         <Dialog.Root open={open}>
@@ -59,7 +60,7 @@ export default function SingleFeedback() {
                                         {data.message}  
                                     </p>
                                     <div className="flex gap-4 [&>*]:w-full [&_button]:w-full [&_button]:font-semibold">
-                                        <form action="">
+                                        <form action={deleteAction}>
                                             <FormButton className="delete-btn py-2.5">Delete</FormButton>
                                             <AdminAuth />
                                             <input type="hidden" name="feedbackId" value={data._id} />

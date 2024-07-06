@@ -107,7 +107,7 @@ export const dummyContact: ContactMessage = {
   phone: "0708456233",
   read: true,
   subject: "",
-  resolved: "resolved"
+  resolved: true
 
 }
 

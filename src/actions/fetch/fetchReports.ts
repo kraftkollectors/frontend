@@ -13,8 +13,8 @@ import { Report } from "@/utils/types/reports";
 export async function fetchReports({ throwsError = true, isPublic = true, params = '' }: ServerActionParams<string> = {}): Promise<ActionApiResponse<Paginated<Report>>> {
     try {
         const req = await (isPublic 
-            ? ApiRequest.getJson(apis.reports + params, {next: {tags: [tags.feedbacks]}}) 
-            : ServerApiRequest.get(apis.reports + params, {next: {tags: [tags.feedbacks]}}));
+            ? ApiRequest.getJson(apis.reports + params, {next: {tags: [tags.reports]}}) 
+            : ServerApiRequest.get(apis.reports + params, {next: {tags: [tags.reports]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<Report>>;
         debugLog(res);
         debugLog(apis + params);
