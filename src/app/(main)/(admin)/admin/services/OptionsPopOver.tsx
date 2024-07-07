@@ -24,9 +24,9 @@ export default function OptionsPopOver({id, active}:{id: string; active:boolean}
             </Popover.Trigger>
             <Popover.Content>
                 <div className="flex flex-col divide-y font-semibold">
-                    <Link href={paths.service(id)} target="_blank" className="flex gap-3 text-black-400 pb-1">View Details <AppIcons.ExternalLink/> </Link>
+                    <Link href={paths.service(id)} target="_blank" className="flex gap-3 justify-between w-full text-black-400 pb-1">View Details <AppIcons.ExternalLink/> </Link>
                     <form action={action}>
-                        <FormButton className="flex items-center text-[#BE2828] gap-3 pt-1">
+                        <FormButton className="flex items-center justify-between w-full text-[#BE2828] gap-3 pt-1">
                             <span>{!enabled ? "Unblock" : "Block"}</span>
                             {!enabled ? <CgUnblock /> : <MdOutlineBlock />}
                         </FormButton>
@@ -34,8 +34,6 @@ export default function OptionsPopOver({id, active}:{id: string; active:boolean}
                         <input type="hidden" name="enable" value={`${!enabled}`} />
                         <AdminAuth />
                     </form>
-
-
                 </div>
             </Popover.Content>
         </Popover.Root>

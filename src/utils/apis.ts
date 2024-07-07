@@ -300,6 +300,10 @@ const apis = {
      */
     adminDashboard: (adminId: string) => `${admin}/dashboard/${adminId}`,
     /**
+     * PATCH - change admin password {password: string}
+     */
+    adminChangePassword: (adminId: string) => `${admin}/dashboard/password/${adminId}`,
+    /**
      * PATCH - edit admin password. {password: string}
      */
     adminPassword: (adminId: string) => `${admin}/dashboard/password/${adminId}`,
@@ -377,6 +381,10 @@ const apis = {
      * @param id the user _id
      */
     adminEditUser: (id:string)=>`${admin}/users/${id}`,
+    /**
+     * GET - get all services
+     */
+    adminServices: `${admin}/ads`,
     /**
      * PATCH - update a service's details (for active and disabled)
      * DELETE - delete a service

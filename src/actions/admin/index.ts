@@ -7,3 +7,5 @@ export {enableOrDisableService} from './enableOrDisableService';
 export {deleteAdvert} from './deleteAdvert';
 export {markContactOrReportResolved} from './markContactOrReportResolved';
 export {deleteContactOrReport} from './deleteContactOrReport';
+export {adminChangePassword} from './adminChangePassword';
+export {adminFetchServices} from './adminFetchServices';
