@@ -4,6 +4,12 @@ import { adminDashboard } from "@/actions/admin";
 import { debugLog } from "@/functions/helpers";
 import { redirect, RedirectType } from "next/navigation";
 import { paths } from "@/utils";
+import { staticMetadata } from "@/functions/metadata";
+
+export const metadata = staticMetadata({
+    title: "KraftKollectors | Admin",
+    description: "Welcome back to KraftKollectors Admin"
+})
 
 export const dynamic = 'force-dynamic';
 

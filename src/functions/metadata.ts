@@ -8,8 +8,9 @@ export type MetadataProps = {
     path?: string;
 }
 
-export function staticMetadata({ title, description, img = '/images/banners/default.png', path }: MetadataProps): Metadata {
+export function staticMetadata({ title, description, img, path }: MetadataProps): Metadata {
     const keywords = ["kraftkollectors", "services", "artisans", ...title.split(' '), ...description.split(' ')];
+    const buildImg = img ? (img.startsWith('/') ? HOST+img : img) : '/images/banners/default.png';
 
     return {
         title,
@@ -20,11 +21,11 @@ export function staticMetadata({ title, description, img = '/images/banners/defa
         applicationName: "KraftKollectors",
         keywords: keywords,
         manifest: "/files/manifest.json",
-        twitter: { title, description, images: [HOST + img] },
+        twitter: { title, description, images: [buildImg] },
         openGraph: {
             title,
             description,
-            images: [HOST + img],
+            images: [buildImg],
             tags: keywords,
         },
 

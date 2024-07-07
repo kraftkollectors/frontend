@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 export default function Category() {
 
   const { params } = useChangeSearchParams();
-  const { data, isLoading, error, cats, subCats, selectedCat, onCatChange, key } = useCategories();
+  const { data, isLoading, error, cats, subCats, selectedCat, onCatChange, key } = useCategories({
+    addAll: true
+  });
 
   return (
     <div

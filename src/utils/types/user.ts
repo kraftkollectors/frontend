@@ -16,6 +16,7 @@ export type UserDetails = {
     createdAt: string;
     updatedAt: string;
     lastSeen: string;
+    paymentPlan: string;
     __v: number;
   };
 

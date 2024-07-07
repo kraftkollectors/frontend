@@ -1,11 +1,12 @@
 "use client";
 
 import { newService } from "@/actions";
-import { FormButton, FormMessage, UseCurrentLocation } from "@/components";
+import { FormButton, FormMessage, ServiceChargePicker, UseCurrentLocation } from "@/components";
 import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
+import { useCategories } from "@/hooks";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import { $1MB, ALLOWED_IMAGE_EXTENSIONS, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { useLayoutEffect, useMemo } from "react";
@@ -16,18 +17,14 @@ import {
   FileTypeValidator,
 } from "use-file-picker/validators";
 export default function ServicesForm() {
-  const {data:states, isLoading:statesLoading, error:statesError} = useNigerianStates();
+  const { data: states, isLoading: statesLoading, error: statesError } = useNigerianStates();
   const allStates = useMemo(() => {
     return statesLoading ? null : statesError ? null :
-    (states && states !== 'error' && states.length) ? states : null
+      (states && states !== 'error' && states.length) ? states : null
   }, [states, statesLoading, statesError]);
   const [res, action] = useFormState(newService, {});
+  const { data, isLoading, error, cats, subCats, onCatChange, key } = useCategories();
 
-  useLayoutEffect(()=>{
-    if(!res.success) return;
-    
-  }, [res])
-  
   return (
     <form action={action}>
       <div className="flex flex-col gap-4">
@@ -54,8 +51,16 @@ export default function ServicesForm() {
             Category
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            <AppSelect error={res.fieldErrors && res.fieldErrors['category']} name="category" options={["select a category"]} />
-            <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']} name="subCategory" options={["Select A Subcategory"]} />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['category']}
+              name="category"
+              onChange={onCatChange}
+              readonly={isLoading || !!error || !data}
+              options={cats}
+            />
+            <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']} name="subCategory"
+              readonly={isLoading || !!error || !data}
+              options={subCats}
+            />
           </div>
           <p className="col-span-4 text-label text-black-300">
             Select the most appropriate category that aligns with your service.
@@ -87,31 +92,7 @@ export default function ServicesForm() {
           </label>
           <div className="col-span-5 flex flex-col gap-2">
             <AppInput error={res.fieldErrors && res.fieldErrors['estimatedPrice']} name="estimatedPrice" placeholder="Example: 20,000" type="number" />
-            <div className="flex gap-2">
-              <input
-              name="charge"
-                type="radio"
-                hidden
-                className="radio-group hidden"
-                id="fixed"
-                value="fixed"
-                defaultChecked
-              />
-              <label htmlFor="fixed" className="bg-light px-3 rounded">
-                fixed
-              </label>
-              <input
-              name="charge"
-                type="radio"
-                hidden
-                className="radio-group hidden"
-                id="hourly"
-                value="hourly"
-              />
-              <label htmlFor="hourly" className="bg-light px-3 rounded">
-                Hourly
-              </label>
-            </div>
+            <ServiceChargePicker />
           </div>
         </div>
 
@@ -120,7 +101,7 @@ export default function ServicesForm() {
             Service Location
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-            <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]}  />
+            <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]} />
             <AppInput error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
             <UseCurrentLocation />
           </div>
@@ -129,13 +110,13 @@ export default function ServicesForm() {
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
             Cover photo
           </label>
-          <div className="col-span-4">
+          <div className="col-span-5">
             <AppFilePicker
-            max={1}
-            name="coverPhoto"
+              max={1}
+              name="coverPhoto"
               title="cover Photo"
               subtitle="Select 1 image up to 2MB"
-              onSelect={(_) => {}}
+              onSelect={(_) => { }}
               accept=""
               validators={[
                 new FileTypeValidator(ALLOWED_IMAGE_EXTENSIONS),
@@ -150,13 +131,13 @@ export default function ServicesForm() {
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
             Portfolio
           </label>
-          <div className="col-span-4">
+          <div className="col-span-5">
             <AppFilePicker
-            name="portfolio"
+              name="portfolio"
               accept=""
               title="cover Photo"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
-              onSelect={(_) => {}}
+              onSelect={(_) => { }}
               max={5}
               validators={[
                 new FileTypeValidator([

@@ -6,9 +6,8 @@ import { debugLog } from "@/functions/helpers";
 export default async function page({params}:AppPageProps<{slug:string}>) {
     const service = await fetchSingleArtisanService(params?.slug ?? '');
     if(!service) notFound()
-    if(service == 'error') return null
+    if(service == 'error') throw new Error("Something went wrong");
     
-    debugLog(service.portfolio);
   return (
     <main className="flex items-center bg-light-text  py-10 app-container">
       <div className="flex flex-col gap-2 max-w-[900px]  md:p-5 ">

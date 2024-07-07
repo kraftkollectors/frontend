@@ -1,12 +1,14 @@
 "use client";
 
 import { newService, updateService } from "@/actions";
-import { FormButton, FormMessage, UseCurrentLocation } from "@/components";
+import { FormButton, FormMessage, ServiceChargePicker, UseCurrentLocation } from "@/components";
 import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import FileInput from "@/components/ui/NewFilePicker";
+import { ServiceCharge } from "@/components/ui/ServiceChargePicker";
+import { useCategories } from "@/hooks";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import { ALLOWED_IMAGE_EXTENSIONS, $1MB, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { Service } from "@/utils/types/service";
@@ -24,11 +26,8 @@ export default function ServicesForm({service}:{service:Service}) {
     (states && states !== 'error' && states.length) ? states : null
   }, [states, statesLoading, statesError]);
   const [res, action] = useFormState(newService, {});
+  const { data, isLoading, error, cats, subCats, onCatChange } = useCategories();
 
-  useLayoutEffect(()=>{
-    if(!res.success) return;
-    
-  }, [res])
   
   return (
     <form action={action}>
@@ -61,10 +60,13 @@ export default function ServicesForm({service}:{service:Service}) {
           <div className="col-span-5  flex flex-col gap-2">
             <AppSelect error={res.fieldErrors && res.fieldErrors['category']}
             value={service.category}
-             name="category" options={["select a category"]} />
+             name="category" onChange={onCatChange}
+              readonly={isLoading || !!error || !data}
+              options={cats} />
             <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']}
             value={service.subCategory}
-             name="subCategory" options={["Select A Subcategory"]} />
+             name="subCategory"  readonly={isLoading || !!error || !data}
+              options={subCats} />
           </div>
           <p className="col-span-4 text-label text-black-300">
             Select the most appropriate category that aligns with your service.
@@ -100,32 +102,7 @@ export default function ServicesForm({service}:{service:Service}) {
             <AppInput error={res.fieldErrors && res.fieldErrors['estimatedPrice']}
             value={service.estimatedPrice}
              name="estimatedPrice" placeholder="Example: 20,000" type="number" />
-            <div className="flex gap-2">
-              <input
-              name="charge"
-                type="radio"
-                hidden
-                className="radio-group hidden"
-                id="fixed"
-                value="fixed"
-                defaultChecked={service.charge=="fixed"}
-                />
-              <label htmlFor="fixed" className="bg-light px-3 rounded">
-                fixed
-              </label>
-              <input
-              name="charge"
-              defaultChecked={service.charge=="hourly"}
-                type="radio"
-                hidden
-                className="radio-group hidden"
-                id="hourly"
-                value="hourly"
-              />
-              <label htmlFor="hourly" className="bg-light px-3 rounded">
-                Hourly
-              </label>
-            </div>
+            <ServiceChargePicker value={service.charge as ServiceCharge} />
           </div>
         </div>
 
@@ -144,7 +121,7 @@ export default function ServicesForm({service}:{service:Service}) {
           <label className="col-span-3 text-black-800 font-semibold" htmlFor="">
             Cover photo
           </label>
-          <div className="col-span-4">
+          <div className="col-span-5">
             <AppFilePicker
             value={[service.coverPhoto]}
             max={1}
@@ -167,7 +144,7 @@ export default function ServicesForm({service}:{service:Service}) {
             Portfolio
           </label>
           {/* <FileInput /> */}
-          <div className="col-span-4">
+          <div className="col-span-5">
             <AppFilePicker
             value={service.portfolio}
             name="portfolio"

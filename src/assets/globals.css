@@ -114,11 +114,11 @@
   .pagination-button{
     @apply flex items-center justify-center px-4 h-10 ms-0 leading-tight  bg-white border border-e-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 data-[active="true"]:bg-primary data-[active="true"]:text-light
   }
+  .radio-group:checked + label {
+    @apply border-primary border-2 text-primary-dark
+  }
 }
 
-.radio-group:checked + label {
-  background-color: #d2d2d2;
-}
 
 .app-table tr td:nth-of-type(1){
   padding: 12px 5px 12px;

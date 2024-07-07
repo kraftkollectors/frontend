@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useFilePicker } from "use-file-picker";
@@ -92,7 +93,7 @@ export default function AppFilePicker({
       </div>
       <div
         onClick={() => openFilePicker()}
-        className="flex items-center flex-col border border-dotted border-gray-400 rounded h-24 w-full justify-center"
+        className="flex items-center flex-col border border-dotted border-gray-400 rounded h-24 w-full justify-center max-w-[280px] text-center p-2"
       >
         <h1 className="flex items-center text-label text-primary">
           <MdOutlineUpload />
@@ -101,7 +102,7 @@ export default function AppFilePicker({
         <p className="text-small text-[#929292]">{subtitle}</p>
       </div>
       {(selectedFiles || prevFiles.length > 0) && (
-        <div className="flex gap-2 pt-2 overflow-x-auto">
+        <div className="flex gap-2 py-2 overflow-x-auto">
           {selectedFiles.map((file, index) => (
             <MediaCard
               isVideo={["mp4", "m4a"].includes(

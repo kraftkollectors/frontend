@@ -2,11 +2,7 @@
 
 import { useChangeSearchParams } from "@/hooks";
 
-export type AdminSearchProps<T extends () => any> = {
-    action?: T;
-}
-
-export default function AdminSearch({ action }: AdminSearchProps<any>) {
+export default function AdminSearch() {
     const { pushParams, params } = useChangeSearchParams();
 
     return (
@@ -18,7 +14,7 @@ export default function AdminSearch({ action }: AdminSearchProps<any>) {
         }} className="flex gap-3 justify-stretch">
             <input
             defaultValue={`${params.get('q')??''}`}
-             placeholder="Enter your email to search " name="search" className="p-2 flex-shrink grow md:w-80 border border-black-100 rounded outline-primary" />
+             placeholder="Search..." name="search" className="p-2 flex-shrink grow md:w-80 border border-black-100 rounded outline-primary" />
             <button className="btn-dark-tiny flex-shrink-0 px-4">Search</button>
         </form>
     );

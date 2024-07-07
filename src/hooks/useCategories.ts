@@ -5,14 +5,17 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useChangeSearchParams } from "./useChangeSearchParams";
 
+type CategoryHookProps ={
+    addAll?: boolean;
+}
 
-export function useCategories() {
+export function useCategories({addAll = false}:CategoryHookProps = {}) {
     const [key, setKey] = useState("-");
     const [selectedCat, setSelectedCat] = useState("");
     const [cats, setCats] = useState<AppSelectOption[]>([]);
     const [subCats, setSubCats] = useState<AppSelectOption[]>([]);
     const { params } = useChangeSearchParams();
-    const withAll = (others: AppSelectOption[] = []): AppSelectOption[] => ([{ title: "All", value: '' }, ...others]);
+    const withAll = (others: AppSelectOption[] = []): AppSelectOption[] => (addAll ? [{ title: "All", value: '' }, ...others] : others);
 
     const query = useQuery({
         queryKey: [tags.categories],
@@ -54,7 +57,8 @@ export function useCategories() {
             title: i.title,
             value: i.title
         }))));
-        setSubCats(withAll());
+        onCatChange(categories[0].title);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [query.data])
 
     return { cats, subCats, onCatChange, key, selectedCat, ...query }

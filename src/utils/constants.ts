@@ -13,7 +13,7 @@ export const GOOGLE_AUTH_USER_INFO_API = "https://www.googleapis.com/oauth2/v3/u
 export const JWT_SECRET = 'n7tdce8yhsu88209cry8y98d4suhd9y408w9ufs94';
 
 export const ARTISAN_DEGREE_TYPES = [
-    "HND", 'OND', "Diploma", 'BSC', 'PHD', 'Others'
+  "HND", 'OND', "Diploma", 'BSC', 'PHD', 'Others'
 ];
 
 export const GENDERS = ['male', 'female']
@@ -22,43 +22,43 @@ export const ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'webp', 'gif']
 export const ALLOWED_VIDEO_EXTENSIONS = ['mp4', 'm4a'];
 export const $1MB = 1024 * 1024 * 1;
 
-export const SORT_OPTIONS =  [
-    {
-      title: "Best Rating",
-      value: "best-rating",
-    },
-    {
-      title: "Latest",
-      value: "latest",
-    },
-    {
-      title: "Lowest Price",
-      value: "lowest-price",
-    },
-    {
-      title: "Highest Price",
-      value: "highest-price",
-    },
-  ];
+export const SORT_OPTIONS = [
+  {
+    title: "Latest",
+    value: "latest",
+  },
+  {
+    title: "Best Rating",
+    value: "best-rating",
+  },
+  {
+    title: "Lowest Price",
+    value: "lowest-price",
+  },
+  {
+    title: "Highest Price",
+    value: "highest-price",
+  },
+];
 
-  export const ADVERT_DURATIONS = [
-    {
-      title: "1 day",
-      value: "1"
-    },
-    {
-      title: "3 days",
-      value: "3"
-    },
-    {
-      title: "7 days",
-      value: "7"
-    },
-    {
-      title: "12 days",
-      value: "12"
-    },
-  ]
+export const ADVERT_DURATIONS = [
+  {
+    title: "1 day",
+    value: "1"
+  },
+  {
+    title: "3 days",
+    value: "3"
+  },
+  {
+    title: "7 days",
+    value: "7"
+  },
+  {
+    title: "12 days",
+    value: "12"
+  },
+]
 
 export const ADMIN_USERS_FILTERS = [{
   title: 'All',

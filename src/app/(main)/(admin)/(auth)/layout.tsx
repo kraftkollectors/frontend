@@ -1,5 +1,11 @@
 import { AppLogo } from "@/components";
+import { staticMetadata } from "@/functions/metadata";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
+
+export const metadata = staticMetadata({
+    title: "KraftKollectors | Admin",
+    description: "Welcome back to KraftKollectors Admin"
+})
 
 export default function Layout({ children }: AppLayoutProps) {
     return (

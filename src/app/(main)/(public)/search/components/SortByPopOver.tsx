@@ -9,6 +9,7 @@ import { formDataToObject } from "@/functions/helpers";
 import { useChangeSearchParams } from "@/hooks";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { SORT_OPTIONS } from "@/utils/constants";
 
 export default function SortBy() {
   const { pushParams, params } = useChangeSearchParams();
@@ -29,6 +30,12 @@ export default function SortBy() {
     }, 3000)
   }
 
+  const sort = ()=>{
+    const _sort = params.get('sort');
+    if(!_sort) return SORT_OPTIONS[0].title
+    return SORT_OPTIONS.filter(i=>i.value == _sort)[0].title;
+  }
+
   useEffect(() => {
     setOpen(false)
     setLoading(false)
@@ -38,7 +45,7 @@ export default function SortBy() {
       <Popover.Trigger>
         <button className=" flex gap-2 items-center text-primary">
           <LuArrowDownUp />
-          <p>Best Rating</p>
+          <p>{sort()}</p>
         </button>
       </Popover.Trigger>
       <Popover.Content>
