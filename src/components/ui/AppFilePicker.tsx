@@ -81,7 +81,7 @@ export default function AppFilePicker({
   }
   const allFiles = [...prevFiles, ...selectedFiles];
   return (
-    <div className="">
+    <div className="w-full max-w-[90vw] overflow-x-auto">
       <div>
         <input  type="hidden" defaultValue={chunkifyString(JSON.stringify(allFiles)).length} hidden name={name} />
         {

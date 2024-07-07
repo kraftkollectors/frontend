@@ -8,3 +8,4 @@ export {useLastSeen} from './useLastSeen';
 export {useTypingDetector} from './useTypingDetector';
 export {useDisableOrEnableUser} from './useDisableOrEnableUser';
 export {useDisableOrEnableService} from './useDisableOrEnableService';
+export {useCategories} from './useCategories';

@@ -45,6 +45,7 @@ export default function CategoryPopOver() {
       <Popover.Content
         style={{
           minWidth: 280,
+          maxWidth: 320,
         }}
       >
         <form
