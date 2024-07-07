@@ -1,7 +1,11 @@
+import { fetchPayments } from "@/actions/admin";
 import TableRow from "./TableRow";
-import { dummyPayment } from "@/utils/dummy";
+import { Pagination } from "@/components";
 
-export default function Table() {
+export default async function Table({ query }: { query: string }) {
+  const payments = await fetchPayments({ throwsError: false, params: query });
+  if (payments === 'error' || !payments) throw new Error('Connection error | Failed to load Transactions');
+
   return (
     <div className="overflow-x-auto w-full">
       <table className="min-w-[800px] w-full rounded-md overflow-hidden app-table">
@@ -16,16 +20,13 @@ export default function Table() {
             <td></td>
           </tr>
           <tr><td className="p-2"></td></tr>
-          <TableRow
-            {...dummyPayment
-            }
-          />
-          <TableRow
-            {...dummyPayment
-            }
-          />
+          {
+            payments.existingRecords.length === 0 ? <tr><td colSpan={7}><div className="info-box">No payments found</div></td></tr> :
+              payments.existingRecords.map(payment => <TableRow key={payment._id} {...payment} />)
+          }
         </tbody>
       </table>
+      <Pagination pagination={payments} />
     </div>
   );
 }

@@ -9,8 +9,8 @@ export default function TableRow({
   _id,
   amount,
   date,
-  duration,
-  isActive,
+  plan: duration,
+  active: isActive,
 
 
  

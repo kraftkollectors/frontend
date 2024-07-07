@@ -2,6 +2,7 @@ export {adminLogin} from './adminLogin';
 export {adminRegister} from './adminRegister';
 export {adminDashboard} from './adminDashboard';
 export {fetchAdverts} from './fetchAdverts';
+export {fetchPayments} from './fetchPayments';
 export {enableOrDisableUser} from './enableOrDisableUser';
 export {enableOrDisableService} from './enableOrDisableService';
 export {deleteAdvert} from './deleteAdvert';

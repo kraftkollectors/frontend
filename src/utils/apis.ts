@@ -406,8 +406,22 @@ const apis = {
      * @param id the report _id
      */
     singleReport: (id:string)=>`${admin}/report/${id}`,
-
-    getTransactions: `${admin}/transactions`,
+    /**
+     * GET - get all transactions
+     */
+    transactions: `${admin}/transactions`,
+    /**
+     * GET - get all user transactions
+     * @param userId the user _id
+     */
+    userTransactions: (userId: string)=>`${admin}/transactions/users/${userId}`,
+    /**
+     * GET - get single transaction
+     * PATCH - edit transaction
+     * DELETE - delete transaction
+     * @param transactionId the transaction _id
+     */
+    singleTransaction: (transactionId: string)=>`${admin}/transactions/users/${transactionId}`,
 }
 
 export default apis;

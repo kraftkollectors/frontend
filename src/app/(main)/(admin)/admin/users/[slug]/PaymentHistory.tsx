@@ -20,7 +20,7 @@ export default function PaymentHistory({userId}:{userId: string}) {
     );
 }
 
-function Card({ date, duration, isActive, amount }: Payment) {
+function Card({ date, plan: duration, active: isActive, amount }: Payment) {
 
     return (
         <div className="flex justify-stretch items-start gap-3 py-1" >

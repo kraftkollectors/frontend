@@ -94,8 +94,8 @@ export const dummyPayment: Payment = {
   amount: "20000",
   date: "02-04-2024 12:45:30",
   createdAt: "02-04-2024 12:45:30",
-  duration: 'monthly',
-  isActive: false,
+  plan: 'monthly',
+  active: false,
   userId: "edrftgyhu"
 }
 

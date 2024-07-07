@@ -4,9 +4,9 @@ export type PaymentDuration = 'yearly' | 'monthly' | 'weekly'
 
 export type Payment = {
     _id: string;
-    duration: PaymentDuration;
+    plan: PaymentDuration;
     date: string;
-    isActive: boolean;
+    active: boolean;
     amount: string;
     userId: string;
     createdAt: string;

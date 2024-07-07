@@ -16,6 +16,7 @@ const tags = {
     admin: "admin",
     adverts: "adverts",
     categories: "categories",
+    payments: "payments",
 }
 
 

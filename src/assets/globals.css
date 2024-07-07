@@ -100,7 +100,7 @@
     @apply opacity-75 hover:opacity-100;
   }
   .info-box{
-    @apply bg-[#00000022] rounded p-2
+    @apply bg-[#00000011] rounded p-2 font-semibold
   }
   .skeleton{
     @apply bg-[#00000022] rounded-md animate-pulse
