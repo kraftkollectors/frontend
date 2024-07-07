@@ -21,7 +21,7 @@ export default function CategoryPopOver() {
       subCategory?:string;
     }>(new FormData(e.target));
 
-    if(!data.category || !data.subCategory) return toast(<AppToast.error message="select a category and sub-category" />);
+    // if(!data.category || !data.subCategory) return toast(<AppToast.error message="select a category and sub-category" />);
     setLoading(true)
     pushParams(data);
     setTimeout(()=>{
