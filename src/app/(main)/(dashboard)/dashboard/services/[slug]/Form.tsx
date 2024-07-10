@@ -2,33 +2,40 @@
 
 import { newService, updateService } from "@/actions";
 import { FormButton, FormMessage, ServiceChargePicker, UseCurrentLocation } from "@/components";
+import { GoogleLocationInput } from "@/components/maps";
+import { GoogleLocation } from "@/components/maps/GoogleLocationInput";
 import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import FileInput from "@/components/ui/NewFilePicker";
 import { ServiceCharge } from "@/components/ui/ServiceChargePicker";
-import { useCategories } from "@/hooks";
+import { useCategories, useLocation } from "@/hooks";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import { ALLOWED_IMAGE_EXTENSIONS, $1MB, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { Service } from "@/utils/types/service";
-import { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
 
 import {
   FileSizeValidator,
   FileTypeValidator,
 } from "use-file-picker/validators";
-export default function ServicesForm({service}:{service:Service}) {
-   const {data:states, isLoading:statesLoading, error:statesError} = useNigerianStates();
+export default function ServicesForm({ service }: { service: Service }) {
+  const { data: states, isLoading: statesLoading, error: statesError } = useNigerianStates();
   const allStates = useMemo(() => {
     return statesLoading ? null : statesError ? null :
-    (states && states !== 'error' && states.length) ? states : null
+      (states && states !== 'error' && states.length) ? states : null
   }, [states, statesLoading, statesError]);
   const [res, action] = useFormState(newService, {});
   const { data, isLoading, error, cats, subCats, onCatChange } = useCategories();
+  const {location:loc, setLocation:setLoc, isLoaded} = useLocation({
+    address: service.address,
+    latitude: Number(service.latitude),
+    longitude: Number(service.longitude),
+  })
 
-  
+
   return (
     <form action={action}>
       <input type="hidden" name="_id" value={service._id} className="hidden" hidden />
@@ -42,7 +49,7 @@ export default function ServicesForm({service}:{service:Service}) {
               textarea
               error={res.fieldErrors && res.fieldErrors['title']}
               value={service.title}
-               name="title"
+              name="title"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -59,13 +66,13 @@ export default function ServicesForm({service}:{service:Service}) {
           </label>
           <div className="col-span-5  flex flex-col gap-2">
             <AppSelect error={res.fieldErrors && res.fieldErrors['category']}
-            value={service.category}
-             name="category" onChange={onCatChange}
+              value={service.category}
+              name="category" onChange={onCatChange}
               readonly={isLoading || !!error || !data}
               options={cats} />
             <AppSelect error={res.fieldErrors && res.fieldErrors['subCategory']}
-            value={service.subCategory}
-             name="subCategory"  readonly={isLoading || !!error || !data}
+              value={service.subCategory}
+              name="subCategory" readonly={isLoading || !!error || !data}
               options={subCats} />
           </div>
           <p className="col-span-4 text-label text-black-300">
@@ -83,7 +90,7 @@ export default function ServicesForm({service}:{service:Service}) {
               textarea
               error={res.fieldErrors && res.fieldErrors['description']}
               value={service.description}
-               name="description"
+              name="description"
               placeholder="Example: I will plan and manage your event...."
               rows={2}
             />
@@ -100,8 +107,8 @@ export default function ServicesForm({service}:{service:Service}) {
           </label>
           <div className="col-span-5 flex flex-col gap-2">
             <AppInput error={res.fieldErrors && res.fieldErrors['estimatedPrice']}
-            value={service.estimatedPrice}
-             name="estimatedPrice" placeholder="Example: 20,000" type="number" />
+              value={service.estimatedPrice}
+              name="estimatedPrice" placeholder="Example: 20,000" type="number" />
             <ServiceChargePicker value={service.charge as ServiceCharge} />
           </div>
         </div>
@@ -111,10 +118,12 @@ export default function ServicesForm({service}:{service:Service}) {
             Service Location
           </label>
           <div className="col-span-5  flex flex-col gap-2">
-             <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]}  />
-            
-            <AppInput value={service.address} error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
-            <UseCurrentLocation />
+            <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]} />
+            {isLoaded && <GoogleLocationInput onChange={setLoc} value={loc} />}
+            <input type="hidden" name="address" value={loc?.address ?? ''} />
+            <input type="hidden" name="latitude" value={loc?.latitude ?? ''} />
+            <input type="hidden" name="longitude" value={loc?.longitude ?? ''} />
+            <UseCurrentLocation onChange={setLoc} />
           </div>
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">
@@ -123,12 +132,12 @@ export default function ServicesForm({service}:{service:Service}) {
           </label>
           <div className="col-span-5">
             <AppFilePicker
-            value={[service.coverPhoto]}
-            max={1}
-            name="coverPhoto"
+              value={[service.coverPhoto]}
+              max={1}
+              name="coverPhoto"
               title="cover Photo"
               subtitle="Select 1 image up to 2MB"
-              onSelect={(_) => {}}
+              onSelect={(_) => { }}
               accept=""
               validators={[
                 new FileTypeValidator(ALLOWED_IMAGE_EXTENSIONS),
@@ -146,12 +155,12 @@ export default function ServicesForm({service}:{service:Service}) {
           {/* <FileInput /> */}
           <div className="col-span-5">
             <AppFilePicker
-            value={service.portfolio}
-            name="portfolio"
+              value={service.portfolio}
+              name="portfolio"
               accept=""
               title="cover Photo"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
-              onSelect={(_) => {}}
+              onSelect={(_) => { }}
               max={5}
               validators={[
                 new FileTypeValidator([

@@ -19,14 +19,14 @@ export default function LocationPopOver() {
     const data = formDataToObject<{
       latitude?: string;
       longitude?: string;
-      location?: string;
+      address?: string;
       radius?: string;
     }>(new FormData(e.target));
 
     if (
       !data.latitude ||
       !data.longitude ||
-      !data.location ||
+      !data.address ||
       !data.radius
     ) return toast(<AppToast.error message="Invalid location selected" />);
     setLoading(true)
@@ -49,7 +49,7 @@ export default function LocationPopOver() {
           location <MdMyLocation />
         </button>
       </Popover.Trigger>
-      <Popover.Content style={{minWidth: 320}}>
+      <Popover.Content style={{minWidth: 320, maxWidth: 400}}>
         <form
           onSubmit={handleSubmit}
           className="flex flex-col gap-2"

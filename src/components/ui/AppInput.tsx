@@ -44,6 +44,10 @@ export default memo(function AppInput({
   const [error, setError] = useState<string | null>(null);
   const hasUpdated = useRef(false);
 
+  useEffect(()=>{
+    setVal(value);
+  }, [value])
+
   useEffect(() => {
     if (schema)
       try {
@@ -74,7 +78,7 @@ export default memo(function AppInput({
           {title}
         </label>
       )}
-      <div className="relative">
+      <div className="relative AppInput z-[1]">
         <span
           className={`absolute inline-block left-3 opacity-60 ${
             textarea ? "top-4" : "top-1/2 -translate-y-1/2"

@@ -11,6 +11,8 @@ export type Service = {
     description: string;
     estimatedPrice: string;
     state: string;
+    longitude: string;
+    latitude: string;
     charge: string;
     userId: string;
     portfolio: string[];

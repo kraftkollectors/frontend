@@ -2,11 +2,12 @@
 
 import { newService } from "@/actions";
 import { FormButton, FormMessage, ServiceChargePicker, UseCurrentLocation } from "@/components";
+import { GoogleLocationInput } from "@/components/maps";
 import UserAuth from "@/components/server/UserAuth";
 import AppFilePicker from "@/components/ui/AppFilePicker";
 import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
-import { useCategories } from "@/hooks";
+import { useCategories, useLocation } from "@/hooks";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import { $1MB, ALLOWED_IMAGE_EXTENSIONS, ALLOWED_VIDEO_EXTENSIONS } from "@/utils/constants";
 import { useLayoutEffect, useMemo } from "react";
@@ -24,6 +25,7 @@ export default function ServicesForm() {
   }, [states, statesLoading, statesError]);
   const [res, action] = useFormState(newService, {});
   const { data, isLoading, error, cats, subCats, onCatChange, key } = useCategories();
+  const { location: loc, setLocation: setLoc, isLoaded } = useLocation()
 
   return (
     <form action={action}>
@@ -102,8 +104,11 @@ export default function ServicesForm() {
           </label>
           <div className="col-span-5  flex flex-col gap-2">
             <AppSelect readonly={!allStates} error={res.fieldErrors && res.fieldErrors['state']} name="state" options={allStates ? allStates.map((s) => s.name) : [(statesLoading ? "loading..." : "error")]} />
-            <AppInput error={res.fieldErrors && res.fieldErrors['address']} name="address" type="text" placeholder="Egbu" />
-            <UseCurrentLocation />
+            {isLoaded && <GoogleLocationInput onChange={setLoc} value={loc} />}
+            <input type="hidden" name="address" value={loc?.address ?? ''} />
+            <input type="hidden" name="latitude" value={loc?.latitude ?? ''} />
+            <input type="hidden" name="longitude" value={loc?.longitude ?? ''} />
+            <UseCurrentLocation onChange={setLoc} />
           </div>
         </div>
         <div className="md:grid md:grid-cols-12 gap-4">

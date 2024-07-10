@@ -1,15 +1,31 @@
+'use client'
+
 import { UseCurrentLocation } from "@/components";
-import AppInput from "@/components/ui/AppInput";
+import GoogleLocationInput from "@/components/maps/GoogleLocationInput";
 import AppSelect from "@/components/ui/AppSelect";
-import { useChangeSearchParams } from "@/hooks";
+import { useChangeSearchParams, useLocation } from "@/hooks";
+import { useMemo } from "react";
 
 export default function Location() {
-  const {params} = useChangeSearchParams();
-  
+
+  const { params } = useChangeSearchParams();
+  const lng = useMemo(() => Number(params.get('longitude')), [params]);
+  const lat = useMemo(() => Number(params.get('latitude')), [params]);
+  const address = useMemo(() => params.get('address'), [params]);
+
+  const { location: loc, setLocation: setLoc, isLoaded } = useLocation((!lat || !lng || !address) ? undefined : {
+    latitude: lat,
+    longitude: lng,
+    address
+  })
+
   return (
     <div className="flex flex-col gap-2">
-      <AppInput name="location" placeholder="Enter Location" value={params.get('location') || undefined} />
-      <UseCurrentLocation />
+      {isLoaded && <GoogleLocationInput onChange={setLoc} value={loc} />}
+      <input type="hidden" name="address" value={loc?.address ?? ''} />
+      <input type="hidden" name="latitude" value={loc?.latitude ?? ''} />
+      <input type="hidden" name="longitude" value={loc?.longitude ?? ''} />
+      <UseCurrentLocation onChange={setLoc} />
       <AppSelect name="radius" options={radius} value={params.get('radius') ?? radius[0].value} />
     </div>
   );
@@ -17,7 +33,7 @@ export default function Location() {
 
 const radius = [
   {
-    title: "all",
+    title: "All",
     value: "1000000"
   },
   {
