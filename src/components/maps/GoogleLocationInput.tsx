@@ -58,9 +58,10 @@ export default function GoogleLocationInput({onChange, value:v}:GoogleLocationIn
         onChange({address, latitude:lat, longitude: lng});
     }
 
+    // ${isValid ? '!border-green-500' : '!border-red-500'}
     return (
         <div className={`relative [&.AppInput]:relative [&.AppInput]:z-[1] border-2 border-transparent rounded-lg
-        ${isValid ? '!border-green-500' : '!border-red-500'}`}>
+        `}>
             <AppInput
                 onChange={(v) => {
                     setIsValid(false);
@@ -68,7 +69,7 @@ export default function GoogleLocationInput({onChange, value:v}:GoogleLocationIn
                 }}
                 value={value}
                 name="" type="text" placeholder="Enter and select a location" />
-                {!isValid && <span className="text-red-800 text-label leading-[12px]">Invalid address, you must select one from the dropdown or use current location</span>}
+                {!isValid && <span className="text-red-800 text-sm leading-[9px]">Invalid address, you must select one from the dropdown or use current location</span>}
             {
                 data && data.length > 0 &&
                 <div className="absolute z-[0] w-full top-full shadow-[0_-2px_10px_#00000044] rounded-b left-0 p-2 max-h-[200px] overflow-y-auto flex flex-col bg-light divide-y">

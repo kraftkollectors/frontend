@@ -20,7 +20,7 @@ export function useCategories({addAll = false}:CategoryHookProps = {}) {
     const query = useQuery({
         queryKey: [tags.categories],
         queryFn: () => fetchCategories({ throwsError: false }).then(v => {
-            if (v === 'error' || !v) return undefined;
+            if (v === 'error' || !v) return null;
             return v
         }),
     })
