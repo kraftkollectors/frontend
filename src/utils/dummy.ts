@@ -86,6 +86,8 @@ export const dummyService: Service = {
   title: "I cook the best dishes",
   userId: "jnakcamanskdnsdk",
   updatedAt: '',
+  longitude: '',
+  latitude: '',
   active: true,
 }
 
