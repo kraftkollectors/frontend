@@ -30,15 +30,7 @@ export default function EducationForm() {
   return (
     <form action={action}>
       <div className=" flex flex-col md:grid grid-cols-11 gap-5 md:gap-6 py-6">
-        <p className="text-black-800 col-span-3">Area of specialization <i className="text-red-800">*</i></p>
 
-        <div className="col-span-5  flex flex-col gap-4">
-          <AppInput
-            name="areaOfSpecialization" error={res.fieldErrors && res.fieldErrors['areaOfSpecialization']}
-            placeholder="eg: Electrician, Mechanic, Engineer"
-                      />
-        </div>
-        <div className="col-span-3 max-md:hidden"></div>
 
         <p className="text-black-800 col-span-3">Work Hour</p>
 

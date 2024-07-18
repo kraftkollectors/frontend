@@ -10,7 +10,7 @@ const schema = z.object({
     businessName: validators.name,
     phoneNumber: validators.phoneNumber,
     description: validators.name,
-    facebook: validators.url,
+    facebook: validators.url, 
     instagram: validators.url,
     twitter: validators.url,
     linkedin: validators.url,

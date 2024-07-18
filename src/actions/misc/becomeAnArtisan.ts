@@ -12,6 +12,8 @@ import { z } from "zod";
 
 const schema = z.object({
     nin: validators.nin,
+    phoneNumber: validators.phoneNumber,
+    areaOfSpecialization: validators.name,
 })
 
 export type BecomeAnArtisan = z.infer<typeof schema> & Artisan;
@@ -24,19 +26,11 @@ export async function becomeAnArtisan(_: ActionResponse, formData: FormData): Pr
 
     let proceed = false;
     try {
-        const {delete:del, get} = cookies();
-        const cookieArtisan = get(appCookies.registerData)?.value;
-        if(!cookieArtisan) {
-            del(appCookies.registerData);
-            return {data: 'refresh'}
-        }
-
-        const req = await ServerApiRequest.post(apis.artisan, {...data, showContact: !!(data.showContact)});
+        const req = await ServerApiRequest.post(apis.artisan, {...data});
         const res = (await req?.json()) as ApiResponse;
         debugLog(res);
 
         if(res.statusCode == 201){
-            del(appCookies.registerData);
             proceed = true;
         } else return {error: res.data ?? "An error occurred"}
     } catch (error) {
@@ -48,7 +42,7 @@ export async function becomeAnArtisan(_: ActionResponse, formData: FormData): Pr
         revalidatePath(paths.dashboard);
         revalidateTag(tags.artisan);
         revalidateTag(tags.user);
-        redirect(paths.dashboard, RedirectType.replace);
+        redirect(paths.dashboardSettingsPersonalDetails, RedirectType.replace);
     }
     return { data: 'refresh'}
 }

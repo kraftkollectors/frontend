@@ -47,14 +47,15 @@ export default async function Profile({ userId }: { userId: string; }) {
         </h3>
       </div>
       <div className="grid max-md:w-9/12 md:grid-cols-2 gap-2 py-6 w-full">
+      <Link href={paths.dashboardSingleChat(userId)} className="btn-primary !py-2">
+          <AppIcons.Messages />
+          Message
+        </Link>
         {art.phoneNumber && <Link href={"tel:"+art.phoneNumber} className="btn-primary-border !py-2">
           <FiPhone />
           Phone Call
         </Link>}
-        <Link href={paths.dashboardSingleChat(userId)} className="btn-primary !py-2">
-          <AppIcons.Messages />
-          Message
-        </Link>
+       
       </div>
       <div className="flex flex-col gap-2 w-full items-start pb-2 border-b [&>*]:w-full">
         <p className="text-body font-semibold text-start text-black-400">Contact Info</p>
