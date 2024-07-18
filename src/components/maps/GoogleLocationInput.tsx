@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import AppToast from "../Toast";
 import { debugLog } from "@/functions/helpers";
 import { useEffect, useRef, useState } from "react";
+import { useGoogleLocationInput } from "@/hooks";
 
 export type GoogleLocation = {
     address: string;
@@ -18,45 +19,7 @@ export type GoogleLocationInputProps = {
     value?: GoogleLocation;
 }
 export default function GoogleLocationInput({onChange, value:v}:GoogleLocationInputProps) {
-    const [val, setVal] = useState(v);
-
-    useEffect(()=>{
-        setVal(v)
-    }, [v])
-
-    const [isValid, setIsValid] = useState(false);
-    const { value, setValue,
-        suggestions: { status, data },
-        clearSuggestions,
-    } = usePlacesAutocomplete({
-        debounce: 800,
-    })
-
-    useEffect(()=>{
-        if(!isValid) onChange(undefined)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isValid])
-
-    useEffect(()=>{
-        if(!val || !val.address) return;
-        onChange(val);
-        setIsValid(true);
-        setValue(val.address, false)
-        clearSuggestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [val])
-
-    async function handleSelect(address: string) {
-        setValue(address, false);
-        clearSuggestions();
-
-        const res = await getGeocode({ address });
-        if (res.length < 1) return toast(<AppToast.error message="Failed to get location" />);
-        const { lat, lng } = await getLatLng(res[0]);
-        setIsValid(true);
-        debugLog({ lat, lng, address });
-        onChange({address, latitude:lat, longitude: lng});
-    }
+    const {setValue, handleSelect, data, isValid, value, setIsValid} = useGoogleLocationInput(onChange, v);
 
     // ${isValid ? '!border-green-500' : '!border-red-500'}
     return (

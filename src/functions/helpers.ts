@@ -84,3 +84,15 @@ export function buildUrlQuery(obj:{[key:string]:any} | undefined) {
 export function generateRoomId(str1:string, str2:string){
     return [str1, str2].sort().join('_');
 }
+
+export function getParentIds(element:any):string[] {
+    const parentIds = [];
+    let currentElement = element;
+    while (currentElement && currentElement.parentNode) {
+      if (currentElement.id) {
+        parentIds.push(currentElement.id);
+      }
+      currentElement = currentElement.parentNode;
+    }
+    return parentIds;
+  }
