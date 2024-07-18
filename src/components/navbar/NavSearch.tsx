@@ -18,6 +18,7 @@ export default function NavSearch() {
           <option value="artisans">Artisans</option>
         </select>
         <input
+          onClick={()=>setOpen(true)}
           type="text"
           className="[border:1px_solid_transparent!important] font-semibold text-label text-black-500 flex-grow [outline:1px_solid_transparent!important] [all:unset] [box-shadow:none!important] w-[100%!important] md:!px-3 py-1 rounded-md "
           placeholder="What are you looking for?"
