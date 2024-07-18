@@ -43,6 +43,7 @@ export default function NavLocationSelector({ className = '', location, setLocat
                         </button>
                         {data.map(item => (
                             <button
+                                id="ignore_search_click"
                                 role="button"
                                 type="button"
                                 className="py-1 text-start font-semibold text-label text-black-400"

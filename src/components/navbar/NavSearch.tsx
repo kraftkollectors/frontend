@@ -25,16 +25,16 @@ export default function NavSearch() {
       if (!getParentIds(event.target).includes('ignore_search_click')) {
         // Click occurred outside the excluded div
         debugLog('out click')
-        // setOpen(false);
+        setOpen(false);
       }
     };
 
     // Attach the event listener to the document
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('mouseup', handleClickOutside);
 
     // Cleanup function to remove event listener
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mouseup', handleClickOutside);
     };
   }, []); // Empty dependency array ensures this effect runs only once
 
