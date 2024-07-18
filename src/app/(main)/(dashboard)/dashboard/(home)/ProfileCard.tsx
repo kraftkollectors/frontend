@@ -33,16 +33,19 @@ export default function ProfileCard() {
         <div className="flex flex-col gap-2">
           <p className="text-body font-semibold">General Info</p>
           {user?.createdAt && <ProfileInfoLine
+          hideOnMobile
             title="Member Since"
             value={formatDate(user!.createdAt)}
             icon={<LuUser2 />}
           />}
           {artisan && <ProfileInfoLine
+          hideOnMobile
             title="Location"
             value={`${artisan.state}, ${artisan.lga}`}
             icon={<IoLocationOutline />}
           />}
           <ProfileInfoLine
+          hideOnMobile
             title="Email"
             value={user?.email}
             icon={<CiMail />}
@@ -56,6 +59,7 @@ export default function ProfileCard() {
               <p className="text-body font-semibold">Contact Info</p>
               {true && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="Availability"
                   value={<AvailableToggle />}
                   icon={<IoTimeOutline />}
@@ -64,6 +68,7 @@ export default function ProfileCard() {
 
               {artisan?.phoneNumber && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="Phone Number"
                   value={artisan?.phoneNumber}
                   icon={<LuPhone />}
@@ -71,6 +76,7 @@ export default function ProfileCard() {
               )}
               {artisan?.website && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="Website"
                   value={
                     <a
@@ -90,6 +96,7 @@ export default function ProfileCard() {
               <p className="text-body font-semibold">Social Links</p>
               {artisan?.instagram && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="Instagram"
                   value={
                     <a
@@ -105,6 +112,7 @@ export default function ProfileCard() {
               )}
               {artisan?.twitter && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="x"
                   value={
                     <a
@@ -120,6 +128,7 @@ export default function ProfileCard() {
               )}
               {artisan?.facebook && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="Facebook"
                   value={
                     <a
@@ -136,6 +145,7 @@ export default function ProfileCard() {
 
               {artisan?.linkedin && (
                 <ProfileInfoLine
+                hideOnMobile
                   title="Linked In"
                   value={
                     <a

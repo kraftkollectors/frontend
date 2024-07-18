@@ -12,9 +12,9 @@ export default function DashboardProfile() {
       <img
         src={fallbackImage(user?.image)}
         alt={user?.userName}
-        height={64}
-        width={64}
-        className="rounded-full size-16 object-cover profile-img"
+        height={124}
+        width={124}
+        className="rounded-full size-[124px] avatar object-cover profile-img"
       />
       <p className="font-semibold text-title">{user?.userName}</p>
       <p className="">{user?.email}</p>

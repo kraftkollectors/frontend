@@ -2,6 +2,7 @@
 
 import { HTMLAttributes, memo, useEffect, useRef, useState } from "react";
 import { z } from "zod";
+import AppIcons from "../AppIcons";
 
 export type AppInputProps = {
   icon?: React.ReactNode;
@@ -40,11 +41,13 @@ export default memo(function AppInput({
   error: fieldError,
   inputProps,
 }: AppInputProps) {
+  // const [_type, setType] = useState(type);
+  const [eyeOpen, setEyeOpen] = useState(false);
   const [val, setVal] = useState(value);
   const [error, setError] = useState<string | null>(null);
   const hasUpdated = useRef(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     setVal(value);
   }, [value])
 
@@ -80,16 +83,31 @@ export default memo(function AppInput({
       )}
       <div className="relative AppInput z-[1]">
         <span
-          className={`absolute inline-block left-3 opacity-60 ${
-            textarea ? "top-4" : "top-1/2 -translate-y-1/2"
-          }`}
+          className={`absolute inline-block left-3 opacity-60 ${textarea ? "top-4" : "top-1/2 -translate-y-1/2"
+            }`}
         >
           {icon}
         </span>
+        {
+          type === 'password' &&
+          <button
+          type="button"
+          role="button"
+            onClick={() => setEyeOpen(!eyeOpen)}
+            className={`absolute inline-block right-3 ${textarea ? "top-4" : "top-1/2 -translate-y-1/2"
+              }`}
+          >
+            {
+              eyeOpen
+                ? <AppIcons.EyeOpen />
+                : <AppIcons.EyeClosed />
+            }
+          </button>
+        }
         {textarea ? (
           <textarea
-          readOnly={readonly}
-          hidden={hidden}
+            readOnly={readonly}
+            hidden={hidden}
             id={`${title}-input`}
             name={name}
             placeholder={placeholder}
@@ -99,27 +117,25 @@ export default memo(function AppInput({
               setVal(e.target.value);
               if (onChange) onChange(e.target.value);
             }}
-            className={`app-input ${!icon ? "ps-3" : "ps-9"} ${
-              (error||fieldError) ? "!bg-red-100" : ""
-            }`}
+            className={`app-input ${!icon ? "ps-3" : "ps-9"} ${(error || fieldError) ? "!bg-red-100" : ""
+              }`}
           />
         ) : (
           <input
-          {...inputProps}
-          readOnly={readonly}
-          hidden={hidden}
+            {...inputProps}
+            readOnly={readonly}
+            hidden={hidden}
             id={`${title}-input`}
             name={name}
             placeholder={placeholder}
-            type={type}
+            type={!eyeOpen ? type : 'text'}
             value={val}
             onChange={(e) => {
               setVal(e.target.value);
               if (onChange) onChange(e.target.value);
             }}
-            className={`app-input ${ps ? ps : !icon ? "ps-4" : "ps-9"}  ${
-              (error||fieldError) ? "!bg-red-100" : ""
-            }`}
+            className={`app-input ${ps ? ps : !icon ? "ps-4" : "ps-9"} ${type === 'password' ? "pe-4" : "pe-9"}  ${(error || fieldError) ? "!bg-red-100" : ""
+              }`}
           />
         )}
       </div>

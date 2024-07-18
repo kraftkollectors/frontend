@@ -72,7 +72,7 @@ export function ContinueWithGoogleButton({ onError }: SocialButtonProps) {
         <button disabled={loading} onClick={() => {
           setLoading(true);
           login()
-        }} className={`btn-dark-border gap-2 p-2 ${loading ? 'animate-pulse pointer-events-none' : ''}`}>
+        }} className={`btn-dark-border text-black-300 !shadow-none gap-2 !py-2.5 ${loading ? 'animate-pulse pointer-events-none' : ''}`}>
           <svg
             width="24"
             height="24"
@@ -97,7 +97,7 @@ export function ContinueWithGoogleButton({ onError }: SocialButtonProps) {
               fill="#EA4335"
             />
           </svg>
-          <span>Continue with Google</span>
+          <span className="text-black-300">Continue with Google</span>
         </button>}
     </>
   );

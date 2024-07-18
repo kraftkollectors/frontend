@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 
 import { FaRegEnvelope, FaRegHeart } from "react-icons/fa6";
@@ -7,6 +8,7 @@ import paths from "@/utils/paths";
 import ProfileDropdown from "./ProfileDropdown";
 import { useUserStore } from "@/state";
 import { fallbackImage } from "@/functions/helpers";
+import AppIcons from "../AppIcons";
 
 export default function NavLinks() {
   const user = useUserStore((s) => s.user);
@@ -22,7 +24,7 @@ export default function NavLinks() {
           src={fallbackImage(user?.image)}
           alt={user?.userName}
           title={user?.userName}
-          className=" size-8 avatar cursor-pointer overflow-hidden profile-img border border-black-100"
+          className=" size-10 avatar cursor-pointer overflow-hidden profile-img border border-black-100"
         />
       </ProfileDropdown>
     </nav>
@@ -32,17 +34,17 @@ export default function NavLinks() {
 const links: NavLinkProps[] = [
   {
     label: "Saved",
-    icon: <FaRegHeart />,
+    icon: <AppIcons.Saved />,
     href: paths.dashboardSaved,
   },
   {
     label: "Messages",
-    icon: <FaRegEnvelope />,
+    icon: <AppIcons.Messages />,
     href: paths.dashboardChats,
   },
   {
     label: "Support",
-    icon: <BiSupport />,
+    icon: <AppIcons.Support />,
     href: paths.support,
   },
 ];
@@ -56,9 +58,9 @@ type NavLinkProps = {
 function NavLink({ icon, label, href }: NavLinkProps) {
   return (
     <Link href={href}>
-      <div className="flex flex-col items-center justify-center hover:text-black text-black-400">
+      <div className="flex flex-col items-center justify-center hover:text-black-400 text-black-300">
         <span className="text-body">{icon}</span>
-        <span className="text-label font-[500]">{label}</span>
+        <span className="text-label font-semibold">{label}</span>
       </div>
     </Link>
   );

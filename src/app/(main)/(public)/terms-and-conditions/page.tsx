@@ -17,7 +17,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             Welcome to Kraftkollectors App!
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             These terms and conditions outline the rules and regulations for the
             use of Kraftkollectors Website, located at (insert website) By
             accessing this website we assume you accept these terms and
@@ -45,7 +45,7 @@ export default function page() {
 
         <div className="">
           <h1 className="text-title text-black-700 font-semiboldc">Cookies</h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             We employ the use of cookies. By accessing Kraftkollectors App, you
             agreed to use cookies in agreement with the Privacy Policy. Most
             interactive websites use cookies to let us retrieve the user&apos;s
@@ -58,7 +58,7 @@ export default function page() {
 
         <div className="">
           <h1 className="text-title text-black-700 font-semiboldc">License</h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             Unless otherwise stated, Kraftkollectors and/or its licensors own
             the intellectual property rights for all material on Kraftkollectors
             App. All intellectual property rights are reserved. You may access
@@ -70,7 +70,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             You must not:
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             Republish material from Kraftkollectors website/App.Sell, rent or
             sub-license material from Kraftkollectors website/App.Reproduce,
             duplicate or copy material from Kraftkollectors
@@ -100,7 +100,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             You warrant and represent that:
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             You are entitled to post the Comments on our website/App and have
             all necessary licenses and consents to do so; <br />
             The Comments do not invade any intellectual property right,
@@ -121,7 +121,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             Hyperlinking to our Content
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             The following organizations may link to our Website without prior
             written approval: <br /> <br />
             Government agencies; <br /> <br />
@@ -184,7 +184,7 @@ export default function page() {
         </div>
         <div className="">
           <h1 className="text-title text-black-700 font-semiboldc">iFrames</h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             Without prior approval and written permission, you may not create
             frames around our Webpages/App that alter in any way the visual
             presentation or appearance of our Website/App.
@@ -194,7 +194,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             Content Liability
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             We shall not be held responsible for any content that appears on
             your Website/App. You agree to protect and defend us against all
             claims that is rising on your Website/App. No link(s) should appear
@@ -208,7 +208,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             Reservation of Rights
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             We reserve the right to request that you remove all links or any
             particular link to our Website/App. You approve to immediately
             remove all links to our Website/App upon request. We also reserve
@@ -232,7 +232,7 @@ export default function page() {
           <h1 className="text-title text-black-700 font-semiboldc">
             Disclaimer
           </h1>
-          <p className="text-black-500">
+          <p className="text-label text-black-500">
             To the maximum extent permitted by applicable laws, we exclude all
             representations, warranties and conditions relating to our
             website/App and the use of this website/App. Nothing in this

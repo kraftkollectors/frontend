@@ -1,22 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import { FaLocationDot, FaMessage, FaPhone, FaRegClock } from "react-icons/fa6";
-import Image from "next/image";
 import Link from "next/link";
 import { SocialIcons } from "@/components";
 import ReportDialog from "@/components/Report";
 import ProfileInfoLine from "@/app/(main)/(dashboard)/dashboard/(home)/ProfileInfoLine";
-import { CiMail } from "react-icons/ci";
-import { LuPhone } from "react-icons/lu";
 import { TbMessageReport, TbWorld } from "react-icons/tb";
 import { HiOutlineMail } from "react-icons/hi";
 import { paths } from "@/utils";
 import { fetchUser } from "@/actions";
 import { fetchArtisan } from "@/actions/fetch/fetchArtisan";
-import { Artisan } from "@/utils/types/artisan";
-import { debugLog, fallbackImage } from "@/functions/helpers";
+import { fallbackImage } from "@/functions/helpers";
 import { notFound } from "next/navigation";
 import { formatTime } from "@/functions/date";
 import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
+import AppIcons from "@/components/AppIcons";
+import { FiPhone } from "react-icons/fi";
 
 export default async function Profile({ userId }: { userId: string; }) {
   // debugLog({userId})
@@ -50,11 +48,11 @@ export default async function Profile({ userId }: { userId: string; }) {
       </div>
       <div className="grid max-md:w-9/12 md:grid-cols-2 gap-2 py-6 w-full">
         {art.phoneNumber && <Link href={"tel:"+art.phoneNumber} className="btn-primary-border !py-2">
-          <FaPhone />
+          <FiPhone />
           Phone Call
         </Link>}
         <Link href={paths.dashboardSingleChat(userId)} className="btn-primary !py-2">
-          <FaMessage />
+          <AppIcons.Messages />
           Message
         </Link>
       </div>

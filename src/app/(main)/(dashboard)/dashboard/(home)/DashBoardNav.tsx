@@ -22,10 +22,10 @@ export default function DashBoardNav() {
         if (!hideProfile)
           return (
             <Link
-              className={`border-b-2 ${
+              className={`border-b-2 font-semibold ${
                 isActive || servicesActive
-                  ? " border-primary font-semibold"
-                  : "border-transparent"
+                  ? " border-primary text-black-900"
+                  : "border-transparent text-black-300"
               }`}
               key={service.href}
               {...service}

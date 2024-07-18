@@ -39,19 +39,19 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2;
+    @apply inline-flex items-center justify-center gap-2 text-label;
   }
   .search-filter-btn {
     @apply flex gap-2 border py-1 px-2 items-center rounded;
   }
   .btn-primary {
-    @apply btn-primary-tiny r-font-semibold text-lg py-3 hover:bg-primary-hover;
+    @apply btn-primary-tiny r-font-semibold text-lg py-2.5 hover:bg-black-600;
   }
   .btn-transparent {
     @apply bg-transparent border text-label py-2 rounded-3xl inline-flex justify-center items-center text-primary gap-1;
   }
   .btn-primary-border {
-    @apply btn-primary-tiny-border r-font-semibold text-lg py-2;
+    @apply btn-primary-tiny-border font-semibold text-lg py-2;
   }
   .delete-btn {
     @apply btn gap-2 text-danger rounded-md hover:bg-red-100 px-1.5;
@@ -60,13 +60,16 @@
     @apply btn gap-2 text-primary rounded-md hover:bg-blue-100 px-1.5;
   }
   .btn-primary-tiny {
-    @apply bg-primary border border-primary btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-primary-hover text-sm font-normal inline-flex gap-1;
+    @apply bg-black-500 border border-black-500 btn text-white rounded-lg shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-semibold inline-flex gap-1;
   }
   .btn-dark-tiny {
     @apply bg-black-600 border border-black-600 btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-normal inline-flex gap-1;
   }
+  .btn-transparent-tiny {
+    @apply bg-transparent border border-transparent btn text-black-500 py-2.5 btn rounded-md transition duration-150 ease-in-out hover:bg-black-50 font-semibold;
+  }
   .btn-primary-tiny-border {
-    @apply bg-transparent border border-primary btn text-primary rounded-md hover:shadow-sm transition duration-150 ease-in-out hover:border-primary-darkActive hover:text-primary-darkActive text-sm font-normal inline-flex gap-1;
+    @apply bg-transparent border-2 font-semibold border-black-500 btn text-black-500 rounded-md hover:shadow-sm transition duration-150 ease-in-out hover:border-black-600 hover:text-black-600 text-sm inline-flex gap-1;
   }
   .btn-dark-border {
     @apply bg-transparent border btn text-dark-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-[#00000011] r-font-semibold text-lg;
@@ -82,7 +85,7 @@
   }
 
   .app-input {
-    @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-3  pe-3 rounded-md read-only:opacity-70 read-only:pointer-events-none;
+    @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-2.5 text-sm pe-3 rounded-md read-only:opacity-70 read-only:pointer-events-none;
   }
   .app-select {
     @apply bg-light w-full border border-black-100 outline-primary text-dark-text py-3  pe-3 rounded-md;

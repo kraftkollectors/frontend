@@ -37,7 +37,7 @@ export function FavouriteButton({serviceId, className, ...props}:FavouriteButton
         {...props}
          className={`size-8 rounded-md shadow inline-flex items-center justify-center bg-light ${className}`}>
             {
-                isFav ? <FaHeart className="text-red-600" /> : <FaRegHeart />
+                isFav ? <FaHeart className="text-black-600" /> : <FaRegHeart />
             }
         </FormButton>
             <UserAuth />

@@ -35,7 +35,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`flex flex-col gap-1 app-container w-full py-3 border-b-2 ${
+      className={`flex flex-col gap-1 app-container w-full py-3 border-b border-black-50 ${
         show ? "" : "max-md:hidden"
       }`}
     >
@@ -53,7 +53,7 @@ export function Navbar() {
         </MobileNav>
         </> : 
         <nav className="flex gap-2">
-          <Link href={paths.login} className="btn-primary px-4">Login</Link>
+          <Link href={paths.login} className="btn-transparent-tiny px-4">Log in</Link>
           <Link href={paths.signup} className="btn-primary-border px-4 max-md:hidden">Sign Up</Link>
         </nav>
        }

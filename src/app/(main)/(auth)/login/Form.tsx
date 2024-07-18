@@ -34,11 +34,11 @@ export default function LoginForm() {
         return <AppInput key={item.name} {...item} hidden={verify} type={verify ? 'hidden' : item.type} />;
       })}
       {verify && <p className="text-black-400 font-semibold">Enter the verification code / token sent to your email</p>}
-      {verify && <AppInput name="token" type="number" title="Token" placeholder="Enter verification code" />}
+      {verify && <AppInput name="token" type="number" title="Token" placeholder="Enter verification code" inputProps={{required:true}} />}
       <div className="flex justify-end"> 
         <Link
           href="/forgot-password"
-          className="text-primary r-font-semibold text-sm"
+          className="text-black-500 font-semibold text-label underline"
         >
           Forgot Password?
         </Link>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import { HTMLAttributes } from "react";
 import { useFormStatus } from "react-dom";
@@ -13,9 +14,11 @@ export function FormButton({
 }:FormButtonProps) {
   const {pending} = useFormStatus();
 
-return <button {...props} disabled={loading||pending} className={className}>
+return <button {...props} disabled={loading||pending} className={className} style={{
+  opacity: loading||pending ? 0.5 : 1
+}}>
   {
-    loading||pending ? <FaSpinner className="animate-spin" /> : <>{children}</>
+    loading||pending ? <img height={20} width={20} alt="..." src="/images/loading.gif" className="aspect-square object-cover" /> : <>{children}</>
   }
 </button>;
 }
