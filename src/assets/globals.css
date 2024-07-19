@@ -50,6 +50,9 @@
   .btn-primary {
     @apply btn-primary-tiny r-font-semibold text-lg py-2.5 hover:bg-black-600;
   }
+  .btn-light {
+    @apply btn-light-tiny font-semibold text-lg py-2.5;
+  }
   .btn-transparent {
     @apply bg-transparent border text-label py-2 rounded-3xl inline-flex justify-center items-center text-primary gap-1;
   }
@@ -64,6 +67,9 @@
   }
   .btn-primary-tiny {
     @apply bg-black-500 border border-black-500 btn text-white rounded-lg shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-semibold inline-flex gap-1;
+  }
+  .btn-light-tiny {
+    @apply bg-light border border-light btn text-primary-darkActive rounded-lg shadow-sm transition duration-150 ease-in-out hover:bg-light text-sm font-semibold inline-flex gap-1;
   }
   .btn-dark-tiny {
     @apply bg-black-600 border border-black-600 btn text-light-text rounded-md shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-normal inline-flex gap-1;
