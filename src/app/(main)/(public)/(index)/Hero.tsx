@@ -13,7 +13,9 @@ export default function Hero() {
             Linking You to the Best Artisans and Experts in Your Area
           </p>
           <div className="[&>*]:bg-light [&>*]:rounded-lg text-start ">
-            <NavSearch />
+            <Suspense>
+              <NavSearch />
+            </Suspense>
           </div>
           <HeroButton />
         </div>
