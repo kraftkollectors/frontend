@@ -5,7 +5,7 @@ import { useParams, usePathname } from "next/navigation";
 import NavLocationSelector from "./LocationSelector";
 import { useEffect, useState } from "react";
 import { useChangeSearchParams, useLocation } from "@/hooks";
-import { debugLog, getParentIds } from "@/functions/helpers";
+import { getParentIds } from "@/functions/helpers";
 
 export default function NavSearch() {
   const { params } = useChangeSearchParams();
@@ -38,6 +38,10 @@ export default function NavSearch() {
       document.removeEventListener('mouseup', handleClickOutside);
     };
   }, []); // Empty dependency array ensures this effect runs only once
+
+  useEffect(()=>{
+    setOpen(false);
+  }, [params, pathname])
 
 
   return (

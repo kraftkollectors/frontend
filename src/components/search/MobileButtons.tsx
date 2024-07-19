@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import SearchMobile from "../navbar/SearchMobile";
+import { Suspense } from "react";
 
 export default function MobileFilterButtons() {
     const {push} = useRouter();
@@ -16,7 +17,7 @@ export default function MobileFilterButtons() {
                 <option value="/search">Services</option>
                 <option value="/artisan">Artisans</option>
             </select>
-           <SearchMobile />
+           <Suspense><SearchMobile /></Suspense>
         </div>
     );
 }
