@@ -10,7 +10,7 @@ export default function ArtisanCard({_id, firstName, lastName, userName, image, 
     return (
         <div className="border bg-light rounded-lg border-black-50 p-4 flex flex-col items-center justify-center gap-1.5">
             <img src={fallbackImage(image)} alt={fullName(firstName, lastName)} className="avatar profile-img size-[72px] flex-shrink-0 " />
-            <h3 className="font-semibold text-black-500 text-center flex justify-center items-center flex-wrap gap-1">
+            <h3 className="font-semibold text-black-500 text-label text-center flex justify-center items-center flex-wrap gap-1">
                 {fullName(firstName, lastName).split(' ').map(name => <span key={name}>{name}</span>)}
                 <AppIcons.Verified />
             </h3>

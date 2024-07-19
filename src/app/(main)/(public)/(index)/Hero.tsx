@@ -1,5 +1,6 @@
 import NavSearch from "@/components/navbar/NavSearch";
 import HeroButton from "./HeroButtons";
+import { Suspense } from "react";
 
 export default function Hero() {
   return (
