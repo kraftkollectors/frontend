@@ -3,6 +3,7 @@ import { FaCediSign } from "react-icons/fa6";
 const paths = {
   home: "/",
   search: (query = '') => `/search/${query}`,
+  searchArtisans: (query = '') => `/artisan/${query}`,
 
   // auth paths
   login: "/login",
@@ -24,7 +25,7 @@ const paths = {
   becomeASellerIdVerification: "/become-a-seller/id-verification",
 
   // dynamic paths
-  artisan: (slug: string) => `/artisans/${slug}`,
+  singleArtisan: (slug: string) => `/artisans/${slug}`,
   service: (slug: string) => `/services/${slug}`,
 
   // dashboard

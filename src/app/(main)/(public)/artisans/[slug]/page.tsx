@@ -29,11 +29,11 @@ export default async function Page({ params }: AppPageProps<{ slug: string }>) {
   const userId = params?.slug;
   if (!userId) notFound();
   const user = await fetchUser({ isPublic: true, params: userId });
-  if (user == 'error') throw new Error("Connection error");
-  if (!user?.isArtisan) notFound()
+  if (user == 'error' || !user) throw new Error("Connection error");
+  // if (!user?.isArtisan) notFound()
 
-  let art = await fetchArtisan({ isPublic: true, params: userId });
-  if (art == 'error' || !art) throw new Error("Connection error")
+  let art = user.isArtisan ? (await fetchArtisan({ isPublic: true, params: userId })) : undefined;
+  if (art == 'error' || art == null) throw new Error("Connection error")
 
 
   return (
@@ -51,15 +51,20 @@ export default async function Page({ params }: AppPageProps<{ slug: string }>) {
             phone={art.phoneNumber}
             email={user.email}
             website={art.website}
+            artisan={art}
           />
-          <About
+          {user.isArtisan && <About
             about={art.description}
             userId={user._id}
-          />
+          />}
         </div>
       </section>
-      <MyServices userId={user._id} />
-      <Reviews userId={user._id} />
+      {
+        user.isArtisan && <>
+        <MyServices userId={user._id} />
+        <Reviews userId={user._id} />
+        </>
+      }
     </>
   );
 }

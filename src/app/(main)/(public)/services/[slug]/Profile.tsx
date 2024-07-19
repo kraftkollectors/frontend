@@ -14,6 +14,7 @@ import { notFound } from "next/navigation";
 import { formatTime } from "@/functions/date";
 import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
 import AppIcons from "@/components/AppIcons";
+import ArtisanNotAvailableModal from "@/components/modals/ArtisanNotAvailableModal";
 import { FiPhone } from "react-icons/fi";
 
 export default async function Profile({ userId }: { userId: string; }) {
@@ -29,7 +30,7 @@ export default async function Profile({ userId }: { userId: string; }) {
 
   return (
     <div className="md:col-span-4 h-fit rounded-md bg-light p-4 md:p-6 border md:shadow-lg flex flex-col items-center justify-center text-center">
-      <Link href={paths.artisan(userId)}>
+      <Link href={paths.singleArtisan(userId)}>
         <img
           height={112}
           width={112}
@@ -39,7 +40,7 @@ export default async function Profile({ userId }: { userId: string; }) {
         />
       </Link>
       <div className="flex flex-col gap-1 pt-3 max-md:items-center max-md:text-center">
-      <Link href={paths.artisan(userId)} className="r-font-bold text-title">{art.businessName}</Link>
+        <Link href={paths.singleArtisan(userId)} className="r-font-bold text-title">{art.businessName}</Link>
         <h2 className="text-black-300 text-label">{art.areaOfSpecialization}</h2>
         <h3 className="flex pt-2 gap-1 text-label text-black-300 justify-center items-center">
           <FaLocationDot />
@@ -47,15 +48,19 @@ export default async function Profile({ userId }: { userId: string; }) {
         </h3>
       </div>
       <div className="grid max-md:w-9/12 md:grid-cols-2 gap-2 py-6 w-full">
-      <Link href={paths.dashboardSingleChat(userId)} className="btn-primary !py-2">
+        <Link href={paths.dashboardSingleChat(userId)} className="btn-primary !py-2">
           <AppIcons.Messages />
           Message
         </Link>
-        {art.phoneNumber && <Link href={"tel:"+art.phoneNumber} className="btn-primary-border !py-2">
-          <FiPhone />
-          Phone Call
-        </Link>}
-       
+        {art.phoneNumber &&
+          <ArtisanNotAvailableModal {...art}>
+            <Link target="_blank" href={"tel:" + art.phoneNumber} className="btn-primary-border !py-2">
+              <FiPhone />
+              Phone Call
+            </Link>
+          </ArtisanNotAvailableModal>
+        }
+
       </div>
       <div className="flex flex-col gap-2 w-full items-start pb-2 border-b [&>*]:w-full">
         <p className="text-body font-semibold text-start text-black-400">Contact Info</p>

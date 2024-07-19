@@ -51,7 +51,7 @@ export default async function Reviews({ userId }: { userId: string }) {
         </div>
       </div>
       <Suspense>
-      {reviews.totalPages > 1 && <Pagination pagination={reviews} baseUrl={paths.artisan(userId + "#Reviews")} />}
+      {reviews.totalPages > 1 && <Pagination pagination={reviews} baseUrl={paths.singleArtisan(userId + "#Reviews")} />}
       </Suspense>
     </section>
   );

@@ -16,7 +16,7 @@ export default async function MyServices({userId}:{userId:string}) {
           <ServiceCard key={service._id} {...service} />
         ))}
       </div>
-      {services.totalPages > 1 && <Pagination pagination={services} baseUrl={paths.artisan(userId + "#Services")} />}
+      {services.totalPages > 1 && <Pagination pagination={services} baseUrl={paths.singleArtisan(userId + "#Services")} />}
     </section>
   );
 }

@@ -176,3 +176,16 @@ export function formatChatDate(dateString: string): string {
   const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
   return formattedDate;
 }
+
+export function getCurrentTime() {
+  const now = new Date();
+  let hours:any = now.getHours();
+  let minutes:any = now.getMinutes();
+
+  // Pad single digit hours and minutes with leading zeros if needed
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+
+  // Return formatted time string
+  return hours + ':' + minutes;
+}

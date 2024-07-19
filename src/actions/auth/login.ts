@@ -12,6 +12,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import bcrypt from 'bcrypt'
+import { UserDetails } from "@/utils/types/user";
 
 
 type LoginFormProps = {
@@ -28,18 +29,23 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
     try {
         if (data.token) {
             const token = cookies().get(appCookies.clientToken)?.value ?? '';
-            if(!(await bcrypt.compare(data.token, token))) return {error: 'Invalid token'}
-            
+            if (!(await bcrypt.compare(data.token, token))) return { error: 'Invalid token' }
+
             const req = await ApiRequest.postJson(apis.registerVerifyEmail, data);
             const res = (await req.json()) as ApiResponse;
             debugLog(res)
 
-            if(res.statusCode !== 201) throw new Error();
+            if (res.statusCode !== 201) throw new Error();
         }
         const req = await ApiRequest.postJson(apis.login, data);
         const res = await (req.json()) as ApiResponse<ApiSignupResponse>;
         debugLog(res)
         if (res.statusCode === 201) {
+            const user = res.data.user as UserDetails;
+            if (!user.emailVerify) return {
+                error: 'verify email first',
+                data: data.email
+            }
             success = true;
             cookies().set(appCookies.accessToken, res.data.token, {
                 maxAge: COOKIE_MAX_AGE
@@ -50,7 +56,7 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
             revalidatePath('/');
             revalidateTag(tags.user);
         }
-        else if(res.data.toString() === 'email not verified') return {
+        else if (res.data.toString() === 'email not verified') return {
             error: 'verify email first',
             data: data.email
         }
@@ -65,5 +71,5 @@ export async function login(res: ActionResponse, formData: FormData): Promise<Ac
     }
     if (success)
         redirect(paths.dashboard, RedirectType.replace);
-    return {error: "Unknown error"}
+    return { error: "Unknown error" }
 }

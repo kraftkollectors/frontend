@@ -35,7 +35,7 @@ export function ServiceCard({
         </Link>
         <FavouriteButton serviceId={_id} className="absolute right-2 top-2 size-7 rounded-md shadow inline-flex items-center justify-center bg-light" />
       </div>
-      <Link href={paths.artisan(service.userId)}>
+      <Link href={paths.singleArtisan(service.userId)}>
         <div className="flex gap-1 items-center">
           <Suspense fallback={<CardUserSkeleton />}>
             <UserProfile userId={service.userId} />
