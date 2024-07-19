@@ -18,6 +18,13 @@ const config: Config = {
             lineHeight: "64px",
           },
         ],
+        headlineBig: [
+          "48px",
+          {
+            // letterSpacing: '-0.02em',
+            lineHeight: "64px",
+          },
+        ],
         headline: [
           "32px",
           {
@@ -35,7 +42,7 @@ const config: Config = {
         body: [
           "16px",
           {
-            // letterSpacing: '-0.02em',
+            // letterSpacing:  '-0.02em',
             lineHeight: "24px",
           },
         ],

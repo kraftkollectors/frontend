@@ -59,7 +59,10 @@ const SmallComponents = {
     return <div className={`py-12 flex w-full h-auto justify-center items-center ${className}`}>
       <Spinner size={'3'} className=" scale-[2]"/>
     </div>
-  }
+  },
+
+
 };
+
 
 export default SmallComponents;
