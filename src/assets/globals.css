@@ -41,6 +41,9 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2 text-label;
   }
+  .filter-btn{
+    @apply inline-flex bg-light border py-3 rounded-lg text-black-400 font-semibold text-label gap-2 justify-center items-center
+  }
   .search-filter-btn {
     @apply flex gap-1.5 justify-center app-select-new !px-4 font-semibold !text-black-400 items-center;
   }
@@ -100,7 +103,7 @@
     @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3;
   }
   .search-mobile-group {
-    @apply py-4 [&>p]:text-label [&>p]:font-[500];
+    @apply py-4 [&>p]:text-label [&>p]:font-semibold [&>p]:text-black-800 px-5;
   }
   .hover-link {
     @apply opacity-75 hover:opacity-100;
@@ -118,7 +121,7 @@
     @apply bg-black/5
   }
   .pagination-button{
-    @apply flex items-center justify-center px-4 h-10 ms-0 leading-tight  bg-white border border-e-0 border-gray-300 hover:bg-gray-100 hover:text-gray-700 data-[active="true"]:bg-primary data-[active="true"]:text-light
+    @apply flex items-center justify-center px-4 h-10 ms-0 leading-tight  bg-white border border-black-50 rounded-lg hover:bg-black-50 data-[active="true"]:text-light data-[active="true"]:bg-black-500 text-dark
   }
   .radio-group:checked + label {
     @apply border-primary border-2 text-primary-dark

@@ -47,7 +47,7 @@ export default function PricePopOver() {
       </Popover.Trigger>
       <Popover.Content
         style={{
-          maxWidth: 400,
+          maxWidth: 340,
         }}
       >
         <form

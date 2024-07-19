@@ -33,7 +33,7 @@ export default async function Reviews({ userId }: { userId: string }) {
             Overall Rating
           </h1>
           <div className="flex items-center gap-2">
-            <h1 className="r-font-bold text-title">{avgRating.toFixed(1)}</h1>
+            <h3 className="r-font-bold text-title">{avgRating.toFixed(1)}</h3>
             <RatingStars value={avgRating} size="lg" />
           </div>
           <div className="flex flex-col gap-2 max-w-[400px]">

@@ -5,7 +5,7 @@ import Price from "@/app/(main)/(public)/search/components/price";
 import Location from "@/app/(main)/(public)/search/components/Location";
 import AppIcons from "../AppIcons";
 import Category from "@/app/(main)/(public)/search/components/Category";
-import { IoCloseSharp } from "react-icons/io5";
+import { IoCloseSharp, IoFilterOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { formDataToObject } from "@/functions/helpers";
 import { useChangeSearchParams } from "@/hooks";
@@ -17,7 +17,7 @@ import { useParams } from "next/navigation";
 import { paths } from "@/utils";
 
 export default function SearchMobile() {
-  const {query} = useParams();
+  const { query } = useParams();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -45,27 +45,27 @@ export default function SearchMobile() {
   }, [params])
   return (
     <>
-      <button className="p-1 md:hidden text-primary hover:text-primary-hover" onClick={() => setOpen(true)}>
-        <AppIcons.Filter />
+      <button className="filter-btn" onClick={() => setOpen(true)}>
+        <IoFilterOutline />
+        <span>Filter</span>
       </button>
       <div
         className={`fixed top-0 left-0 h-[100dvh] w-screen bg-light z-50 flex flex-col justify-stretch ${open ? "" : "hidden"
           }`}
       >
-        <div className="flex justify-between items-end !pb-1 shadow-md p-4 flex-shrink-0">
-          <h2 className="font-semibold text-black-500">Search filters</h2>
+        <div className="flex justify-end items-end px-4 py-2 flex-shrink-0 shadow-[0_0_40px_5px_#358FAB14]">
           <button className="icon-btn p-2 text-lg" onClick={() => setOpen(false)}>
             <IoCloseSharp />
           </button>
         </div>
         <form
-          onSubmit={handleSubmit} className=" h-2 flex flex-col gap-2 flex-grow p-5 ">
-          <div className="divide-y-2 flex flex-col gap-2  h-full overflow-y-auto">
-            <div className="search-mobile-group">
+          onSubmit={handleSubmit} className=" h-2 flex flex-col flex-grow">
+          <div className="divide-y divide-black-50 flex flex-col gap-2  h-full overflow-y-auto">
+            <div className="search-mobile-group [&_label]:!text-black-800 [&_label]:font-semibold pt-4">
               <Category />
             </div>
             <div className="search-mobile-group">
-              <p>Sort By</p>
+              <p className="pb-2">Sort By</p>
               <Sort />
             </div>
 
@@ -74,12 +74,13 @@ export default function SearchMobile() {
               <Price />
             </div>
             <div className="search-mobile-group">
-              <p>Location</p>
+              <p className="pb-2">Distance</p>
               <Location />
             </div>
           </div>
-
-          <FormButton loading={loading} className="btn-dark-tiny py-2 w-full">Apply</FormButton>
+          <div className="p-4 border-t border-black-50 shadow-[0_0_40px_5px_#358FAB14]">
+            <FormButton loading={loading} className="btn-dark-tiny py-2 w-full">Apply</FormButton>
+          </div>
         </form>
       </div>
     </>

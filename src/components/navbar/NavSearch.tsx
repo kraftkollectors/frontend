@@ -46,7 +46,7 @@ export default function NavSearch() {
         className="flex max-lg:flex-col items-stretch flex-grow rounded-lg border border-black-50 overflow-hidden max-lg:p-2 max-lg:gap-2">
         <select name="type" id="" className="bg-[#F0F0F0] max-lg:hidden focus:outline-none text-black-400 border-none outline-none font-semibold text-label">
           <option value="search">Services</option>
-          <option value="artisans">Artisans</option>
+          <option value="artisan">Artisans</option>
         </select>
         <input
           type="text"

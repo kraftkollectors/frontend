@@ -125,7 +125,7 @@ export async function registerToken(res: ActionResponse, formData: FormData): Pr
         const req = await ApiRequest.postJson(apis.registerVerifyEmail, postData);
         const res = (await req.json()) as ApiResponse;
         debugLog(res)
-        if(res.msg === 'Success') {
+        if(res.msg === 'Success') { 
             deleteCookie(appCookies.registerData);
             deleteCookie(appCookies.clientToken);
             set(appCookies.accessToken, get(appCookies.accessTokenTmp)?.value!);

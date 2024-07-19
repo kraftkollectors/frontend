@@ -12,7 +12,7 @@ export type Review = {
 export type CummulativeReview = { averageRating: number, totalRatings: number }
 
 export type TotalUserReviews = {
-    totalRatings: 1,
+    totalRatings: number,
     ratingCounts: { '1': number, '2': number, '3': number, '4': number, '5': number, };
     sumRating: number;
 }

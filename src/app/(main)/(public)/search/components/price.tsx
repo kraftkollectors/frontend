@@ -13,9 +13,9 @@ export default function Price() {
 
   return (
     <div className="flex flex-col gap-2 min-w-72">
-      <div className="pt-2">
-        <AppInput type="hidden" name="minPrice" placeholder="Min Price" value={price[0].toString()} />
-        <AppInput type="hidden" name="maxPrice" placeholder="Max Price" value={price[1].toString()} />
+      <div className="py-2 grid gap-2 grid-cols-2">
+        <AppInput type="number" name="minPrice" placeholder="Min Price" value={price[0].toString()} />
+        <AppInput type="number" name="maxPrice" placeholder="Max Price" value={price[1].toString()} />
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ export function ServiceCard({
             className="rounded-md overflow-hidden object-cover w-full h-full border border-black-50"
           />
         </Link>
-        <FavouriteButton serviceId={_id} className="absolute right-[5%] -bottom-3 size-7 rounded-md shadow inline-flex items-center justify-center bg-light" />
+        <FavouriteButton serviceId={_id} className="absolute right-2 top-2 size-7 rounded-md shadow inline-flex items-center justify-center bg-light" />
       </div>
       <Link href={paths.artisan(service.userId)}>
         <div className="flex gap-1 items-center">

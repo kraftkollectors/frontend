@@ -1,0 +1,18 @@
+import { fetchUserReviews, fetchUserReviewsCount } from "@/actions";
+import { RatingStars } from "../ui/RatingStars";
+
+export default async function ArtisanCardReviews({userId}:{userId: string}) {
+    const reviews = await fetchUserReviews({ throwsError: false, isPublic: true, params: userId });
+    if (!reviews || reviews == 'error') return <div className="skeleton h-4 w-8"></div>
+    const reviewsCount = await fetchUserReviewsCount({ throwsError: false, isPublic: true, params: userId });
+    if (!reviewsCount || reviewsCount == 'error') return <div className="skeleton h-4 w-8"></div>
+    
+  const avgRating = reviewsCount.sumRating / reviewsCount.totalRatings == 0 ? 1 : reviewsCount.totalRatings;
+  
+    return (
+        <div className="flex items-center gap-2">
+        <h3 className="r-font-bold text-title">{(avgRating ?? 0).toFixed(1)}</h3>
+        <RatingStars value={avgRating} size="lg" />
+      </div>
+    );
+}

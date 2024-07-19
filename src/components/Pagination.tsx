@@ -5,6 +5,7 @@ import { HTMLAttributes, useCallback, useMemo } from "react";
 import { debugLog } from "@/functions/helpers";
 import { useChangeSearchParams } from "@/hooks";
 import { Paginated } from '@/utils/types/basicTypes';
+import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 
 export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
     baseUrl?: string;
@@ -13,8 +14,8 @@ export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
 
 export function Pagination({ pagination, baseUrl, ...props }: PaginationProps) {
     const { currentPage: page, totalPages } = pagination;
-    const {params, pushParams} = useChangeSearchParams(baseUrl);
-    const toPage = (page:number)=>pushParams({'page': page.toString()})
+    const { params, pushParams } = useChangeSearchParams(baseUrl);
+    const toPage = (page: number) => pushParams({ 'page': page.toString() })
 
     const _page = useMemo(() => +(params.get('page') ?? 1), [params])
     debugLog(_page);
@@ -24,23 +25,22 @@ export function Pagination({ pagination, baseUrl, ...props }: PaginationProps) {
 
     return (
         <nav aria-label="Page navigation" {...props}>
-            <ul className="flex items-center -space-x-px h-10 text-base rounded overflow-hidden border w-fit">
-                {
-                    page > 1 && (
-                        <li>
-                            <button onClick={()=>toPage(page - 1)} className="pagination-button">
-                                <span className="sr-only">Previous</span>
-                                <svg className="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4" />
-                                </svg>
-                            </button>
-                        </li>
-                    )
-                }
+            <ul className="flex items-center -space-x-px h-10 text-base font-semibold gap-3 w-fit">
+
+                <li>
+                    <button 
+                    disabled={page === 1}
+                    onClick={() => toPage(page - 1)} className="inline-flex items-center justify-center p-2 gap-1 disabled:pointer-events-none disabled:text-black-200 text-black-500">
+                        <FaArrowLeftLong />
+                        <span className="">Prev</span>
+                        
+                    </button>
+                </li>
+
                 {
                     firstThree.map((page) => (
                         <li key={page}>
-                            <button onClick={()=>toPage(page)} {...{ 'data-active': page === _page }} className="pagination-button">
+                            <button onClick={() => toPage(page)} {...{ 'data-active': page == _page }} className="pagination-button">
                                 {page}
                             </button>
                         </li>
@@ -63,9 +63,9 @@ export function Pagination({ pagination, baseUrl, ...props }: PaginationProps) {
                                         <div className="flex flex-wrap gap-2 rounded-lg border shadow-2xl p-4 bg-light">
                                             {
                                                 Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                                        <button  onClick={()=>toPage(page)} key={page} {...{ 'data-active': page === _page }} className="pagination-button !border !rounded">
-                                                            {page}
-                                                        </button>
+                                                    <button onClick={() => toPage(page)} key={page} {...{ 'data-active': page == _page }} className="pagination-button !border !rounded">
+                                                        {page}
+                                                    </button>
                                                 ))
                                             }
                                         </div>
@@ -78,7 +78,7 @@ export function Pagination({ pagination, baseUrl, ...props }: PaginationProps) {
                 {
                     lastThree.map((page) => (
                         <li key={page} >
-                            <button onClick={()=>toPage(page)} {...{ 'data-active': page === _page }} className="pagination-button">
+                            <button onClick={() => toPage(page)} {...{ 'data-active': page == _page }} className="pagination-button">
                                 {page}
                             </button>
                         </li>
@@ -86,18 +86,15 @@ export function Pagination({ pagination, baseUrl, ...props }: PaginationProps) {
                 }
 
 
-                {
-                    page < totalPages && (
+               
                         <li>
-                            <button onClick={()=>toPage(page + 1)} className="pagination-button">
-                                <span className="sr-only">Next</span>
-                                <svg className="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
-                                </svg>
+                            <button 
+                            disabled={page >= totalPages}
+                            onClick={() => toPage(page + 1)}  className="inline-flex items-center justify-center p-2 gap-1 disabled:pointer-events-none disabled:text-black-200 text-black-500">
+                                <span className="">Next</span>
+                                <FaArrowRightLong />
                             </button>
                         </li>
-                    )
-                }
             </ul>
         </nav>
 

@@ -19,14 +19,14 @@ export function Navbar() {
   const [showSearch, setShowSearch] = useState(true);
 
   useLayoutEffect(() => {
-    if (pathname.includes(paths.dashboardSingleChat(""))) {
-      setShow(false);
-    } else {
-      setShow(true);
-    }
+    // if (pathname.includes(paths.dashboardSingleChat(""))) {
+    //   setShow(false);
+    // } else {
+    //   setShow(true);
+    // }
 
     const p = pathsToHideSearch.map((_) => pathname.includes(_));
-    if (p.includes(true)) {
+    if (p.includes(true) || pathname === paths.home) {
       setShowSearch(false);
     } else {
       setShowSearch(true);
@@ -69,4 +69,5 @@ const pathsToHideSearch = [
   paths.dashboardChats,
   paths.dashboardSettings,
   paths.dashboardNewService,
+  paths.dashboardSingleChat("")
 ];
