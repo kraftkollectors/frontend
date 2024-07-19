@@ -12,8 +12,8 @@ export default async function UserProfile({userId}:{userId:string}) {
     const fullname = fullName(artisan.firstName, artisan.lastName);
     return (
         <>
-        <img src={artisan.image} alt={fullname} className="avatar size-6 profile-img" />
-        <h2 className="text-label font-bold truncate line-clamp-1">
+        <img src={artisan.image} alt={fullname} className="avatar size-6 flex-shrink-0 profile-img" />
+        <h2 className="text-label font-bold line-clamp-1">
           {fullname}
         </h2>
         </>

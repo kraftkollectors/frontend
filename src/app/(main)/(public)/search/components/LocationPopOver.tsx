@@ -9,6 +9,7 @@ import { formDataToObject } from "@/functions/helpers";
 import { useChangeSearchParams } from "@/hooks";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { FaChevronDown } from "react-icons/fa6";
 
 export default function LocationPopOver() {
   const { pushParams, params } = useChangeSearchParams();
@@ -46,7 +47,7 @@ export default function LocationPopOver() {
     <Popover.Root onOpenChange={setOpen} open={open}>
       <Popover.Trigger>
         <button className="search-filter-btn">
-          location <MdMyLocation />
+          Distance <FaChevronDown />
         </button>
       </Popover.Trigger>
       <Popover.Content style={{minWidth: 320, maxWidth: 400}}>

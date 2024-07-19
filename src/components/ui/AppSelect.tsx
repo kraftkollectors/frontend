@@ -9,9 +9,10 @@ export type AppSelectOption = {
 
 export type AppSelectProps = Omit<AppInputProps, "placeholder"> & {
   options: string[] | AppSelectOption[];
+  variant?: "app-select" | "app-select-new";
 };
 
-export default function AppSelect({ name, title, options, value, readonly, onChange, error: fieldError }: AppSelectProps) {
+export default function AppSelect({ name, title, options, value, readonly, onChange, variant = "app-select", error: fieldError }: AppSelectProps) {
   return (
     <div>
       {title &&
@@ -20,7 +21,7 @@ export default function AppSelect({ name, title, options, value, readonly, onCha
         </label>}
       <select
         onChange={(e) => onChange?.(e.target.value)}
-        disabled={readonly} defaultValue={value} name={name} id={`${title}-select`} className="app-select">
+        disabled={readonly} defaultValue={value} name={name} id={`${title}-select`} className={variant}>
         {options.map((item, index) => {
           if (typeof item === "string")
             return (

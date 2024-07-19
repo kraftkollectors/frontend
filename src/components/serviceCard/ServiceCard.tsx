@@ -45,7 +45,7 @@ export function ServiceCard({
       <p className="truncate text-label text-black-300">
         {category}
       </p>
-      <Link href={paths.service(_id)} className="r-font-semibold text-black-400 pb-1 line-clamp-2">
+      <Link href={paths.service(_id)} className="r-font-semibold justify-stretch text-black-400 pb-1 line-clamp-2">
         {title}
       </Link>
       <p className="font-bold text-black-600">

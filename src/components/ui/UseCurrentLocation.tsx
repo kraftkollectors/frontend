@@ -28,11 +28,11 @@ export function UseCurrentLocation({onChange}:UseCurrentLocationProps) {
     }else{
       onChange(locationToGoogleLocation(location))
     }
-  }
+  } 
   
   return (
     <>
-    <button role="button" type="button" onClick={getLocation} className="text-primary hover:text-primary-dark flex items-center gap-2">
+    <button role="button" type="button" onClick={getLocation}  className="text-primary hover:text-primary-dark flex items-center gap-2">
       <MdMyLocation />
       <span>Use Current location</span>
     </button>

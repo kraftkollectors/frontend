@@ -43,7 +43,7 @@ export default function SortBy() {
   return (
     <Popover.Root onOpenChange={setOpen} open={open}>
       <Popover.Trigger>
-        <button className=" flex gap-2 items-center text-primary">
+        <button className=" flex gap-2 items-center text-black-500 font-semibold">
           <LuArrowDownUp />
           <p>{sort()}</p>
         </button>

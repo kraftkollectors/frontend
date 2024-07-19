@@ -11,8 +11,8 @@ export default function SearchResult({ count }: { count: number }) {
 
   return (
     <div className="">
-      {query && <p className="text-black">
-        {count == 0 ? 'No' : formatNumber(count)} Search Result{count == 1 ? '' : 's'} for <span className="font-semibold"> {sanitizeSearch(query)}</span>
+      {query && <p className="text-black-300 font-bold">
+        {count == 0 ? 'No' : formatNumber(count)} Search Result{count == 1 ? '' : 's'} for <span className="text-black-500"> {sanitizeSearch(query)}</span>
       </p>}
     </div>
   );

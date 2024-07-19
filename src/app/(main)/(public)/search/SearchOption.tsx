@@ -8,10 +8,10 @@ export default function SearchOption() {
   return (
     <div className="flex gap-2 py-3 justify-between max-md:hidden">
       <div className="flex gap-2 items-center">
-        <p className="text-black-300">Filter:</p>
+        <p className="text-black-300 font-semibold">Filter:</p>
+        <LocationPopOver />
         <CategoryPopOver />
         <PricePopOver />
-        <LocationPopOver />
       </div>
       <div className="flex gap-2 items-center">
         <p className="text-black-300">sort by:</p>

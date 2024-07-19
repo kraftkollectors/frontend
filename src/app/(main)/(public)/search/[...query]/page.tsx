@@ -33,7 +33,7 @@ export default async function searchPage({ params, searchParams }: AppPageProps<
 
     return (
         <div className="">
-            <RelatedSearch />
+            {/* <RelatedSearch /> */}
             <div className="app-container py-2">
                 <SearchResult count={ads.totalDocuments} />
                 <SearchOption />
