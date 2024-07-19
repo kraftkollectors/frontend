@@ -1,7 +1,7 @@
 'use client';
 
 import { submitSearch } from "@/actions";
-import { useParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import NavLocationSelector from "./LocationSelector";
 import { useEffect, useState } from "react";
 import { useChangeSearchParams, useLocation } from "@/hooks";
@@ -10,6 +10,7 @@ import { debugLog, getParentIds } from "@/functions/helpers";
 export default function NavSearch() {
   const { params } = useChangeSearchParams();
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   const { query } = useParams();
   const q = typeof query == 'string' ? query : (query ?? []).join(' ')
   const [val, setVal] = useState(q);
@@ -44,7 +45,9 @@ export default function NavSearch() {
       <form action={submitSearch}
         onClick={() => setOpen(true)}
         className="flex max-lg:flex-col items-stretch flex-grow rounded-lg border border-black-50 overflow-hidden max-lg:p-2 max-lg:gap-2">
-        <select name="type" id="" className="bg-[#F0F0F0] max-lg:hidden focus:outline-none text-black-400 border-none outline-none font-semibold text-label">
+        <select 
+        defaultValue={pathname.includes('search') ? 'search' : 'artisan'}
+        name="type" className="bg-[#F0F0F0] max-lg:hidden focus:outline-none text-black-400 border-none outline-none font-semibold text-label">
           <option value="search">Services</option>
           <option value="artisan">Artisans</option>
         </select>
