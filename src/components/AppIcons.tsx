@@ -1,4 +1,44 @@
 const AppIcons = {
+  ChatCheck() {
+    return (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.66699 8L6.66699 12L13.3337 4"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  },
+
+  ChatCheckDouble() {
+    return (
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.33301 8.00033L4.83301 11.3337L6.58301 9.33366M5.33301 8.00033L8.83301 11.3337L14.6663 4.66699M10.6663 4.66699L8.33301 7.33366"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  },
+
   Premium() {
     return (
       <svg

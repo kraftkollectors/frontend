@@ -17,20 +17,22 @@ export default function MainLayout({
 
   const pathname = usePathname();
   const vw = useWindowWidth();
+  const isMobile =
+    pathname === paths.dashboardChats ||
+    pathname === paths.dashboardChats + "/" ||
+    vw >= 768;
 
   return (
     <main
       id="ChatView"
-      className="md:app-container md:py-10 md:bg-light-text md:max-h-screen md:h-screen"
+      className="md:app-container md:h-screen md:max-h-screen md:bg-light-text md:py-10"
     >
-      <div className="md:grid md:grid-cols-10 gap-4 md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)]">
-        {(pathname === paths.dashboardChats ||
-          pathname === paths.dashboardChats + "/" ||
-          vw >= 768) && (
-          <div className={`md:col-span-4 h-full  md:h-[calc(100vh-5rem)]`}>
-            {sideBar}
-          </div>
-        )}
+      <div className="gap-4 md:grid md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:grid-cols-10">
+        <div
+          className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${isMobile ? "invisible" : ""}`}
+        >
+          {sideBar}
+        </div>
 
         {((!(
           pathname === paths.dashboardChats ||
@@ -38,7 +40,7 @@ export default function MainLayout({
         ) &&
           vw < 768) ||
           vw >= 768) && (
-          <div className="col-span-6 bg-light rounded-md md:border border-black-50  max-w-[700px] w-full h-screen md:h-[calc(100vh-5rem)]">
+          <div className="col-span-6 h-screen w-full max-w-[700px] rounded-md border-black-50 bg-light md:h-[calc(100vh-5rem)] md:border">
             {children}
           </div>
         )}

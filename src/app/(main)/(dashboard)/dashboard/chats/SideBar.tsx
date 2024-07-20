@@ -127,12 +127,12 @@ export default function SideBar({
   }, [slugUser]);
 
   return (
-    <div className="flex flex-col gap-1 md:max-h-full md:h-full rounded-md md:bg-light md:border border-black-50 overflow-hidden">
-      <div className="px-3 pt-4 flex-shrink-0 h-fit">
-        <div className="flex justify-between items-center">
-          <h1 className="font-bold text-title pb-2 line-clamp-1">Messages</h1>
+    <div className="flex flex-col gap-1 overflow-hidden rounded-md border-black-50 md:h-full md:max-h-full md:border md:bg-light">
+      <div className="h-fit flex-shrink-0 px-3 pt-4">
+        <div className="flex items-center justify-between">
+          <h1 className="line-clamp-1 pb-2 text-title font-bold">Messages</h1>
           <div
-            className={`size-1 rounded-full ${isConnected ? " bg-lime-600" : "bg-red-700"}`}
+            className={`size-1 rounded-full ${isConnected ? "bg-lime-600" : "bg-red-700"}`}
           ></div>
         </div>
         <AppInput
@@ -142,9 +142,9 @@ export default function SideBar({
           onChange={(v) => setSearch(v)}
         />
       </div>
-      <div className="flex flex-col overflow-y-auto ">
+      <div className="flex flex-col overflow-y-auto">
         {chatHeads.length === 0 && (
-          <div className="p-10 items-center justify-center flex gap-4">
+          <div className="flex flex-col items-center justify-center gap-4 p-10">
             <img
               src="/images/message-banner.svg"
               alt="no conversations"

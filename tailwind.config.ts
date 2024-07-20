@@ -79,6 +79,7 @@ const config: Config = {
         primary: {
           DEFAULT: "#2680BF",
           light: "#93BFDF",
+          chat: "#DEECF5",
           lightActive: "#BCD8EB",
           lightActive2: "#E9F2F9",
           dark: "#1D608F",

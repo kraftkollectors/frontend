@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 export default function page() {
   return (
-    <div className="p-10 items-center justify-center flex gap-4">
+    <div className="flex flex-col items-center justify-center gap-4 p-10">
       <img
         src="/images/message-banner.svg"
         alt="no conversations"

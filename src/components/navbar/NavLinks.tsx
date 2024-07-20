@@ -13,7 +13,7 @@ import AppIcons from "../AppIcons";
 export default function NavLinks() {
   const user = useUserStore((s) => s.user);
   return (
-    <nav className="flex w-fit gap-4 items-center max-md:hidden">
+    <nav className="flex w-fit items-center gap-4 max-md:hidden">
       {links.map((link) => (
         <NavLink key={link.label} {...link} />
       ))}
@@ -25,9 +25,9 @@ export default function NavLinks() {
             src={fallbackImage(user?.image)}
             alt={user?.userName}
             title={user?.userName}
-            className=" size-10 avatar cursor-pointer overflow-hidden profile-img border border-black-100"
+            className="avatar profile-img size-10 cursor-pointer overflow-hidden border border-black-100"
           />
-          <div className="absolute bottom-0 right-0 border border-light size-2 bg-[#1B8E57]"></div>
+          <div className="absolute bottom-0 right-0 size-2 rounded-full border border-light bg-[#1B8E57]"></div>
         </div>
       </ProfileDropdown>
     </nav>
@@ -61,7 +61,7 @@ type NavLinkProps = {
 function NavLink({ icon, label, href }: NavLinkProps) {
   return (
     <Link href={href}>
-      <div className="flex flex-col items-center justify-center hover:text-black-400 text-black-300">
+      <div className="flex flex-col items-center justify-center text-black-300 hover:text-black-400">
         <span className="text-body">{icon}</span>
         <span className="text-label font-semibold">{label}</span>
       </div>
