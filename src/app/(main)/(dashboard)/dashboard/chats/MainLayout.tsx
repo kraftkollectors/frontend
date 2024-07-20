@@ -26,9 +26,12 @@ export default function MainLayout({
       <div className="gap-4 md:grid md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:grid-cols-10">
         {(pathname === paths.dashboardChats ||
           pathname === paths.dashboardChats + "/") && (
-          <div
-            className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${vw >= 768 ? "" : "invisible"}`}
-          >
+          <div className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)]`}>
+            {sideBar}
+          </div>
+        )}
+        {pathname.startsWith(paths.dashboardChats) && vw >= 768 && (
+          <div className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)]`}>
             {sideBar}
           </div>
         )}
