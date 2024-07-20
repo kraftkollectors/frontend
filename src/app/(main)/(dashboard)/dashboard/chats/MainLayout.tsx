@@ -29,7 +29,7 @@ export default function MainLayout({
     >
       <div className="gap-4 md:grid md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:grid-cols-10">
         <div
-          className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${isMobile ? "invisible" : ""}`}
+          className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${isMobile ? "max-md:invisible" : ""}`}
         >
           {sideBar}
         </div>
