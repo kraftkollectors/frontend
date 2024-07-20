@@ -73,7 +73,7 @@ export default function MobileNav({ children }: MobileNavProps) {
             <p className="text-black-400">{user?.email}</p>
             <Link
               href={paths.premium}
-              className="mt-2 flex items-center gap-1 rounded-[100px] bg-primary-lightActive font-semibold text-primary"
+              className="mt-2 flex items-center gap-1 rounded-[100px] bg-primary-lightActive2 px-3 py-1 font-semibold text-primary"
             >
               <AppIcons.Premium />
               <span>Upgrade account</span>

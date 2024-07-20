@@ -17,10 +17,6 @@ export default function MainLayout({
 
   const pathname = usePathname();
   const vw = useWindowWidth();
-  const isMobile =
-    pathname === paths.dashboardChats ||
-    pathname === paths.dashboardChats + "/" ||
-    vw >= 768;
 
   return (
     <main
@@ -28,11 +24,14 @@ export default function MainLayout({
       className="md:app-container md:h-screen md:max-h-screen md:bg-light-text md:py-10"
     >
       <div className="gap-4 md:grid md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:grid-cols-10">
-        <div
-          className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${isMobile ? "max-md:invisible" : ""}`}
-        >
-          {sideBar}
-        </div>
+        {(pathname === paths.dashboardChats ||
+          pathname === paths.dashboardChats + "/") && (
+          <div
+            className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${vw >= 768 ? "" : "invisible"}`}
+          >
+            {sideBar}
+          </div>
+        )}
 
         {((!(
           pathname === paths.dashboardChats ||
