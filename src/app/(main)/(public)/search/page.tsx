@@ -34,7 +34,7 @@ export default async function SearchPage({ searchParams }: AppPageProps<null, Se
       </div>
       <PostList services={ads.existingRecords} />
       <div className=" flex items-center justify-center py-2">
-        <Suspense><Pagination baseUrl={paths.search()} pagination={ads} /></Suspense>
+        <Suspense><Pagination pagination={ads} /></Suspense>
       </div>
     </div>
   );

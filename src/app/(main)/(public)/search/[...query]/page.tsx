@@ -11,6 +11,7 @@ import { buildUrlQuery, sanitizeSearch } from "@/functions/helpers";
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
 import { SearchPageParams } from "@/utils/types/search";
+import MobileFilterButtons from "@/components/search/MobileButtons";
 
 export async function generateMetadata({ params, searchParams }: AppPageProps<{ query: string | string[] }, SearchPageParams>):Promise<Metadata|null>{
     let q = typeof params?.query == 'string' ? params?.query : (params?.query ?? []).toString()
@@ -37,10 +38,11 @@ export default async function searchPage({ params, searchParams }: AppPageProps<
             <div className="app-container py-2">
                 <SearchResult count={ads.totalDocuments} />
                 <SearchOption />
+            <MobileFilterButtons />
             </div>
             <PostList services={ads.existingRecords} />
             <div className=" flex items-center justify-center py-2">
-                <Pagination baseUrl={paths.search()} pagination={ads} />
+                <Pagination pagination={ads} />
             </div>
         </div>
     );

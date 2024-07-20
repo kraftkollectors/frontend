@@ -40,63 +40,91 @@ export default function Profile({
   socials,
   website,
   userId,
-  artisan
+  artisan,
 }: ProfileProps) {
   return (
     <div className="flex flex-col gap-2 w-full md:col-span-4 items-center justify-center md:p-6 md:bg-light md:border rounded-md">
       <img src={img} alt="auth image" className="size-20 rounded-full" />
       <p className="font-semibold text-title text-black-900">{name}</p>
       {profession && <p className="text-black-400">{profession}</p>}
-      {location && <p className="flex items-center text-label">
-        <MdOutlineLocationOn />
-        {location}
-      </p>}
+      {location && (
+        <p className="flex items-center text-label">
+          <MdOutlineLocationOn />
+          {location}
+        </p>
+      )}
       <p className="text-label">member since {memberSince}</p>
-      {artisan && <>
-        <div className="flex gap-2 w-full justify-center">
-          <Link href={paths.dashboardSingleChat(userId)} className="btn-primary p-2 w-5/12">
-            <AppIcons.Messages />
-            message
-          </Link>
-          <ArtisanNotAvailableModal {...artisan}>
-            <Link target="_blank" href={"tel:" + artisan.phoneNumber} className="btn-primary-border !py-2">
-              <FiPhone />
-              Phone Call
+      {artisan && (
+        <>
+          <div className="grid max-md:w-9/12 md:grid-cols-2 gap-2 py-6 w-full">
+            <Link
+              href={paths.dashboardSingleChat(userId)}
+              className="btn-primary !py-2"
+            >
+              <AppIcons.Messages />
+              Message
             </Link>
-          </ArtisanNotAvailableModal>
-        </div>
-        <div className="w-full my-3 md:border-b"></div>
-        <div className="flex flex-col gap-2 w-full max-md:bg-light max-md:border max-md:rounded-md max-md:p-4">
-          <div className="flex flex-col gap-2 w-full">
-            <p className="text-body font-semibold">Contact Info</p>
-            <ProfileInfoLine
-              title="Phone Number"
-              value={phone}
-              icon={<LuPhone />}
-            />
-            <ProfileInfoLine
-              title="Email"
-              value={<a target="_blank"
-                className="link-btn text-body !font-normal" href={'mailto:' + email}>{email}</a>}
-              icon={<CiMail />}
-            />
-            {website && <ProfileInfoLine
-              title="website"
-              value={<a target="_blank"
-                className="link-btn text-body !font-normal" href={website}>{website}</a>}
-              icon={<TbWorld />}
-            />}
+            {phone && (
+              <ArtisanNotAvailableModal {...artisan}>
+                <Link
+                  target="_blank"
+                  href={"tel:" + phone}
+                  className="btn-primary-border !py-2"
+                >
+                  <FiPhone />
+                  Phone Call
+                </Link>
+              </ArtisanNotAvailableModal>
+            )}
           </div>
-          <div className="w-full my-3 border-b"></div>
-          <div className="flex gap-1  justify-between items-center w-full ">
-            <h1 className="font-bold ">Social Links</h1>
-            <div className=" text-black-600 flex gap-3">
-              <SocialIcons {...socials} />
+          <div className="w-full my-3 md:border-b"></div>
+          <div className="flex flex-col gap-2 w-full max-md:bg-light max-md:border max-md:rounded-md max-md:p-4">
+            <div className="flex flex-col gap-2 w-full">
+              <p className="text-body font-semibold">Contact Info</p>
+              <ProfileInfoLine
+                title="Phone Number"
+                value={phone}
+                icon={<LuPhone />}
+              />
+              <ProfileInfoLine
+                title="Email"
+                value={
+                  <a
+                    target="_blank"
+                    className="link-btn text-body !font-normal"
+                    href={"mailto:" + email}
+                  >
+                    {email}
+                  </a>
+                }
+                icon={<CiMail />}
+              />
+              {website && (
+                <ProfileInfoLine
+                  title="website"
+                  value={
+                    <a
+                      target="_blank"
+                      className="link-btn text-body !font-normal"
+                      href={website}
+                    >
+                      {website}
+                    </a>
+                  }
+                  icon={<TbWorld />}
+                />
+              )}
+            </div>
+            <div className="w-full my-3 border-b"></div>
+            <div className="flex gap-1  justify-between items-center w-full ">
+              <h1 className="font-bold ">Social Links</h1>
+              <div className=" text-black-600 flex gap-3">
+                <SocialIcons {...socials} />
+              </div>
             </div>
           </div>
-        </div>
-      </>
-      }
+        </>
+      )}
     </div>
   );
 }

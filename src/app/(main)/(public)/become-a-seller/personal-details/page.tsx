@@ -12,7 +12,7 @@ export default function PersonalDetailsPage() {
         </div> */}
 
         <h1 className="text-title font-semibold text-black-800">
-          Become an Arisan
+          Account verification
         </h1>
         <p className="text-black-300 text-body">
           Fill in the information below

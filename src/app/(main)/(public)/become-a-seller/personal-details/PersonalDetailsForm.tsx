@@ -3,15 +3,9 @@ import { becomeAnArtisan } from "@/actions";
 import { FormButton, FormMessage } from "@/components";
 import UserAuth from "@/components/server/UserAuth";
 import AppInput from "@/components/ui/AppInput";
-import AppSelect from "@/components/ui/AppSelect";
-import { debugLog } from "@/functions/helpers";
-import { useNigerianStates } from "@/hooks/useNigerianStates";
-import { useBecomeArtisanStore } from "@/state";
-import { paths } from "@/utils";
-import { State } from "@/utils/types/location";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function PersonalDetailsForm() {
   const { push } = useRouter();
@@ -20,6 +14,19 @@ export default function PersonalDetailsForm() {
   return (
     <form action={action}>
       <div className=" flex flex-col md:grid grid-cols-11 gap-5 md:gap-6 py-6">
+        <p className="text-black-800 col-span-3">
+          Occupation <i className="text-red-800">*</i>
+        </p>
+
+        <div className="col-span-5  flex flex-col gap-4">
+          <AppInput
+            name="areaOfSpecialization"
+            error={res.fieldErrors && res.fieldErrors["areaOfSpecialization"]}
+            placeholder="eg: Electrician, Mechanic, Engineer"
+          />
+        </div>
+        <div className="col-span-3 max-md:hidden"></div>
+
         <p className="text-black-800 col-span-3">
           Phone Number <i className="text-red-800">*</i>
         </p>
@@ -30,19 +37,10 @@ export default function PersonalDetailsForm() {
             error={res.fieldErrors && res.fieldErrors["phoneNumber"]}
             placeholder="081XXXXXXXX"
           />
-        </div>
-        <div className="col-span-3 max-md:hidden"></div>
-
-        <p className="text-black-800 col-span-3">
-          Area of specialization <i className="text-red-800">*</i>
-        </p>
-
-        <div className="col-span-5  flex flex-col gap-4">
-          <AppInput
-            name="areaOfSpecialization"
-            error={res.fieldErrors && res.fieldErrors["areaOfSpecialization"]}
-            placeholder="eg: Electrician, Mechanic, Engineer"
-          />
+          <div className="flex gap-2 text-secondary items-center justify-start text-label">
+            <HiOutlineExclamationCircle />
+            <p>Provide the phone number linked to your NIN</p>
+          </div>
         </div>
         <div className="col-span-3 max-md:hidden"></div>
 

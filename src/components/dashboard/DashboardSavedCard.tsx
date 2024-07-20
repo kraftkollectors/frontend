@@ -35,11 +35,11 @@ export function DashboardSavedCard({
 
   return (
     <div className="flex gap-2 p-2 bg-light border rounded">
-      <Link href={paths.service(_id)}>
+      <Link href={paths.service(_id)} className="block w-4/12 aspect-[4/3] md:w-[200px]">
         <img
           src={coverPhoto}
           alt={title}
-          className="w-4/12 md:w-40 aspect-[5/3] object-cover rounded profile-img"
+          className="w-full h-full object-cover rounded profile-img"
         /></Link>
       <div className="flex flex-col gap-1">
         <Link href={paths.service(_id)}>

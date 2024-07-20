@@ -41,7 +41,7 @@ export default async function SearchPage({ searchParams }: AppPageProps<null, Se
       </div>
     </section>
       <div className=" flex items-center justify-center py-2">
-        <Suspense><Pagination baseUrl={paths.search()} pagination={artisans} /></Suspense>
+        <Suspense><Pagination pagination={artisans} /></Suspense>
       </div>
     </div>
   );

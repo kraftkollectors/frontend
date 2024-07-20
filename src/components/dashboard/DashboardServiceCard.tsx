@@ -18,11 +18,11 @@ export function DashboardServiceCard(props: DashboardServiceCardProps) {
     coverPhoto, title, estimatedPrice} = props;
   return (
     <div className="flex gap-2 p-2 bg-light border rounded">
-      <Link href={paths.service(props._id)} className="w-4/12 md:w-40 h-full aspect-[5/3] ">
+      <Link href={paths.service(props._id)} className="block w-4/12 aspect-[4/3] md:w-[200px]">
       <img
         src={coverPhoto}
         alt={title}
-        className="object-cover rounded profile-img"
+        className="object-cover rounded profile-img w-full h-full"
       />
       </Link>
       <div className="flex flex-col gap-1">

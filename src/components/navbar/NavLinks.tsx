@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+"use client";
 
 import { FaRegEnvelope, FaRegHeart } from "react-icons/fa6";
 import { BiSupport } from "react-icons/bi";
@@ -18,14 +18,17 @@ export default function NavLinks() {
         <NavLink key={link.label} {...link} />
       ))}
       <ProfileDropdown>
-        <img
-          height={80}
-          width={80}
-          src={fallbackImage(user?.image)}
-          alt={user?.userName}
-          title={user?.userName}
-          className=" size-10 avatar cursor-pointer overflow-hidden profile-img border border-black-100"
-        />
+        <div className="relative h-fit w-fit">
+          <img
+            height={80}
+            width={80}
+            src={fallbackImage(user?.image)}
+            alt={user?.userName}
+            title={user?.userName}
+            className=" size-10 avatar cursor-pointer overflow-hidden profile-img border border-black-100"
+          />
+          <div className="absolute bottom-0 right-0 border border-light size-2 bg-[#1B8E57]"></div>
+        </div>
       </ProfileDropdown>
     </nav>
   );

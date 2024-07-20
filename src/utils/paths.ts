@@ -24,6 +24,8 @@ const paths = {
   becomeASellerPersonalInfo: "/become-a-seller/personal-information",
   becomeASellerIdVerification: "/become-a-seller/id-verification",
 
+  premium: "/premium",
+
   // dynamic paths
   singleArtisan: (slug: string) => `/artisans/${slug}`,
   service: (slug: string) => `/services/${slug}`,
