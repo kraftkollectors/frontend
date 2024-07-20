@@ -3,10 +3,11 @@ import ArtisanNotAvailableModal from "@/components/modals/ArtisanNotAvailableMod
 import { debugLog, fallbackImage, fullName } from "@/functions/helpers";
 import { useLastSeen, useTypingDetector } from "@/hooks";
 import { useUserStore } from "@/state";
-import { wse } from "@/utils";
+import { paths, wse } from "@/utils";
 import { UserDetails } from "@/utils/types/user";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { Socket } from "socket.io-client";
@@ -24,7 +25,7 @@ export function ChatTopbar({ guest, socket }: ChatTopbarProps) {
       fetchArtisan({ isPublic: true, throwsError: false, params: guest._id }),
   });
 
-  const user = useUserStore((s) => s.user);
+  const { push } = useRouter();
   const fullname = useMemo(
     () => fullName(guest.firstName, guest.lastName),
     [guest],
@@ -59,13 +60,19 @@ export function ChatTopbar({ guest, socket }: ChatTopbarProps) {
     <header className="flex items-center justify-between border-b border-black-50 px-4 py-2">
       <div className="flex gap-2">
         <img
+          onClick={() => push(paths.singleArtisan(guest._id))}
           src={fallbackImage(guest.image)}
           alt={fullname}
           title={`Conversation with ${fullname}`}
           className="profile-img avatar aspect-square size-12 flex-shrink-0 rounded-full object-cover"
         />
         <div className="w-full flex-shrink">
-          <h1 className="line-clamp-1 font-semibold">{fullname}</h1>
+          <Link
+            href={paths.singleArtisan(guest._id)}
+            className="line-clamp-1 font-semibold"
+          >
+            {fullname}
+          </Link>
           <p className="line-clamp-2 flex items-center gap-3 overflow-ellipsis text-label text-black-300">
             <span>{lastSeen}</span>
             <span>{typing && "| typing..."}</span>
