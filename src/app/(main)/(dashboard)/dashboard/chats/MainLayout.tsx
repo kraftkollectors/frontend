@@ -30,7 +30,7 @@ export default function MainLayout({
               pathname === paths.dashboardChats ||
               pathname === paths.dashboardChats + "/"
                 ? "md:hidden"
-                : ""
+                : "hidden"
             }`}
           >
             {sideBar}
