@@ -24,12 +24,19 @@ export default function MainLayout({
       className="md:app-container md:h-screen md:max-h-screen md:bg-light-text md:py-10"
     >
       <div className="gap-4 md:grid md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:grid-cols-10">
-        {(pathname === paths.dashboardChats ||
-          pathname === paths.dashboardChats + "/") && (
-          <div className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)]`}>
+        {
+          <div
+            className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${
+              pathname === paths.dashboardChats ||
+              pathname === paths.dashboardChats + "/"
+                ? "md:hidden"
+                : ""
+            }`}
+          >
             {sideBar}
           </div>
-        )}
+        }
+
         {pathname.startsWith(paths.dashboardChats) && vw >= 768 && (
           <div className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)]`}>
             {sideBar}
