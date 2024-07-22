@@ -33,7 +33,12 @@ export function Navbar() {
 
     const p = pathsToHideSearch.map((_) => pathname.includes(_));
     debugLog({ p, pathname });
-    if (p.includes(true) || pathname == paths.home || pathname == "") {
+    if (
+      pathname.length == 1 ||
+      pathname == paths.home ||
+      pathname == "/" ||
+      p.includes(true)
+    ) {
       setShowSearch(false);
     } else {
       setShowSearch(true);
