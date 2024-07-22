@@ -10,6 +10,7 @@ import MobileNav from "./navbar/MobileNav";
 import { useUserStore } from "@/state";
 import Link from "next/link";
 import { useUpdateOnline } from "@/hooks";
+import { debugLog } from "@/functions/helpers";
 
 const search = (
   <Suspense>
@@ -31,6 +32,7 @@ export function Navbar() {
     }
 
     const p = pathsToHideSearch.map((_) => pathname.includes(_));
+    debugLog({ p, pathname });
     if (p.includes(true) || pathname == paths.home || pathname == "") {
       setShowSearch(false);
     } else {
