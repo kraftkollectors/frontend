@@ -2,6 +2,7 @@ import { formatTime, getCurrentTime } from "@/functions/date";
 import { Artisan } from "@/utils/types/artisan";
 import { Dialog } from "@radix-ui/themes";
 import { ReactNode } from "react";
+import { IoClose } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
 
 export default function ArtisanNotAvailableModal({
@@ -43,14 +44,14 @@ export default function ArtisanNotAvailableModal({
       </Dialog.Trigger>
       <Dialog.Content
         style={{
-          width: 280,
+          width: 300,
         }}
       >
         <div className="flex flex-col gap-4">
           <div className="flex justify-end">
             <Dialog.Close>
-              <button className="icon-btn">
-                <MdCancel />
+              <button className="icon-btn p-1">
+                <IoClose />
               </button>
             </Dialog.Close>
           </div>
