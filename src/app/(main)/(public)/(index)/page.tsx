@@ -5,12 +5,12 @@ import FeaturedServices from "./FeaturedServices";
 
 export default function Home() {
   return (
-   <>
-   <Hero/>
-   {/* <AllCategories /> */}
-   <FeaturedServices />
-   <MobileApp />
-   <Banner />
-   </>
+    <>
+      <Hero />
+      {/* <AllCategories /> */}
+      <FeaturedServices />
+      <MobileApp />
+      <Banner />
+    </>
   );
 }

@@ -14,10 +14,25 @@ function formDataToObject(formData){
 }
 
 
-void function(){
-    const a = new FormData();
-    a.append('a', 'b');
-    a.append('a', 'd');
+// void function(){
+//     const a = new FormData();
+//     a.append('a', 'b');
+//     a.append('a', 'd');
 
-    console.log(formDataToObject(a))
-  }();
+//     console.log(formDataToObject(a))
+//   }();
+
+
+// const nums = [1,2,3];
+// const nums2 = [4,5,6];
+// const joined = [...nums, ...nums2];
+// console.log(joined)
+
+// const student = {
+//     name: "ts",
+//     age: 18,
+// }
+
+// const {name, } = student;
+
+// console.log(others)

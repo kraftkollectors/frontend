@@ -77,7 +77,7 @@ export default function NavLocationSelector({
           onFocus={() => setOpen(true)}
           // onBlur={() => setOpen(false)}
           value={value}
-          placeholder={"Lagos, Nigeria"}
+          placeholder={"Enter Location"}
           className="flex !border-none py-1 text-black-400 !outline-none [all:unset] [box-shadow:none!important] [outline:1px_solid_transparent!important] focus:!border-none focus:!shadow-none focus:!outline-none focus:!ring-transparent max-lg:!w-full lg:w-28 lg:!p-0"
         />
       </div>
