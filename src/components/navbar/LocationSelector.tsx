@@ -1,11 +1,12 @@
 import { useGoogleLocationInput } from "@/hooks";
 import { MdMyLocation } from "react-icons/md";
 import { GoogleLocation } from "../maps/GoogleLocationInput";
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { getDeviceLocation } from "@/functions/getDeviceLocation";
 import { toast } from "react-toastify";
 import AppToast from "../Toast";
 import { locationToGoogleLocation } from "../ui/UseCurrentLocation";
+import { getParentIds } from "@/functions/helpers";
 
 export default function NavLocationSelector({
   className = "",
@@ -32,6 +33,29 @@ export default function NavLocationSelector({
       setLocation(locationToGoogleLocation(location));
     }
   }
+
+  useEffect(() => {
+    // Function to handle click outside the excluded div
+    const handleClickOutside = (event: MouseEvent) => {
+      const parentIds = getParentIds(event.target);
+      if (!parentIds.includes("ignore_search_click")) {
+        // Click occurred outside the excluded div
+        // debugLog('out click')
+        setOpen(false);
+      }
+    };
+
+    // Attach the event listener to the document
+    document.addEventListener("mouseup", handleClickOutside);
+    // Cleanup function to remove event listener
+    return () => {
+      document.removeEventListener("mouseup", handleClickOutside);
+    };
+  }, []); // Empty dependency array ensures this effect runs only once
+
+  useEffect(() => {
+    setOpen(false);
+  }, []);
 
   return (
     <>

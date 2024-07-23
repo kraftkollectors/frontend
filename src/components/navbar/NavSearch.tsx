@@ -6,6 +6,7 @@ import NavLocationSelector from "./LocationSelector";
 import { useEffect, useState } from "react";
 import { useChangeSearchParams, useLocation } from "@/hooks";
 import { getParentIds } from "@/functions/helpers";
+import TypePopover from "./TypePopover";
 
 export default function NavSearch() {
   const { params } = useChangeSearchParams();
@@ -53,15 +54,9 @@ export default function NavSearch() {
         onClick={() => setOpen(true)}
         className="flex flex-grow items-stretch overflow-hidden rounded-lg border border-black-50 max-lg:flex-col max-lg:gap-2 max-lg:p-2"
       >
-        <select
-          defaultValue={pathname.includes("artisan") ? "artisan" : "search"}
-          name="type"
-          className="border-none bg-[#F0F0F0] text-label font-semibold text-black-400 outline-none focus:outline-none max-lg:hidden"
-        >
-          <option value="search">Services</option>
-          <option value="artisan">Artisans</option>
-        </select>
-        <input
+        <input type="hidden" name='type' value={pathname.includes('artisan') ? 'artisan' : 'search'} />
+        <TypePopover />
+        <input 
           type="text"
           className="w-[100%!important] flex-grow rounded-md py-1 text-label font-semibold text-black-500 [all:unset] [box-shadow:none!important] [outline:1px_solid_transparent!important] [border:1px_solid_transparent!important] lg:!px-3"
           placeholder="What are you looking for?"
