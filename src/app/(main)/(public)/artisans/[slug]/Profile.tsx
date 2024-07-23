@@ -43,9 +43,9 @@ export default function Profile({
   artisan,
 }: ProfileProps) {
   return (
-    <div className="flex flex-col gap-2 w-full md:col-span-4 items-center justify-center md:p-6 md:bg-light md:border rounded-md">
-      <img src={img} alt="auth image" className="size-20 rounded-full" />
-      <p className="font-semibold text-title text-black-900">{name}</p>
+    <div className="flex w-full flex-col items-center justify-center gap-2 rounded-md md:col-span-4 md:border md:bg-light md:p-6">
+      <img src={img} alt="auth image" className="avatar profile-img size-20" />
+      <p className="text-title font-semibold text-black-900 text-center">{name}</p>
       {profession && <p className="text-black-400">{profession}</p>}
       {location && (
         <p className="flex items-center text-label">
@@ -56,7 +56,7 @@ export default function Profile({
       <p className="text-label">member since {memberSince}</p>
       {artisan && (
         <>
-          <div className="grid max-md:w-9/12 md:grid-cols-2 gap-2 py-6 w-full">
+          <div className="grid w-full gap-2 py-6 max-md:w-9/12 md:grid-cols-2">
             <Link
               href={paths.dashboardSingleChat(userId)}
               className="btn-primary !py-2"
@@ -77,9 +77,9 @@ export default function Profile({
               </ArtisanNotAvailableModal>
             )}
           </div>
-          <div className="w-full my-3 md:border-b"></div>
-          <div className="flex flex-col gap-2 w-full max-md:bg-light max-md:border max-md:rounded-md max-md:p-4">
-            <div className="flex flex-col gap-2 w-full">
+          <div className="my-3 w-full md:border-b"></div>
+          <div className="flex w-full flex-col gap-2 max-md:rounded-md max-md:border max-md:bg-light max-md:p-4">
+            <div className="flex w-full flex-col gap-2">
               <p className="text-body font-semibold">Contact Info</p>
               <ProfileInfoLine
                 title="Phone Number"
@@ -115,10 +115,10 @@ export default function Profile({
                 />
               )}
             </div>
-            <div className="w-full my-3 border-b"></div>
-            <div className="flex gap-1  justify-between items-center w-full ">
-              <h1 className="font-bold ">Social Links</h1>
-              <div className=" text-black-600 flex gap-3">
+            <div className="my-3 w-full border-b"></div>
+            <div className="flex w-full items-center justify-between gap-1">
+              <h1 className="font-bold">Social Links</h1>
+              <div className="flex gap-3 text-black-600">
                 <SocialIcons {...socials} />
               </div>
             </div>

@@ -14,22 +14,31 @@ export type DashboardServiceCardProps = {
 };
 
 export function DashboardServiceCard(props: DashboardServiceCardProps) {
-  const {
-    coverPhoto, title, estimatedPrice} = props;
+  const { coverPhoto, title, estimatedPrice } = props;
   return (
-    <div className="flex gap-2 p-2 bg-light border rounded">
-      <Link href={paths.service(props._id)} className="block w-4/12 aspect-[4/3] md:w-[200px]">
-      <img
-        src={coverPhoto}
-        alt={title}
-        className="object-cover rounded profile-img w-full h-full"
-      />
+    <div className="flex gap-2 rounded border bg-light p-2">
+      <Link
+        href={paths.service(props._id)}
+        className="block aspect-[4/3] w-4/12 flex-shrink-0 md:w-[200px]"
+      >
+        <img
+          src={coverPhoto}
+          alt={title}
+          className="profile-img h-full w-full rounded object-cover"
+        />
       </Link>
       <div className="flex flex-col gap-1">
-        <Link href={paths.service(props._id)} className="text-back-400">{title}</Link>
-        <p className="text-black-600 font-semibold">{formatNumber(Number(estimatedPrice), true)}</p>
+        <Link href={paths.service(props._id)} className="text-back-400">
+          {title}
+        </Link>
+        <p className="font-semibold text-black-600">
+          {formatNumber(Number(estimatedPrice), true)}
+        </p>
         <div className="flex gap-2">
-          <Link href={paths.dashboardEditService(props._id)} className="edit-btn">
+          <Link
+            href={paths.dashboardEditService(props._id)}
+            className="edit-btn"
+          >
             <FaRegEdit />
             Edit
           </Link>

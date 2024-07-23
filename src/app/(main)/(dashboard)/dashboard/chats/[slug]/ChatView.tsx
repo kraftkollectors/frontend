@@ -36,7 +36,7 @@ export default function ChatView({
 
   const { data, isLoading, error, refetch } = useQuery({
     queryFn: () => {
-      debugLog("querying...");
+      // debugLog("querying...");
       return fetchChats(receiverId, { params: lastDate, throwsError: false });
     },
     queryKey: ["chats", receiverId],
@@ -168,7 +168,8 @@ export default function ChatView({
 
   // handle scroll to bottom
   useEffect(() => {
-    debugLog({ toBottom });
+    setLocChats(chats.slice(-10));
+    // debugLog({ toBottom });
     if (toBottom) scrollToBottom();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);

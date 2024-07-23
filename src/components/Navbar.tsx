@@ -22,27 +22,15 @@ export function Navbar() {
   const user = useUserStore((s) => s.user);
   const pathname = usePathname();
   const [show, setShow] = useState(true);
-  const [showSearch, setShowSearch] = useState(true);
+  const [showSearch, setShowSearch] = useState(false);
 
   useLayoutEffect(() => {
-    if (pathname.includes(paths.dashboardSingleChat(""))) {
-      setShow(false);
-    } else {
-      setShow(true);
-    }
+    if (pathname.includes(paths.dashboardSingleChat(""))) setShow(false);
+    else setShow(true);
 
     const p = pathsToHideSearch.map((_) => pathname.includes(_));
-    debugLog({ p, pathname });
-    if (
-      pathname.length == 1 ||
-      pathname == paths.home ||
-      pathname == "/" ||
-      p.includes(true)
-    ) {
-      setShowSearch(false);
-    } else {
-      setShowSearch(true);
-    }
+    if (pathname == paths.home || p.includes(true)) setShowSearch(false);
+    else setShowSearch(true);
   }, [pathname]);
 
   return (
@@ -53,7 +41,9 @@ export function Navbar() {
     >
       <div className="flex h-12 items-center justify-between gap-5 md:h-12">
         <AppLogo />
-        <div className="max-md:hidden md:w-5/12">{search}</div>
+        {pathname !== paths.home && (
+          <div className="max-md:hidden md:w-5/12">{search}</div>
+        )}
         {!!user ? (
           <div>
             <NavLinks />

@@ -60,10 +60,10 @@
     @apply btn-primary-tiny-border font-semibold text-lg py-2;
   }
   .delete-btn {
-    @apply btn gap-2 text-danger rounded-md hover:bg-red-100 px-1.5;
+    @apply btn gap-1.5 text-danger rounded-md hover:bg-red-100 px-1.5 text-label font-semibold;
   }
   .edit-btn {
-    @apply btn gap-2 text-primary rounded-md hover:bg-blue-100 px-1.5;
+    @apply btn gap-1.5 text-primary rounded-md hover:bg-blue-100 px-1.5 text-label font-semibold;
   }
   .btn-primary-tiny {
     @apply bg-black-500 border border-black-500 btn text-white rounded-lg shadow-sm transition duration-150 ease-in-out hover:bg-black-800 text-sm font-semibold inline-flex gap-1;
@@ -88,6 +88,12 @@
   }
   .icon-btn {
     @apply rounded-md hover:bg-primary-lightActive cursor-pointer inline-flex justify-center items-center;
+  }
+  .location-popover{
+    @apply absolute right-0 top-full translate-y-1 z-[0] flex max-h-[200px] w-full flex-col overflow-y-auto rounded-lg border border-black-50 bg-light p-2 shadow-[0_0_40px_5px_#358FAB14]
+  }
+  .btn-location{
+    @apply text-start text-label text-black-400 rounded-lg p-1.5 hover:bg-[#F0F0F0] inline-flex justify-start gap-1.5
   }
   .media-slider-arrow {
     @apply absolute left-4 top-1/2 -translate-y-1/2 size-8 aspect-square rounded-full bg-light shadow-md flex items-center justify-center text-xl;

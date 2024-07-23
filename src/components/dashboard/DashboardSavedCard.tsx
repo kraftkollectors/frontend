@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-'use client'
+"use client";
 
 import { toggleFavourite } from "@/actions";
 import { formatNumber } from "@/functions/helpers";
@@ -29,23 +29,29 @@ export function DashboardSavedCard({
 }: Service) {
   const [res, action] = useFormState(toggleFavourite, {});
   useLayoutEffect(() => {
-    if (res.error) toast(<AppToast.error message={res.error} />)
-    if (res.success) toast(<AppToast.success message={res.success} />)
-  }, [res])
+    if (res.error) toast(<AppToast.error message={res.error} />);
+    if (res.success) toast(<AppToast.success message={res.success} />);
+  }, [res]);
 
   return (
-    <div className="flex gap-2 p-2 bg-light border rounded">
-      <Link href={paths.service(_id)} className="block w-4/12 aspect-[4/3] md:w-[200px]">
+    <div className="flex gap-2 rounded border bg-light p-2">
+      <Link
+        href={paths.service(_id)}
+        className="block aspect-[4/3] w-4/12 flex-shrink-0 md:w-[200px]"
+      >
         <img
           src={coverPhoto}
           alt={title}
-          className="w-full h-full object-cover rounded profile-img"
-        /></Link>
+          className="profile-img h-full w-full rounded object-cover"
+        />
+      </Link>
       <div className="flex flex-col gap-1">
         <Link href={paths.service(_id)}>
           <h3 className="text-back-400 line-clamp-3">{title}</h3>
         </Link>
-        <p className="text-black-600 font-semibold">{formatNumber(Number(estimatedPrice), true)}</p>
+        <p className="font-semibold text-black-600">
+          {formatNumber(Number(estimatedPrice), true)}
+        </p>
         <form action={action} className="flex gap-2">
           <FormButton className="delete-btn">
             <RiDeleteBin6Line />
@@ -53,7 +59,7 @@ export function DashboardSavedCard({
           </FormButton>
           <UserAuth />
           <input type="hidden" name="serviceId" value={_id} hidden />
-          <input type="hidden" name="delete" value={'true'} hidden />
+          <input type="hidden" name="delete" value={"true"} hidden />
         </form>
       </div>
     </div>
