@@ -1,9 +1,6 @@
 'use client'
 
-import { useChangeSearchParams } from "@/hooks";
-import { AppLayoutProps } from "@/utils/types/basicTypes"
 import { Popover } from "@radix-ui/themes"
-import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -26,7 +23,7 @@ export default function TypePopover() {
                     className="border-none bg-[#F0F0F0] text-label font-semibold text-black-400 outline-none focus:outline-none max-lg:hidden h-auto py-1.5 px-2 inline-flex items-center gap-2"
                 >
                     <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 1.5L6 6.5L1 1.5" stroke="#606060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M11 1.5L6 6.5L1 1.5" stroke="#606060" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
 
                     {links.filter(i => i.href == currentLink)[0].title}
