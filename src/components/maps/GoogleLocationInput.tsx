@@ -44,13 +44,13 @@ export default function GoogleLocationInput({
         placeholder="Enter and select a location"
       />
       {!isValid && (
-        <span className="text-sm leading-[9px] text-red-800">
+        <span className="text-[12px] leading-[7px] text-red-800">
           Invalid address, you must select one from the dropdown or use current
           location
         </span>
       )}
       {data && data.length > 0 && (
-        <div className="location-popover">
+        <div className="location-popover z-10">
           {data.map((item) => (
             <button
               className="btn-location"

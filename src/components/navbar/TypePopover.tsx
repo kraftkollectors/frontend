@@ -2,9 +2,15 @@
 
 import { Popover } from "@radix-ui/themes";
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-export default function TypePopover({ className }: { className?: string }) {
+export default function TypePopover({
+  className,
+  search = "",
+}: {
+  className?: string;
+  search?: string;
+}) {
   const pathname = usePathname();
   const { query } = useParams();
   const q = query
@@ -13,10 +19,16 @@ export default function TypePopover({ className }: { className?: string }) {
       : (query ?? []).join(" ")
     : "";
   const { push } = useRouter();
-  const currentLink = useMemo(() => {
-    if (pathname.includes("artisan")) return "/artisan";
-    return "/search";
+  const [currentLink, setCurrentLink] = useState("/search");
+
+  useEffect(() => {
+    setCurrentLink((_) => {
+      if (pathname.includes("artisan")) return "/artisan";
+      return "/search";
+    });
   }, [pathname]);
+
+  const s = useMemo(() => search, [search]);
 
   return (
     <Popover.Root>
@@ -29,21 +41,7 @@ export default function TypePopover({ className }: { className?: string }) {
             "inline-flex h-auto items-center gap-2 border-none bg-[#F0F0F0] px-2 py-1.5 text-label font-semibold text-black-400 outline-none focus:outline-none max-lg:hidden"
           }
         >
-          <svg
-            width="12"
-            height="8"
-            viewBox="0 0 12 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M11 1.5L6 6.5L1 1.5"
-              stroke="#606060"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {checkIcon}
 
           {links.filter((i) => i.href == currentLink)[0].title}
         </button>
@@ -53,30 +51,33 @@ export default function TypePopover({ className }: { className?: string }) {
           {links.map((link) => {
             const active = link.href == currentLink;
             return (
-              <button
-                key={link.title}
-                onClick={() => {
-                  push(`${link.href}/${q}`);
-                }}
-                className={`inline-flex min-w-[150px] items-center gap-2 rounded-lg px-3 py-2 text-start text-label font-semibold text-black-300 hover:bg-black-50 ${active ? "text-black-500" : ""}`}
-              >
-                {link.icon}
-                <span className="w-full">{link.title}</span>
-                {active && (
-                  <svg
-                    width="12"
-                    height="10"
-                    viewBox="0 0 12 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M4.0001 7.77989L1.2201 4.9999L0.273438 5.93989L4.0001 9.66656L12.0001 1.66656L11.0601 0.726562L4.0001 7.77989Z"
-                      fill="#121212"
-                    />
-                  </svg>
-                )}
-              </button>
+              <Popover.Close key={link.title}>
+                <button
+                  onClick={() => {
+                    if (!!q && !!s) setCurrentLink(link.href);
+                    else if (s) push(`${link.href}/${s}`);
+                    else if (q) push(`${link.href}/${q}`);
+                  }}
+                  className={`inline-flex min-w-[150px] items-center gap-2 rounded-lg px-3 py-2 text-start text-label font-semibold text-black-300 hover:bg-black-50 ${active ? "text-black-500" : ""}`}
+                >
+                  {link.icon}
+                  <span className="w-full">{link.title}</span>
+                  {active && (
+                    <svg
+                      width="12"
+                      height="10"
+                      viewBox="0 0 12 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M4.0001 7.77989L1.2201 4.9999L0.273438 5.93989L4.0001 9.66656L12.0001 1.66656L11.0601 0.726562L4.0001 7.77989Z"
+                        fill="#121212"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </Popover.Close>
             );
           })}
         </div>
@@ -84,6 +85,24 @@ export default function TypePopover({ className }: { className?: string }) {
     </Popover.Root>
   );
 }
+
+const checkIcon = (
+  <svg
+    width="12"
+    height="8"
+    viewBox="0 0 12 8"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M11 1.5L6 6.5L1 1.5"
+      stroke="#606060"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const links = [
   {

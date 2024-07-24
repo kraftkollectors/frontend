@@ -54,11 +54,15 @@ export default function NavSearch() {
         onClick={() => setOpen(true)}
         className="flex flex-grow items-stretch overflow-hidden rounded-lg border border-black-50 max-lg:flex-col max-lg:gap-2 max-lg:p-2"
       >
-        <input type="hidden" name='type' value={pathname.includes('artisan') ? 'artisan' : 'search'} />
-        <TypePopover />
-        <input 
+        <input
+          type="hidden"
+          name="type"
+          value={pathname.includes("artisan") ? "artisan" : "search"}
+        />
+        <TypePopover search={val} />
+        <input
           type="text"
-          className="w-[100%!important] flex-grow rounded-md py-1 text-label font-semibold text-black-500 [all:unset] [box-shadow:none!important] [outline:1px_solid_transparent!important] [border:1px_solid_transparent!important] lg:!px-3"
+          className="w-[100%!important] flex-grow rounded-md py-1 text-label font-semibold text-black-500 [all:unset] [border:1px_solid_transparent!important] [box-shadow:none!important] [outline:1px_solid_transparent!important] lg:!px-3"
           placeholder="What are you looking for?"
           name="query"
           value={val}
