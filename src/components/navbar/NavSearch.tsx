@@ -54,11 +54,11 @@ export default function NavSearch() {
         onClick={() => setOpen(true)}
         className="flex flex-grow items-stretch overflow-hidden rounded-lg border border-black-50 max-lg:flex-col max-lg:gap-2 max-lg:p-2"
       >
-        <input
+        {/* <input
           type="hidden"
           name="type"
           value={pathname.includes("artisan") ? "artisan" : "search"}
-        />
+        /> */}
         <TypePopover search={val} />
         <input
           type="text"

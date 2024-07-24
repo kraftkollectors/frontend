@@ -32,61 +32,63 @@ export default function TypePopover({
   const s = useMemo(() => search, [search]);
 
   return (
-    <Popover.Root>
-      <Popover.Trigger>
-        <button
-          defaultValue={pathname.includes("artisan") ? "artisan" : "search"}
-          name="type"
-          className={
-            className ??
-            "inline-flex h-auto items-center gap-2 border-none bg-[#F0F0F0] px-2 py-1.5 text-label font-semibold text-black-400 outline-none focus:outline-none max-lg:hidden"
-          }
-        >
-          {checkIcon}
-
-          {links.filter((i) => i.href == currentLink)[0].title}
-        </button>
-      </Popover.Trigger>
-      <Popover.Content style={{ padding: 12, borderRadius: 8 }}>
-        <div className="flex flex-col items-stretch">
-          {links.map((link) => {
-            const active = link.href == currentLink;
-            return (
-              <Popover.Close key={link.title}>
-                <button
-                  onClick={() => {
-                    // debugLog({ q, s, currentLink });
-                    if (q.trim().length == 0 && s.trim().length == 0) {
-                      // debugLog(link.href);
-                      setCurrentLink(link.href);
-                    } else if (s) push(`${link.href}/${s}`);
-                    else if (q) push(`${link.href}/${q}`);
-                  }}
-                  className={`inline-flex min-w-[150px] items-center gap-2 rounded-lg px-3 py-2 text-start text-label font-semibold text-black-300 hover:bg-black-50 ${active ? "text-black-500" : ""}`}
-                >
-                  {link.icon}
-                  <span className="w-full">{link.title}</span>
-                  {active && (
-                    <svg
-                      width="12"
-                      height="10"
-                      viewBox="0 0 12 10"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4.0001 7.77989L1.2201 4.9999L0.273438 5.93989L4.0001 9.66656L12.0001 1.66656L11.0601 0.726562L4.0001 7.77989Z"
-                        fill="#121212"
-                      />
-                    </svg>
-                  )}
-                </button>
-              </Popover.Close>
-            );
-          })}
-        </div>
-      </Popover.Content>
-    </Popover.Root>
+    <>
+      <input type="hidden" name="type" value={currentLink.replace("/", "")} />
+      <Popover.Root>
+        <Popover.Trigger>
+          <button
+            defaultValue={pathname.includes("artisan") ? "artisan" : "search"}
+            name="type"
+            className={
+              className ??
+              "inline-flex h-auto items-center gap-2 border-none bg-[#F0F0F0] px-2 py-1.5 text-label font-semibold text-black-400 outline-none focus:outline-none max-lg:hidden"
+            }
+          >
+            {checkIcon}
+            {links.filter((i) => i.href == currentLink)[0].title}
+          </button>
+        </Popover.Trigger>
+        <Popover.Content style={{ padding: 12, borderRadius: 8 }}>
+          <div className="flex flex-col items-stretch">
+            {links.map((link) => {
+              const active = link.href == currentLink;
+              return (
+                <Popover.Close key={link.title}>
+                  <button
+                    onClick={() => {
+                      // debugLog({ q, s, currentLink });
+                      if (q.trim().length == 0 && s.trim().length == 0) {
+                        // debugLog(link.href);
+                        setCurrentLink(link.href);
+                      } else if (s) push(`${link.href}/${s}`);
+                      else if (q) push(`${link.href}/${q}`);
+                    }}
+                    className={`inline-flex min-w-[150px] items-center gap-2 rounded-lg px-3 py-2 text-start text-label font-semibold text-black-300 hover:bg-black-50 ${active ? "text-black-500" : ""}`}
+                  >
+                    {link.icon}
+                    <span className="w-full">{link.title}</span>
+                    {active && (
+                      <svg
+                        width="12"
+                        height="10"
+                        viewBox="0 0 12 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M4.0001 7.77989L1.2201 4.9999L0.273438 5.93989L4.0001 9.66656L12.0001 1.66656L11.0601 0.726562L4.0001 7.77989Z"
+                          fill="#121212"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </Popover.Close>
+              );
+            })}
+          </div>
+        </Popover.Content>
+      </Popover.Root>
+    </>
   );
 }
 
