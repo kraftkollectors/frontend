@@ -167,6 +167,9 @@ const apis = {
     nigerianStates: `${STATES_AND_CITIES_API}/nigerian-states`,
     /**
      * GET - get a user's artisan odject with (/user._id)
+     * POST - become an artisan { nin: string,
+    phoneNumber: string,
+    areaOfSpecialization: string,}
      */
     artisan: API + "/users/artisan",
     /**
