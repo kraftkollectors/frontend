@@ -8,7 +8,7 @@ import { cookies } from "next/headers"
 
 export async function checkFavourite(serviceId: string): Promise<boolean | null> {
     const userId = cookies().get(appCookies.accessId)?.value
-    debugLog({ userId, serviceId })
+    // debugLog({ userId, serviceId })
     if (!userId || !serviceId) return false;
     try {
         const req = await ServerApiRequest.get(apis.checkFavourite(userId, serviceId), {
@@ -20,7 +20,7 @@ export async function checkFavourite(serviceId: string): Promise<boolean | null>
             }
         })
         const res = (await req?.json()) as ApiResponse;
-        debugLog(res);
+        // debugLog(res);
         if (res.statusCode == 201) {
             return res.data
         }

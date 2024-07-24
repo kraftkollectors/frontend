@@ -1,5 +1,6 @@
 "use client";
 
+import { debugLog } from "@/functions/helpers";
 import { Popover } from "@radix-ui/themes";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -54,8 +55,11 @@ export default function TypePopover({
               <Popover.Close key={link.title}>
                 <button
                   onClick={() => {
-                    if (!!q && !!s) setCurrentLink(link.href);
-                    else if (s) push(`${link.href}/${s}`);
+                    // debugLog({ q, s, currentLink });
+                    if (q.trim().length == 0 && s.trim().length == 0) {
+                      // debugLog(link.href);
+                      setCurrentLink(link.href);
+                    } else if (s) push(`${link.href}/${s}`);
                     else if (q) push(`${link.href}/${q}`);
                   }}
                   className={`inline-flex min-w-[150px] items-center gap-2 rounded-lg px-3 py-2 text-start text-label font-semibold text-black-300 hover:bg-black-50 ${active ? "text-black-500" : ""}`}
