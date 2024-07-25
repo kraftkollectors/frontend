@@ -169,7 +169,7 @@ const apis = {
      * GET - get a user's artisan odject with (/user._id)
      * POST - become an artisan { nin: string,
     phoneNumber: string,
-    areaOfSpecialization: string,}
+    areaOfSpecialization: string,(firstName, lastName)-from user data}
      */
     artisan: API + "/users/artisan",
     /**
