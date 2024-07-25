@@ -13,7 +13,7 @@ export default function Hero() {
           <p className="text-light">
             Linking You to the Best Artisans and Experts in Your Area
           </p>
-          <div className="[&>*]:bg-light [&>*]:rounded-lg text-start ">
+          <div className="[&>*]:bg-light [&>*]:rounded-lg [&>div>form]:min-h-[42px] text-start ">
             <Suspense>
               <NavSearch />
             </Suspense>
