@@ -52,7 +52,7 @@ export default function NavSearch() {
       <form
         action={submitSearch}
         onClick={() => setOpen(true)}
-        className="flex flex-grow items-stretch overflow-hidden rounded-lg border border-black-50 max-lg:flex-col max-lg:gap-2 max-lg:p-2"
+        className="animate flex flex-grow items-stretch overflow-hidden rounded-lg border border-black-50 max-lg:flex-col max-lg:gap-2 max-lg:p-2"
       >
         {/* <input
           type="hidden"
