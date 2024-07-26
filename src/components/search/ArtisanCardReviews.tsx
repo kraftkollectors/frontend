@@ -1,7 +1,7 @@
 import { fetchUserReviews, fetchUserReviewsCount } from "@/actions";
-import { RatingStars } from "../ui/RatingStars";
+import { RatingStars, SizeVariant } from "../ui/RatingStars";
 
-export default async function ArtisanCardReviews({userId}:{userId: string}) {
+export default async function ArtisanCardReviews({userId, size = 'lg'}:{userId: string; size?: SizeVariant}) {
     const reviews = await fetchUserReviews({ throwsError: false, isPublic: true, params: userId });
     if (!reviews || reviews == 'error') return <div className="skeleton h-4 w-8"></div>
     const reviewsCount = await fetchUserReviewsCount({ throwsError: false, isPublic: true, params: userId });
@@ -12,7 +12,7 @@ export default async function ArtisanCardReviews({userId}:{userId: string}) {
     return (
         <div className="flex items-center gap-2">
         <h3 className="r-font-bold text-title">{(avgRating ?? 0).toFixed(1)}</h3>
-        <RatingStars value={avgRating} size="lg" />
+        <RatingStars value={avgRating} size={size} />
       </div>
     );
 }

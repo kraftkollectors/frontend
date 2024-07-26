@@ -2,12 +2,14 @@ import { getStarSize } from "@/functions/helpers";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { FaRegStar, FaStar } from "react-icons/fa6";
 
+export type SizeVariant = "md" | "lg" | "sm";
+
 export function RatingStars({
   value,
   size = "sm"
 }: {
   value: number;
-  size?: "md" | "lg" | "sm";
+  size?: SizeVariant;
 }) {
   const classNames = "text-sm text-md text-lg";
   return (
