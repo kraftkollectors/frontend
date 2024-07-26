@@ -21,7 +21,7 @@ export async function fetchUserReviewsCount({ throwsError = true, isPublic = fal
         }));
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<TotalUserReviews>;
-        debugLog(res);
+        // debugLog(res);
         // debugLog(res.data.existingRecords.length);
 
         if (res.statusCode === 201) return res.data;

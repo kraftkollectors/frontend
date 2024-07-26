@@ -96,7 +96,7 @@
     @apply text-start text-label text-black-400 rounded-lg p-1.5 hover:bg-[#F0F0F0] inline-flex justify-start gap-1.5
   }
   .media-slider-arrow {
-    @apply absolute left-4 top-1/2 -translate-y-1/2 size-8 aspect-square rounded-full bg-light shadow-md flex items-center justify-center text-xl;
+    @apply absolute left-1 top-1/2 -translate-y-1/2 size-8 aspect-square rounded-full bg-light shadow-md flex items-center justify-center text-xl;
   }
 
   .app-input {

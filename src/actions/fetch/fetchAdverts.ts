@@ -17,8 +17,8 @@ export async function fetchAdverts({ throwsError = true, isPublic = true, params
             ? ApiRequest.getJson(apis.adverts + params, {next: {tags: [tags.adverts]}}) 
             : ServerApiRequest.get(apis.adverts + params, {next: {tags: [tags.adverts]}}));
         const res = (await req?.json()) as ApiResponse<Paginated<Advert>>;
-        debugLog(res);
-        debugLog(apis.services + params);
+        // debugLog(res);
+        // debugLog(apis.services + params);
 
 
         if (res.statusCode === 201) return res.data;

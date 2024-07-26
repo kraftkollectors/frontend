@@ -21,7 +21,7 @@ export async function fetchUserReviews({ throwsError = true, isPublic = false, p
         }));
         if(!req) return null;
         const res = (await req.json()) as ApiResponse<Paginated<Review>>;
-        debugLog(res);
+        // debugLog(res);
         // debugLog(res.data.existingRecords.length);
 
         if (res.statusCode === 201) return res.data;
