@@ -8,7 +8,7 @@ export default async function ServiceViews({ id }: { id: string }) {
   if (!totalViews || totalViews == "error") return null;
 
   return (
-    <div className="flex gap-2 font-semibold text-black-400">
+    <div className="flex items-center justify-end gap-2 text-label font-semibold text-black-400 max-md:w-full">
       <FaEye />
       <span>
         {totalViews.views} ({views.views} today)
