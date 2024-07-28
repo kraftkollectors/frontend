@@ -1,7 +1,7 @@
 const API = "https://backends-865y.onrender.com";
 const STATES_AND_CITIES_API = "https://abundiko-api.vercel.app/api";
 const admin = API + "/admin";
-const users = API + "/usert";
+const users = API + "/users";
 
 /**
  * NOTE:
