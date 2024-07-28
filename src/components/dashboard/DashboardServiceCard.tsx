@@ -5,6 +5,7 @@ import { FaEdit, FaRegEdit } from "react-icons/fa";
 import DeleteServiceModal from "./DeleteServiceModal";
 import { formatNumber } from "@/functions/helpers";
 import { Suspense } from "react";
+import ServiceViews from "./ServiceViews";
 
 export type DashboardServiceCardProps = {
   coverPhoto: string;
@@ -49,9 +50,9 @@ export function DashboardServiceCard(props: DashboardServiceCardProps) {
             </Link>
             <DeleteServiceModal {...props} />
           </div>
-          <Suspense
-            fallback={<div className="skeleton h-5 w-8"></div>}
-          ></Suspense>
+          <Suspense fallback={<div className="skeleton h-5 w-8"></div>}>
+            <ServiceViews id={props._id} />
+          </Suspense>
         </div>
       </div>
     </div>
