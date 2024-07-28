@@ -14,16 +14,16 @@ export default function MobileApp() {
                 alt="circle"
                 width={200}
                 height={200}
+                loading="lazy"
                 className="absolute left-1/2 top-1/2 aspect-square w-full -translate-x-1/2 -translate-y-1/2"
-                priority={true}
               />
               <Image
                 src="/images/phone.png"
                 alt="phone"
                 width={200}
                 height={200}
+                loading="lazy"
                 className="absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 object-contain"
-                priority={true}
               />
             </div>
           </div>

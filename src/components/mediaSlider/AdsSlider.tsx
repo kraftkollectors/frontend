@@ -40,6 +40,9 @@ export function AdsSlider({ ads }: MediaSliderProps) {
                       src={ad.image}
                       alt={ad.title}
                       className="h-full rounded object-contain shadow-lg"
+                      height={700}
+                      width={800}
+                      loading="lazy"
                     />
                   </div>
                   <h3 className="absolute bottom-0 left-0 flex h-1/2 w-full flex-col items-start justify-end bg-gradient-to-t from-[#00000012] to-transparent p-6 pb-10 text-title font-bold text-light lg:text-headline">

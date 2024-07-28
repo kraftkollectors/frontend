@@ -8,9 +8,8 @@ import { Suspense } from "react";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_OAUTH_CLIENT_ID } from "@/utils/constants";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import ReactQueryClient from "./ReactQueryClient";
-
 
 export const metadata: Metadata = {
   title: "KraftKollectors",
@@ -23,15 +22,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
-
   return (
     <html lang="en">
       <Suspense>
         <AuthProvider />
       </Suspense>
-      <body className={` bg-light text-black-800 text-body font-normal`}>
+      <body className={`bg-light text-body font-normal text-black-800`}>
         <ReactQueryClient>
           <Theme>
             <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIENT_ID}>

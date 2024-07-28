@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import NavSearch from "@/components/navbar/NavSearch";
 import HeroButton from "./HeroButtons";
-import { Suspense } from "react";
 
 export default function Hero() {
   return (
@@ -21,11 +19,7 @@ export default function Hero() {
           <p className="text-light">
             Linking You to the Best Artisans and Experts in Your Area
           </p>
-          <div className="text-start [&>*]:rounded-lg [&>*]:bg-light [&>div>form]:min-h-[42px]">
-            <Suspense>
-              <NavSearch />
-            </Suspense>
-          </div>
+         
           <HeroButton />
         </div>
       </div>

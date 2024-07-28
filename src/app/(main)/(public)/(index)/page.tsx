@@ -4,6 +4,7 @@ import Banner from "./Banner";
 import FeaturedServices from "./FeaturedServices";
 import AllCategories from "./AllCategories";
 import FeaturedArtisans from "./FeaturedArtisans";
+// import PreloadResources from 'react-dom';
 
 export default function Home() {
   return (
