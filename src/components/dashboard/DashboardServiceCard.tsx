@@ -40,7 +40,7 @@ export function DashboardServiceCard(props: DashboardServiceCardProps) {
           {formatNumber(Number(estimatedPrice), true)}
         </p>
         <div className="flex justify-between">
-          <div className="fleinline-x flex-shrink-0 gap-2">
+          <div className="inline-flex flex-shrink-0 gap-2">
             <Link
               href={paths.dashboardEditService(props._id)}
               className="edit-btn"
