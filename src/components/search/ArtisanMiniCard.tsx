@@ -7,7 +7,6 @@ import ArtisanInfo from "./ArtisanInfo";
 import ArtisanCardReviews from "./ArtisanCardReviews";
 import Link from "next/link";
 import { paths } from "@/utils";
-import Image from "next/image";
 
 export default function ArtisanCard({
   _id,
@@ -21,11 +20,12 @@ export default function ArtisanCard({
       href={paths.singleArtisan(_id)}
       className="flex w-full items-center justify-stretch gap-1.5 bg-light p-4 hover:bg-black-50"
     >
-      <Image
+      <img
         height={56}
         width={56}
         src={fallbackImage(image)}
         alt={fullName(firstName, lastName)}
+        loading="lazy"
         className="avatar profile-img size-[56px] flex-shrink-0"
       />
       <div className="flex w-full flex-shrink flex-col gap-1">

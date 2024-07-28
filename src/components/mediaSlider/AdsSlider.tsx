@@ -38,7 +38,7 @@ export function AdsSlider({ ads }: MediaSliderProps) {
                   <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center p-1">
                     <img
                       src={ad.image}
-                      alt={ad.title}
+                      alt={"advertisement of " + ad.title}
                       className="h-full rounded object-contain shadow-lg"
                       height={700}
                       width={800}

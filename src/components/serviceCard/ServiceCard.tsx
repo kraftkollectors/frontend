@@ -11,7 +11,6 @@ import CardUserSkeleton from "../skeletons/CardUserSkeleton";
 
 /* eslint-disable @next/next/no-img-element */
 
-
 export function ServiceCard({
   coverPhoto,
   category,
@@ -23,29 +22,31 @@ export function ServiceCard({
 }: Service) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="relative w-full h-44 md:h-48">
-        <Link
-          href={paths.service(_id)}
-          className="h-full w-full">
+      <div className="relative h-44 w-full md:h-48">
+        <Link href={paths.service(_id)} className="h-full w-full">
           <img
             src={coverPhoto}
             alt={title}
-            className="rounded-md overflow-hidden object-cover w-full h-full border border-black-50"
+            className="h-full w-full overflow-hidden rounded-md border border-black-50 object-cover"
           />
         </Link>
-        <FavouriteButton serviceId={_id} className="absolute right-2 top-2 size-7 rounded-md shadow inline-flex items-center justify-center bg-light" />
+        <FavouriteButton
+          serviceId={_id}
+          className="absolute right-2 top-2 inline-flex size-7 items-center justify-center rounded-md bg-light shadow"
+        />
       </div>
       <Link href={paths.singleArtisan(service.userId)}>
-        <div className="flex gap-1 items-center">
+        <div className="flex items-center gap-1">
           <Suspense fallback={<CardUserSkeleton />}>
             <UserProfile userId={service.userId} />
           </Suspense>
         </div>
       </Link>
-      <p className="truncate text-label text-black-300">
-        {category}
-      </p>
-      <Link href={paths.service(_id)} className="r-font-semibold justify-stretch text-black-400 pb-1 line-clamp-2">
+      <p className="truncate text-label text-black-300">{category}</p>
+      <Link
+        href={paths.service(_id)}
+        className="r-font-semibold line-clamp-2 justify-stretch pb-1 text-black-400"
+      >
         {title}
       </Link>
       <p className="font-bold text-black-600">

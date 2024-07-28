@@ -39,6 +39,7 @@ export function FavouriteButton({
   return (
     <form action={action}>
       <FormButton
+        title="add to favourites"
         {...props}
         className={`inline-flex size-8 items-center justify-center rounded-md bg-light shadow ${className}`}
       >

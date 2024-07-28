@@ -9,6 +9,7 @@ export default function MediaSliderArrows({
   return (
     <>
       <button
+        title="previous slide"
         className="media-slider-arrow"
         onClick={() => {
           const prevIndex =
@@ -19,6 +20,7 @@ export default function MediaSliderArrows({
         <FaChevronLeft />
       </button>
       <button
+        title="next slide"
         className="media-slider-arrow right-1 [left:unset!important]"
         onClick={() => {
           const nextIndex = currentIndex === itemCount ? 1 : currentIndex + 1;

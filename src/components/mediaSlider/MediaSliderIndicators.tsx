@@ -13,7 +13,7 @@ export default function MediaSliderIndicators({
     <div className="flex gap-2">
       {Array.from({ length: itemCount }, (_, i) => {
         return (
-          <button
+          <div
             key={i}
             onClick={() => onChange(i + 1)}
             className={`aspect-square size-3 rounded-full ${
