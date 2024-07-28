@@ -45,7 +45,7 @@ export function DashboardSavedCard({
           className="profile-img h-full w-full rounded object-cover"
         />
       </Link>
-      <div className="flex flex-col gap-1">
+      <div className="flex w-full flex-col gap-1">
         <Link href={paths.service(_id)}>
           <h3 className="text-back-400 line-clamp-2">{title}</h3>
         </Link>

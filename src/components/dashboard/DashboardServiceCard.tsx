@@ -29,7 +29,7 @@ export function DashboardServiceCard(props: DashboardServiceCardProps) {
           className="profile-img h-full w-full rounded object-cover"
         />
       </Link>
-      <div className="flex flex-col gap-1">
+      <div className="flex w-full flex-col gap-1">
         <Link
           href={paths.service(props._id)}
           className="text-back-400 line-clamp-2"
