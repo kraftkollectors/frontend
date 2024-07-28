@@ -47,7 +47,7 @@ export function DashboardSavedCard({
       </Link>
       <div className="flex flex-col gap-1">
         <Link href={paths.service(_id)}>
-          <h3 className="text-back-400 line-clamp-3">{title}</h3>
+          <h3 className="text-back-400 line-clamp-2">{title}</h3>
         </Link>
         <p className="font-semibold text-black-600">
           {formatNumber(Number(estimatedPrice), true)}

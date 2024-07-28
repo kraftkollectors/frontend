@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FaEdit, FaRegEdit } from "react-icons/fa";
 import DeleteServiceModal from "./DeleteServiceModal";
 import { formatNumber } from "@/functions/helpers";
+import { Suspense } from "react";
 
 export type DashboardServiceCardProps = {
   coverPhoto: string;
@@ -28,21 +29,29 @@ export function DashboardServiceCard(props: DashboardServiceCardProps) {
         />
       </Link>
       <div className="flex flex-col gap-1">
-        <Link href={paths.service(props._id)} className="text-back-400">
+        <Link
+          href={paths.service(props._id)}
+          className="text-back-400 line-clamp-2"
+        >
           {title}
         </Link>
         <p className="font-semibold text-black-600">
           {formatNumber(Number(estimatedPrice), true)}
         </p>
-        <div className="flex gap-2">
-          <Link
-            href={paths.dashboardEditService(props._id)}
-            className="edit-btn"
-          >
-            <FaRegEdit />
-            Edit
-          </Link>
-          <DeleteServiceModal {...props} />
+        <div className="flex justify-between">
+          <div className="fleinline-x flex-shrink-0 gap-2">
+            <Link
+              href={paths.dashboardEditService(props._id)}
+              className="edit-btn"
+            >
+              <FaRegEdit />
+              Edit
+            </Link>
+            <DeleteServiceModal {...props} />
+          </div>
+          <Suspense
+            fallback={<div className="skeleton h-5 w-8"></div>}
+          ></Suspense>
         </div>
       </div>
     </div>

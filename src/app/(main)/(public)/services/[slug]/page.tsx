@@ -1,4 +1,3 @@
-
 import { fetchSingleArtisanService } from "@/actions";
 import Main from "./Main";
 import Profile from "./Profile";
@@ -12,44 +11,52 @@ import { FaChevronRight } from "react-icons/fa6";
 
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
+import UpdateServiceViews from "@/components/server/UpdateServiceViews";
 
-export async function generateMetadata({ params }: AppPageProps<{ slug: string }>):Promise<Metadata|null>{
-  const service = await fetchSingleArtisanService(params?.slug ?? '', {isPublic: true});
-  if(!service || service == 'error') return null;
+export async function generateMetadata({
+  params,
+}: AppPageProps<{ slug: string }>): Promise<Metadata | null> {
+  const service = await fetchSingleArtisanService(params?.slug ?? "", {
+    isPublic: true,
+  });
+  if (!service || service == "error") return null;
 
   return staticMetadata({
     title: `KraftKollectors | Service: ${service.title}`,
     description: `Location: ${service.address}, ${service.state}. Description: ${service.description}`,
-    img: service.coverPhoto
-  })
+    img: service.coverPhoto,
+  });
 }
 
-export default async function Page({params}:AppPageProps) {
-  const service = await fetchSingleArtisanService(params.slug, {isPublic: true});
-  if(!service) notFound();
+export default async function Page({ params }: AppPageProps) {
+  const service = await fetchSingleArtisanService(params.slug, {
+    isPublic: true,
+  });
+  if (!service) notFound();
 
-  if(service == 'error') throw new Error("Connection Error")
-  const {category, subCategory, title} = service;
-  
+  if (service == "error") throw new Error("Connection Error");
+  const { category, subCategory, title } = service;
+
   return (
     <>
-    <section className="md:app-container md:pt-5 pb-10 bg-gray-100">
-      <div className="pb-6 flex gap-2 max-md:hidden text-label text-black-400 font-semibold items-center flex-wrap">
-        <span>home</span> <FaChevronRight />
-        <span>{category}</span> <FaChevronRight />
-        <span>{subCategory}</span> <FaChevronRight />
-        <span>{title}</span>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-11 gap-4 md:gap-6">
-        <Main s={service} />
-       <div className="max-md:hidden md:col-span-4 md:sticky top-6 h-fit">
-        <Suspense fallback={<UserProfileSkeleton />}>
-        <Profile userId={service.userId} />
-        </Suspense>
-       </div>
-      </div>
-    </section>
-    <SimilarPosts items={service.similarAds} />
+      <UpdateServiceViews serviceId={service._id} />
+      <section className="md:app-container bg-gray-100 pb-10 md:pt-5">
+        <div className="flex flex-wrap items-center gap-2 pb-6 text-label font-semibold text-black-400 max-md:hidden">
+          <span>home</span> <FaChevronRight />
+          <span>{category}</span> <FaChevronRight />
+          <span>{subCategory}</span> <FaChevronRight />
+          <span>{title}</span>
+        </div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-11 md:gap-6">
+          <Main s={service} />
+          <div className="top-6 h-fit max-md:hidden md:sticky md:col-span-4">
+            <Suspense fallback={<UserProfileSkeleton />}>
+              <Profile userId={service.userId} />
+            </Suspense>
+          </div>
+        </div>
+      </section>
+      <SimilarPosts items={service.similarAds} />
     </>
   );
 }
