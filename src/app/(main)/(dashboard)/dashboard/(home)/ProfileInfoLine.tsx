@@ -14,12 +14,14 @@ export default function ProfileInfoLine({
   hideOnMobile = false,
 }: profileInfoLineProps) {
   return (
-    <div className=" flex justify-between items-center gap-4">
-      <div className="flex gap-1 items-center">
+    <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-shrink-0 items-center gap-1">
         <span className="text-black-300"> {icon} </span>
-        <p className={`text-black-300 ${hideOnMobile ? "max-md:hidden" : ""}`}>{title}</p>
+        <p className={`text-black-300 ${hideOnMobile ? "max-md:hidden" : ""}`}>
+          {title}
+        </p>
       </div>
-      <div className="text-black-900">{value}</div>
+      <div className="line-clamp-1 w-full text-black-900">{value}</div>
     </div>
   );
 }
