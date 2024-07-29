@@ -45,8 +45,10 @@ export default function Profile({
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2 rounded-md md:col-span-4 md:border md:bg-light md:p-6">
       <img src={img} alt="auth image" className="avatar profile-img size-20" />
-      <p className="text-title font-semibold text-black-900 text-center">{name}</p>
-      {profession && <p className="text-black-400">{profession}</p>}
+      <h1 className="text-center text-title font-semibold text-black-900">
+        {name}
+      </h1>
+      {profession && <h2 className="text-black-400">{profession}</h2>}
       {location && (
         <p className="flex items-center text-label">
           <MdOutlineLocationOn />

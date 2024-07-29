@@ -50,26 +50,26 @@ export default async function Reviews({ userId }: { userId: string }) {
   return (
     <section id="Reviews" className="app-container py-10">
       <ReviewsClient />
-      <h1 className="r-font-bold text-title">
+      <h3 className="r-font-bold text-title">
         {reviewsCount.totalRatings} Review
         {reviewsCount.totalRatings == 1 ? "" : "s"}
-      </h1>
+      </h3>
       <div className="flex justify-between max-md:flex-col">
-        <div className="flex flex-col gap-2 w-full md:w-5/12 md:sticky top-0">
-          <h1 className="r-font-semibold text-sm text-dark-gray">
+        <div className="top-0 flex w-full flex-col gap-2 md:sticky md:w-5/12">
+          <h3 className="r-font-semibold text-sm text-dark-gray">
             Overall Rating
-          </h1>
+          </h3>
           <div className="flex items-center gap-2">
-            <h3 className="r-font-bold text-title">{avgRating.toFixed(1)}</h3>
+            <p className="r-font-bold text-title">{avgRating.toFixed(1)}</p>
             <RatingStars value={avgRating} size="lg" />
           </div>
-          <div className="flex flex-col gap-2 max-w-[400px]">
+          <div className="flex max-w-[400px] flex-col gap-2">
             {reviewLines.map((reviewLine) => (
               <ReviewLines key={reviewLine.label} {...reviewLine} />
             ))}
           </div>
         </div>
-        <div className="max-md:pt-10 gap-4 flex-col w-full md:w-6/12">
+        <div className="w-full flex-col gap-4 max-md:pt-10 md:w-6/12">
           {reviews.existingRecords.length == 0 ? (
             <div className="info-box">No Reviews</div>
           ) : (
