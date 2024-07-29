@@ -19,7 +19,7 @@ export default function Hero() {
           <p className="text-light">
             Linking You to the Best Artisans and Experts in Your Area
           </p>
-         
+
           <HeroButton />
         </div>
       </div>

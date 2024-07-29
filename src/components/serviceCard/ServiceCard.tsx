@@ -27,6 +27,7 @@ export function ServiceCard({
           <img
             src={coverPhoto}
             alt={title}
+            loading="lazy"
             className="h-full w-full overflow-hidden rounded-md border border-black-50 object-cover"
           />
         </Link>

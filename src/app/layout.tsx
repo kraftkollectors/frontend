@@ -10,6 +10,7 @@ import { GOOGLE_OAUTH_CLIENT_ID } from "@/utils/constants";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactQueryClient from "./ReactQueryClient";
+import PreloadUrls from "@/components/server/PreloadUrls";
 
 export const metadata: Metadata = {
   title: "KraftKollectors",
@@ -30,6 +31,14 @@ export default function RootLayout({
       <body className={`bg-light text-body font-normal text-black-800`}>
         <ReactQueryClient>
           <Theme>
+            <PreloadUrls
+              urls={[
+                "/fonts/Eina01-Bold/Web Fonts/2d57f676e3d6955778fb8acac0176b9a.woff2",
+                "/fonts/Eina01-Regular/Web Fonts/1868e326d3ee28e5395f6efa2bc037bf.woff2",
+                "/fonts/Eina01-SemiBold/Web Fonts/032d6b2c34344e22d2cbca6b7050d642.woff2",
+                "https://fonts.cdnfonts.com/css/sf-pro-display",
+              ]}
+            />
             <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIENT_ID}>
               {children}
             </GoogleOAuthProvider>

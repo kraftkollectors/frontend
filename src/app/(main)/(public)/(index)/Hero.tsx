@@ -18,9 +18,9 @@ export default function Hero() {
           <h1 className="text-headline font-semibold text-black-50 md:text-headlineBig">
             Find Professionals Nearby
           </h1>
-          <p className="text-light">
+          <h2 className="text-light">
             Linking You to the Best Artisans and Experts in Your Area
-          </p>
+          </h2>
           <div className="text-start [&>*]:rounded-lg [&>*]:bg-light [&>div>form]:min-h-[42px]">
             <Suspense>
               <NavSearch />

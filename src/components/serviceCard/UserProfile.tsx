@@ -20,6 +20,7 @@ export default async function UserProfile({ userId }: { userId: string }) {
   return (
     <>
       <img
+        loading="lazy"
         src={artisan.image}
         alt={"service by: " + fullname}
         className="avatar profile-img size-6 flex-shrink-0"
