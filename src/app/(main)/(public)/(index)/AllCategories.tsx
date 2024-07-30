@@ -10,7 +10,7 @@ export default function AllCategories() {
                 {
                     categories.map((category, index) => (
                         <Link key={index}
-                        href={`/search?category=${encodeURIComponent(category.title)}`}
+                        href={`/search?category=${category.title}`}
                         className="relative block aspect-[4/3] rounded-lg overflow-hidden bg-cover bg-center"
                         style={{ backgroundImage: `url(${category.image})` }}
                         >

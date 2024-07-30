@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { formatMedia } from "@/functions/media";
-import MediaSliderCard from "./MediaSliderCard";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import MediaSliderIndicators from "./MediaSliderIndicators";
 import MediaSliderArrows from "./MediaSliderArrows";
@@ -15,6 +13,18 @@ export type MediaSliderProps = {
 
 export function AdsSlider({ ads }: MediaSliderProps) {
   const [index, setIndex] = useState(1);
+  const int = useRef<any>(null);
+  useEffect(()=>{
+    if(int.current) clearInterval(int.current);
+    int.current = setInterval(() => {
+      if (index === ads.length) {
+        setIndex(1);
+      } else {
+        setIndex((i) => i + 1);
+      }
+    }, 4000);
+    return () => clearInterval(int.current);
+  }, [index])
 
   return (
     <div className="flex w-full flex-col gap-3">
