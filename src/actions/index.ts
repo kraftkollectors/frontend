@@ -61,3 +61,4 @@ export { updateArtisanSocials } from "./update/updateArtisanSocials";
 export { updateArtisanDescription } from "./update/updateArtisanDescription";
 export { updateArtisanAwayMessage } from "./update/updateArtisanAwayMessage";
 export { updateUserPassword } from "./update/updateUserPassword";
+export { updateUserNotificationSettings } from "./update/updateUserNotificationSettings";

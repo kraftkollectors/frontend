@@ -17,6 +17,8 @@ export type UserDetails = {
     updatedAt: string;
     lastSeen: string;
     paymentPlan: string;
+    notify: boolean;
+    notifyReview: boolean;
     __v: number;
   };
 
