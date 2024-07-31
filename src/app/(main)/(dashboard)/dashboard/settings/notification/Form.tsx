@@ -25,6 +25,8 @@ export default function Form() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res])
+
+  if(user)
   return (
     <form action={action} className="flex flex-col gap-4">
       <FormMessage res={res} />
