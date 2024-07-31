@@ -7,7 +7,7 @@ import UserAuth from "@/components/server/UserAuth";
 import AppCheckTile from "@/components/ui/AppCheckTile";
 import { useUserStore } from "@/state";
 import { paths } from "@/utils";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useLayoutEffect } from "react";
 import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
