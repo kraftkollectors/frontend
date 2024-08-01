@@ -7,17 +7,22 @@ import {
 import WriteReview from "./WriteReview";
 import { fetchServiceRatings } from "@/actions";
 import { CummulativeReview } from "@/utils/types/review";
+import { buildUrlQuery } from "@/functions/helpers";
 
 export default async function Reviews({
   serviceId,
   cummulative: { totalRatings, averageRating },
   ownerId,
+  page,
 }: {
   ownerId: string;
   serviceId: string;
   cummulative: CummulativeReview;
+  page?: string;
 }) {
-  const reviews = await fetchServiceRatings(serviceId);
+  const reviews = await fetchServiceRatings(serviceId, {
+    params: buildUrlQuery({ page }),
+  });
   if (!reviews || reviews == "error") return <></>;
 
   return (

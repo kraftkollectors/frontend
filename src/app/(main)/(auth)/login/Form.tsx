@@ -12,33 +12,51 @@ import { useRouter } from "next/navigation";
 import { paths } from "@/utils";
 
 export default function LoginForm() {
-  const {push} = useRouter();
-    const [res, action] = useFormState(login, {});
-    const [verify, setVerify] = useState(false);
-    useEffect(()=>{
-      if(res.error !== 'verify email first') return;
+  const { push } = useRouter();
+  const [res, action] = useFormState(login, {});
+  const [verify, setVerify] = useState(false);
+  useEffect(() => {
+    if (res.error !== "verify email first") return;
 
-      async function sendCode(){
-        const sent = await resendVerificationCode(res.data);
-        if(sent) setVerify(true);
-      }
+    async function sendCode() {
+      const sent = await resendVerificationCode(res.data);
+      if (sent) setVerify(true);
+    }
 
-      sendCode();
-      
-    }, [res])
+    sendCode();
+  }, [res]);
 
   return (
     <form action={action} className="flex flex-col gap-3 py-3">
       <FormMessage res={res} />
-      {loginFields.map(item => {
-        return <AppInput key={item.name} {...item} hidden={verify} type={verify ? 'hidden' : item.type} />;
+      {loginFields.map((item) => {
+        return (
+          <AppInput
+            key={item.name}
+            {...item}
+            hidden={verify}
+            type={verify ? "hidden" : item.type}
+          />
+        );
       })}
-      {verify && <p className="text-black-400 font-semibold">Enter the verification code / token sent to your email</p>}
-      {verify && <AppInput name="token" type="number" title="Token" placeholder="Enter verification code" inputProps={{required:true}} />}
-      <div className="flex justify-end"> 
+      {verify && (
+        <p className="font-semibold text-black-400">
+          Enter the verification code / token sent to your email
+        </p>
+      )}
+      {verify && (
+        <AppInput
+          name="token"
+          type="number"
+          title="Token"
+          placeholder="Enter verification code"
+          inputProps={{ required: true }}
+        />
+      )}
+      <div className="flex justify-end">
         <Link
           href="/forgot-password"
-          className="text-black-500 font-semibold text-label underline"
+          className="text-label font-semibold text-black-500 underline"
         >
           Forgot Password?
         </Link>
@@ -54,11 +72,13 @@ const loginFields: AppInputProps[] = [
     title: "Email",
     type: "email",
     placeholder: "Email Address",
+    inputProps: { required: true },
   },
   {
     name: "password",
     title: "Password",
     type: "password",
     placeholder: "Enter your Password",
-  }
+    inputProps: { required: true },
+  },
 ];

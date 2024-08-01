@@ -5,14 +5,18 @@ import { Pagination } from "@/components";
 
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
+import { buildUrlQuery } from "@/functions/helpers";
+import { AppPageProps } from "@/utils/types/basicTypes";
 
 export const metadata: Metadata = staticMetadata({
   title: "KraftKollectors | My Saved Services",
   description: "services saved by me",
 });
 
-export default async function Page() {
-  const services = await fetchSavedServices();
+export default async function Page({ searchParams }: AppPageProps) {
+  const services = await fetchSavedServices({
+    params: buildUrlQuery(searchParams),
+  });
   if (services == "error" || !services)
     return <div className="info-box">An Error Occurred</div>;
 

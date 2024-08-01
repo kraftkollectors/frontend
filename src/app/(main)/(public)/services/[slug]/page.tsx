@@ -28,7 +28,7 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({ params }: AppPageProps) {
+export default async function Page({ params, searchParams }: AppPageProps) {
   const service = await fetchSingleArtisanService(params.slug, {
     isPublic: true,
   });
@@ -48,7 +48,7 @@ export default async function Page({ params }: AppPageProps) {
           <span>{title}</span>
         </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-11 md:gap-6">
-          <Main s={service} />
+          <Main s={service} reviewsPage={searchParams.page} />
           <div className="top-6 h-fit max-md:hidden md:sticky md:col-span-4">
             <Suspense fallback={<UserProfileSkeleton />}>
               <Profile userId={service.userId} />

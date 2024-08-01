@@ -5,19 +5,23 @@ import { fetchArtisanServices, fetchUser } from "@/actions";
 import { NotAnArtisan, Pagination } from "@/components";
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
+import { buildUrlQuery } from "@/functions/helpers";
+import { AppPageProps } from "@/utils/types/basicTypes";
 
 export const metadata: Metadata = staticMetadata({
   title: "KraftKollectors | My Services",
   description: "services provided by me",
 });
 
-export default async function Page() {
+export default async function Page({ searchParams }: AppPageProps) {
   const user = await fetchUser();
   if (!user || user == "error")
     return <div className="info-box">An Error Occurred</div>;
   if (!user.isArtisan) return <NotAnArtisan />;
 
-  const services = await fetchArtisanServices();
+  const services = await fetchArtisanServices({
+    params: buildUrlQuery(searchParams),
+  });
   if (services == "error" || !services)
     return <div className="info-box">An Error Occurred</div>;
 
