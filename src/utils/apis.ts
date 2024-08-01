@@ -325,6 +325,11 @@ const apis = {
    */
   adminSingleUser: (userId: string) => `${admin}/users/${userId}`,
   /**
+   * GET - get all artisans.
+   * q = search
+   */
+  getArtisans: `${users}/artisans`,
+  /**
      * GET - get all users.
      * sort = date | a-z
         artisanOnly = true(only artisans) | false(only users) (if not set, return all users)
