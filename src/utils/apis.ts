@@ -328,7 +328,7 @@ const apis = {
    * GET - get all artisans.
    * q = search
    */
-  getArtisans: `${users}/artisans`,
+  getArtisans: `${admin}${users}/artisans`,
   /**
      * GET - get all users.
      * sort = date | a-z
