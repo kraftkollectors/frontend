@@ -27,7 +27,10 @@ export async function generateMetadata({
   });
 }
 
-export default async function Page({ params }: AppPageProps<{ slug: string }>) {
+export default async function Page({
+  params,
+  searchParams,
+}: AppPageProps<{ slug: string }>) {
   const userId = params?.slug;
   if (!userId) notFound();
   const user = await fetchUser({ isPublic: true, params: userId });
@@ -42,7 +45,9 @@ export default async function Page({ params }: AppPageProps<{ slug: string }>) {
   return (
     <>
       <section className="app-container bg-light-text py-10">
-        <div className={`${user.isArtisan ? 'grid grid-cols-1 gap-4 md:grid-cols-10 md:gap-6 lg:grid-cols-11 ' : 'flex [&>div]:max-w-[400px] justify-center items-center'}`}>
+        <div
+          className={`${user.isArtisan ? "grid grid-cols-1 gap-4 md:grid-cols-10 md:gap-6 lg:grid-cols-11" : "flex items-center justify-center [&>div]:max-w-[400px]"}`}
+        >
           <Profile
             userId={user._id}
             memberSince={formatDate(user.createdAt).split("/").pop() ?? "--"}
@@ -64,7 +69,7 @@ export default async function Page({ params }: AppPageProps<{ slug: string }>) {
       {user.isArtisan && (
         <>
           <MyServices userId={user._id} />
-          <Reviews userId={user._id} />
+          <Reviews page={searchParams.page ?? "1"} userId={user._id} />
         </>
       )}
     </>

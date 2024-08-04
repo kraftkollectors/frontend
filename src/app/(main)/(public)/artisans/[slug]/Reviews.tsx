@@ -12,11 +12,17 @@ import { Suspense } from "react";
 import { paths } from "@/utils";
 import { debugLog } from "@/functions/helpers";
 
-export default async function Reviews({ userId }: { userId: string }) {
+export default async function Reviews({
+  userId,
+  page = "1",
+}: {
+  userId: string;
+  page: string;
+}) {
   const reviews = await fetchUserReviews({
     throwsError: false,
     isPublic: true,
-    params: userId,
+    params: `userId?page=${page}`,
   });
   if (!reviews || reviews == "error")
     return <div className="info-box">Failed to get reviews</div>;
