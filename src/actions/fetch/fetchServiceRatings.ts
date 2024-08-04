@@ -11,15 +11,19 @@ import {
 } from "@/utils/types/basicTypes";
 import { ServerActionParams } from "@/utils/types/actions";
 import { Review } from "@/utils/types/review";
+import { ApiRequest } from "@/utils/apiRequest";
 
 export async function fetchServiceRatings(
   serviceId: string,
-  { throwsError = false }: ServerActionParams = {},
+  { throwsError = false, params = "" }: ServerActionParams = {},
 ): Promise<ActionApiResponse<Paginated<Review>>> {
   try {
-    const req = await ServerApiRequest.get(apis.getServiceRatings(serviceId), {
-      next: { tags: [tags.serviceReviews(serviceId)] },
-    });
+    const req = await ApiRequest.getJson(
+      apis.getServiceRatings(serviceId) + params,
+      {
+        next: { tags: [tags.serviceReviews(serviceId)] },
+      },
+    );
     if (!req) return null;
     const res = (await req.json()) as ApiResponse;
     // debugLog(res.data.existingRecords);
