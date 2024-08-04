@@ -8,6 +8,7 @@ import WriteReview from "./WriteReview";
 import { fetchServiceRatings } from "@/actions";
 import { CummulativeReview } from "@/utils/types/review";
 import { buildUrlQuery } from "@/functions/helpers";
+import { Suspense } from "react";
 
 export default async function Reviews({
   serviceId,
@@ -26,7 +27,7 @@ export default async function Reviews({
   if (!reviews || reviews == "error") return <></>;
 
   return (
-    <section className="py-4">
+    <section id="Reviews" className="py-4">
       <h1 className="r-font-bold text-title">
         {totalRatings} Review{totalRatings === 1 ? "" : "s"}
       </h1>
@@ -47,7 +48,9 @@ export default async function Reviews({
           <ArtisanReviewCard key={review._id} {...review} showService={false} />
         ))}
       </div>
-      <Pagination className="pt-4" pagination={reviews} />
+      <Suspense>
+        <Pagination className="pt-4" pagination={reviews} hash="Reviews" />
+      </Suspense>
     </section>
   );
 }

@@ -28,7 +28,7 @@ export async function fetchUsers({
           next: { tags: [tags.user, tags.artisan] },
         }));
     const res = (await req?.json()) as ApiResponse<Paginated<UserDetails>>;
-    // debugLog({params});
+    debugLog({ params, res, isPublic });
 
     if (res.statusCode === 201) return res.data;
     if (throwsError) throw new Error("Unable to connect");

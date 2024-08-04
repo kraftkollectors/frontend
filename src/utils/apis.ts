@@ -1,4 +1,4 @@
-const API = "https://backends-865y.onrender.com";
+const API = "https://backends-865y.onrender.com" as const;
 const STATES_AND_CITIES_API = "https://abundiko-api.vercel.app/api";
 const admin = API + "/admin";
 const users = API + "/users";
@@ -328,7 +328,7 @@ const apis = {
    * GET - get all artisans.
    * q = search
    */
-  getArtisans: `${admin}${users}/artisans`,
+  getArtisans: `${admin}/users/artisans`,
   /**
      * GET - get all users.
      * sort = date | a-z
