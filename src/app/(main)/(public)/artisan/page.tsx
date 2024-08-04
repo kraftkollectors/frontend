@@ -27,7 +27,6 @@ export default async function SearchPage({
   const artisans = await fetchUsers({
     throwsError: false,
     isPublic: true,
-    params: "?artisanOnly=true",
   });
   if (!artisans || artisans == "error") throw new Error("Connection error");
 

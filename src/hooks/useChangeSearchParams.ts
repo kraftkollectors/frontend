@@ -1,9 +1,12 @@
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useCallback } from "react";
 
-export type AppJson = {[key:string]:string};
+export type AppJson = { [key: string]: string };
 
-export function useChangeSearchParams(path:string|undefined = undefined) {
+export function useChangeSearchParams(
+  path: string | undefined = undefined,
+  hash = "",
+) {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -18,23 +21,24 @@ export function useChangeSearchParams(path:string|undefined = undefined) {
 
       return _params.toString();
     },
-    [params]
+    [params],
   );
 
-  const pushParams = (
-    obj: AppJson
-  ) => {
-    
+  const pushParams = (obj: AppJson) => {
     router.push(
-     ( path ?? pathname )+ "?" + createQueryString(obj)
+      (path ?? pathname) +
+        "?" +
+        createQueryString(obj) +
+        (hash ? `#${hash}` : ""),
     );
   };
 
-  const replaceParams = (
-    obj: AppJson
-  ) => {
+  const replaceParams = (obj: AppJson) => {
     router.replace(
-      ( path ?? pathname )+ "?" + createQueryString(obj)
+      (path ?? pathname) +
+        "?" +
+        createQueryString(obj) +
+        (hash ? `#${hash}` : ""),
     );
   };
 

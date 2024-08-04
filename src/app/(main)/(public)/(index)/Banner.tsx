@@ -4,9 +4,9 @@ import Link from "next/link";
 export default function Banner() {
   return (
     <section className="app-container py-16">
-      <div className=" grid md:grid-cols-2 rounded-2xl overflow-hidden">
-        <div className="bg-primary-darkActive app-container py-10 max-md:text-center flex flex-col gap-4 text-light justify-center ">
-          <p className="text-headline font-bold ">
+      <div className="grid overflow-hidden rounded-2xl md:grid-cols-2">
+        <div className="app-container flex flex-col justify-center gap-4 bg-primary-darkActive py-10 text-light max-md:text-center">
+          <p className="text-headline font-bold">
             Ready to Elevate Your Kraft and Skill?
           </p>
           <p>
@@ -14,19 +14,22 @@ export default function Banner() {
             intuitive geolocation feature. Download our app now and connect with
             skilled artisans and service providers on the go.
           </p>
-          <Link href={paths.becomeASeller} className="max-sm:w-full btn-light w-fit px-6">
+          <Link
+            href={paths.becomeASeller}
+            className="btn-light w-fit px-6 max-sm:w-full"
+          >
             Become an artisan
           </Link>
         </div>
-        <div className="w-full h-full relative">
+        <div className="relative h-full w-full">
           <Image
-            src="/images/hero-bg.jpeg"
+            src="/images/banner.jpeg"
             alt=""
             width={600}
             height={600}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
           />
-          <div className="absolute w-full h-full top-0 left-0 bg-primary-darkActive bg-opacity-[0.75]"></div>
+          <div className="absolute left-0 top-0 h-full w-full bg-primary-darkActive bg-opacity-[0.75]"></div>
         </div>
       </div>
     </section>

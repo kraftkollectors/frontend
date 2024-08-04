@@ -83,7 +83,8 @@ export default async function Reviews({ userId }: { userId: string }) {
         {reviews.totalPages > 1 && (
           <Pagination
             pagination={reviews}
-            baseUrl={paths.singleArtisan(userId + "#Reviews")}
+            baseUrl={paths.singleArtisan(userId)}
+            hash="Reviews"
           />
         )}
       </Suspense>
