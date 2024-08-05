@@ -252,6 +252,12 @@ const apis = {
   userReviewsCount: (userId: string) =>
     API + "/users/userreviewscount/" + userId,
   /**
+   * GET - get the reviews count of a service
+   * @param id (the service _id)
+   */
+  serviceReviewsCount: (serviceId: string) =>
+    API + "/users/servicereviewscount/" + serviceId,
+  /**
    * GET - get the ratings of a service
    * @param id (the service _id)
    */

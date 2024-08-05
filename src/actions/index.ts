@@ -28,6 +28,7 @@ export { fetchAdverts } from "./fetch/fetchAdverts";
 export { fetchReports } from "./fetch/fetchReports";
 export { fetchServiceViews } from "./fetch/fetchServiceViews";
 export { fetchServiceTotalViews } from "./fetch/fetchServiceTotalViews";
+export { fetchServiceReviewsCount } from "./fetch/fetchServiceReviewsCount";
 
 export { newEducation } from "./new/newEducation";
 export { newCertificate } from "./new/newCertificate";

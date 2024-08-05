@@ -22,7 +22,7 @@ export default async function Reviews({
   const reviews = await fetchUserReviews({
     throwsError: false,
     isPublic: true,
-    params: `userId?page=${page}`,
+    params: `${userId}?page=${page}`,
   });
   if (!reviews || reviews == "error")
     return <div className="info-box">Failed to get reviews</div>;
