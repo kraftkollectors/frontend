@@ -24,9 +24,9 @@ export default async function ArtisanCardReviews({
     return <div className="skeleton h-4 w-8"></div>;
 
   const avgRating =
-    reviewsCount.sumRating / reviewsCount.totalRatings == 0
-      ? 1
-      : reviewsCount.totalRatings;
+    reviewsCount.totalRatings == 0
+      ? 0
+      : reviewsCount.sumRating / reviewsCount.totalRatings;
 
   return (
     <div className="flex items-center gap-2">
