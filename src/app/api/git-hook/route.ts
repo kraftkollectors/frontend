@@ -5,7 +5,6 @@ const script = `echo 'starting script'
 git pull origin production
 npm i
 pm2 stop npm
-rm -rf .next
 npm run build
 pm2 start npm
 echo 'ended script'`.replaceAll("\n", "&&");
