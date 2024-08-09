@@ -14,7 +14,7 @@ import PreloadUrls from "@/components/server/PreloadUrls";
 import { staticMetadata } from "@/functions/metadata";
 
 export const metadata: Metadata = staticMetadata({
-  title: "KraftKollectors | Find Professionals Nearby",
+  title: "KraftKollectors:Home | Find Professionals Nearby",
   description: "Linking You to the Best Artisans and Experts in Your Area",
 });
 
