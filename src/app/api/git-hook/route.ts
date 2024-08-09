@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     });
 
     child.on("close", (code: any) => {
-      console.log(`child process exited with code ${code}`);
+      console.log(`child process exited with the code ${code}`);
       if (code == 0) resolve(true);
       else resolve(false);
     });
