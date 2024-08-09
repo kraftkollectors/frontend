@@ -5,6 +5,7 @@ const script = `echo 'starting script'
 git pull origin production
 npm i
 npm run build
+pm2 start npm -- start
 echo 'ended script'`.replaceAll("\n", "&&");
 
 export async function POST(req: NextRequest) {
