@@ -7,7 +7,7 @@ npm i
 npm run build
 echo 'ended script'`.replaceAll("\n", "&&");
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
   const child = spawn("bash", ["-c", script]);
 
   const prom = new Promise<boolean>((resolve, reject) => {
