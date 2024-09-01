@@ -6,4 +6,4 @@ git add .
 
 git commit -m "working on admin forgot password"
 
-git push origin dev
+git push origin production
