@@ -13,7 +13,7 @@ export function ChatInfoMessage({
   let className: string;
   switch (type) {
     case "warning":
-      className = "text-yellow-800 bg-yellow-50";
+      className = "text-[#A87B3B] bg-[#FAF1E5]";
       break;
     case "danger":
       className = "text-red-800 bg-red-50";
@@ -27,9 +27,9 @@ export function ChatInfoMessage({
   }
 
   return (
-    <div className="flex justify-center items-center px-4 py-1 sticky left-0 top-0 bg-light-text">
+    <div className="sticky left-0 top-0 z-[2] flex items-center justify-center bg-black-50 px-4 py-1">
       <div
-        className={`text-label py-1 rounded-md px-2 ${className} flex flex-wrap items-center gap-1`}
+        className={`rounded-md px-2 py-1 text-label ${className} flex flex-wrap items-center gap-1 font-semibold`}
       >
         {type === "warning" && <IoWarningOutline />}
         {message}

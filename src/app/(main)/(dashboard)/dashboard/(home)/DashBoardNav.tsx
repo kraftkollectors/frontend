@@ -9,7 +9,7 @@ export default function DashBoardNav() {
   const vw = useWindowWidth();
 
   return (
-    <div className="flex gap-4 pt-2 px-2 max-md:justify-between">
+    <div className="flex gap-4 pt-2 px-6 max-md:justify-between">
       {services.map((service) => {
         const isActive = path == service.href;
         const isMobile = vw <= 768;
@@ -22,10 +22,10 @@ export default function DashBoardNav() {
         if (!hideProfile)
           return (
             <Link
-              className={`border-b-2 ${
+              className={`border-b-2 font-semibold ${
                 isActive || servicesActive
-                  ? " border-primary font-semibold"
-                  : "border-transparent"
+                  ? " border-primary text-black-900"
+                  : "border-transparent text-black-300"
               }`}
               key={service.href}
               {...service}

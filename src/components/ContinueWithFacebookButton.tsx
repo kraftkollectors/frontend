@@ -1,6 +1,7 @@
 export function ContinueWithFacebookButton() {
   return (
-    <button className="btn-dark-border gap-2">
+    <>
+    {/* <button className="btn-dark-border gap-2 p-2">
       <svg
         width="24"
         height="24"
@@ -18,6 +19,7 @@ export function ContinueWithFacebookButton() {
         />
       </svg>
       <span>Continue with Facebook</span>
-    </button>
+    </button> */}
+    </>
   );
 }

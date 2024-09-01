@@ -1,11 +1,13 @@
 import { AppLayoutProps } from '@/utils/types/basicTypes'
-import type { Metadata } from 'next'
 import MainLayout from './MainLayout'
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
 
-export const metadata: Metadata = {
-	title: 'Create Next App',
-	description: 'Create Next App with TypeScript, Tailwind CSS, NextAuth, Prisma, tRPC, and more.',
-}
+export const metadata:Metadata = staticMetadata({
+  title: "KraftKollectors | Settings",
+  description: "settings and preferences"
+})
+
 
 export default function Layout({
 	children,

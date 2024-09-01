@@ -1,34 +1,60 @@
 "use client";
 
-import { AppPageProps } from "@/utils/types/basicTypes";
-import SideBar from "./SideBar";
+import { AppLayoutProps } from "@/utils/types/basicTypes";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import paths from "@/utils/paths";
-import Conversations from "./Conversations";
+import { ReactNode, useEffect, useRef } from "react";
+import { useEffectOnce } from "react-use";
+import { toast } from "react-toastify";
 
-export default function MainLayout({ children }: AppPageProps) {
+export default function MainLayout({
+  children,
+  sideBar,
+}: AppLayoutProps & {
+  // chatHeads: Paginated<any>;
+  sideBar: ReactNode;
+}) {
+  // const {} = useWS();
+
   const pathname = usePathname();
   const vw = useWindowWidth();
 
   return (
-    <main className="md:app-container md:py-10 md:bg-light-text md:max-h-screen md:h-screen">
-      <div className="md:grid md:grid-cols-10 gap-4 md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)]">
-        {(pathname === paths.dashboardChats ||
-          pathname === paths.dashboardChats + "/" ||
-          vw >= 768) &&
-          <div className="md:col-span-4 h-full  md:h-[calc(100vh-5rem)]">
-            <SideBar />
-          </div>}
+    <main
+      id="ChatView"
+      className="md:app-container md:h-screen md:max-h-screen md:bg-light-text md:py-10"
+    >
+      <div className="gap-4 md:grid md:h-[calc(100vh-64px)] md:max-h-[calc(100vh-64px)] md:grid-cols-10">
+        {
+          <div
+            className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)] ${
+              pathname === paths.dashboardChats ||
+              pathname === paths.dashboardChats + "/"
+                ? "md:hidden"
+                : "hidden"
+            }`}
+          >
+            {sideBar}
+          </div>
+        }
+
+        {pathname.startsWith(paths.dashboardChats) && vw >= 768 && (
+          <div className={`h-full md:col-span-4 md:h-[calc(100vh-5rem)]`}>
+            {sideBar}
+          </div>
+        )}
+
         {((!(
           pathname === paths.dashboardChats ||
           pathname === paths.dashboardChats + "/"
         ) &&
           vw < 768) ||
-          vw >= 768) &&
-          <div className="col-span-6 bg-light rounded-md md:border border-black-50  max-w-[700px] w-full h-screen md:h-[calc(100vh-5rem)]">
+          vw >= 768) && (
+          <div className="col-span-6 h-screen w-full max-w-[700px] rounded-md border-black-50 bg-light md:h-[calc(100vh-5rem)] md:border">
             {children}
-          </div>}
+          </div>
+        )}
       </div>
     </main>
   );

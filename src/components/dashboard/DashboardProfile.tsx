@@ -1,20 +1,23 @@
+/* eslint-disable @next/next/no-img-element */
+"use client";
 
-export type DashboardProfileProps = {
-    image: string;
-  fullName: string;
-  email: string;
-}
+import { fallbackImage } from "@/functions/helpers";
+import { useUserStore } from "@/state";
 
-export default function DashboardProfile(props: DashboardProfileProps) {
-    return (
-        <div className="flex flex-col gap-2 items-center py-4">
-        <img
-          src={props.image}
-          alt=""
-          className="rounded-full size-16 object-ccover"
-        />
-        <p className="font-semibold text-title">{props.fullName}</p>
-        <p className="">{props.email}</p>
-      </div>
-    );
+
+export default function DashboardProfile() {
+  const user = useUserStore((s) => s.user);
+  return (
+    <div className="flex flex-col gap-2 items-center py-4">
+      <img
+        src={fallbackImage(user?.image)}
+        alt={user?.userName}
+        height={124}
+        width={124}
+        className="rounded-full size-[124px] avatar object-cover profile-img"
+      />
+      <p className="font-semibold text-title">{user?.userName}</p>
+      <p className="">{user?.email}</p>
+    </div>
+  );
 }

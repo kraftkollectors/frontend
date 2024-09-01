@@ -4,6 +4,7 @@ import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
 export type AppRangeSliderProps = {
   min: number;
   max: number;
+  value: [number, number];
   onChange: (e: ChangeResult) => void;
 };
 
@@ -11,16 +12,16 @@ export default function AppRangeSlider({
   min,
   max,
   onChange,
+  value,
 }: AppRangeSliderProps) {
   return (
     <MultiRangeSlider
       min={min}
       max={max}
       canMinMaxValueSame={false}
-      onInput={(e: ChangeResult) => {
-        // setMinValue(e.minValue);
-        // setMaxValue(e.maxValue);
-      }}
+      minValue={value[0]}
+      maxValue={value[1]}
+      onInput={onChange}
       onChange={onChange}
       label={false}
       ruler={false}

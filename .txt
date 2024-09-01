@@ -1,0 +1,247 @@
+API Endpoints
+root route: https://backends-865y.onrender.com
+
+users ends:
+Onboarding routes
+/users
+
+get "", testServer
+post "/login", loginUser. data to send
+	email: string,
+    	password: string 
+
+post "/google/login" thirdPartyLogin. data to send
+	email: string
+
+post "/google/signup" thirdPartyCreate. data to send
+	firstName: string,
+    	lastName: string,
+    	email: string,
+    	gender: string,
+	
+post "/register" createUser. data to send
+	firstName: string,
+    	lastName: string,
+    	userName: string,
+    	email: string,
+    	password: string,
+    	gender: string,
+
+post "/verifyemail" verifyUserEmail. data to send
+	email: string
+
+post "/otpagain" createOTP (incase user didnt get any otp. send again) data to send
+	email: string
+
+post "/forgot" userForgotPassword. data to send
+	email: string
+
+post "/reset" userResetPassword. data to send
+	email: string
+	password: string
+
+
+// Upload Files to Cloud And Get UploadURL
+post "/geturl" data to send.
+	formdata: file
+
+
+// Authenticated Routes (add x-access-token: jwt_token in the header and add userEmail for each post and patch request in the body)
+	// users
+
+		get "/dashboard/:userid" getUser
+
+		patch "/dashboard/profile/:userid" editUser. data to send
+			user profile datas
+
+		patch "/dashboard/password/:userid" editUserPassword. data to send
+			password: string
+
+	// post adds (not tested. dont run. logic or route might change)
+
+		post "/adds" postAd. data to send
+			userId: string,
+    			title: string,
+    			category: string,
+    			description: string,
+    			amount: number,
+    			location: string,
+    			coverPhoto: string,
+    			publicId: string,
+    			portfolio: string
+		
+		patch "/adds/:id" editAd. data to send
+			adds datas
+
+		patch "/adds/edit/:id" enableDisableAd. data to send
+			active: boolean (true / false)
+
+		delete "/adds/:id" deleteAd
+
+		get "/adds" getAllAd. has pagination. limit is 10. query is ?page=pagenumber
+
+		get "/adds/:id" getSingleAd
+
+		get "/myadds/:userid" getUserAds. has pagination. limit is 10. query is ?page=pagenumber		
+
+
+	// become an artisan
+		post "/artisan" becomeArtisan. (for now nin verify is not working cause its not free). data to send
+			userId: string,
+    			userEmail: string,
+    			picture: string,
+    			workHourFrom: string,
+   			workHourTo: string,
+    			website: string,
+    			instagram: string,
+    			twitter: string,
+    			facebook: string,
+    			linkedln: string,
+    			phoneNumber: string,
+    			description: string,
+    			firstName: string,
+    			lastName: string,
+    			businessName: string,
+    			location: string,
+    			areaOfSpecialization: string,
+    			nin: string,
+		
+		get "/artisan/:userid" getArtisanData
+
+		post "/certificate" createCertificate. data to be sent
+			userId: string,
+    			userEmail: string
+    			certificate: string,
+    			certifiedBy: string,
+    			year: string,
+
+		get "/certificate/:userid" getUserCertificate
+
+		get "/certificate/single/:id" getSingleCertificate
+
+ 		patch "/certificate/:id" editCertificate. data to send
+			certificate datas
+
+		delete "/certificate/:id" deleteCertificate
+
+		router "/education" createEducation. data to send
+			userId: string,
+    			userEmail: string,
+    			university: string,
+    			degree: string,
+    			areaOfStudy: string,
+    			year: string
+
+		get "/education/:userid" getUserEducation
+
+		get "/education/single/:id" getSingleEducation
+
+		patch "/education/:id" editEducation. data to send
+			education datas
+
+		delete "/education/:id" deleteEducation
+
+
+	// payment and transaction history. note: not tested
+		post "/pay/:userid" savePaymenthistory. data to send
+			userId: string
+			plan: string
+			amount: number
+			days: number
+			
+		get "/pay/:userid" getAllUserPayment
+
+
+
+users/rateads/serviceID         GET    to get reviews for an add. the the one i sent last was to create reviws
+
+
+On Thu, Jun 6, 2024 at 7:46 PM chuks chibyke <chukschibyke92@gmail.com> wrote:
+users/contact       POST
+users/savead         POST
+users/getsavead/:userid     GET
+users/savead/:id    DELETE
+
+users/reportad        POST
+users/rateads         POST
+
+
+
+
+
+
+
+
+
+
+
+admins ends: not fully tested. but should work
+Onboarding routes
+/admin
+
+get "", testServer
+post "/login", loginDriver. data to send
+	email: string,
+    	password: string
+	
+post "/register" createDriver. data to send
+	email: string,
+    	password: string
+
+post "/otpagain" createOTP (incase driver didnt get any otp. send again) data to send
+	email: string
+
+post "/forgot" userForgotPassword. data to send
+	email: string
+
+post "/reset" userResetPassword. data to send
+	email: string
+	password: string
+
+
+// Authenticated Routes (add x-access-token: jwt_token in the header and add adminEmail for each post and patch request in the body)
+	// admin
+
+		get "/dashboard/:adminid" getAdmin
+
+		patch "/dashboard/password/:adminid" editAdminPassword. data to send
+			password: string
+
+	// users routes
+		
+		get "/users" getAllUsers. has pagination. limit is 10. query is ?page=pagenumber, and can search ?keyword=username
+
+		get "/users/:id" getSingleUser
+
+		patch "/users/:id" enableDisableUser. data to send
+			active: boolean (true / false)
+
+		delete "/users/:id" deleteUser		
+
+
+	// transactions routes
+		
+		get "/transactions" getAllTransactions. has pagination. limit is 10. query is ?page=pagenumber
+
+		get "/transactions/:id" getSingleTransaction
+
+		get "transactions/users/:userid" getUserTransactions. . has pagination. limit is 10. query is ?page=pagenumber
+
+		patch "transactions/:id" enableDisableTransaction. data to send
+			active: boolean (true / false)
+
+		delete "/transactions/:id" deleteUser
+
+
+	// post ads routes
+		
+		get "/ads" getAllAds. has pagination. limit is 10. query is ?page=pagenumber
+
+		get "/ads/:id" getSingleAd
+
+		get "ads/users/:userid" getUserAds. . has pagination. limit is 10. query is ?page=pagenumber
+
+		patch "ads/:id" enableDisableTransaction. data to send
+			active: boolean (true / false)
+
+		delete "/ads/:id" deleteUser

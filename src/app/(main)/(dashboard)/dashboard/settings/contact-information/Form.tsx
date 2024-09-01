@@ -1,29 +1,44 @@
 "use client";
 
-import { FormButton } from "@/components";
-import AppCheckTile from "@/components/ui/AppCheckTile";
+import { updateArtisanSocials } from "@/actions";
+import { FormButton, FormMessage } from "@/components";
+import AppToast from "@/components/Toast";
+import UserAuth from "@/components/server/UserAuth";
 import AppInput, { AppInputProps } from "@/components/ui/AppInput";
-import AppSelect, { AppSelectProps } from "@/components/ui/AppSelect";
+import { useUserStore } from "@/state";
+import { paths } from "@/utils";
+import { useRouter } from "next/navigation";
+import { useLayoutEffect } from "react";
+import { useFormState } from "react-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
 
 export default function Form() {
+
+  const { replace } = useRouter()
+  const { artisan, setArtisan } = useUserStore(({ artisan, setArtisan }) => ({ artisan, setArtisan }));
+
+
+  const [res, action] = useFormState(updateArtisanSocials, {});
+  useLayoutEffect(() => {
+    if (!res.success) return;
+    setArtisan(res.data)
+    toast(<AppToast.success message={res?.success} />);
+    replace(paths.dashboard)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [res])
+
+  if (!artisan) return <div className="skeleton h-60 w-full"></div>;
   return (
-    <form className="grid sm:grid-cols-2 gap-6 items-end">
+    <form action={action} className="grid sm:grid-cols-2 gap-6 items-end">
+
+      <div className="col-span-full"><FormMessage res={res} /></div>
       {formFields.map(item => {
-        return <AppInput key={item.name} {...item} />;
+        return <AppInput key={item.name} {...item} value={(artisan as any)[item.name] ?? ''} />;
       })}
-      <div>
-        <h1 className="pb-1 font-[500]">Work hour</h1>
-        <div className="grid grid-cols-2 gap-4 pb-1">
-          {workHours.map(item => <AppSelect key={item.name} {...item} />)}
-        </div>
-        <AppCheckTile name="show" title="Don't show contact after work hours" />
-      </div>
-      <div className="col-span-full flex justify-end items-center">
-        <FormButton className="btn-primary px-6 max-sm:w-full">
-          Save Changes
-        </FormButton>
-      </div>
+
+      <UserAuth />
+      <div className="col-span-full"><FormButton className="btn-primary w-full md:w-60">Save Changes</FormButton></div>
     </form>
   );
 }
@@ -37,10 +52,17 @@ const formFields: AppInputProps[] = [
     schema: z.string()
   },
   {
-    name: "x",
-    title: "X Link",
+    name: "twitter",
+    title: "Twitter/X Link",
     type: "url",
-    placeholder: "X Link",
+    placeholder: "Twitter/X Link",
+    schema: z.string()
+  },
+  {
+    name: "linkedin",
+    title: "LinkedIn Link",
+    type: "url",
+    placeholder: "LinkedIn Link",
     schema: z.string()
   },
   {
@@ -59,15 +81,4 @@ const formFields: AppInputProps[] = [
   }
 ];
 
-const workHours: AppSelectProps[] = [
-  {
-    title: "Open",
-    name: "open",
-    options: ["8am", "9am"]
-  },
-  {
-    title: "Close",
-    name: "close",
-    options: ["8am", "9am"]
-  }
-];
+

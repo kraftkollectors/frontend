@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["flowbite", "kraftkollectors"]
+  "cSpell.words": [
+    "flowbite",
+    "kraftkollectors"
+  ],
+  "files.exclude": {
+    ".next": true,
+    "node_modules": true
+  }
 }

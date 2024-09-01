@@ -1,41 +1,47 @@
 "use client";
 
 import AppInput, { AppInputProps } from "@/components/ui/AppInput";
-import { FormButton } from "@/components";
-import Link from "next/link";
-import { z } from "zod";
+import { FormButton, FormMessage } from "@/components";
+import { useFormState } from "react-dom";
+import { register } from "@/actions";
 
-export default function LoginForm() {
+export default function Form() {
+  const [res, action] = useFormState(register, {});
+
   return (
-    <form className="flex flex-col gap-3 py-3">
-      {loginFields.map(item => {
-        return <AppInput key={item.name} {...item} />;
+    <form action={action} className="flex flex-col gap-4 py-3">
+      <FormMessage res={res} />
+      {loginFields.map((item) => {
+        return (
+          <AppInput
+            key={item.name}
+            {...item}
+            error={res.fieldErrors ? res.fieldErrors[item.name] : undefined}
+          />
+        );
       })}
-      <FormButton className="btn-primary">Sign Up</FormButton>
+      <FormButton className="btn-primary">Continue</FormButton>
     </form>
   );
 }
 
 const loginFields: AppInputProps[] = [
   {
-    name: "displayName",
-    title: "Display Name",
+    name: "userName",
+    title: "User Name",
     type: "text",
-    placeholder: "Display Name",
-    schema: z.string().min(3, "display name too short")
+    placeholder: "User Name",
   },
   {
     name: "email",
     title: "Email",
     type: "email",
     placeholder: "Email Address",
-    schema: z.string().email("enter a vilad email")
   },
   {
     name: "password",
     title: "Password",
     type: "password",
     placeholder: "Enter your Password",
-    schema: z.string()
-  }
+  },
 ];

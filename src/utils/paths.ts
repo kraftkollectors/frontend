@@ -1,19 +1,32 @@
+
 const paths = {
   home: "/",
+  search: (query = '') => `/search/${query}`,
+  searchArtisans: (query = '') => `/artisan/${query}`,
 
   // auth paths
   login: "/login",
   signup: "/signup",
+  signupDetails: "/signup/details",
+  signupToken: "/signup/token",
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
+
+  // legal
+  support: "/contact",
+  contact: "/contact",
+  termsAndConditions: "/terms-and-conditions",
 
   // become a seller
   becomeASeller: "/become-a-seller",
   becomeASellerPersonalDetails: "/become-a-seller/personal-details",
-  becomeASellerEducation: "/become-a-seller/education",
+  becomeASellerPersonalInfo: "/become-a-seller/personal-information",
+  becomeASellerIdVerification: "/become-a-seller/id-verification",
+
+  premium: "/premium",
 
   // dynamic paths
-  artisan: (slug: string) => `/artisans/${slug}`,
+  singleArtisan: (slug: string) => `/artisans/${slug}`,
   service: (slug: string) => `/services/${slug}`,
 
   // dashboard
@@ -25,8 +38,11 @@ const paths = {
   dashboardSettings: `/dashboard/settings`,
   dashboardSettingsPersonalDetails: `/dashboard/settings/personal-details`,
   dashboardSettingsAccount: `/dashboard/settings/account`,
+  dashboardSettingsPassword: `/dashboard/settings/change-password`,
+  dashboardSettingsPhoto: `/dashboard/settings/photo`,
   dashboardSettingsContactInfo: `/dashboard/settings/contact-information`,
   dashboardSettingsNotification: `/dashboard/settings/notification`,
+  dashboardLogout: `/logout`,
 
   // dashboard chats
   dashboardChats: `/dashboard/chats`,
@@ -35,6 +51,36 @@ const paths = {
   //dashboard services
   dashboardServices: `/dashboard/services`,
   dashboardNewService: `/dashboard/services/new`,
+  dashboardEditService: (serviceId: string)=>`/dashboard/services/${serviceId}`,
+
+  // app
+  android: "/",
+  ios: "/",
+
+  // socials
+  facebook: "/",
+  instagram: "/",
+  twitter: "/",
+  tiktok: "/",
+  linkedin: "/",
+
+  // admin
+  admin: "/admin",
+  adminUsers: "/admin/users",
+  adminSingleUser: (userId: string) => `/admin/users/${userId}`,
+  adminFeedback: "/admin/feedback",
+  adminReports: "/admin/reports",
+  adminServices: "/admin/services",
+  adminCategories: "/admin/categories",
+  adminPayments: "/admin/payments",
+  adminAdverts: "/admin/adverts",
+  adminSettings: "/admin/settings",
+
+  // admin auth
+  adminLogin: "/admin-login",
+  adminRegister: "/admin-register",
+  adminForgotPassword: "/admin-forgot-password",
+  adminLogout: "/admin/logout",
 };
 
 export default paths;

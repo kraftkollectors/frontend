@@ -1,0 +1,19 @@
+{
+    "name": "KraftKollectors",
+    "short_name": "Kraft",
+    "description": "connecting artisans to clients",
+    "icons": [
+      {
+        "src": "../images/icon.png",
+        "sizes": "120x120",
+        "type": "image/png"
+      }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/",
+    "orientation": "any"
+  }
+  

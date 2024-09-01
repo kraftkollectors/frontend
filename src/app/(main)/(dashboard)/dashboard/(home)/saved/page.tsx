@@ -1,11 +1,39 @@
-import { DashboardSavedCard } from "@/components/dashboard/DashboardSavedCard";
+import { fetchSavedServices } from "@/actions";
+import { DashboardSavedCard } from "@/components/dashboard";
+import { paths } from "@/utils";
+import { Pagination } from "@/components";
 
-export default function Page() {
+import { staticMetadata } from "@/functions/metadata";
+import { Metadata } from "next";
+import { buildUrlQuery } from "@/functions/helpers";
+import { AppPageProps } from "@/utils/types/basicTypes";
+
+export const metadata: Metadata = staticMetadata({
+  title: "KraftKollectors | My Saved Services",
+  description: "services saved by me",
+});
+
+export default async function Page({ searchParams }: AppPageProps) {
+  const services = await fetchSavedServices({
+    params: buildUrlQuery(searchParams),
+  });
+  if (services == "error" || !services)
+    return <div className="info-box">An Error Occurred</div>;
+
   return (
     <div className="flex flex-col gap-3">
-      {services.map((service) => (
-        <DashboardSavedCard key={service.id} {...service} />
-      ))}
+      {services.existingRecords.length == 0 ? (
+        <div className="info-box">No saved Services</div>
+      ) : (
+        services.existingRecords.map((service) => (
+          <DashboardSavedCard key={service._id} {...service} />
+        ))
+      )}
+      <Pagination
+        className="mx-auto py-2"
+        baseUrl={paths.dashboardServices}
+        pagination={services}
+      />
     </div>
   );
 }

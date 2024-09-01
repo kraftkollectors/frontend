@@ -1,41 +1,34 @@
-import { SocialIcons } from "@/components";
+import { ReadMoreReadLess, SocialIcons } from "@/components";
+import { Certificate } from "@/components/certificate/CertificateCard";
+import { Education } from "@/components/education/EducationCard";
 import { SocialIconsProps } from "@/components/ui/SocialIcons";
 import { ArtisanEducation } from "@/utils/types/artisanTypes";
+import Educations from "./Educations";
+import { Suspense } from "react";
+import Certificates from "./Certificates";
 
 export type AboutProps = {
-  about: string;
-  education: ArtisanEducation[];
-  socials: SocialIconsProps;
+  about?: string;
+  userId: string;
 };
 
-export default function About({ about, education, socials }: AboutProps) {
+export default function About({ about, userId }: AboutProps) {
   return (
-    <div className="md:col-span-6 flex flex-col gap-3">
-      <div className="flex flex-col gap-1 max-md:pb-2 max-md:border-b">
-        <h1 className="font-bold ">About Me</h1>
-        <p className=" text-black-400">
-          {about}
-        </p>
+    <div className="flex flex-col gap-3 rounded-md border bg-light p-4 md:col-span-6 md:p-6 lg:col-span-7">
+      <div className="flex flex-col gap-1 border-b pb-2">
+        <h1 className="font-bold">About Me</h1>
+        <ReadMoreReadLess className="text-black-400">{about}</ReadMoreReadLess>
       </div>
-      <div className="flex flex-col gap-1 max-md:pb-2 max-md:border-b">
-        <h1 className="font-bold ">Education</h1>
-        {education.map(({ degree, school }, i) =>
-          <p key={i} className=" text-black-600 pb-1 flex flex-col">
-            <span>
-              {school}
-            </span>
-            <span className="text-black-400">
-              {degree}
-            </span>
-          </p>
-        )}
-      </div>
-      <div className="flex flex-col gap-1 max-md:pb-2 max-md:border-b">
-        <h1 className="font-bold ">Social Links</h1>
-        <div className=" text-black-600 flex gap-3">
-          <SocialIcons {...socials} />
-        </div>
-      </div>
+      {!!about && (
+        <>
+          <Suspense fallback={<div className="skeleton h-20"></div>}>
+            <Educations userId={userId} />
+          </Suspense>
+          <Suspense fallback={<div className="skeleton h-20"></div>}>
+            <Certificates userId={userId} />
+          </Suspense>
+        </>
+      )}
     </div>
   );
 }

@@ -1,17 +1,17 @@
 "use client";
 
-import { AppPageProps } from "@/utils/types/basicTypes";
+import { AppLayoutProps } from "@/utils/types/basicTypes";
 import SideBar from "./SideBar";
 import { usePathname } from "next/navigation";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import paths from "@/utils/paths";
 
-export default function MainLayout({ children }: AppPageProps) {
+export default function MainLayout({ children }: AppLayoutProps) {
   const pathname = usePathname();
   const vw = useWindowWidth();
 
   return (
-    <main className="app-container py-10 md:bg-light-text">
+    <main className="app-container py-10 min-h-screen md:bg-light-text">
       <div className="md:grid md:grid-cols-9 gap-4">
         {(pathname === paths.dashboardSettings ||
           pathname === paths.dashboardSettings + "/" ||

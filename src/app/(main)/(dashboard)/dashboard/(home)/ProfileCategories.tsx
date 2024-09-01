@@ -1,80 +1,21 @@
-"use client";
-import { FaRegEdit } from "react-icons/fa";
-import ProfileCategory from "./ProfileCategory";
-import { FaPlus } from "react-icons/fa6";
-import { EducationCard } from "@/components/education/EducationCard";
-import { CertificateCard } from "@/components/certificate/CertificateCard";
 
-export type ProfileCategoriesProps = {
-  description: string;
-  awayMessage: string;
-  education?: string;
-};
+import Certificates from "./Certificates";
+import Educations from "./Educations";
+import { Suspense } from "react";
+import Description from "./Description";
+import AwayMessage from "./AwayMessage";
+import { fetchUser } from "@/actions";
 
-export default function ProfileCategories({
-  description,
-  awayMessage,
-  education,
-}: ProfileCategoriesProps) {
+export default async function ProfileCategories() {
+  const user = await fetchUser({throwsError: false});
+  if(!user || user == 'error' || !user.isArtisan) return <></>
+
   return (
     <div className=" flex flex-col p-4 rounded-md bg-light gap-2 border">
-      <ProfileCategory
-        title="Description"
-        action={
-          <button className="edit-btn">
-            <FaRegEdit /> Edit
-          </button>
-        }
-      >
-        <p className="text-black-400">{description}</p>
-      </ProfileCategory>
-      <ProfileCategory
-        title="Away Message"
-        action={
-          <button className="edit-btn">
-            <FaRegEdit /> Edit
-          </button>
-        }
-      >
-        <p className="text-black-400">{awayMessage}</p>
-      </ProfileCategory>
-
-      <ProfileCategory
-        title="Education"
-        action={
-          <button className="edit-btn">
-            <FaPlus /> Add New
-          </button>
-        }
-      >
-        <EducationCard
-          universityName="University of Technology Owerri"
-          degree="Bachelor of Engineering(BEng)"
-          areaOfStudy=""
-          graduation="2023"
-          id=""
-          onDelete={() => {}}
-          onEdit={() => {}}
-        />
-      </ProfileCategory>
-
-      <ProfileCategory
-        title="Certificates"
-        action={
-          <div className="edit-btn">
-            <FaPlus /> Add New
-          </div>
-        }
-      >
-        <CertificateCard
-          id=""
-          year="2022"
-          certificate="Web Development with Python"
-          certifiedBy="Aptech Institute"
-          onDelete={() => {}}
-          onEdit={() => {}}
-        />
-      </ProfileCategory>
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><AwayMessage /></Suspense>
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Description /></Suspense>
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Educations /></Suspense>
+      <Suspense fallback={<div className="skeleton w-full h-20"></div>}><Certificates /></Suspense>
     </div>
   );
 }

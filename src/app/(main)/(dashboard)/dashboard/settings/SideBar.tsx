@@ -1,16 +1,17 @@
 "use client";
 
+import { useUserStore } from "@/state";
 import paths from "@/utils/paths";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { title } from "process";
 
 export default function SideBar() {
   const pathname = usePathname();
+  const artisan = useUserStore(s=>s.artisan);
 
   return (
     <div className="flex flex-col gap-1">
-      {links.map(({ title, href }, i) => {
+      {[...links, ...(artisan ? artisanLinks : [])].map(({ title, href }, i) => {
         const active =
           pathname.includes(href) ||
           (i == 0 && pathname === paths.dashboardSettings) ||
@@ -18,8 +19,8 @@ export default function SideBar() {
         return (
           <Link
             key={href}
-            className={`block p-3 rounded hover:bg-[#00000011] ${
-              active ? "md:bg-[#00000033] md:font-bold" : ""
+            className={`block p-3 rounded hover:bg-primary-lightActive ${
+              active ? "md:bg-primary-lightActive2 md:font-semibold" : ""
             }`}
             href={href}
           >
@@ -31,19 +32,31 @@ export default function SideBar() {
   );
 }
 
-const links = [
+const artisanLinks = [
   {
-    title: "Personal Details",
-    href: paths.dashboardSettingsPersonalDetails,
-  },
-  {
-    title: "Account Settings",
+    title: "Artisan Profile",
     href: paths.dashboardSettingsAccount,
   },
   {
     title: "Contact Information",
     href: paths.dashboardSettingsContactInfo,
   },
+]
+
+const links = [
+  {
+    title: "Personal Details",
+    href: paths.dashboardSettingsPersonalDetails,
+  },
+  {
+    title: "Profile Photo",
+    href: paths.dashboardSettingsPhoto,
+  },
+  {
+    title: "Change Password",
+    href: paths.dashboardSettingsPassword,
+  },
+ 
   {
     title: "Manage Notification",
     href: paths.dashboardSettingsNotification,

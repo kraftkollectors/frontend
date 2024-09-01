@@ -1,22 +1,27 @@
+'use client'
+
 import { AppInputProps } from "./AppInput";
 
-export type AppSelectProps = Omit<AppInputProps, "placeholder"> & {
-  options:
-    | string[]
-    | {
-        title: string;
-        value: string;
-      }[];
+export type AppSelectOption = {
+  title: string;
+  value: string;
 };
 
-export default function AppSelect({ name, title, options }: AppSelectProps) {
+export type AppSelectProps = Omit<AppInputProps, "placeholder"> & {
+  options: string[] | AppSelectOption[];
+  variant?: "app-select" | "app-select-new";
+};
+
+export default function AppSelect({ name, title, options, value, readonly, onChange, variant = "app-select", error: fieldError }: AppSelectProps) {
   return (
     <div>
       {title &&
-        <label htmlFor={`${title}-select`} className="inline-block pb-1">
+        <label htmlFor={`${title}-select`} className="inline-block pb-1 text-black-300 text-label font-semibold">
           {title}
         </label>}
-      <select name={name} id={`${title}-select`} className="app-input">
+      <select
+        onChange={(e) => onChange?.(e.target.value)}
+        disabled={readonly} defaultValue={value} name={name} id={`${title}-select`} className={variant}>
         {options.map((item, index) => {
           if (typeof item === "string")
             return (
@@ -31,7 +36,9 @@ export default function AppSelect({ name, title, options }: AppSelectProps) {
               </option>
             );
         })}
-      </select>
+      </select>{fieldError && fieldError.length > 0 && (
+        <p className="text-red-900 text-xs">{fieldError[0]}</p>
+      )}
     </div>
   );
 }

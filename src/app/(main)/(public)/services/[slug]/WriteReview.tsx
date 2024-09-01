@@ -1,24 +1,54 @@
 "use client";
+
+import { rateService } from "@/actions";
+import { FormMessage, FormButton } from "@/components";
+import UserAuth from "@/components/server/UserAuth";
+import AppToast from "@/components/Toast";
 import AppInput from "@/components/ui/AppInput";
 import Rating from "@/components/ui/Rating";
-import { Theme, AlertDialog } from "@radix-ui/themes";
+import { useUserStore } from "@/state";
+import { paths } from "@/utils";
+import { AlertDialog } from "@radix-ui/themes";
+import { useParams,useRouter } from "next/navigation";
+import { useState, useLayoutEffect } from "react";
+import { useFormState } from "react-dom";
 import { IoClose } from "react-icons/io5";
-export default function WriteReview() {
+import { toast } from "react-toastify";
+
+export default function WriteReview({serviceId, ownerId}:{serviceId:string; ownerId: string}) {  
+  const {push} = useRouter();
+  const [key, setKey] = useState('-');
+  const [open, setOpen] = useState(false);
+  const [res, action] = useFormState(rateService, {});
+  useLayoutEffect(()=>{
+    if(res.error?.includes('not logged in')){
+      setTimeout(() => {
+        push(paths.login)
+      }, 2000);
+    }
+    if(!res.success) return;
+    setKey(key + '-');
+    toast(<AppToast.success message={res.success} />)
+    setOpen(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [res])
   return (
     // <Theme>
-    <AlertDialog.Root>
+    <AlertDialog.Root onOpenChange={setOpen} open={open}>
       <AlertDialog.Trigger>
-        <button className="btn-dark-border p-2"> Write a review</button>
+        <button className="btn-dark-border !text-label max-md:!font-normal p-2"> Write a review</button>
       </AlertDialog.Trigger>
       <AlertDialog.Content>
-        <form className=" flex flex-col gap-3 text-center items-center">
+        <form action={action} key={key} className=" flex flex-col gap-3 text-center items-center">
           <div className="flex justify-between w-full">
-            <h1></h1>
+            <i></i>
             <h1 className="text-center text-title font-semibold">
               Rate service
             </h1>
             <AlertDialog.Cancel>
+              <button className="icon-btn p-2">
               <IoClose />
+              </button>
             </AlertDialog.Cancel>
           </div>
 
@@ -26,7 +56,8 @@ export default function WriteReview() {
             Kindly provide genuine feedback to benefit both future customers and
             the artisan in attracting more clients.
           </p>
-          <div className="text-headline text-secondary flex gap-1 justify-center py-4">
+          <FormMessage res={res} />
+          <div className="text-headline text-secondary-accent flex gap-1 justify-center py-4">
             <Rating />
           </div>
           <div className="w-full">
@@ -37,9 +68,12 @@ export default function WriteReview() {
               name="review"
             />
           </div>
-          <button className="btn-dark-tiny py-2 max-md:w-full px-6">
+           <FormButton className="btn-dark-tiny py-3 md:w-40 max-md:w-full px-6">
             Submit
-          </button>
+          </FormButton>
+          <UserAuth />
+          <input type="hidden" name="serviceId" hidden defaultValue={serviceId} />
+          <input type="hidden" name="ownerId" hidden defaultValue={ownerId} />
         </form>
       </AlertDialog.Content>
     </AlertDialog.Root>

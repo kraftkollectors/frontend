@@ -1,37 +1,41 @@
 "use client";
 import { AlertDialog } from "@radix-ui/themes";
-import { FaPlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import AppInput from "../ui/AppInput";
 import AppSelect from "../ui/AppSelect";
-import { useState } from "react";
-import { Education } from "./EducationCard";
+import { useEffect, useState } from "react";
+import { Education } from "@/utils/types/education";
+import { useRouter } from "next/navigation";
+import { useFormState } from "react-dom";
+import UserAuth from "../server/UserAuth";
+import { FormButton } from "../ui/FormButton";
+import { FormMessage } from "../ui/FormMessage";
+import { getYearsBeforeToday } from "@/functions/date";
+import { ARTISAN_DEGREE_TYPES } from "@/utils/constants";
+import { newEducation } from "@/actions";
 
 export type EducationModalProps = {
   children: React.ReactNode;
   data?: Education;
-  onSubmit: (data: Education) => void;
+  // onSubmit: (data: Education) => void;
   isNew?: boolean;
 };
 
 export default function EducationModal({
   children,
   data,
-  onSubmit,
+  // onSubmit,
   isNew = true,
 }: EducationModalProps) {
   const [open, setOpen] = useState(false);
-  function handleSubmit(e: any) {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    const _data = data as Education;
-    setOpen(false);
-    onSubmit({
-      ..._data,
-      id: !isNew ? _data.id : Date.now().toString(),
-    });
-  }
+  let [res, action] = useFormState(newEducation, {});
+  const { refresh } = useRouter()
+  useEffect(() => {
+    if (res.data === 'success') {
+      setOpen(false);
+    }
+    return () => {res = {}};
+  }, [res])
 
   return (
     <div>
@@ -39,28 +43,33 @@ export default function EducationModal({
         <AlertDialog.Trigger>{children}</AlertDialog.Trigger>
         <AlertDialog.Content>
           <form
-            onSubmit={handleSubmit}
-            className=" flex flex-col gap-3 text-center items-center"
+            action={action}
+            className=" flex flex-col gap-3"
           >
-            <input type="hidden" name="id" value={data?.id} />
+            {!isNew && <input type="hidden" name="_id" value={data?._id} />}
             <div className="flex justify-between w-full">
-              <h1></h1>
+            <h2 className="font-semibold">{isNew ? "Add education" : "Edit education"}</h2>
               <AlertDialog.Cancel>
+                <button className="icon-btn text-lg p-2">
                 <IoClose />
+                </button>
               </AlertDialog.Cancel>
             </div>
+            <FormMessage res={res} />
+            <UserAuth />
             <div className="w-full flex flex-col gap-3 ">
               <AppInput
-                value={data?.universityName}
+                value={data?.university}
                 placeholder="University name"
                 type="text"
-                name="universityName"
+                name="university"
+                error={res.fieldErrors && res.fieldErrors['university']}
               />
               <div className="w-full">
                 <AppSelect
                   value={data?.degree}
                   name="degree"
-                  options={["Degree"]}
+                  options={ARTISAN_DEGREE_TYPES}
                 />
               </div>
               <AppInput
@@ -68,22 +77,22 @@ export default function EducationModal({
                 placeholder="Area of study"
                 type="text"
                 name="areaOfStudy"
+                error={res.fieldErrors && res.fieldErrors['areaOfStudy']}
               />
             </div>
             <div className="flex w-full gap-2">
               <div className="w-full">
                 <AppSelect
-                  value={data?.graduation}
-                  name="graduation"
-                  options={["2024"]}
+                  value={data?.year}
+                  name="year"
+                  options={getYearsBeforeToday()}
                 />
               </div>
-              <button
-                type="submit"
+              <FormButton
                 className="btn-dark-tiny py-2 max-md:w-full px-6"
               >
                 <span>Done</span>
-              </button>
+              </FormButton>
             </div>
           </form>
         </AlertDialog.Content>

@@ -18,6 +18,13 @@ const config: Config = {
             lineHeight: "64px",
           },
         ],
+        headlineBig: [
+          "48px",
+          {
+            // letterSpacing: '-0.02em',
+            lineHeight: "64px",
+          },
+        ],
         headline: [
           "32px",
           {
@@ -35,7 +42,7 @@ const config: Config = {
         body: [
           "16px",
           {
-            // letterSpacing: '-0.02em',
+            // letterSpacing:  '-0.02em',
             lineHeight: "24px",
           },
         ],
@@ -72,10 +79,12 @@ const config: Config = {
         primary: {
           DEFAULT: "#2680BF",
           light: "#93BFDF",
+          chat: "#DEECF5",
           lightActive: "#BCD8EB",
           lightActive2: "#E9F2F9",
           dark: "#1D608F",
           darkActive: "#113A56",
+          hover: "#1e6699",
         },
         secondary: {
           DEFAULT: "#E0A44F",
@@ -84,18 +93,22 @@ const config: Config = {
           lightHover: "#FAF1E5",
           dark: "#A87B3B",
           darkActive: "#654A24",
+          accent: "#F0981C",
         },
         light: {
           DEFAULT: "#FFFFFF",
           text: "#F5F5F5",
+          link: "#E8E8E8",
         },
         dark: {
           DEFAULT: "#010101",
           text: "#131313",
           gray: "#555555",
+          footer: "#1e1e1e",
         },
         danger: {
           DEFAULT: "#BE2828",
+          hover: "#991414",
           dark: "#00000",
         },
       },
