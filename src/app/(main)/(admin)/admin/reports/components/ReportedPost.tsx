@@ -32,7 +32,7 @@ export default function ReportedPost({postId}:{postId: string}) {
             : error || !data || data === 'error' ? <div className="info-box">Failed to load service</div>
                 : <div className="grid grid-cols-1 md:grid-cols-5 gap-3 items-center">
                     <img src={data.coverPhoto} alt="cover photo for service"
-                        className="rounded-md max-md:w-10/12 md:col-span-2 bg-black-50 overflow-hidden aspect-[4/3]" />
+                        className="rounded-md max-md:w-10/12 md:col-span-2 bg-black-50 overflow-hidden aspect-[4/3] object-cover" />
                     <div className="flex flex-col gap-2 md:col-span-3">
                         <h2 className="text-black-500">
                             {!userLoading && !userError && userData && userData !== 'error' && fullName(userData.firstName, userData.lastName)}

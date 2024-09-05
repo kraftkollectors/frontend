@@ -108,3 +108,11 @@ export function getParentIds(element: any): string[] {
   }
   return parentIds;
 }
+
+export function tryCatch(tryFn: () => any, catchFn: (e: any) => any) {
+  try {
+      return tryFn()
+  } catch (e) {
+      return catchFn(e)
+  }
+}

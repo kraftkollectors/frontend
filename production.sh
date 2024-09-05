@@ -1,9 +1,9 @@
 git remote remove origin
 
-git remote add origin https://github.com/kraftkollectors/frontend.git
+git remote add origin https://github.com/kraftkollectors/frontend-web.git
 
 git add .
 
-git commit -m "working on admin forgot password"
+git commit -m "new repo"
 
-git push origin production
+git push origin public

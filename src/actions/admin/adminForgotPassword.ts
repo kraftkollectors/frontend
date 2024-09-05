@@ -8,7 +8,7 @@ import validators from "@/utils/validators";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { JWT_SECRET } from "@/utils/constants";
 
 
@@ -22,6 +22,18 @@ type ForgotPasswordFormData = { email: string, token?: string;
     c_password?: string;
  }
 
+/**
+ * Handles the admin forgot password functionality.
+ *
+ * This function is responsible for the following:
+ * - Validating a password reset token sent to the user's email
+ * - Allowing the user to reset their password if the token is valid
+ * - Sending a password reset token to the user's email if they have forgotten their password
+ *
+ * @param res - The ActionResponse object to return the result of the operation
+ * @param formData - The form data containing the user's email, password reset token, and new password
+ * @returns The ActionResponse object with the result of the operation
+ */
 export async function adminForgotPassword(res: ActionResponse, formData: FormData): Promise<ActionResponse> {
 
     const { set, get, delete:del } = cookies();

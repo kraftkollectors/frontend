@@ -22,8 +22,9 @@ export default function Page() {
       setEmailValid(false);
     }
     if (res.success && res.data == 'password_changed') {
-      setTimeout(() => replace(paths.login), 1500)
+      setTimeout(() => replace(paths.adminLogin), 1500)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res])
 
   return (

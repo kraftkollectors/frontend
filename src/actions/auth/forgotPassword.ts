@@ -8,7 +8,7 @@ import validators from "@/utils/validators";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { JWT_SECRET } from "@/utils/constants";
 
 

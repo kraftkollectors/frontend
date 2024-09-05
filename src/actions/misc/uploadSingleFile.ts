@@ -14,6 +14,8 @@ export async function uploadSingleFile(
       false,
     );
 
+    // console.log(await req.text());
+    
     const res = (await req?.json()) as ApiResponse;
     debugLog({ res });
 

@@ -11,7 +11,7 @@ import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import { UserDetails } from "@/utils/types/user";
 
 

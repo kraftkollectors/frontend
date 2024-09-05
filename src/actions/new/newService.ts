@@ -36,7 +36,7 @@ export async function newService(_: ActionResponse, formData: FormData): Promise
     // debugLog(data)
     const tryParse = schema.safeParse(data);
 
-    if (!tryParse.success) return { fieldErrors: tryParse.error.flatten().fieldErrors, error: "Fix errors and submit" };
+    // if (!tryParse.success) return { fieldErrors: tryParse.error.flatten().fieldErrors, error: "Fix errors and submit" };
     let _formData = new FormData();
     let coverPhotoUrl: string;
     let proceed = false;

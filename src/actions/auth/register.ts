@@ -12,7 +12,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import { z } from "zod";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 const registerSchema = z.object({
     email: validators.email,

@@ -1,5 +1,5 @@
 const backendHost = process.env.NEXT_PUBLIC_API_URL;
-const API = backendHost || 'https://api.kraftkollectors.com' || "https://backends-865y.onrender.com";
+const API = backendHost || ['https://api.kraftkollectors.com', "https://backends-865y.onrender.com"][0];
 const STATES_AND_CITIES_API = "https://abundiko-api.vercel.app/api";
 const admin = API + "/admin";
 const users = API + "/users";

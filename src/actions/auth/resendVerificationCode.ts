@@ -5,7 +5,7 @@ import { apis, appCookies } from "@/utils"
 import { ApiRequest } from "@/utils/apiRequest"
 import { ApiResponse } from "@/utils/types/basicTypes";
 import { cookies } from "next/headers";
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 export async function resendVerificationCode(email:string):Promise<boolean>{
     try {
