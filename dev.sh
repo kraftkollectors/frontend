@@ -6,4 +6,4 @@ git add .
 
 git commit -m "edited next config to accept bigger files"
 
-git push origin dev
+git push origin dev --force
