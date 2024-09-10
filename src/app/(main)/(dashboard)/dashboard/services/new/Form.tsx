@@ -19,7 +19,7 @@ import {
   ALLOWED_IMAGE_EXTENSIONS,
   ALLOWED_VIDEO_EXTENSIONS,
 } from "@/utils/constants";
-import { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo, useState } from "react";
 import { useFormState } from "react-dom";
 
 import {
@@ -27,6 +27,8 @@ import {
   FileTypeValidator,
 } from "use-file-picker/validators";
 export default function ServicesForm() {
+  const [file, setFile] = useState<File>();
+  const [files, setFiles] = useState<File[]>([]);
   const {
     data: states,
     isLoading: statesLoading,
@@ -47,7 +49,13 @@ export default function ServicesForm() {
   const { location: loc, setLocation: setLoc, isLoaded } = useLocation();
 
   return (
-    <form action={action}>
+    <form action={(formData)=>{
+      formData.append("file", file as any);
+      files.forEach((file) => {
+        formData.append("files", file as any);
+      });
+      return action(formData)
+    }}>
       <div className="flex flex-col gap-4">
         <div className="gap-4 md:grid md:grid-cols-12">
           <label className="col-span-3 font-semibold text-black-800" htmlFor="">
@@ -163,7 +171,10 @@ export default function ServicesForm() {
               name="coverPhoto"
               title="cover Photo"
               subtitle="Select 1 image up to 2MB"
-              onSelect={(_) => {}}
+              onSelect={(f) => {
+                setFile(f[0]);
+              }}
+              notVerbose
               accept=""
               validators={[
                 new FileTypeValidator(ALLOWED_IMAGE_EXTENSIONS),
@@ -184,7 +195,10 @@ export default function ServicesForm() {
               accept=""
               title="Portfolio images"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
-              onSelect={(_) => {}}
+              onSelect={(f) => {
+                setFiles(f);
+              }}
+              notVerbose
               max={5}
               validators={[
                 new FileTypeValidator([

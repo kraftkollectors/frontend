@@ -12,7 +12,7 @@ import {
 } from "use-file-picker/validators";
 import { FaPlay } from "react-icons/fa6";
 import { debugLog } from "@/functions/helpers";
-import { chunkifyString, JsonFile } from "@/functions/file";
+import { base64ToFile, chunkifyString, JsonFile } from "@/functions/file";
 import { toast } from "react-toastify";
 import AppToast from "../Toast";
 
@@ -21,10 +21,11 @@ export type AppFilePickerProps = {
   title: string;
   subtitle?: string;
   accept?: string;
-  onSelect: (files: FileContent<string>[]) => void;
+  onSelect: (files: File[]) => void;
   validators?: Validator<unknown, UseFilePickerConfig<any>>[];
   value?: string[];
   max?: number;
+  notVerbose?: boolean;
 };
 
 export function getFileErrorMessage(
@@ -82,6 +83,7 @@ export default function AppFilePicker({
   validators,
   value,
   max = 1,
+  notVerbose = false,
 }: AppFilePickerProps) {
   const [prevFiles, setPrevFiles] = useState(
     (value ?? []).map((url) => ({ type: "url" as const, data: url })),
@@ -121,10 +123,19 @@ export default function AppFilePicker({
     // }
   }, [selectedFiles]);
 
+  const allFiles = [...prevFiles, ...selectedFiles];
+  useEffect(() => {
+    if (onSelect) {
+      const files = selectedFiles
+        .filter((file) => file.type == "file")
+        .map((file) => base64ToFile((file.data as any).content, (file.data as any).name));
+      onSelect(files);
+    }
+  }, [selectedFiles]);
+
   if (loading) {
     return <div>loading ...</div>;
   }
-  const allFiles = [...prevFiles, ...selectedFiles];
   return (
     <div className="w-full max-w-[90vw] overflow-x-auto">
       <div>
@@ -134,7 +145,11 @@ export default function AppFilePicker({
           hidden
           name={name}
         />
-        {chunkifyString(JSON.stringify(allFiles)).map((chunk, index) => (
+        {chunkifyString(
+          JSON.stringify(
+            notVerbose ? allFiles.filter((i) => i.type == "url") : allFiles,
+          ),
+        ).map((chunk, index) => (
           <input
             key={index}
             type="hidden"

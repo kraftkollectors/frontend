@@ -105,3 +105,29 @@ export function removeFilesFromFormData(formData: FormData, key: string, c: any)
     }
     return newFormData;
 }
+
+export function base64ToFile(base64String: string, filename: string) {
+    // Split the base64 string to get the mime type and data
+    const [header, data] = base64String.split(",");
+    const mimeMatch = header.match(/data:(.*);base64/);
+    if (!mimeMatch) {
+      throw new Error("Invalid base64 format");
+    }
+  
+    const mimeType = mimeMatch[1];
+  
+    // Decode the base64 string to binary data
+    const binaryString = window.atob(data);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
+  
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+  
+    // Create a Blob from the binary data
+    const blob = new Blob([bytes], { type: mimeType });
+  
+    // Create a File object from the Blob
+    return new File([blob], filename, { type: mimeType });
+  }

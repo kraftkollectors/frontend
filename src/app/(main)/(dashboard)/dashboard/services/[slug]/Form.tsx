@@ -31,6 +31,8 @@ import {
   FileTypeValidator,
 } from "use-file-picker/validators";
 export default function ServicesForm({ service }: { service: Service }) {
+  const [file, setFile] = useState<File>();
+  const [files, setFiles] = useState<File[]>([]);
   const {
     data: states,
     isLoading: statesLoading,
@@ -59,7 +61,17 @@ export default function ServicesForm({ service }: { service: Service }) {
   });
 
   return (
-    <form action={action}>
+    <form 
+    // action={action}
+    action={async (formData)=>{
+      formData.append("file", file as any);
+      files.forEach((file) => {
+        formData.append("files", file as any);
+      });
+      const a = await action(formData);
+      // console.log({a});
+    }}
+    >
       <input
         type="hidden"
         name="_id"
@@ -188,7 +200,10 @@ export default function ServicesForm({ service }: { service: Service }) {
               name="coverPhoto"
               title="cover Photo"
               subtitle="Select 1 image up to 2MB"
-              onSelect={(_) => {}}
+              onSelect={(f) => {
+                setFile(f[0]);
+              }}
+              notVerbose
               accept=""
               validators={[
                 new FileTypeValidator(ALLOWED_IMAGE_EXTENSIONS),
@@ -211,7 +226,10 @@ export default function ServicesForm({ service }: { service: Service }) {
               accept=""
               title="Portfolio images"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
-              onSelect={(_) => {}}
+              onSelect={(f) => {
+                setFiles(f);
+              }}
+              notVerbose
               max={5}
               validators={[
                 new FileTypeValidator([
