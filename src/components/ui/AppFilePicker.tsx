@@ -126,9 +126,11 @@ export default function AppFilePicker({
   const allFiles = [...prevFiles, ...selectedFiles];
   useEffect(() => {
     if (onSelect) {
+      
       const files = selectedFiles
-        .filter((file) => file.type == "file")
-        .map((file) => base64ToFile((file.data as any).content, (file.data as any).name));
+      .filter((file) => file.type == "file")
+      .map((file) => base64ToFile((file.data as any).content, (file.data as any).name));
+      // console.log({l: selectedFiles.length, 2: files.length, s: onSelect});
       onSelect(files);
     }
   }, [selectedFiles]);

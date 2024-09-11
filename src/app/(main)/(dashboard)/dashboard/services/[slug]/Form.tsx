@@ -15,6 +15,7 @@ import AppInput from "@/components/ui/AppInput";
 import AppSelect from "@/components/ui/AppSelect";
 import FileInput from "@/components/ui/NewFilePicker";
 import { ServiceCharge } from "@/components/ui/ServiceChargePicker";
+import { formDataToObject } from "@/functions/helpers";
 import { useCategories, useLocation } from "@/hooks";
 import { useNigerianStates } from "@/hooks/useNigerianStates";
 import {
@@ -61,16 +62,22 @@ export default function ServicesForm({ service }: { service: Service }) {
   });
 
   return (
-    <form 
-    // action={action}
-    action={async (formData)=>{
-      formData.append("file", file as any);
-      files.forEach((file) => {
-        formData.append("files", file as any);
-      });
-      const a = await action(formData);
-      // console.log({a});
-    }}
+    <form
+      // action={action}
+      action={async (formData) => {
+        formData.append("file", file as any);
+        // const fd = new FormData();
+        // for(const fi of files) {
+        //   fd.append("files", fi as any);
+        // }
+        files.forEach((f) => {
+          formData.append("files", f as any);
+        });
+        // console.log(formDataToObject(fd), fd, {files});
+
+        const a = await action(formData);
+        // console.log({a});
+      }}
     >
       <input
         type="hidden"
@@ -227,6 +234,9 @@ export default function ServicesForm({ service }: { service: Service }) {
               title="Portfolio images"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
               onSelect={(f) => {
+                // console.log("hello");
+
+                // console.log({ who: f.length });
                 setFiles(f);
               }}
               notVerbose

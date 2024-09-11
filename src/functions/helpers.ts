@@ -111,8 +111,16 @@ export function getParentIds(element: any): string[] {
 
 export function tryCatch(tryFn: () => any, catchFn: (e: any) => any) {
   try {
-      return tryFn()
+    return tryFn();
   } catch (e) {
-      return catchFn(e)
+    return catchFn(e);
+  }
+}
+
+export function attempt(a: any, b: any) {
+  try {
+    return a();
+  } catch {
+    return b;
   }
 }

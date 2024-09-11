@@ -1,6 +1,6 @@
 "use server";
 
-import { debugLog, formDataToObject } from "@/functions/helpers";
+import { attempt, debugLog, formDataToObject } from "@/functions/helpers";
 import { apis, paths, tags, validators } from "@/utils";
 import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { z } from "zod";
@@ -70,7 +70,11 @@ export async function newService(
         if (typeof coverPhoto === "string") return { error: coverPhoto };
         coverPhotoUrl = coverPhoto.url;
       } else
-        coverPhotoUrl = (JSON.parse((data as any)["coverPhoto0"]) as any)[0].data;
+        coverPhotoUrl = (JSON.parse((data as any)["coverPhoto0"]) as any)[0]
+          .data;
+      if (!coverPhotoUrl) {
+        return { error: "Please upload a cover photo" };
+      }
       console.log({ coverPhotoUrl });
     } catch (error) {
       debugLog(error);
@@ -78,25 +82,33 @@ export async function newService(
     }
 
     const portfolioUrls: string[] = [];
-    const portfolios = JSON.parse(
-      loadFileFromFormData(formData, "portfolio", data.portfolio),
-    ) as AppCustomFile[];
-    debugLog({ length: portfolios.length });
-    _formData = new FormData();
-    portfolios.forEach((i) => {
-      if (i.type === "file") {
-      } else {
-        portfolioUrls.push(i.data);
-      }
-    });
+    debugLog(1.5);
 
     try {
+      const portfolios: any[] = attempt(
+        () => JSON.parse((data as any)["portfolio0"]),
+        [],
+      );
+      if (portfolios && portfolios.length) {
+        debugLog({ portfolios });
+        debugLog(2);
+        debugLog({ portfolios });
+        portfolios.forEach((i) => {
+          if (i.type === "file") {
+          } else {
+            portfolioUrls.push(i.data);
+          }
+        });
+      }
+      _formData = new FormData();
       _formData.append("files", formData.get("files") as File);
       _formData.append("userId", data.userId);
       _formData.append("userEmail", data.userEmail);
-      const portfolios = await uploadFiles(_formData);
-      if (typeof portfolios === "string") throw new Error();
-      portfolioUrls.push(...portfolios);
+      const _portfolios = await uploadFiles(_formData);
+      if (typeof _portfolios === "string") throw new Error();
+      portfolioUrls.push(..._portfolios);
+      if (portfolioUrls.length === 0)
+        return { error: "Please upload portfolio" };
     } catch (error) {
       debugLog(error);
       //    throw new Error()
@@ -139,7 +151,7 @@ export async function newService(
     }
   } catch (error) {
     debugLog(error);
-    return { error: "Something went wrong" };
+    return { error: "Something went wrongg" };
   }
   if (proceed) {
     redirect(paths.dashboardServices);

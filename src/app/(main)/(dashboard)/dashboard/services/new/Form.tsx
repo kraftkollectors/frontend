@@ -172,6 +172,10 @@ export default function ServicesForm() {
               title="cover Photo"
               subtitle="Select 1 image up to 2MB"
               onSelect={(f) => {
+                console.log('hello');
+                
+                console.log({who: f.length});
+                
                 setFile(f[0]);
               }}
               notVerbose
@@ -196,6 +200,9 @@ export default function ServicesForm() {
               title="Portfolio images"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
               onSelect={(f) => {
+                console.log('hello');
+                
+                console.log({who: f.length});
                 setFiles(f);
               }}
               notVerbose
