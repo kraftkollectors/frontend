@@ -70,9 +70,12 @@ export default function ServicesForm({ service }: { service: Service }) {
         // for(const fi of files) {
         //   fd.append("files", fi as any);
         // }
-        files.forEach((f) => {
-          formData.append("files", f as any);
-        });
+        for (let i = 0; i < files.length; i++) {
+          formData.append("files", files[i] as any, files[i].name);
+          
+        }
+        // files.forEach((f) => {
+        // });
         // console.log(formDataToObject(fd), fd, {files});
 
         const a = await action(formData);

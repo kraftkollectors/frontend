@@ -52,7 +52,7 @@ export default function ServicesForm() {
     <form action={(formData)=>{
       formData.append("file", file as any);
       files.forEach((file) => {
-        formData.append("files", file as any);
+        formData.append("files", file as any, file.name);
       });
       return action(formData)
     }}>
@@ -172,9 +172,9 @@ export default function ServicesForm() {
               title="cover Photo"
               subtitle="Select 1 image up to 2MB"
               onSelect={(f) => {
-                console.log('hello');
+                // console.log('hello');
                 
-                console.log({who: f.length});
+                // console.log({who: f.length});
                 
                 setFile(f[0]);
               }}

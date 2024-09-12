@@ -4,6 +4,6 @@ git remote add origin https://github.com/kraftkollectors/frontend.git
 
 git add .
 
-git commit -m "edited next config to accept bigger files"
+git commit -m "trying file upload for services"
 
 git push origin production

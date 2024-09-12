@@ -23,7 +23,6 @@ export default function DeleteServiceModal({
   description: string;
   coverPhoto: string;
 }) {
-  const { refresh } = useRouter();
   const [open, setOpen] = useState(false);
   const [res, action] = useFormState(deleteService, {});
   useLayoutEffect(() => {
@@ -56,7 +55,7 @@ export default function DeleteServiceModal({
             <img
               src={coverPhoto}
               alt={title}
-              className="profile-img aspect-[5/4] w-4/12 flex-shrink-0 overflow-hidden rounded"
+              className="profile-img aspect-[5/4] w-4/12 flex-shrink-0 object-cover overflow-hidden rounded"
             />
             <div>
               <h2 className="font-bold text-black-700">{title}</h2>
