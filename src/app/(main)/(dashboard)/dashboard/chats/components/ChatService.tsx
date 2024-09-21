@@ -25,17 +25,19 @@ export default function ChatService({ serviceId }: { serviceId: string }) {
   return (
     <Link
       href={paths.service(service._id)}
-      className="flex items-center gap-2 rounded-lg bg-primary-lightActive p-2 min-w-[180px]"
+      className="flex min-w-[180px] items-center gap-2 rounded-lg bg-primary-lightActive p-2"
     >
       <img
         src={service.coverPhoto}
         alt={"service cover photo"}
         className="aspect-square w-10 flex-shrink-0 rounded"
       />
-      <h3 className="text-xs">Service:</h3>
-      <h4 className="line-clamp-2 text-sm font-semibold text-black-500">
-        {service.title}
-      </h4>
+      <div>
+        <h3 className="text-xs">Service:</h3>
+        <h4 className="line-clamp-2 text-sm font-semibold text-black-500">
+          {service.title}
+        </h4>
+      </div>
     </Link>
   );
 }
