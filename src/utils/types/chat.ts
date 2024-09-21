@@ -4,7 +4,7 @@ export type ChatStatus = "seen" | "delivered" | "sent";
 
 export type ChatMessage = {
   message: string;
-  serviceId: string;
+  serviceId?: string;
   senderId: string;
   receiverId: string;
   createdAt: string;

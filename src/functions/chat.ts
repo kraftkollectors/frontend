@@ -5,6 +5,7 @@ export function newMessageChat(props: {
   senderId: string;
   receiverId: string;
   message: string;
+  serviceId?: string;
 }): ChatMessage {
   return {
     senderId: props.senderId,
@@ -12,6 +13,7 @@ export function newMessageChat(props: {
     data: props.message,
     message: props.message,
     status: "sent",
+    serviceId: props.serviceId,
     type: "text",
   } as ChatMessage;
 }

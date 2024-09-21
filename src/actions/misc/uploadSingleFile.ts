@@ -1,9 +1,7 @@
 import { debugLog } from "@/functions/helpers";
 import { apis } from "@/utils";
 import { ApiRequest } from "@/utils/apiRequest";
-import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { ApiResponse } from "@/utils/types/basicTypes";
-
 export async function uploadSingleFile(
   formData: FormData,
 ): Promise<string | { url: string }> {

@@ -71,7 +71,7 @@ export default function ServicesForm({ service }: { service: Service }) {
         //   fd.append("files", fi as any);
         // }
         for (let i = 0; i < files.length; i++) {
-          formData.append("files", files[i] as any, files[i].name);
+          formData.append("files"+i, files[i] as any);
           
         }
         // files.forEach((f) => {

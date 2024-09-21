@@ -19,7 +19,7 @@ import {
   ALLOWED_IMAGE_EXTENSIONS,
   ALLOWED_VIDEO_EXTENSIONS,
 } from "@/utils/constants";
-import { useLayoutEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useFormState } from "react-dom";
 
 import {
@@ -49,13 +49,17 @@ export default function ServicesForm() {
   const { location: loc, setLocation: setLoc, isLoaded } = useLocation();
 
   return (
-    <form action={(formData)=>{
-      formData.append("file", file as any);
-      files.forEach((file) => {
-        formData.append("files", file as any, file.name);
-      });
-      return action(formData)
-    }}>
+    <form
+      action={(formData) => {
+        formData.append("file", file as any);
+        // console.log("hi: ", files.length);
+
+        for (let i = 0; i < files.length; i++) {
+          formData.append("files" + i, files[i] as any);
+        }
+        let _ = action(formData);
+      }}
+    >
       <div className="flex flex-col gap-4">
         <div className="gap-4 md:grid md:grid-cols-12">
           <label className="col-span-3 font-semibold text-black-800" htmlFor="">
@@ -173,9 +177,9 @@ export default function ServicesForm() {
               subtitle="Select 1 image up to 2MB"
               onSelect={(f) => {
                 // console.log('hello');
-                
+
                 // console.log({who: f.length});
-                
+
                 setFile(f[0]);
               }}
               notVerbose
@@ -200,9 +204,9 @@ export default function ServicesForm() {
               title="Portfolio images"
               subtitle="Select up to 5, JPG, GIF, WebM, MP4, PNG, up to 5MB"
               onSelect={(f) => {
-                console.log('hello');
-                
-                console.log({who: f.length});
+                // console.log("hello");
+
+                // console.log({ who: f.length });
                 setFiles(f);
               }}
               notVerbose

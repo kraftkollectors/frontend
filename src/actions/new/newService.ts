@@ -1,21 +1,15 @@
 "use server";
 
+import { removeFilesFromFormData } from "@/functions/file";
 import { attempt, debugLog, formDataToObject } from "@/functions/helpers";
 import { apis, paths, tags, validators } from "@/utils";
-import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
-import { z } from "zod";
-import { uploadSingleFile } from "../misc/uploadSingleFile";
-import {
-  JsonFile,
-  createFileFromObject,
-  loadFileFromFormData,
-  removeFilesFromFormData,
-} from "@/functions/file";
 import { ServerApiRequest } from "@/utils/serverApiRequest";
+import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import { AppCustomFile } from "@/components/ui/AppFilePicker";
+import { z } from "zod";
 import { uploadFiles } from "../misc/uploadFiles";
+import { uploadSingleFile } from "../misc/uploadSingleFile";
 
 const schema = z.object({
   title: validators.name,
@@ -75,24 +69,38 @@ export async function newService(
       if (!coverPhotoUrl) {
         return { error: "Please upload a cover photo" };
       }
-      console.log({ coverPhotoUrl });
+      // console.log({ coverPhotoUrl });
     } catch (error) {
       debugLog(error);
       return { error: "Failed to upload cover photo" };
     }
 
     const portfolioUrls: string[] = [];
-    debugLog(1.5);
-
     try {
+      const fileKeys = Object.keys(data).filter(
+        (i) => i.startsWith("files") && i != "files",
+      );
+      let uploadedFiles: string[] = [];
+      // console.log(fileKeys);
+      
+      if (fileKeys.length > 0) {
+        uploadedFiles = await Promise.all(
+          fileKeys.map(async (file) => {
+            const fileFormData = new FormData();
+            const f = formData.get(file) as File;
+            fileFormData.append("file", f);
+            const url = await uploadSingleFile(fileFormData);
+            if (typeof url === "string") throw new Error();
+            return url.url;
+          }),
+        );
+      }
+
       const portfolios: any[] = attempt(
         () => JSON.parse((data as any)["portfolio0"]),
         [],
       );
       if (portfolios && portfolios.length) {
-        debugLog({ portfolios });
-        debugLog(2);
-        debugLog({ portfolios });
         portfolios.forEach((i) => {
           if (i.type === "file") {
           } else {
@@ -100,15 +108,8 @@ export async function newService(
           }
         });
       }
-      _formData = new FormData();
-      _formData.append("files", formData.get("files") as File);
-      _formData.append("userId", data.userId);
-      _formData.append("userEmail", data.userEmail);
-      const _portfolios = await uploadFiles(_formData);
-      if (typeof _portfolios === "string") throw new Error();
-      portfolioUrls.push(..._portfolios);
-      if (portfolioUrls.length === 0)
-        return { error: "Please upload portfolio" };
+      portfolioUrls.push(...uploadedFiles);
+      if(portfolioUrls.length < 1) return {error: "Please, upload portfolio images"}
     } catch (error) {
       debugLog(error);
       //    throw new Error()

@@ -163,7 +163,7 @@ export default function AppFilePicker({
       </div>
       <div
         onClick={() => openFilePicker()}
-        className="flex h-24 w-full max-w-[280px] flex-col items-center justify-center rounded border border-dotted border-gray-400 p-2 text-center"
+        className="flex cursor-pointer h-24 w-full max-w-[280px] flex-col items-center justify-center rounded border border-dotted border-gray-400 p-2 text-center"
       >
         <h1 className="flex items-center text-label text-primary">
           <MdOutlineUpload />

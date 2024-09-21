@@ -10,9 +10,9 @@ export default function ErrorPage({error, reset}:AppPageError) {
     
     return (
         <section className="h-screen w-full flex flex-col gap-6 justify-center items-center app-container text-center">
-            <h2 className="text-xl font-semibold">Something went wrong!</h2>
+            <h2 className="text-xl font-semibold">Ooops!</h2>
             <p className="text-3xl font-bold max-w-[400px]">{error.message}</p>
-            <p className="text-3xl font-bold max-w-[400px]">{error.digest}</p>
+            {/* <p className="text-3xl font-bold max-w-[400px]">{error.digest}</p> */}
             <div className="grid grid-cols-2 w-[320px] gap-4">
             <button className="btn-dark-tiny px-8 !py-2" onClick={()=>window.location.reload()}>
                  Reload Page

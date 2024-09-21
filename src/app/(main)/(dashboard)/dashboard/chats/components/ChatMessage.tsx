@@ -8,6 +8,7 @@ import { ChatMessage } from "@/utils/types/chat";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { Socket } from "socket.io-client";
+import ChatService from "./ChatService";
 
 export type ChatMessageProps = ChatMessage & {
   me: boolean;
@@ -68,6 +69,7 @@ export function ChatBubble({
         }`}
       >
         <div>
+          {props.serviceId && <ChatService serviceId={props.serviceId} />}
           {typeof data === "string" ? (
             <p className="text-label text-black-900">{message}</p>
           ) : (

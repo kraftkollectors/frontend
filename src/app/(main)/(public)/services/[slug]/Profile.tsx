@@ -56,7 +56,7 @@ export default async function Profile({ userId }: { userId: string }) {
       </div>
       <div className="grid w-full gap-2 py-6 max-md:w-9/12 md:grid-cols-2">
         <Link
-          href={paths.dashboardSingleChat(userId)}
+          href={paths.dashboardSingleChat(userId) + "?serviceId=" + art._id}
           className="btn-primary !py-2"
         >
           <AppIcons.Messages />
