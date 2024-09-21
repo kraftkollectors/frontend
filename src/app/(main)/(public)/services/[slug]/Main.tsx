@@ -25,7 +25,7 @@ export default function Main({
         <ServiceDetails {...s} />
         <div className="border-b pb-4 md:hidden">
           <Suspense fallback={<UserProfileSkeleton />}>
-            <Profile userId={s.userId} />
+            <Profile serviceId={s._id} userId={s.userId} />
           </Suspense>
         </div>
         <Reviews
