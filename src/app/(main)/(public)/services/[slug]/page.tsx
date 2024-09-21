@@ -1,17 +1,16 @@
 import { fetchSingleArtisanService } from "@/actions";
+import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
+import { AppPageProps } from "@/utils/types/basicTypes";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import { FaChevronRight } from "react-icons/fa6";
 import Main from "./Main";
 import Profile from "./Profile";
 import SimilarPosts from "./SimilarPosts";
-import { AppPageProps } from "@/utils/types/basicTypes";
-import { notFound } from "next/navigation";
-import { debugLog } from "@/functions/helpers";
-import { Suspense } from "react";
-import UserProfileSkeleton from "@/components/skeletons/UserProfileSkeleton";
-import { FaChevronRight } from "react-icons/fa6";
 
+import UpdateServiceViews from "@/components/server/UpdateServiceViews";
 import { staticMetadata } from "@/functions/metadata";
 import { Metadata } from "next";
-import UpdateServiceViews from "@/components/server/UpdateServiceViews";
 
 export async function generateMetadata({
   params,
@@ -51,7 +50,7 @@ export default async function Page({ params, searchParams }: AppPageProps) {
           <Main s={service} reviewsPage={searchParams.page} />
           <div className="top-6 h-fit max-md:hidden md:sticky md:col-span-4">
             <Suspense fallback={<UserProfileSkeleton />}>
-              <Profile userId={service.userId} />
+              <Profile serviceId={service._id} userId={service.userId} />
             </Suspense>
           </div>
         </div>

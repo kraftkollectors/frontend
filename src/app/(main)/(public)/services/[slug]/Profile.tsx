@@ -17,7 +17,13 @@ import AppIcons from "@/components/AppIcons";
 import ArtisanNotAvailableModal from "@/components/modals/ArtisanNotAvailableModal";
 import { FiPhone } from "react-icons/fi";
 
-export default async function Profile({ userId }: { userId: string }) {
+export default async function Profile({
+  userId,
+  serviceId,
+}: {
+  userId: string;
+  serviceId: string;
+}) {
   // debugLog({userId})
   const user = await fetchUser({ isPublic: true, params: userId });
   if (user == "error") return <UserProfileSkeleton />;
@@ -56,7 +62,7 @@ export default async function Profile({ userId }: { userId: string }) {
       </div>
       <div className="grid w-full gap-2 py-6 max-md:w-9/12 md:grid-cols-2">
         <Link
-          href={paths.dashboardSingleChat(userId) + "?serviceId=" + art._id}
+          href={paths.dashboardSingleChat(userId) + "?serviceId=" + serviceId}
           className="btn-primary !py-2"
         >
           <AppIcons.Messages />
