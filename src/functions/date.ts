@@ -35,7 +35,8 @@ export function addDays(date: string, days: string): string {
   return `${year}-${month}-${day}`;
 }
 
-export function formatTime(time: string) {
+export function formatTime(time?: string) {
+  if (!time) return "";
   const parts = time.split(":");
   if (parts.length !== 2) return time;
   const isPm = Number(parts[0]) >= 12;

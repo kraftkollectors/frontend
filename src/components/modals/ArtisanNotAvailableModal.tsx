@@ -15,14 +15,19 @@ export default function ArtisanNotAvailableModal({
   const [hours, minutes] = getCurrentTime()
     .split(":")
     .map((i) => parseInt(i));
-  const from =
-    workHourFrom.length < 3
-      ? null
-      : workHourFrom.split(":").map((i) => parseInt(i));
-  const to =
-    workHourTo.length < 3
-      ? null
-      : workHourTo.split(":").map((i) => parseInt(i));
+  let msg, from, to;
+  try {
+    from =
+      workHourFrom.length < 3
+        ? null
+        : workHourFrom.split(":").map((i) => parseInt(i));
+    to =
+      workHourTo.length < 3
+        ? null
+        : workHourTo.split(":").map((i) => parseInt(i));
+  } catch (error) {
+    msg = "";
+  }
   let isAvailable = available;
   if (from && to) {
     if (hours < from[0] || (hours == from[0] && minutes < from[1])) {
@@ -31,6 +36,14 @@ export default function ArtisanNotAvailableModal({
       isAvailable = false;
     }
   }
+  msg = available && (
+    <>
+      They are available from
+      <span className="text-black-900">{formatTime(workHourFrom)}</span>
+      to
+      <span className="text-black-900"> {formatTime(workHourTo)}</span>.
+    </>
+  );
 
   return (isAvailable || showContact) && available ? (
     children
@@ -60,20 +73,7 @@ export default function ArtisanNotAvailableModal({
           </h2>
           <p className="text-label font-semibold text-black-300">
             This user is not available for calls right now.
-            {available && (
-              <>
-                They are available from
-                <span className="text-black-900">
-                  {formatTime(workHourFrom)}
-                </span>
-                to
-                <span className="text-black-900">
-                  {" "}
-                  {formatTime(workHourTo)}
-                </span>
-                .
-              </>
-            )}
+            {msg}
             <br />
             <br />
             You can leave a message for them to get back to you.
