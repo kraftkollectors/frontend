@@ -22,7 +22,7 @@ export default function SideBar() {
             key={href}
             className={`block p-3 rounded hover:bg-primary-lightActive 
               ${ active ? "md:bg-primary-lightActive2 md:font-semibold" : "" }
-              ${ isRed ? "text-danger !md:bg-[#ECE1E0] hover:bg-[#ECE1E0]" : "" }
+              ${ isRed ? "text-danger md:!bg-[#ECE1E0] hover:bg-[#ECE1E0]" : "" }
               `}
             href={href}
           >
