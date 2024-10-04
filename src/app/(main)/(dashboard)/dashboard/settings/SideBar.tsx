@@ -16,12 +16,14 @@ export default function SideBar() {
           pathname.includes(href) ||
           (i == 0 && pathname === paths.dashboardSettings) ||
           (i == 0 && pathname === paths.dashboardSettings + "/");
+          const isRed = href === paths.dashboardSettingsAccountDeletion;
         return (
           <Link
             key={href}
-            className={`block p-3 rounded hover:bg-primary-lightActive ${
-              active ? "md:bg-primary-lightActive2 md:font-semibold" : ""
-            }`}
+            className={`block p-3 rounded hover:bg-primary-lightActive 
+              ${ active ? "md:bg-primary-lightActive2 md:font-semibold" : "" }
+              ${ isRed ? "text-danger hover:bg-[#ECE1E0]" : "" }
+              `}
             href={href}
           >
             {title}
@@ -60,5 +62,9 @@ const links = [
   {
     title: "Manage Notification",
     href: paths.dashboardSettingsNotification,
+  },
+  {
+    title: "Account Deletion",
+    href: paths.dashboardSettingsAccountDeletion,
   },
 ];

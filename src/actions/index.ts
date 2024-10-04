@@ -53,6 +53,7 @@ export { revalidateTags } from "./misc/revalidateTags";
 export { deleteEducation } from "./delete/deleteEducation";
 export { deleteCertificate } from "./delete/deleteCertificate";
 export { deleteService } from "./delete/deleteService";
+export { deleteAccount } from "./delete/deleteAccount";
 
 export { updateUserProfile } from "./update/updateUserProfile";
 export { updateUserPhoto } from "./update/updateUserPhoto";

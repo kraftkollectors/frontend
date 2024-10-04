@@ -10,6 +10,7 @@ const users = API + "/users";
  */
 
 const apis = {
+  deleteAccount: API + "/users/deleteaccount",
   /**
    * POST - users login {email:string, password:string}
    */

@@ -4,6 +4,6 @@ git remote add origin https://github.com/kraftkollectors/frontend.git
 
 git add .
 
-git commit -m "trying file upload for services"
+git commit -m "working on delete account"
 
 git push origin production

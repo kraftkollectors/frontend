@@ -42,6 +42,7 @@ const paths = {
   dashboardSettingsPhoto: `/dashboard/settings/photo`,
   dashboardSettingsContactInfo: `/dashboard/settings/contact-information`,
   dashboardSettingsNotification: `/dashboard/settings/notification`,
+  dashboardSettingsAccountDeletion: `/dashboard/settings/account-deletion`,
   dashboardLogout: `/logout`,
 
   // dashboard chats
