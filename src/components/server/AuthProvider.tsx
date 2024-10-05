@@ -11,7 +11,7 @@ export default async function AuthProvider() {
     if (user as any == 'conflict') {
         return null;
     };
-    if (user == 'error') return;
+    if (user == 'error' || !user) return;
 
     let artisan: Artisan | null = null;
     if (user?.isArtisan || true) {

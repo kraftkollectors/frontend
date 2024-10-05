@@ -25,7 +25,7 @@ export async function fetchUser({
 }: ServerActionParams<string> = {}): Promise<
   ActionApiResponse<UserDetailsPlus>
 > {
-  let proceed = false;
+  // let proceed = false;
   const accessId = isPublic ? "" : cookies().get(appCookies.accessId)?.value;
   if (!isPublic && !accessId) {
     if (throwsError) throw new Error("Unable to connect");
@@ -45,20 +45,20 @@ export async function fetchUser({
       // debugLog(res);
 
       if (res.statusCode == 404) {
-        proceed = true;
+        // proceed = true;
         throw new Error("Unable to connect");
       }
 
-      if ((res as any).message == "Invalid Token") proceed = true;
+      if ((res as any).message == "Invalid Token") return null;
       else if (res.statusCode === 201) return res.data.userDetails;
       else if (throwsError) throw new Error("Unable to connect");
-      if (!proceed) return "error";
+      // if (!proceed) return "error";
     } catch (error) {
       debugLog(error);
-      if (throwsError && !proceed) throw new Error("Something went wrong");
+      if (throwsError) throw new Error("Something went wrong");
       // return "error";
     }
   }
-  if (proceed) redirect(paths.login);
-  else return "error";
+  // if (proceed) redirect(paths.login);
+  return null;
 }
