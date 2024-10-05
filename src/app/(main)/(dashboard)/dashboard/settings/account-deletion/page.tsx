@@ -1,5 +1,4 @@
 import DeleteAccountModal from "./DeleteModal";
-import Form from "./Form";
 
 export default function page() {
   return (

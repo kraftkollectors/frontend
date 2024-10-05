@@ -2,8 +2,10 @@
 
 import { deleteAccount } from "@/actions";
 import { FormButton, FormMessage } from "@/components";
+import UserAuth from "@/components/server/UserAuth";
 import AppToast from "@/components/Toast";
 import AppInput from "@/components/ui/AppInput";
+import { useUserStore } from "@/state";
 import { AppLayoutProps } from "@/utils/types/basicTypes";
 import { AlertDialog } from "@radix-ui/themes";
 import { useEffect } from "react";
@@ -11,12 +13,16 @@ import { useFormState } from "react-dom";
 import { toast } from "react-toastify";
 
 export default function DeleteAccountModal({ children }: AppLayoutProps) {
+  const { setUser, setArtisan } = useUserStore();
   const [res, action] = useFormState(deleteAccount, {});
   useEffect(() => {
     if (res.success) {
       toast(<AppToast.success message={"Account deleted successfully"} />);
+      setUser(null);
+      setArtisan(null);
       window.location.href = "/";
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
 
   return (
@@ -39,8 +45,10 @@ export default function DeleteAccountModal({ children }: AppLayoutProps) {
             </p>
             <form action={action} className="flex w-full flex-col gap-4">
               <FormMessage res={res} />
+              <UserAuth />
               <AppInput
                 name="confirm"
+                value=""
                 title="Type 'I want to delete my account' to confirm"
                 placeholder="type here"
                 inputProps={{
@@ -49,6 +57,7 @@ export default function DeleteAccountModal({ children }: AppLayoutProps) {
                 error={res.fieldErrors && res.fieldErrors.confirm}
               />
               <AppInput
+                value=""
                 name="password"
                 title="Password"
                 placeholder="Password"

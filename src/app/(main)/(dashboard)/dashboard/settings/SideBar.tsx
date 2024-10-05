@@ -21,8 +21,8 @@ export default function SideBar() {
           <Link
             key={href}
             className={`block p-3 rounded hover:bg-primary-lightActive 
-              ${ active ? "md:bg-primary-lightActive2 md:font-semibold" : "" }
-              ${ isRed ? "text-danger md:!bg-[#ECE1E0] hover:bg-[#ECE1E0]" : "" }
+              ${ active ? (isRed ? "md:!bg-[#ECE1E0]" : "md:bg-primary-lightActive2") + " md:font-semibold" : "" }
+              ${ isRed ? "text-danger  hover:!bg-[#ECE1E0]" : "" }
               `}
             href={href}
           >

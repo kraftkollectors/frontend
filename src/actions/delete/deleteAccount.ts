@@ -1,11 +1,12 @@
 "use server";
 
 import { debugLog, formDataToObject } from "@/functions/helpers";
-import { apis, tags } from "@/utils";
+import { apis, appCookies, tags } from "@/utils";
 import { ServerApiRequest } from "@/utils/serverApiRequest";
 import { UserAuthProps } from "@/utils/types/auth";
 import { ActionResponse, ApiResponse } from "@/utils/types/basicTypes";
 import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 import { z } from "zod";
 
 const schema = z.object({
@@ -38,7 +39,10 @@ export async function deleteAccount(
     const res = (await req?.json()) as ApiResponse;
     debugLog(res);
     if (res.statusCode == 201) {
-      revalidateTag(tags.user);
+      cookies().delete(appCookies.accessId);
+      cookies().delete(appCookies.accessToken);
+      cookies().delete(appCookies.accessTokenTmp);
+      cookies().delete(appCookies.clientToken);
       return {
         success: `Account deleted Successfully`,
       };
