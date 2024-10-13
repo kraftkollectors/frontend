@@ -31,11 +31,13 @@ export function useCategories({addAll = false}:CategoryHookProps = {}) {
     }, [params, cats])
 
     useEffect(()=>{
+
         onCatChange(selectedCat)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selectedCat])
 
     function onCatChange(newCat: string) {
+        if(newCat === selectedCat) return;
         if (!newCat) setSubCats(withAll());
         if (!query.data) return;
         const categories = query.data.existingRecords;
@@ -48,6 +50,7 @@ export function useCategories({addAll = false}:CategoryHookProps = {}) {
             }))
         ));
         setKey(i => i + '-');
+        setSelectedCat(newCat);
     }
 
     useEffect(() => {

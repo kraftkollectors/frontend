@@ -20,6 +20,8 @@ export function ServiceCard({
   _id,
   ...service
 }: Service) {
+  const userId = (typeof service.userId == 'string') ? service.userId : (service.userId as any)._id;
+  
   return (
     <div className="flex flex-col gap-1">
       <div className="relative h-44 w-full md:h-48">
@@ -36,10 +38,10 @@ export function ServiceCard({
           className="absolute right-2 top-2 inline-flex size-7 items-center justify-center rounded-md bg-light shadow"
         />
       </div>
-      <Link href={paths.singleArtisan(service.userId)}>
+      <Link href={paths.singleArtisan(userId)}>
         <div className="flex items-center gap-1">
           <Suspense fallback={<CardUserSkeleton />}>
-            <UserProfile userId={service.userId} />
+            <UserProfile userId={userId} />
           </Suspense>
         </div>
       </Link>

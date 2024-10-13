@@ -44,7 +44,7 @@ export default function Profile({
 }: ProfileProps) {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-2 rounded-md md:col-span-4 md:border md:bg-light md:p-6">
-      <img src={img} alt="auth image" className="avatar profile-img size-20" />
+      <img src={img} alt="profile image" className="avatar profile-img size-20" />
       <h1 className="text-center text-title font-semibold text-black-900">
         {name}
       </h1>

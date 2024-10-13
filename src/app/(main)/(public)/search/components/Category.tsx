@@ -2,7 +2,6 @@
 
 import AppSelect from "@/components/ui/AppSelect";
 import { useCategories, useChangeSearchParams } from "@/hooks";
-import { useEffect, useState } from "react";
 
 export default function Category() {
 
@@ -10,7 +9,7 @@ export default function Category() {
   const { data, isLoading, error, cats, subCats, selectedCat, onCatChange, key } = useCategories({
     addAll: true
   });
-
+  
   return (
     <div
         key={key} className="flex flex-col gap-2">

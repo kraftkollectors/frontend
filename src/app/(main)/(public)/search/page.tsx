@@ -1,17 +1,15 @@
-import RelatedSearch from "./RelatedSearch";
-import SearchResult from "./SearchResult";
-import SearchOption from "./SearchOption";
-import PostList from "./PostList";
 import { fetchServices } from "@/actions";
 import { Pagination } from "@/components";
-import { paths } from "@/utils";
-import { Suspense } from "react";
+import MobileFilterButtons from "@/components/search/MobileButtons";
+import { buildUrlQuery } from "@/functions/helpers";
 import { staticMetadata } from "@/functions/metadata";
-import { Metadata } from "next";
 import { AppPageProps } from "@/utils/types/basicTypes";
 import { SearchPageParams } from "@/utils/types/search";
-import { buildUrlQuery } from "@/functions/helpers";
-import MobileFilterButtons from "@/components/search/MobileButtons";
+import { Metadata } from "next";
+import { Suspense } from "react";
+import PostList from "./PostList";
+import SearchOption from "./SearchOption";
+import SearchResult from "./SearchResult";
 
 export const metadata:Metadata = staticMetadata({
   title: "KraftKollectors | Explore services and artisans",
