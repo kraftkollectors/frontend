@@ -2,7 +2,7 @@
 
 import AppIcons from "@/components/AppIcons";
 import { formatChatDate } from "@/functions/date";
-import { fallbackImage, fullName } from "@/functions/helpers";
+import { debugLog, fallbackImage, fullName } from "@/functions/helpers";
 /* eslint-disable @next/next/no-img-element */
 import paths from "@/utils/paths";
 import { ChatHead } from "@/utils/types/chat";
@@ -30,6 +30,9 @@ export function ConversationTile({
   const href = paths.dashboardSingleChat(id);
   const active = pathname.includes(href);
   const name = fullName(firstName, lastName);
+  if(!messageDoc) return null;
+  // debugLog({messageDoc});
+  
   const status = messageDoc.status;
 
   return (
